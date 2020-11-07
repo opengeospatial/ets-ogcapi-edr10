@@ -1,6 +1,8 @@
-= EDR API 1.0 Conformance Test Suite
+= OGC API - Environmental Data Retrieval 1.0 Conformance Test Suite
 
 == Scope
+
+This executable test suite is for the OGC API - Environmental Data Retrieval (EDR API) draft standard.
 
 This executable test suite (ETS) verifies the conformance of the implementation
 under test (IUT) with respect to the set of relevant specifications depicted in
@@ -24,7 +26,7 @@ listed below are covered by this test suite:
 
 == Test requirements
 
-The documents listed below stipulate requirements that must be satisfied by a 
+The documents listed below stipulate requirements that must be satisfied by a
 conforming implementation.
 
 1. http://www.w3.org/TR/WCAG20/[Web Content Accessibility Guidelines (WCAG) 2.0]
@@ -39,9 +41,9 @@ suite will be marked as skipped.
 
 == Test suite structure
 
-The test suite definition file (testng.xml) is located in the root package, 
+The test suite definition file (testng.xml) is located in the root package,
 `org.opengis.cite.ogcapiedr10`. A conformance class corresponds to a &lt;test&gt; element, each
-of which includes a set of test classes that contain the actual test methods. 
+of which includes a set of test classes that contain the actual test methods.
 The general structure of the test suite is shown in Table 1.
 
 .Test suite structure
@@ -58,7 +60,7 @@ The general structure of the test suite is shown in Table 1.
 
 |===
 
-The Javadoc documentation provides more detailed information about the test 
+The Javadoc documentation provides more detailed information about the test
 methods that constitute the suite.
 
 include::how-to-run-the-tests.adoc[]
