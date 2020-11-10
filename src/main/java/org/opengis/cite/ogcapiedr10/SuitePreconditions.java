@@ -27,6 +27,7 @@ public class SuitePreconditions {
         SuiteAttribute testFileAttr = SuiteAttribute.TEST_SUBJ_FILE;
         Object sutObj = testContext.getSuite().getAttribute(testFileAttr.getName());
         Class expectedType = testFileAttr.getType();
+   
         if (null != sutObj && expectedType.isInstance(sutObj)) {
             // TODO: Verify test subject
         } else {

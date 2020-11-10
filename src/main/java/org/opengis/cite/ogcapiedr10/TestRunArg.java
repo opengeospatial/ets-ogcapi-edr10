@@ -6,10 +6,16 @@ package org.opengis.cite.ogcapiedr10;
 public enum TestRunArg {
 
     /**
-     * An absolute URI that refers to a representation of the test subject or
-     * metadata about it.
+     * An absolute URI that refers to a representation of the test subject or metadata about it.
      */
-    IUT;
+    IUT,
+
+    /**
+     * The number of collections to test (a value less or equal to 0 means all collections).
+     */
+    NOOFCOLLECTIONS,
+	
+	APIDEFINITION;
 
     @Override
     public String toString() {

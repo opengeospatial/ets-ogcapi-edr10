@@ -7,6 +7,19 @@ This executable test suite is for the OGC API - Environmental Data Retrieval (ED
 Visit the http://opengeospatial.github.io/ets-ogcapi-edr10/[project documentation website]
 for more information, including the API documentation.
 
+|===
+|*Req. #* | *Identifier* | *Implemented in Java Class* 
+
+|1
+|/req/core/api-common
+|`org.opengis.cite.ogcapiedr10.landingpage.LandingPage`
+
+|2
+|/req/core/conformance
+|`org.opengis.cite.ogcapiedr10.conformance.Conformance`
+|===
+
+
 == How to build the test suite
 
 The test suite is built using https://maven.apache.org/[Apache Maven v3].
