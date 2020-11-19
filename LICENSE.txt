@@ -1,4 +1,4 @@
-Copyright 2015 [Open Geospatial Consortium](http://www.opengeospatial.org/)
+Copyright 2020 [Open Geospatial Consortium](http://www.opengeospatial.org/)
 
 This work is licensed under the Apache License, Version 2.0 (the "License").
 You may obtain a copy of the License from the OSI site at
