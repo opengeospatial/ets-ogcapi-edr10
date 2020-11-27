@@ -86,21 +86,11 @@ public class CollectionsTime extends AbstractFeatures {
 
 		// ----------------
 
+		if(!testPoint.getPath().endsWith("/locations"))
+		{
 		assertNotNull(coords, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 				+ "'  in OpenAPI document is missing");
-
-		String msg = "Expected property '%s' with value '%s' but was '%s'";
-
-		assertEquals(coords.getName(), paramName, String.format(msg, "name", "datetime", coords.getName()));
-		assertEquals(coords.getIn(), "query", String.format(msg, "in", "query", coords.getIn()));
-		// assertFalse( isRequired( coords ), String.format( msg, "required", "false",
-		// coords.getRequired() ) );
-		// assertEquals( coords.getStyle(), "form", String.format( msg, "style", "form",
-		// coords.getStyle() ) );
-		assertFalse(isExplode(coords), String.format(msg, "explode", "false", coords.getExplode()));
-
-		Schema schema = coords.getSchema();
-		assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));
+		}
 
 	}
 
@@ -151,6 +141,94 @@ public class CollectionsTime extends AbstractFeatures {
 		assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));
 	}
 
+	/**
+	 * <pre>
+	 * Requirement 6: /req/edr/parameters-definition Parameter parametername definition
+	 * </pre>
+	 *
+	 * @param testPoint the testPoint under test, never <code>null</code>
+	 */
+	@Test(description = "Requirement 6: /req/edr/parameters-definition Parameter parametername definition", dataProvider = "collectionPaths", alwaysRun = true)
+	public void parameternameParameterDefinition(TestPoint testPoint) {
 
+		// Based on
+		// https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
+
+		Parameter parametername = null;
+		String paramName = "parametername";
+
+		OpenApi3 model = getApiModel();
+
+		boolean hasParameternameParameter = false;
+
+		for (Path path : model.getPaths().values()) {
+			
+			
+			
+			if (testPoint.getPath().equals(path.getPathString())) {
+		
+				for (Operation op : path.getOperations().values()) {
+
+					for (Parameter param : op.getParameters()) {
+						if (param.getName().equals(paramName))
+							parametername = param;
+					}
+				}
+			}
+		}
+
+		// ----------------
+
+	
+		assertNotNull(parametername, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
+				+ "'  in OpenAPI document is missing");
+		
+
+	}
+	
+	/**
+	 * <pre>
+	 * Requirement 8: /req/edr/outputCRS-definition Parameter crs definition
+	 * </pre>
+	 *
+	 * @param testPoint the testPoint under test, never <code>null</code>
+	 */
+	@Test(description = "Requirement 8: /req/edr/parameters-definition Parameter crs definition", dataProvider = "collectionPaths", alwaysRun = true)
+	public void crsParameterDefinition(TestPoint testPoint) {
+
+	  // Based on
+	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
+
+	  Parameter crs = null;
+	  String paramName = "crs";
+
+	  OpenApi3 model = getApiModel();
+
+	  boolean hasCrsParameter = false;
+
+	  for (Path path : model.getPaths().values()) {
+	    
+	    
+	    
+	    if (testPoint.getPath().equals(path.getPathString())) {
+	  
+	      for (Operation op : path.getOperations().values()) {
+
+	        for (Parameter param : op.getParameters()) {
+	          if (param.getName().equals(paramName))
+	            crs = param;
+	        }
+	      }
+	    }
+	  }
+
+	  // ----------------
+
+
+	  assertNotNull(crs, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
+	      + "'  in OpenAPI document is missing");
+	  
+
+	}	
 
 }
