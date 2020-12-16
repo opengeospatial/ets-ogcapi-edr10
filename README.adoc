@@ -19,7 +19,7 @@ for more information, including the API documentation.
 |`org.opengis.cite.ogcapiedr10.conformance.Conformance`
 |===
 
-The implementation status of each abstract test is shown http://opengeospatial.github.io/ets-ogcapi-edr10/teststatus.adoc[here].
+The implementation status of each abstract test is shown https://github.com/opengeospatial/ets-ogcapi-edr10/blob/master/teststatus.adoc[here].
 
 == How to build the test suite
 
