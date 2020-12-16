@@ -8,7 +8,7 @@ Visit the http://opengeospatial.github.io/ets-ogcapi-edr10/[project documentatio
 for more information, including the API documentation.
 
 |===
-|*Req. #* | *Identifier* | *Implemented in Java Class* 
+|*Req. #* | *Identifier* | *Implemented in Java Class*
 
 |1
 |/req/core/api-common
@@ -19,6 +19,7 @@ for more information, including the API documentation.
 |`org.opengis.cite.ogcapiedr10.conformance.Conformance`
 |===
 
+The implementation status of each abstract test is shown http://opengeospatial.github.io/ets-ogcapi-edr10/teststatus.adoc[here].
 
 == How to build the test suite
 
