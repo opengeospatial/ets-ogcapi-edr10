@@ -25,6 +25,10 @@ The implementation status of each abstract test is shown https://github.com/open
 
 The test suite is built using https://maven.apache.org/[Apache Maven v3].
 
+`mvn package`
+
+On some operating systems, when building the ETS under Java 11+ for the first time, it may be necessary to run `mvn package` twice.
+
 == How to run the test suite
 The options for running the suite are summarized in
 
