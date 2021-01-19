@@ -5,7 +5,8 @@ package org.opengis.cite.ogcapiedr10;
  *
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>
  */
-public class EtsAssert { 
+ 
+public class EtsAssert {
 
     /**
      * @param valueToAssert
