@@ -32,12 +32,9 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 /**
- * Updated at the OGC API - Tiles Sprint 2020 by ghobona
- *
- * A.?.?. Conformance Path {root}/conformance
+ * Conformance Path {root}/conformance
  *
  *
- * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>
  */
 public class Conformance extends CommonFixture {
 
@@ -67,12 +64,13 @@ public class Conformance extends CommonFixture {
     }
 
     /**
-     * Partly addresses Requirement 1 : /req/tiles/core/conformance-success
+     * Abstract Test 6: Validate that a Conformance Declaration can be retrieved from the expected location.
+     * Abstract Test 7: Validate that the Conformance Declaration response complies with the required structure and contents.
      *
      * @param testPoint
      *            the test point to test, never <code>null</code>
      */
-    @Test(description = "Implements A.?.?. Conformance Path {root}/conformance,", groups = "conformance", dataProvider = "conformanceUris")
+    @Test(description = "Implements Abstract Test 6 and Abstract Test 7 on /conformance,", groups = "conformance", dataProvider = "conformanceUris")
     public void validateConformanceOperationAndResponse( TestPoint testPoint ) {
         String testPointUri = new UriBuilder( testPoint ).buildUrl();
         Response response = init().baseUri( testPointUri ).accept( JSON ).when().request( GET );
@@ -80,9 +78,8 @@ public class Conformance extends CommonFixture {
     }
 
     /**
-     * Requirement 1 : /req/tiles/core/conformance-success
+     * private method to support Abstract Test 6 and Abstract Test 7
      *
-     * Abstract Test ?: /ats/core/conformance-success
      */
     private void validateConformanceOperationResponse( String testPointUri, Response response ) {
         response.then().statusCode( 200 );
