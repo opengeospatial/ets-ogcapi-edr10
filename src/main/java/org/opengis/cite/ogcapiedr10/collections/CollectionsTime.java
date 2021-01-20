@@ -39,23 +39,21 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import io.restassured.response.Response;
 
 /**
- * A.2.7. Features {root}/collections/{collectionId}/items - Datetime
- * 
- * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>
+ * /collections/{collectionId}/
+ *
  */
 public class CollectionsTime extends AbstractFeatures {
 
-
-
-
 	/**
 	 * <pre>
-	 * Requirement 3: /req/edr/coords-definition Parameter coords definition
+	 * Abstract Test 36: Validate that the coords query parameters are constructed correctly. (position)
+	 * Abstract Test 52: Validate that the coords query parameters are constructed correctly. (area)
+	 * Abstract Test 74: Validate that the coords query parameters are constructed correctly. (trajectory)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 3: /req/edr/coords-definition Parameter coords definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 36, Abstract Test 52, and Abstract Test 74, meets Requirement 3 /req/edr/coords-definition Parameter coords definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void coordsParameterDefinition(TestPoint testPoint) {
 
 		// Based on
@@ -69,11 +67,11 @@ public class CollectionsTime extends AbstractFeatures {
 		boolean hasCoordsParameter = false;
 
 		for (Path path : model.getPaths().values()) {
-			
-			
-			
+
+
+
 			if (testPoint.getPath().equals(path.getPathString())) {
-		
+
 				for (Operation op : path.getOperations().values()) {
 
 					for (Parameter param : op.getParameters()) {
@@ -96,12 +94,14 @@ public class CollectionsTime extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Requirement 5: /req/core/rc-datetime-parameter Datetime parameter
+	 * Abstract Test 40: Validate that the dateTime query parameters are constructed correctly. (position)
+	 * Abstract Test 56: Validate that the dateTime query parameters are constructed correctly. (area)
+	 * Abstract Test 89: Validate that the dateTime query parameters are constructed correctly. (items)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 5: /req/core/rc-datetime-parameter Datetime parameter", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 40, Abstract Test 56, and Abstract Test 89, and meets Requirement 5: /req/core/rc-datetime-parameter Datetime parameter", dataProvider = "collectionPaths", alwaysRun = true)
 	public void dateTimeParameterDefinition(TestPoint testPoint) {
 
 		Parameter datetime = null;
@@ -142,13 +142,13 @@ public class CollectionsTime extends AbstractFeatures {
 	}
 
 	/**
-	 * <pre>
-	 * Requirement 6: /req/edr/parameters-definition Parameter parametername definition
-	 * </pre>
-	 *
+	 * Abstract Test 43: Validate that the parameter-name query parameters are processed correctly. (position)
+	 * Abstract Test 59: Validate that the parameter-name query parameters are processed correctly. (area)
+	 * Abstract Test 77: Validate that the parameter-name query parameters are processed correctly. (trajectory)
+	 * Abstract Test 104: Validate that the parameter-name query parameters are processed correctly. (locations)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 6: /req/edr/parameters-definition Parameter parametername definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 43, Abstract Test 59, Abstract Test 77, and Abstract Test 104 and meets Requirement 6: /req/edr/parameters-definition Parameter parametername definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void parameternameParameterDefinition(TestPoint testPoint) {
 
 		// Based on
@@ -162,11 +162,11 @@ public class CollectionsTime extends AbstractFeatures {
 		boolean hasParameternameParameter = false;
 
 		for (Path path : model.getPaths().values()) {
-			
-			
-			
+
+
+
 			if (testPoint.getPath().equals(path.getPathString())) {
-		
+
 				for (Operation op : path.getOperations().values()) {
 
 					for (Parameter param : op.getParameters()) {
@@ -179,21 +179,22 @@ public class CollectionsTime extends AbstractFeatures {
 
 		// ----------------
 
-	
+
 		assertNotNull(parametername, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 				+ "'  in OpenAPI document is missing");
-		
+
 
 	}
-	
+
 	/**
-	 * <pre>
-	 * Requirement 8: /req/edr/outputCRS-definition Parameter crs definition
-	 * </pre>
+	 * Abstract Test 44: Validate that the crs query parameters are constructed correctly.
+	 * Abstract Test 60: Validate that the crs query parameters are constructed correctly.
+	 * Abstract Test 78: Validate that the crs query parameters are constructed correctly.
+	 * Abstract Test 105: Validate that the crs query parameters are constructed correctly.
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 8: /req/edr/parameters-definition Parameter crs definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 44, Abstract Test 60, Abstract Test 78, and Abstract Test 105 and Requirement 8: /req/edr/crs-definition Parameter crs definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void crsParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -207,11 +208,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hasCrsParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -227,24 +228,25 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(crs, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
-	
+
+	}
+
 	/*
-	 * 
+	 *
 	 *  START OF GEHGEN
-	 * 
+	 *
 	 */
-	
+
 	/**
-	 * <pre>
-	 * Requirement 10: /req/edr/outputFormat-definition Parameter f definition
-	 * </pre>
+	 * Abstract Test 46: Validate that the f query parameter is constructed correctly. (position)
+	 * Abstract Test 62: Validate that the f query parameter is constructed correctly. (area)
+	 * Abstract Test 80: Validate that the f query parameter is constructed correctly. (trajectory)
+	 * Abstract Test 107: Validate that the f query parameter is constructed correctly. (locations)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 10: /req/edr/outputFormat-definition Parameter f definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Abstract Test 46, Abstract Test 62, Abstract Test 80, Abstract Test 107 and Requirement 10: /req/edr/outputFormat-definition Parameter f definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void fParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -258,11 +260,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hasfParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -280,19 +282,18 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(f
 , "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
-	 * <pre>
-	 * Requirement 12: /req/edr/z-definition Parameter z
- definition
-	 * </pre>
+	 * Abstract Test 38: Validate that the vertical level query parameters are constructed correctly. (position)
+	 * Abstract Test 54: Validate that the vertical level query parameters are constructed correctly. (area)
+	 *
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 12: /req/edr/z-definition Parameter z definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Abstract Test 38, Abstract Test 54 and Requirement 12: /req/edr/z-definition Parameter z definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void zParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -306,11 +307,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean haszParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -326,15 +327,15 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(z, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 14: /req/edr/within-definition Parameter within
- definition
+	 * Requirement 14: /req/edr/within-definition Parameter within definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
@@ -352,11 +353,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean haswithinParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -372,15 +373,16 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(within, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
 	 * Requirement 16: /req/edr/withinUnits-definition Parameter withinUnits
  definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
@@ -398,11 +400,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean haswithinUnitsParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -418,42 +420,43 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(withinUnits, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 18: /req/edr/minz-definition Parameter minx
+	 * Requirement 18: /req/edr/min-z-definition Parameter min-z
  definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 18: /req/edr/minz-definition Parameter minx definition", dataProvider = "collectionPaths", alwaysRun = true)
-	public void minxParameterDefinition(TestPoint testPoint) {
+	@Test(description = "Requirement 18: /req/edr/min-z-definition Parameter min-z definition", dataProvider = "collectionPaths", alwaysRun = true)
+	public void minzParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
-	  Parameter minx = null;
-	  String paramName = "minx";
+	  Parameter minz = null;
+	  String paramName = "minz";
 
 	  OpenApi3 model = getApiModel();
 
-	  boolean hasminxParameter = false;
+	  boolean hasminzParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
 	          if (param.getName().equals(paramName))
-	            minx = param;
+	            minz = param;
 	        }
 	      }
 	    }
@@ -462,21 +465,22 @@ public class CollectionsTime extends AbstractFeatures {
 	  // ----------------
 
 
-	  assertNotNull(minx, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
+	  assertNotNull(minz, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 20: /req/edr/maxz-definition Parameter maxz
+	 * Requirement 20: /req/edr/max-z-definition Parameter max-z
  definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 20: /req/edr/maxz-definition Parameter maxz definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 20: /req/edr/max-z-definition Parameter max-z definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void maxzParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -490,11 +494,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hasmaxzParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -510,19 +514,20 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(maxz, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 22: /req/edr/resolutionx-definition Parameter resolutionx
+	 * Requirement 22: /req/edr/resolution-x-definition Parameter resolution-x
  definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 22: /req/edr/resolutionx-definition Parameter resolutionx definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 22: /req/edr/resolution-x-definition Parameter resolution-x definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void resolutionxParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -536,11 +541,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hasresolutionxParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -556,19 +561,20 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(resolutionx, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 24: /req/edr/resolutiony-definition Parameter resolutiony
+	 * Requirement 24: /req/edr/resolution-y-definition Parameter resolution-y
  definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 24: /req/edr/resolutiony-definition Parameter resolutiony definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 24: /req/edr/resolution-y-definition Parameter resolution-y definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void resolutionyParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -582,11 +588,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hasresolutionyParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -603,18 +609,19 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(resolutiony, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 26: /req/edr/resolutionz-definition Parameter resolutionz definition
+	 * Requirement 26: /req/edr/resolution-z-definition Parameter resolution-z definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 26: /req/edr/resolutionz-definition Parameter resolutionz definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 26: /req/edr/resolution-z-definition Parameter resolution-z definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void resolutionzParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -628,11 +635,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hasresolutionzParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -648,18 +655,19 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(resolutionz, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 28: /req/edr/corridorHeight-definition Parameter corridorHeight definition
+	 * Requirement 28: /req/edr/corridor-height-definition Parameter corridor-height definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 28: /req/edr/corridorHeight-definition Parameter corridorHeight definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 28: /req/edr/corridor-height-definition Parameter corridor-height definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void corridorHeightParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -673,11 +681,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hascorridorHeightParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -693,18 +701,19 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(corridorHeight, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
+
+	}
 
 	/**
 	 * <pre>
-	 * Requirement 30: /req/edr/corridorWidth-definition Parameter corridorWidth definition
+	 * Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition
 	 * </pre>
+	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 30: /req/edr/corridorWidth-definition Parameter corridorWidth definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void corridorWidthParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -718,11 +727,11 @@ public class CollectionsTime extends AbstractFeatures {
 	  boolean hascorridorWidthParameter = false;
 
 	  for (Path path : model.getPaths().values()) {
-	    
-	    
-	    
+
+
+
 	    if (testPoint.getPath().equals(path.getPathString())) {
-	  
+
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
@@ -738,10 +747,10 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(corridorWidth, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-	  
 
-	}	
 
-	
+	}
+
+
 
 }
