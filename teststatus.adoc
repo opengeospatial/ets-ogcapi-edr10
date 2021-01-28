@@ -3,11 +3,11 @@
 [cols=",,,,",options="header",]
 |===
 |#|URI|assigned|completed|method
-|*Abstract Test 1* |*/conf/core/http*| | |
+|*Abstract Test 1* |*/conf/core/http*| @ghobona | Yes | `Conformance.http`
 |*Abstract Test 2* |*/conf/core/root-op*| @ghobona | Yes | `LandingPage.edrLandingPageValidation`
-|*Abstract Test 3* |*/conf/core/root-success*| | |
-|*Abstract Test 4* |*/conf/core/api-definition-op*| | |
-|*Abstract Test 5* |*/conf/core/api-definition-success*| | |
+|*Abstract Test 3* |*/conf/core/root-success*| @ghobona | Yes | `LandingPage.edrLandingPageValidation`
+|*Abstract Test 4* |*/conf/core/api-definition-op*| @ghobona | Yes | `ApiDefinition.openapiDocumentRetrieval`
+|*Abstract Test 5* |*/conf/core/api-definition-success*| @ghobona | Yes | `ApiDefinition.apiDefinitionValidation`
 |*Abstract Test 6* |*/conf/core/conformance-op*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
 |*Abstract Test 7* |*/conf/core/conformance-success*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
 |*Abstract Test 8* |*/conf/core/crs84*| | |

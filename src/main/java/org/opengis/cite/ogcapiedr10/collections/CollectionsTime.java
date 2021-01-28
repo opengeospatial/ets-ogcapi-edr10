@@ -3,6 +3,7 @@ package org.opengis.cite.ogcapiedr10.collections;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertFalse;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
 import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveParameterByName;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDate;
@@ -89,6 +90,17 @@ public class CollectionsTime extends AbstractFeatures {
 		assertNotNull(coords, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 				+ "'  in OpenAPI document is missing");
 		}
+		else{ 
+			String msg = "Expected property '%s' with value '%s' but was '%s'";
+		
+		assertEquals(coords.getName(), paramName, String.format(msg, "name", paramName, coords.getName()));
+		assertEquals(coords.getIn(), "query", String.format(msg, "in", "query", coords.getIn()));
+		assertTrue(isRequired(coords), String.format(msg, "required", "true", coords.getRequired()));
+		assertEquals( coords.getStyle(), "form", String.format( msg, "style","form", coords.getStyle() ) );
+		assertFalse(isExplode(coords), String.format(msg, "explode", "false", coords.getExplode()));		
+		Schema schema = coords.getSchema();
+		assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));		
+		}
 
 	}
 
@@ -101,7 +113,7 @@ public class CollectionsTime extends AbstractFeatures {
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 40, Abstract Test 56, and Abstract Test 89, and meets Requirement 5: /req/core/rc-datetime-parameter Datetime parameter", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 40, Abstract Test 56, and Abstract Test 89, and meets Requirement 5: /req/core/datetime-parameter Datetime parameter", dataProvider = "collectionPaths", alwaysRun = true)
 	public void dateTimeParameterDefinition(TestPoint testPoint) {
 
 		Parameter datetime = null;
@@ -133,8 +145,7 @@ public class CollectionsTime extends AbstractFeatures {
 		assertEquals(datetime.getName(), paramName, String.format(msg, "name", paramName, datetime.getName()));
 		assertEquals(datetime.getIn(), "query", String.format(msg, "in", "query", datetime.getIn()));
 		assertFalse(isRequired(datetime), String.format(msg, "required", "false", datetime.getRequired()));
-		// assertEquals( datetime.getStyle(), "form", String.format( msg, "style",
-		// "form", datetime.getStyle() ) );
+		assertEquals( datetime.getStyle(), "form", String.format( msg, "style","form", datetime.getStyle() ) );
 		assertFalse(isExplode(datetime), String.format(msg, "explode", "false", datetime.getExplode()));
 
 		Schema schema = datetime.getSchema();
@@ -148,14 +159,14 @@ public class CollectionsTime extends AbstractFeatures {
 	 * Abstract Test 104: Validate that the parameter-name query parameters are processed correctly. (locations)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 43, Abstract Test 59, Abstract Test 77, and Abstract Test 104 and meets Requirement 6: /req/edr/parameters-definition Parameter parametername definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 43, Abstract Test 59, Abstract Test 77, and Abstract Test 104 and meets Requirement 6: /req/edr/parameter-name-definition Parameter parametername definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void parameternameParameterDefinition(TestPoint testPoint) {
 
 		// Based on
 		// https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 		Parameter parametername = null;
-		String paramName = "parametername";
+		String paramName = "parameter-name";
 
 		OpenApi3 model = getApiModel();
 
@@ -179,9 +190,13 @@ public class CollectionsTime extends AbstractFeatures {
 
 		// ----------------
 
+		String msg = "Expected property '%s' with value '%s' but was '%s'";
 
 		assertNotNull(parametername, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 				+ "'  in OpenAPI document is missing");
+		assertEquals(parametername.getName(), paramName, String.format(msg, "name", paramName, parametername.getName()));
+		assertEquals(parametername.getIn(), "query", String.format(msg, "in", "query", parametername.getIn()));
+		assertFalse(isRequired(parametername), String.format(msg, "required", "false", parametername.getRequired()));		
 
 
 	}
@@ -229,14 +244,17 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(crs, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
+	   String msg = "Expected property '%s' with value '%s' but was '%s'";
+		assertEquals(crs.getName(), paramName, String.format(msg, "name", paramName, crs.getName()));
+		assertEquals(crs.getIn(), "query", String.format(msg, "in", "query", crs.getIn()));
+		assertFalse(isRequired(crs), String.format(msg, "required", "false", crs.getRequired()));
+		assertEquals( crs.getStyle(), "form", String.format( msg, "style","form", crs.getStyle() ) );
+		assertFalse(isExplode(crs), String.format(msg, "explode", "false", crs.getExplode()));		
+		Schema schema = crs.getSchema();
+		assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));		  
 
 	}
 
-	/*
-	 *
-	 *  START OF GEHGEN
-	 *
-	 */
 
 	/**
 	 * Abstract Test 46: Validate that the f query parameter is constructed correctly. (position)
@@ -246,7 +264,7 @@ public class CollectionsTime extends AbstractFeatures {
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Abstract Test 46, Abstract Test 62, Abstract Test 80, Abstract Test 107 and Requirement 10: /req/edr/outputFormat-definition Parameter f definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Abstract Test 46, Abstract Test 62, Abstract Test 80, Abstract Test 107 and Requirement 10: /req/edr/f-definition Parameter f definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void fParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
@@ -283,7 +301,14 @@ public class CollectionsTime extends AbstractFeatures {
 , "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(f.getName(), paramName, String.format(msg, "name", paramName, f.getName()));
+	  assertEquals(f.getIn(), "query", String.format(msg, "in", "query", f.getIn()));
+	  assertFalse(isRequired(f), String.format(msg, "required", "false", f.getRequired()));
+	  assertEquals( f.getStyle(), "form", String.format( msg, "style","form", f.getStyle() ) );
+	  assertFalse(isExplode(f), String.format(msg, "explode", "false", f.getExplode()));		
+	  Schema schema = f.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 	}
 
 	/**
@@ -327,7 +352,14 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(z, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(z.getName(), paramName, String.format(msg, "name", paramName, z.getName()));
+	  assertEquals(z.getIn(), "query", String.format(msg, "in", "query", z.getIn()));
+	  assertTrue(isRequired(z), String.format(msg, "required", "true", z.getRequired()));
+	  assertEquals( z.getStyle(), "form", String.format( msg, "style","form", z.getStyle() ) );
+	  assertFalse(isExplode(z), String.format(msg, "explode", "false", z.getExplode()));		
+	  Schema schema = z.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 
 	}
 
@@ -373,27 +405,34 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(within, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(within.getName(), paramName, String.format(msg, "name", paramName, within.getName()));
+	  assertEquals(within.getIn(), "query", String.format(msg, "in", "query", within.getIn()));
+	  assertFalse(isRequired(within), String.format(msg, "required", "false", within.getRequired()));
+	  assertEquals( within.getStyle(), "form", String.format( msg, "style","form", within.getStyle() ) );
+	  assertFalse(isExplode(within), String.format(msg, "explode", "false", within.getExplode()));		
+	  Schema schema = within.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 
 	}
 
 	/**
 	 * <pre>
-	 * Requirement 16: /req/edr/withinUnits-definition Parameter withinUnits
+	 * Requirement 16: /req/edr/within-units-definition Parameter withinUnits
  definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 16: /req/edr/withinUnits-definition Parameter withinUnits definition", dataProvider = "collectionPaths", alwaysRun = true)
+	@Test(description = "Requirement 16: /req/edr/within-units-definition Parameter withinUnits definition", dataProvider = "collectionPaths", alwaysRun = true)
 	public void withinUnitsParameterDefinition(TestPoint testPoint) {
 
 	  // Based on
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter withinUnits = null;
-	  String paramName = "withinUnits";
+	  String paramName = "within-units";
 
 	  OpenApi3 model = getApiModel();
 
@@ -420,10 +459,19 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(withinUnits, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(withinUnits.getName(), paramName, String.format(msg, "name", paramName, withinUnits.getName()));
+	  assertEquals(withinUnits.getIn(), "query", String.format(msg, "in", "query", withinUnits.getIn()));
+	  assertFalse(isRequired(withinUnits), String.format(msg, "required", "false", withinUnits.getRequired()));
+	  assertEquals( withinUnits.getStyle(), "form", String.format( msg, "style","form", withinUnits.getStyle() ) );
+	  assertFalse(isExplode(withinUnits), String.format(msg, "explode", "false", withinUnits.getExplode()));		
+	  Schema schema = withinUnits.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 
 	}
 
+
+	
 	/**
 	 * <pre>
 	 * Requirement 18: /req/edr/min-z-definition Parameter min-z
@@ -440,7 +488,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter minz = null;
-	  String paramName = "minz";
+	  String paramName = "min-z";
 
 	  OpenApi3 model = getApiModel();
 
@@ -468,7 +516,14 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(minz, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(minz.getName(), paramName, String.format(msg, "name", paramName, minz.getName()));
+	  assertEquals(minz.getIn(), "query", String.format(msg, "in", "query", minz.getIn()));
+	  assertTrue(isRequired(minz), String.format(msg, "required", "true", minz.getRequired()));
+	  assertEquals( minz.getStyle(), "form", String.format( msg, "style","form", minz.getStyle() ) );
+	  assertFalse(isExplode(minz), String.format(msg, "explode", "false", minz.getExplode()));		
+	  Schema schema = minz.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));		
 	}
 
 	/**
@@ -487,7 +542,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter maxz = null;
-	  String paramName = "maxz";
+	  String paramName = "max-z";
 
 	  OpenApi3 model = getApiModel();
 
@@ -515,7 +570,14 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(maxz, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(maxz.getName(), paramName, String.format(msg, "name", paramName, maxz.getName()));
+	  assertEquals(maxz.getIn(), "query", String.format(msg, "in", "query", maxz.getIn()));
+	  assertTrue(isRequired(maxz), String.format(msg, "required", "true", maxz.getRequired()));
+	  assertEquals( maxz.getStyle(), "form", String.format( msg, "style","form", maxz.getStyle() ) );
+	  assertFalse(isExplode(maxz), String.format(msg, "explode", "false", maxz.getExplode()));		
+	  Schema schema = maxz.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 	}
 
 	/**
@@ -534,7 +596,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter resolutionx = null;
-	  String paramName = "resolutionx";
+	  String paramName = "resolution-x";
 
 	  OpenApi3 model = getApiModel();
 
@@ -561,7 +623,14 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(resolutionx, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(resolutionx.getName(), paramName, String.format(msg, "name", paramName, resolutionx.getName()));
+	  assertEquals(resolutionx.getIn(), "query", String.format(msg, "in", "query", resolutionx.getIn()));
+	  assertFalse(isRequired(resolutionx), String.format(msg, "required", "false", resolutionx.getRequired()));
+	  assertEquals( resolutionx.getStyle(), "form", String.format( msg, "style","form", resolutionx.getStyle() ) );
+	  assertFalse(isExplode(resolutionx), String.format(msg, "explode", "false", resolutionx.getExplode()));		
+	  Schema schema = resolutionx.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));
 
 	}
 
@@ -581,7 +650,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter resolutiony = null;
-	  String paramName = "resolutiony";
+	  String paramName = "resolution-y";
 
 	  OpenApi3 model = getApiModel();
 
@@ -609,7 +678,14 @@ public class CollectionsTime extends AbstractFeatures {
 
 	  assertNotNull(resolutiony, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(resolutiony.getName(), paramName, String.format(msg, "name", paramName, resolutiony.getName()));
+	  assertEquals(resolutiony.getIn(), "query", String.format(msg, "in", "query", resolutiony.getIn()));
+	  assertFalse(isRequired(resolutiony), String.format(msg, "required", "false", resolutiony.getRequired()));
+	  assertEquals( resolutiony.getStyle(), "form", String.format( msg, "style","form", resolutiony.getStyle() ) );
+	  assertFalse(isExplode(resolutiony), String.format(msg, "explode", "false", resolutiony.getExplode()));		
+	  Schema schema = resolutiony.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));
 
 	}
 
@@ -628,7 +704,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter resolutionz = null;
-	  String paramName = "resolutionz";
+	  String paramName = "resolution-z";
 
 	  OpenApi3 model = getApiModel();
 
@@ -656,7 +732,14 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(resolutionz, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(resolutionz.getName(), paramName, String.format(msg, "name", paramName, resolutionz.getName()));
+	  assertEquals(resolutionz.getIn(), "query", String.format(msg, "in", "query", resolutionz.getIn()));
+	  assertFalse(isRequired(resolutionz), String.format(msg, "required", "false", resolutionz.getRequired()));
+	  assertEquals( resolutionz.getStyle(), "form", String.format( msg, "style","form", resolutionz.getStyle() ) );
+	  assertFalse(isExplode(resolutionz), String.format(msg, "explode", "false", resolutionz.getExplode()));		
+	  Schema schema = resolutionz.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));
 	}
 
 	/**
@@ -674,7 +757,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter corridorHeight = null;
-	  String paramName = "corridorHeight";
+	  String paramName = "corridor-height";
 
 	  OpenApi3 model = getApiModel();
 
@@ -702,7 +785,14 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(corridorHeight, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(corridorHeight.getName(), paramName, String.format(msg, "name", paramName, corridorHeight.getName()));
+	  assertEquals(corridorHeight.getIn(), "query", String.format(msg, "in", "query", corridorHeight.getIn()));
+	  assertTrue(isRequired(corridorHeight), String.format(msg, "required", "true", corridorHeight.getRequired()));
+	  assertEquals( corridorHeight.getStyle(), "form", String.format( msg, "style","form", corridorHeight.getStyle() ) );
+	  assertFalse(isExplode(corridorHeight), String.format(msg, "explode", "false", corridorHeight.getExplode()));		
+	  Schema schema = corridorHeight.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 	}
 
 	/**
@@ -720,7 +810,7 @@ public class CollectionsTime extends AbstractFeatures {
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
 
 	  Parameter corridorWidth = null;
-	  String paramName = "corridorWidth";
+	  String paramName = "corridor-width";
 
 	  OpenApi3 model = getApiModel();
 
@@ -748,7 +838,14 @@ public class CollectionsTime extends AbstractFeatures {
 	  assertNotNull(corridorWidth, "Required " + paramName + " parameter for collections with path '" + testPoint.getPath()
 	      + "'  in OpenAPI document is missing");
 
-
+	  String msg = "Expected property '%s' with value '%s' but was '%s'";
+	  assertEquals(corridorWidth.getName(), paramName, String.format(msg, "name", paramName, corridorWidth.getName()));
+	  assertEquals(corridorWidth.getIn(), "query", String.format(msg, "in", "query", corridorWidth.getIn()));
+	  assertTrue(isRequired(corridorWidth), String.format(msg, "required", "true", corridorWidth.getRequired()));
+	  assertEquals( corridorWidth.getStyle(), "form", String.format( msg, "style","form", corridorWidth.getStyle() ) );
+	  assertFalse(isExplode(corridorWidth), String.format(msg, "explode", "false", corridorWidth.getExplode()));		
+	  Schema schema = corridorWidth.getSchema();
+	  assertEquals(schema.getType(), "string", String.format(msg, "schema -> type", "string", schema.getType()));	
 	}
 
 

@@ -32,17 +32,23 @@ public class LandingPage extends CommonFixture {
     /**
      * <pre>
      * Abstract Test 2: Validate that a landing page can be retrieved from the expected location.
+     * Abstract Test 3: Validate that the landing page complies with the require structure and contents.
      * Requirement 1: The API implementation SHALL demonstrate conformance with the following Requirements Classes of the OGC API-Common version 1.0 Standard.
      * </pre>
      */
-    @Test(description = "Implements Abstract Test 2 - Landing Page and part of Requirement 1 (/req/core/api-common)", groups = "landingpage")
+    @Test(description = "Implements Abstract Test 2 and Abstract Tes 3 - Landing Page and part of Requirement 1 (/req/core/api-common)", groups = "landingpage")
     public void edrLandingPageValidation() {
         Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/" );
         request.then().statusCode( 200 );
         response = request.jsonPath();
         List<Object> links = response.getList( "links" );
         Set<String> linkTypes = collectLinkTypes( links );
-        boolean expectedLinkTypesExists = linkTypes.contains( "conformance" );
+        boolean expectedLinkTypesExists = ( linkTypes.contains( "service-desc" )
+                || linkTypes.contains( "service-doc" ) )
+              && linkTypes.contains( "conformance" ) && linkTypes.contains( "data" );
+        
+        
+        
         assertTrue( expectedLinkTypesExists,
                     "The landing page must include at least links with relation type 'conformance', but contains "
                                              + String.join( ", ", linkTypes ) );

@@ -9,6 +9,7 @@ import static org.opengis.cite.ogcapiedr10.conformance.RequirementClass.CORE;
 import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForConformance;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.containsString;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -62,6 +63,17 @@ public class Conformance extends CommonFixture {
     public void storeRequirementClassesInTestContext( ITestContext testContext ) {
         testContext.getSuite().setAttribute( REQUIREMENTCLASSES.getName(), this.requirementClasses );
     }
+    
+    /**
+     * <pre>
+     * Abstract Test 1: Validate that the resource paths advertised through the API conform with HTTP 1.1 and, where approprate, TLS.
+     * </pre>
+     */
+    @Test(description = "Implements Abstract Test 1 and Requirement /req/core/http")
+    public void http() {
+        Response response = init().baseUri( rootUri.toString() ).when().request( GET, "/" );
+        response.then().statusLine( containsString( "HTTP/1.1" ) );
+    }    
 
     /**
      * Abstract Test 6: Validate that a Conformance Declaration can be retrieved from the expected location.
