@@ -1,0 +1,150 @@
+<html xmlns:saxon="http://saxon.sf.net/" xmlns:txsl="http://www.w3.org/1999/XSL/Transform/target" xmlns:ctl="http://www.occamlab.com/ctl" xmlns:te="java:com.occamlab.te.TECore">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Source for </title>
+   </head>
+   <body><pre>&lt;ctl:package xmlns:ctl="http://www.occamlab.com/ctl"
+             xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+             xmlns:tns="http://www.opengis.net/cite/ogcapi-tiles-1.0"
+             xmlns:saxon="http://saxon.sf.net/"
+             xmlns:tec="java:com.occamlab.te.TECore"
+             xmlns:tng="java:org.opengis.cite.ogcapiprocesses10.TestNGController"&gt;</pre><a name="tns:run-ets-ogcapi-processes-1.0"></a><pre>
+   &lt;ctl:function name="tns:run-ets-ogcapi-processes-1.0"&gt;
+      &lt;ctl:param name="testRunArgs"&gt;A Document node containing test run arguments (as XML properties).&lt;/ctl:param&gt;
+      &lt;ctl:param name="outputDir"&gt;The directory in which the test results will be written.&lt;/ctl:param&gt;
+      &lt;ctl:return&gt;The test results as a Source object (root node).&lt;/ctl:return&gt;
+      &lt;ctl:description&gt;Runs the OGC API - Tiles (0.1-SNAPSHOT) test suite.&lt;/ctl:description&gt;
+      &lt;ctl:code&gt;
+         &lt;xsl:variable name="controller" select="tng:new($outputDir)"/&gt;
+         &lt;xsl:copy-of select="tng:doTestRun($controller, $testRunArgs)"/&gt;
+      &lt;/ctl:code&gt;
+   &lt;/ctl:function&gt;
+</pre><a name="tns:ets-ogcapi-processes-1.0-0.1-SNAPSHOT"></a><pre>
+   &lt;ctl:suite name="tns:ets-ogcapi-processes-1.0-0.1-SNAPSHOT"&gt;
+      &lt;ctl:title&gt;OGC API - Tiles Conformance Test Suite&lt;/ctl:title&gt;
+      &lt;ctl:description&gt;Checks OGC API - Tiles implementations for conformance.&lt;/ctl:description&gt;
+      &lt;ctl:starting-test&gt;tns:Main&lt;/ctl:starting-test&gt;
+   &lt;/ctl:suite&gt;
+</pre><a name="tns:Main"></a><pre>
+   &lt;ctl:test name="tns:Main"&gt;
+      &lt;ctl:assertion&gt;The test subject satisfies all applicable constraints.&lt;/ctl:assertion&gt;
+      &lt;ctl:code&gt;
+         &lt;xsl:variable name="form-data"&gt;
+            &lt;ctl:form xmlns="http://www.w3.org/1999/xhtml" method="POST" width="800" height="600"&gt;
+               &lt;h2&gt;OGC API - Tiles Conformance Test Suite&lt;/h2&gt;
+               &lt;div style="background:#F0F8FF" bgcolor="#F0F8FF"&gt;
+                  &lt;p&gt;The implementation under test (IUT) is checked against the following specifications:&lt;/p&gt;
+                  &lt;ul&gt;
+                     &lt;li&gt;
+                        &lt;a href="http://docs.opengeospatial.org/is/17-069r3/17-069r3.html"&gt;OGC API - Tiles - Part 1: Core&lt;/a&gt;
+                     &lt;/li&gt;
+                  &lt;/ul&gt;
+                  &lt;p&gt;The following conformance levels are defined:&lt;/p&gt;
+                  &lt;ul&gt;
+                     &lt;li&gt;Core&lt;/li&gt;
+                  &lt;/ul&gt;
+               &lt;/div&gt;
+               &lt;fieldset style="background:#ccffff"&gt;
+                  &lt;legend style="font-family: sans-serif; color: #000099;                     background-color:#F0F8FF; border-style: solid;                        border-width: medium; padding:4px"&gt;Implementation under test
+            &lt;/legend&gt;
+                  &lt;p&gt;
+                     &lt;label for="ogc-api-processes-uri"&gt;
+                        &lt;h4 style="margin-bottom: 0.5em"&gt;Location of the landing page&lt;/h4&gt;
+                     &lt;/label&gt;
+                     &lt;input id="ogc-api-processes-uri" name="ogc-api-processes-uri" size="128" type="text"
+                            value=""/&gt;
+                  &lt;/p&gt;
+                  &lt;p&gt;
+                     &lt;h4 style="margin-bottom: 0.5em"&gt;Number of tested collections&lt;/h4&gt;
+                     &lt;div&gt;
+                        &lt;input type="radio" id="collectionsLimitLimited" name="collectionsLimit"
+                               value="limited"
+                               checked="checked"
+                               onchange="document.getElementById('noOfCollections').disabled=document.getElementById('collectionsLimitAll').checked;"/&gt;
+                        &lt;label for="noOfCollectionsAll"&gt;Limited number of collections:&lt;/label&gt;
+                        &lt;input type="number" id="noOfCollections" name="noOfCollections" value="3" min="1"/&gt;
+                     &lt;/div&gt;
+                     &lt;div&gt;
+                        &lt;input type="radio" id="collectionsLimitAll" name="collectionsLimit" value="all"
+                               onchange="document.getElementById('noOfCollections').disabled=document.getElementById('collectionsLimitAll').checked;"/&gt;
+                        &lt;label for="noOfCollectionsAll"&gt;All collections&lt;/label&gt;
+                     &lt;/div&gt;
+                  &lt;/p&gt;
+               &lt;/fieldset&gt;
+               &lt;p&gt;
+                  &lt;input class="form-button" type="submit" value="Start"/&gt;
+            |
+            &lt;input class="form-button" type="reset" value="Clear"/&gt;
+               &lt;/p&gt;
+            &lt;/ctl:form&gt;
+         &lt;/xsl:variable&gt;
+         &lt;xsl:variable name="test-run-props"&gt;
+            &lt;properties version="1.0"&gt;
+               &lt;entry key="iut"&gt;
+                  &lt;xsl:value-of select="normalize-space($form-data/values/value[@key='ogc-api-processes-uri'])"/&gt;
+               &lt;/entry&gt;
+               &lt;entry key="noofcollections"&gt;
+                  &lt;xsl:choose&gt;
+                     &lt;xsl:when test="$form-data/values/value[@key='collectionsLimit'] = 'all'"&gt;-1&lt;/xsl:when&gt;
+                     &lt;xsl:otherwise&gt;
+                        &lt;xsl:value-of select="$form-data/values/value[@key='noOfCollections']"/&gt;
+                     &lt;/xsl:otherwise&gt;
+                  &lt;/xsl:choose&gt;
+               &lt;/entry&gt;
+            &lt;/properties&gt;
+         &lt;/xsl:variable&gt;
+         &lt;xsl:variable name="testRunDir"&gt;
+            &lt;xsl:value-of select="tec:getTestRunDirectory($te:core)"/&gt;
+         &lt;/xsl:variable&gt;
+         &lt;xsl:variable name="test-results"&gt;
+            &lt;ctl:call-function name="tns:run-ets-ogcapi-processes-1.0"&gt;
+               &lt;ctl:with-param name="testRunArgs" select="$test-run-props"/&gt;
+               &lt;ctl:with-param name="outputDir" select="$testRunDir"/&gt;
+            &lt;/ctl:call-function&gt;
+         &lt;/xsl:variable&gt;
+         &lt;xsl:call-template name="tns:testng-report"&gt;
+            &lt;xsl:with-param name="results" select="$test-results"/&gt;
+            &lt;xsl:with-param name="outputDir" select="$testRunDir"/&gt;
+         &lt;/xsl:call-template&gt;
+         &lt;xsl:variable name="summary-xsl"
+                       select="tec:findXMLResource($te:core, '/testng-summary.xsl')"/&gt;
+         &lt;ctl:message&gt;
+            &lt;xsl:value-of select="saxon:transform(saxon:compile-stylesheet($summary-xsl), $test-results)"/&gt;
+        See detailed test report in the TE_BASE/users/
+        &lt;xsl:value-of select="concat(substring-after($testRunDir, 'users/'), '/html/')"/&gt;
+        directory.
+      &lt;/ctl:message&gt;
+         &lt;xsl:if test="xs:integer($test-results/testng-results/@failed) gt 0"&gt;
+            &lt;xsl:for-each select="$test-results//test-method[@status='FAIL' and not(@is-config='true')]"&gt;
+               &lt;ctl:message&gt;
+            Test method&lt;xsl:value-of select="./@name"/&gt;:
+            &lt;xsl:value-of select=".//message"/&gt;
+               &lt;/ctl:message&gt;
+            &lt;/xsl:for-each&gt;
+            &lt;ctl:fail/&gt;
+         &lt;/xsl:if&gt;
+         &lt;xsl:if test="xs:integer($test-results/testng-results/@skipped) eq xs:integer($test-results/testng-results/@total)"&gt;
+            &lt;ctl:message&gt;All tests were skipped. One or more preconditions were not satisfied.&lt;/ctl:message&gt;
+            &lt;xsl:for-each select="$test-results//test-method[@status='FAIL' and @is-config='true']"&gt;
+               &lt;ctl:message&gt;
+                  &lt;xsl:value-of select="./@name"/&gt;:
+            &lt;xsl:value-of select=".//message"/&gt;
+               &lt;/ctl:message&gt;
+            &lt;/xsl:for-each&gt;
+            &lt;ctl:skipped/&gt;
+         &lt;/xsl:if&gt;
+      &lt;/ctl:code&gt;
+   &lt;/ctl:test&gt;
+</pre><xsl:template xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://www.opengis.net/cite/ogcapi-tiles-1.0" xmlns:tec="java:com.occamlab.te.TECore" xmlns:tng="java:org.opengis.cite.ogcapiprocesses10.TestNGController" name="tns:testng-report">
+         <xsl:param name="results"></xsl:param>
+         <xsl:param name="outputDir"></xsl:param>
+         <xsl:variable name="stylesheet" select="tec:findXMLResource($te:core, '/testng-report.xsl')"></xsl:variable>
+         <xsl:variable name="reporter" select="saxon:compile-stylesheet($stylesheet)"></xsl:variable>
+         <xsl:variable name="report-params" as="node()*">
+            <xsl:element name="testNgXslt.outputDir">
+               <xsl:value-of select="concat($outputDir, '/html')"></xsl:value-of>
+            </xsl:element>
+         </xsl:variable>
+         <xsl:copy-of select="saxon:transform($reporter, $results, $report-params)"></xsl:copy-of>
+      </xsl:template><pre>&lt;/ctl:package&gt;</pre></body>
+</html>

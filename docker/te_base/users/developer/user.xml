@@ -1,0 +1,11 @@
+<user>
+ <name>developer</name>
+ <roles>
+  <name>user</name>
+ </roles>
+ <password>sha1:64000:18:hA2IFdgB6AZGqQPOdJm/gdIigMrSqDsJ:pa9c759U2akFsZwI+aSTONvv</password>
+ <email>developer@example.org</email>
+ <firstName>developer</firstName>
+ <lastName>developer</lastName>
+ <organization>developer</organization>
+</user>

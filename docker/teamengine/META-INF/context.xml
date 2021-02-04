@@ -1,0 +1,19 @@
+<Context reloadable="true" processTlds="false"
+  aliases="/docs=/root/te_base/resources/docs,/about=/root/te_base/scripts,/reports=/root/te_base/users,/site=/usr/local/tomcat/webapps/teamengine/site">
+
+  <Realm className="com.occamlab.te.realm.PBKDF2Realm" root="/root/te_base/users"/>
+
+  <Resource name="jdbc/EPSG" type="javax.sql.DataSource"
+            auth="Container"
+            description="Derby database for EPSG geodetic parameters"
+            driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
+            maxActive="8" maxIdle="4"
+            username="" password=""
+            url="jdbc:derby:EPSG/7.09;create=true" />
+
+  <WatchedResource>/root/te_base/config.xml</WatchedResource>
+  <WatchedResource>/root/te_base/scripts</WatchedResource>
+
+  <!-- improve startup time -->
+  <JarScanner scanClassPath="false" />
+</Context>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Unpack the *-ctl-scripts.zip archive in the TE_BASE/scripts directory -->
+<!-- Add this entry to TE_BASE/config.xml (//organization/standard) -->
+<organization>
+  <name>OGC</name>
+  <standard>
+    <name>OGC API - Tiles</name>
+    <version>
+      <name>0.1</name>
+      <suite>
+        <namespace-uri>http://www.opengis.net/cite/ogcapi-tiles-1.0</namespace-uri>
+        <prefix>tns</prefix>
+        <local-name>ets-ogcapi-tiles-1.0-0.1-SNAPSHOT</local-name>
+        <title>OGC API - Tiles Conformance Test Suite</title>
+        <description>Checks OGC API - Tiles implementations for conformance.</description>
+        <BasicConformanceClasses>
+          <conformanceClass>Core</conformanceClass>
+        </BasicConformanceClasses>
+      </suite>
+      <revision>
+        <name>0.1-SNAPSHOT</name>
+        <status>Beta</status>
+        <sources>
+          <source>ogcapi-tiles-1.0/0.1/ctl</source>
+        </sources>
+        <webdir>ogcapi-tiles-1.0/0.1/site</webdir>
+      </revision>
+    </version>
+  </standard>
+</organization>

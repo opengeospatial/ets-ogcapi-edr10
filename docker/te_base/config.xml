@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <scripts>
+    <!-- Sample suite: TE_BASE/scripts/note.ctl -->
+    <organization>
+      <name>OGC</name>
+      <standard>
+        <name>OGC API - Tiles</name>
+        <version>
+          <name>0.1</name>
+          <suite>
+            <namespace-uri>http://www.opengis.net/cite/ogcapi-tiles-1.0</namespace-uri>
+            <prefix>tns</prefix>
+            <local-name>ets-ogcapi-tiles-1.0-0.1-SNAPSHOT</local-name>
+            <title>OGC API - Tiles Conformance Test Suite</title>
+            <description>Checks OGC API - Tiles implementations for conformance.</description>
+            <BasicConformanceClasses>
+              <conformanceClass>Core</conformanceClass>
+            </BasicConformanceClasses>
+          </suite>
+          <revision>
+            <name>0.1-SNAPSHOT</name>
+            <status>Beta</status>
+            <sources>
+              <source>ogcapi-tiles-1.0/0.1/ctl</source>
+            </sources>
+            <webdir>ogcapi-tiles-1.0/0.1/site</webdir>
+          </revision>
+        </version>
+      </standard>
+
+      <standard>
+        <name>OGC API - Processes</name>
+        <version>
+          <name>0.1</name>
+          <suite>
+            <namespace-uri>http://www.opengis.net/cite/ogcapi-processes-1.0</namespace-uri>
+            <prefix>tns</prefix>
+            <local-name>ets-ogcapi-processes-1.0-0.1-SNAPSHOT</local-name>
+            <title>OGC API - Processes Conformance Test Suite</title>
+            <description>Checks OGC API - Processes implementations for conformance.</description>
+            <BasicConformanceClasses>
+              <conformanceClass>Core</conformanceClass>
+            </BasicConformanceClasses>
+          </suite>
+          <revision>
+            <name>0.1-SNAPSHOT</name>
+            <status>Beta</status>
+            <sources>
+              <source>ogcapi-processes-1.0/0.1/ctl</source>
+            </sources>
+            <webdir>ogcapi-processes-1.0/0.1/site</webdir>
+          </revision>
+        </version>
+      </standard>
+      <standard>
+        <name>Sensor Model Language (SensorML)</name>
+        <version>
+          <name>2.0</name>
+          <suite>
+            <namespace-uri>http://www.opengis.net/cite/sensorml20</namespace-uri>
+            <prefix>tns</prefix>
+            <local-name>ets-sensorml20-0.10-SNAPSHOT</local-name>
+            <title>OGC SensorML 2.0 Validator</title>
+            <description>Validates the structure and content of standard SnesorML 2.0 documents.</description>
+            <BasicConformanceClasses>
+    		       <conformanceClass>Conformance Level 1</conformanceClass>
+    		    </BasicConformanceClasses>
+          </suite>
+          <revision>
+            <name>0.10-SNAPSHOT</name>
+            <status>Beta</status>
+            <sources>
+              <source>sensorml20/2.0/ctl</source>
+            </sources>
+            <webdir>sensorml20/2.0/site</webdir>
+          </revision>
+        </version>
+      </standard>
+
+      <standard>
+        <name>OGC API - Environmental Data Retrieval</name>
+        <version>
+          <name>1.0</name>
+          <suite>
+            <namespace-uri>http://www.opengis.net/cite/ogcapi-edr10</namespace-uri>
+            <prefix>tns</prefix>
+            <local-name>ets-ogcapi-edr10-0.1-SNAPSHOT</local-name>
+            <title>ets-ogcapi-edr10 Conformance Test Suite</title>
+            <description>Describe scope of testing.</description>
+            <!-- Add baisc conformance test suites
+            <BasicConformanceClasses>
+              <conformanceClass>Core</conformanceClass>
+            </BasicConformanceClasses>
+            -->
+          </suite>
+          <revision>
+            <name>0.1-SNAPSHOT</name>
+            <status>Beta</status>
+            <sources>
+              <source>ogcapi-edr10/1.0/ctl</source>
+            </sources>
+            <webdir>ogcapi-edr10/1.0/site</webdir>
+          </revision>
+        </version>
+      </standard>
+      
+    </organization>
+  </scripts>
+</config>
