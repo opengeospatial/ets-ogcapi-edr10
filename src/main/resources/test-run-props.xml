@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
     <comment>Sample test run arguments</comment>
-    <entry key="iut">https://data-api.mdl.nws.noaa.gov/EDR-API</entry>
+    <entry key="iut">https://ogcie.iblsoft.com/edr</entry>
     <entry key="ics">Core</entry>
-    <entry key="apiDefinition">https://data-api.mdl.nws.noaa.gov/EDR-API/api?f=json</entry>
-    <entry key="noofcollections">5</entry>
+    <entry key="apiDefinition">https://opengeospatial.github.io/ogcapi-environmental-data-retrieval/candidate-standard/openapi/EDR_OpenAPI.json</entry>
+
 </properties>

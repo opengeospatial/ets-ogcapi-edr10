@@ -27,7 +27,8 @@ public class CommonDataFixture extends CommonFixture {
     private static final int DEFAULT_NUMBER_OF_COLLECTIONS = 3;
   
 
-    private OpenApi3 apiModel;
+    public OpenApi3 apiModel= null;
+   
 
     private List<RequirementClass> requirementClasses;
 
@@ -53,11 +54,12 @@ public class CommonDataFixture extends CommonFixture {
 
     	URI modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
     
+    
     	
-    	OpenApi3 apiModel = null;
     	boolean validate = false;    	
     	try {
     		this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
+    
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}        

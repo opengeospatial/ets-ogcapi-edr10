@@ -38,7 +38,7 @@ public class LandingPage extends CommonFixture {
      */
     @Test(description = "Implements Abstract Test 2 and Abstract Tes 3 - Landing Page and part of Requirement 1 (/req/core/api-common)", groups = "landingpage")
     public void edrLandingPageValidation() {
-        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/" );
+        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/?f=json" );
         request.then().statusCode( 200 );
         response = request.jsonPath();
         List<Object> links = response.getList( "links" );

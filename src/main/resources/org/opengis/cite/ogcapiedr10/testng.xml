@@ -3,6 +3,7 @@
 <suite name="ogcapi-edr10-${version}" verbose="0" configfailurepolicy="continue">
   <parameter name="iut"  value=""/>
   <parameter name="ics"  value=""/>
+  <parameter name="apiDefinition"  value=""/>
 
   <listeners>
     <listener class-name="org.opengis.cite.ogcapiedr10.TestRunListener" />

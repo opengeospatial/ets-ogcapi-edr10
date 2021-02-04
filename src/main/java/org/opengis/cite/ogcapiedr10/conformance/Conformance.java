@@ -84,8 +84,10 @@ public class Conformance extends CommonFixture {
      */
     @Test(description = "Implements Abstract Test 6 and Abstract Test 7 on /conformance,", groups = "conformance", dataProvider = "conformanceUris")
     public void validateConformanceOperationAndResponse( TestPoint testPoint ) {
+
         String testPointUri = new UriBuilder( testPoint ).buildUrl();
-        Response response = init().baseUri( testPointUri ).accept( JSON ).when().request( GET );
+   
+        Response response = init().baseUri( testPointUri ).accept( JSON ).when().request( GET ,"?f=json");
         validateConformanceOperationResponse( testPointUri, response );
     }
 
@@ -129,4 +131,22 @@ public class Conformance extends CommonFixture {
         return requirementClasses;
     }
 
+    
+    /**
+     * <pre>
+     * Abstract Test 8: Validate that all spatial geometries provided through the API are in the CRS84 spatial reference system unless otherwise requested by the client.
+     * </pre>
+     */
+    /*@Test(description = "Implements Abstract Test 8 and Requirement /req/core/crs84")
+    public void validateGeometriesInCrs84() {
+    	 TestPoint testPoint = new TestPoint(rootUri.toString(),"/collections",null);
+         String testPointUri = new UriBuilder( testPoint ).buildUrl();
+         Response response = init().baseUri( testPointUri ).accept( JSON ).when().request( GET );
+         JsonPath jsonPath = response.jsonPath();
+         List<Object> collectionsList = jsonPath.getList( "collections" );
+         System.out.println("Collection "+collectionsList.size());
+  
+       
+    }*/      
+    
 }

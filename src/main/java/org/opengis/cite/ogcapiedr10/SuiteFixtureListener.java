@@ -1,6 +1,7 @@
 package org.opengis.cite.ogcapiedr10;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class SuiteFixtureListener implements ISuiteListener {
                                                 TestRunArg.NOOFCOLLECTIONS.toString(), noOfCollections ) );
         }
         
-        
+   
         
         URI apiDefinitionLocation = URI.create( params.get( "apiDefinition" ));
         suite.setAttribute( SuiteAttribute.API_DEFINITION.getName(), apiDefinitionLocation );

@@ -102,8 +102,11 @@ public class OpenApiUtils {
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	static List<TestPoint> retrieveTestPoints(OpenApi3 apiModel, URI iut) {
+      
 		List<Path> pathItemObjects = identifyTestPoints(apiModel);
+
 		List<PathItemAndServer> pathItemAndServers = identifyServerUrls(apiModel, iut, pathItemObjects);
+	
 		return processServerObjects(pathItemAndServers, true);
 	}
 
@@ -169,20 +172,33 @@ public class OpenApiUtils {
 	public static List<TestPoint> retrieveTestPointsForCollections(OpenApi3 apiModel, URI iut, int noOfCollection) {
 
 		String[] resources = { "locations", "position", "radius", "area", "trajectory" }; 
-
+		 
+		
+	
 		List<TestPoint> allTestPoints = new ArrayList<TestPoint>();
 
+		try {
 		for (String res : resources) {
 			StringBuilder requestedPath = new StringBuilder();
 			requestedPath.append("/");
 			requestedPath.append(COLLECTIONS.getPathItem());
 			requestedPath.append("/.*/"+res);
 
+
+
+			boolean r = allTestPoints
+					.addAll(retrieveTestPoints(apiModel, iut, requestedPath.toString(), (a, b) -> a.matches(b), true));
+			
+	
+		}
+		}
+		catch(Exception er)
+		{
+	
+			er.printStackTrace();
+		}
 		
 
-			allTestPoints
-					.addAll(retrieveTestPoints(apiModel, iut, requestedPath.toString(), (a, b) -> a.matches(b), true));
-		}
 		if (noOfCollection < 0 || allTestPoints.size() <= noOfCollection) {
 			return allTestPoints;
 		}

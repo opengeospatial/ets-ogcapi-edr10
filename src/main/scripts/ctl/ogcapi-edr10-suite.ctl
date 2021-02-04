@@ -48,16 +48,16 @@
                        border-width: medium; padding:4px">Implementation under test</legend>
                <p>
                  <label for="uri">
-                   <h4 style="margin-bottom: 0.5em">Location of IUT (absolute http: or file: URI)</h4>
+                   <h4 style="margin-bottom: 0.5em">Location of the landing page</h4>
                  </label>
-                 <input id="uri" name="uri" size="128" type="text" value="http://www.w3schools.com/xml/note.xml" />
+                 <input id="uri" name="uri" size="128" type="text" value="https://ogcie.iblsoft.com/edr" />
                </p>
                <p>
-                 <label for="doc">
-                   <h4 style="margin-bottom: 0.5em">Upload IUT</h4>
+                 <label for="apiDefinition">
+                   <h4 style="margin-bottom: 0.5em">Location of OpenAPI definition document</h4>
                  </label>
-                 <input name="doc" id="doc" size="128" type="file" />
-               </p>
+                 <input id="apiDefinition" name="apiDefinition" size="128" type="text" value="https://opengeospatial.github.io/ogcapi-environmental-data-retrieval/candidate-standard/openapi/EDR_OpenAPI.json" />
+               </p>               
                <p>
                  <label for="level">Conformance class: </label>
                  <input id="level-1" type="radio" name="level" value="1" checked="checked" />
@@ -86,6 +86,7 @@
             </xsl:choose>
           </entry>
           <entry key="ics"><xsl:value-of select="$form-data/values/value[@key='level']"/></entry>
+          <entry key="apiDefinition"><xsl:value-of select="$form-data/values/value[@key='apiDefinition']"/></entry>
 		    </properties>
 		   </xsl:variable>
        <xsl:variable name="testRunDir">

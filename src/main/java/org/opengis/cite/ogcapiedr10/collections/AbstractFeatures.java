@@ -49,32 +49,104 @@ public class AbstractFeatures extends CommonDataFixture {
     @DataProvider(name = "collectionPaths")
     public Iterator<Object[]> collectionPaths( ITestContext testContext ) {
 
- 
-    	URI modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
-    
-    	
-    	OpenApi3 apiModel = null;
-    	boolean validate = false;    	
-    	try {
-    		apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-		} catch (Exception e) {		
-			e.printStackTrace();
-		}
-    	
-    	
-    	
-    	
-        List<TestPoint> testPointsForCollections = retrieveTestPointsForCollections( apiModel, iut,
-                                                                                     noOfCollections );
-       
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+        
+        
+        
+        String[] resources = { "locations", "position", "radius", "area", "trajectory" }; 
+        for(String res:resources) {
+        	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/"+res,null));
+        }
         
         List<Object[]> collectionsData = new ArrayList<>();
         for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        	
+        
             collectionsData.add( new Object[] { testPointForCollections } );
         }
+     
         return collectionsData.iterator();
     }
+    
+    @DataProvider(name = "locationsCollectionPaths")
+    public Iterator<Object[]> locationsCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/locations",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }
+    @DataProvider(name = "positionCollectionPaths")
+    public Iterator<Object[]> positionCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/position",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }
+    @DataProvider(name = "radiusCollectionPaths")
+    public Iterator<Object[]> radiusCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/radius",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }
+    @DataProvider(name = "areaCollectionPaths")
+    public Iterator<Object[]> areaCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/area",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }
+    
+    @DataProvider(name = "trajectoryCollectionPaths")
+    public Iterator<Object[]> trajectoryCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/trajectory",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }
+
+    
+ 
 
     @BeforeClass
     public void retrieveRequiredInformationFromTestContext( ITestContext testContext ) {
