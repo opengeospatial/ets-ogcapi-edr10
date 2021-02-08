@@ -52,7 +52,7 @@ public class AbstractFeatures extends CommonDataFixture {
 
         List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
         
-        
+        //"Locations", "Position", "Radius", "Trajectory", "Cube", "Corridor"
         
         String[] resources = { "locations", "position", "radius", "area", "trajectory" }; 
         for(String res:resources) {
@@ -145,8 +145,37 @@ public class AbstractFeatures extends CommonDataFixture {
         return collectionsData.iterator();
     }
 
+    @DataProvider(name = "cubeCollectionPaths")
+    public Iterator<Object[]> cubeCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/cube",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }    
     
- 
+    @DataProvider(name = "corridorCollectionPaths")
+    public Iterator<Object[]> corridorCollectionPaths( ITestContext testContext ) {
+
+        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
+   
+       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/corridor",null));
+        
+        List<Object[]> collectionsData = new ArrayList<>();
+        for ( TestPoint testPointForCollections : testPointsForCollections ) {
+        
+            collectionsData.add( new Object[] { testPointForCollections } );
+        }
+     
+        return collectionsData.iterator();
+    }
 
     @BeforeClass
     public void retrieveRequiredInformationFromTestContext( ITestContext testContext ) {
