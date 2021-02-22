@@ -1,8 +1,8 @@
 To build, run these docker commands from the terminal.
 
-docker build -t edr10 .
+docker build -t edr10:local .
 
-docker run -p 9090:8080/tcp edr10
+docker run -p 9090:8080/tcp edr10:local
 
 Ignore the Errors/Exceptions at startup
 
