@@ -11,10 +11,10 @@
 |*Abstract Test 6* |*/conf/core/conformance-op*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
 |*Abstract Test 7* |*/conf/core/conformance-success*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
 |*Abstract Test 8* |*/conf/core/crs84*| | |
-|*Abstract Test 9* |*/conf/collections/rc-md-op*| | |
-|*Abstract Test 10* |*/conf/rc-md-success*| | |
-|*Abstract Test 11* |*/conf/collections/src-md-op*| | |
-|*Abstract Test 12* |*/conf/collections/src-md-success*| | |
+|*Abstract Test 9* |*/conf/collections/rc-md-op*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
+|*Abstract Test 10* |*/conf/rc-md-success*|@ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
+|*Abstract Test 11* |*/conf/collections/src-md-op*|@ghobona | Yes | `CollectionsResponse.validateRetrievalOfEnvironmentalDataCollections`
+|*Abstract Test 12* |*/conf/collections/src-md-success*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfEnvironmentalDataCollections`
 |*Abstract Test 13* |*/conf/core/rc-extent*| | |
 |*Abstract Test 14* |*/conf/edr/rc-collection-info*| | |
 |*Abstract Test 15* |*/conf/edr/rc-md-query-links*| | |
@@ -44,8 +44,8 @@
 |*Abstract Test 39* |*/conf/edr/rc-z-response*| | |
 |*Abstract Test 40* |*/conf/core/rc-time-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
 |*Abstract Test 41* |*/conf/core/rc-time-response*| | |
-|*Abstract Test 42* |*/conf/collections/rc-parametername-definition*| | |
-|*Abstract Test 43* |*/conf/edr/rc-parametername-response*| @ghobona | Yes | `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 42* |*/conf/collections/rc-parametername-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 43* |*/conf/edr/rc-parametername-response*|  |  |
 |*Abstract Test 44* |*/conf/edr/rc-outputCRS-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
 |*Abstract Test 45* |*/conf/edr/rc-outputCRS-response*| | |
 |*Abstract Test 46* |*/conf/edr/rc-outputformat-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`

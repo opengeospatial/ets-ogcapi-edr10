@@ -1,5 +1,7 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
@@ -42,7 +44,7 @@ public class AbstractFeatures extends CommonDataFixture {
 
     protected final Map<CollectionResponseKey, ResponseData> collectionIdAndResponse = new HashMap<>();
 
-    protected List<Map<String, Object>> collections;
+    //protected List<Map<String, Object>> collections;
 
     protected URI iut;
 
@@ -86,6 +88,8 @@ public class AbstractFeatures extends CommonDataFixture {
     @DataProvider(name = "positionCollectionPaths")
     public Iterator<Object[]> positionCollectionPaths( ITestContext testContext ) {
 
+    
+    	
         List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
    
        	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/position",null));
@@ -176,11 +180,13 @@ public class AbstractFeatures extends CommonDataFixture {
      
         return collectionsData.iterator();
     }
+    
+
 
     @BeforeClass
     public void retrieveRequiredInformationFromTestContext( ITestContext testContext ) {
-        this.iut = (URI) testContext.getSuite().getAttribute( IUT.getName() );
-        this.collections = (List<Map<String, Object>>) testContext.getSuite().getAttribute( SuiteAttribute.COLLECTIONS.getName() );
+  
+     
     }
 
     /**

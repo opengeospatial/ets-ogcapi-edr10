@@ -85,9 +85,13 @@ public class Conformance extends CommonFixture {
     @Test(description = "Implements Abstract Test 6 and Abstract Test 7 on /conformance,", groups = "conformance", dataProvider = "conformanceUris")
     public void validateConformanceOperationAndResponse( TestPoint testPoint ) {
 
+    	String f = "";
+    	if(rootUri.toString().contains("f=json") || rootUri.toString().contains("f=application/json")) {}
+    	else { f = "f=application/json"; }    	
+    	
         String testPointUri = new UriBuilder( testPoint ).buildUrl();
    
-        Response response = init().baseUri( testPointUri ).accept( JSON ).when().request( GET ,"?f=json");
+        Response response = init().baseUri( testPointUri ).accept( JSON ).when().request( GET ,"?"+f);
         validateConformanceOperationResponse( testPointUri, response );
     }
 
@@ -118,7 +122,7 @@ public class Conformance extends CommonFixture {
 
         List<RequirementClass> requirementClasses = new ArrayList<>();
         for ( Object conformTo : conformsTo ) {
-        	System.out.println("conformsTo "+conformsTo);
+   
             if ( conformTo instanceof String ) {
                 String conformanceClass = (String) conformTo;
                 RequirementClass requirementClass = RequirementClass.byConformanceClass( conformanceClass );

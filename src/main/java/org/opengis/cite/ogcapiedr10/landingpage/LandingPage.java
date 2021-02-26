@@ -38,7 +38,14 @@ public class LandingPage extends CommonFixture {
      */
     @Test(description = "Implements Abstract Test 2 and Abstract Tes 3 - Landing Page and part of Requirement 1 (/req/core/api-common)", groups = "landingpage")
     public void edrLandingPageValidation() {
-        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/?f=json" );
+
+    	String f = "";
+    	
+    	if(rootUri.toString().contains("f=json") || rootUri.toString().contains("f=application/json")) {}
+    	else { f = "f=application/json"; }
+    	
+        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "?"+f );
+    
         request.then().statusCode( 200 );
         response = request.jsonPath();
         List<Object> links = response.getList( "links" );
@@ -46,8 +53,6 @@ public class LandingPage extends CommonFixture {
         boolean expectedLinkTypesExists = ( linkTypes.contains( "service-desc" )
                 || linkTypes.contains( "service-doc" ) )
               && linkTypes.contains( "conformance" ) && linkTypes.contains( "data" );
-        
-        
         
         assertTrue( expectedLinkTypesExists,
                     "The landing page must include at least links with relation type 'conformance', but contains "
