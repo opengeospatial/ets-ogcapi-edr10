@@ -6,6 +6,7 @@ import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,82 +25,101 @@ import org.testng.annotations.BeforeClass;
  */
 public class CommonDataFixture extends CommonFixture {
 
-    private static final int DEFAULT_NUMBER_OF_COLLECTIONS = 3;
-  
+	private static final int DEFAULT_NUMBER_OF_COLLECTIONS = 3;
 
-    public OpenApi3 apiModel= null;
-   
+	public OpenApi3 apiModel = null;
 
-    private List<RequirementClass> requirementClasses;
+	private List<RequirementClass> requirementClasses;
 
-    protected int noOfCollections = DEFAULT_NUMBER_OF_COLLECTIONS;
+	protected int noOfCollections = DEFAULT_NUMBER_OF_COLLECTIONS;
 
-    @BeforeClass
-    public void requirementClasses( ITestContext testContext ) {
-        this.requirementClasses = (List<RequirementClass>) testContext.getSuite().getAttribute( REQUIREMENTCLASSES.getName() );
-    }
+	@BeforeClass
+	public void requirementClasses(ITestContext testContext) {
+		this.requirementClasses = (List<RequirementClass>) testContext.getSuite()
+				.getAttribute(REQUIREMENTCLASSES.getName());
+	}
 
-    @BeforeClass
-    public void noOfCollections( ITestContext testContext ) {
-        Object noOfCollections = testContext.getSuite().getAttribute( NO_OF_COLLECTIONS.getName() );
-        if ( noOfCollections != null ) {
-            this.noOfCollections = (Integer) noOfCollections;
-        }
-    }
+	@BeforeClass
+	public void noOfCollections(ITestContext testContext) {
+		Object noOfCollections = testContext.getSuite().getAttribute(NO_OF_COLLECTIONS.getName());
+		if (noOfCollections != null) {
+			this.noOfCollections = (Integer) noOfCollections;
+		}
+	}
+	
+	private URI appendFormatToURI(URI input)
+	{
+		URI modelUri = null;
+		try {
 
-    @BeforeClass
-    public void retrieveApiModel( ITestContext testContext ) {
-    	
-        //this.apiModel = (OpenApi3) testContext.getSuite().getAttribute( API_MODEL.getName() ); //Features API way
-
-    	URI modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
-    
-    
-    	
-    	boolean validate = false;    	
-    	try {
-    		this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-    
-		} catch (Exception e) {		
+			if (input.toString().contains("?")) {
+				modelUri = new URI(input.toString() + "f=application/json");
+			} else {
+				modelUri = new URI(input.toString() + "?f=application/json");
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		}        
-  
-        
-    }
+		}
+		
+		return modelUri;
+	}
 
-    public OpenApi3 getApiModel() {
-    	
-        if ( apiModel == null )
-            throw new SkipException( "ApiModel is not available." );
-        return apiModel;
-    }
+	@BeforeClass
+	public void retrieveApiModel(ITestContext testContext) {
 
-    protected List<String> createListOfMediaTypesToSupportForOtherResources( Map<String, Object> linkToSelf ) {
-        if ( this.requirementClasses == null )
-            throw new SkipException( "No requirement classes described in  resource /conformance available" );
-        List<String> mediaTypesToSupport = new ArrayList<>();
-        for ( RequirementClass requirementClass : this.requirementClasses )
-            if ( requirementClass.hasMediaTypeForOtherResources() )
-                mediaTypesToSupport.add( requirementClass.getMediaTypeOtherResources() );
-        if ( linkToSelf != null )
-            mediaTypesToSupport.remove( linkToSelf.get( "type" ) );
-        return mediaTypesToSupport;
-    }
+		URI modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
 
-    protected List<String> createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures() {
-        if ( this.requirementClasses == null )
-            throw new SkipException( "No requirement classes described in  resource /conformance available" );
-        List<String> mediaTypesToSupport = new ArrayList<>();
-        for ( RequirementClass requirementClass : this.requirementClasses )
-            if ( requirementClass.hasMediaTypeForFeaturesAndCollections() )
-                mediaTypesToSupport.add( requirementClass.getMediaTypeFeaturesAndCollections() );
-        return mediaTypesToSupport;
-    }
+		boolean validate = false;
 
-    protected List<String> createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures( Map<String, Object> linkToSelf ) {
-        List<String> mediaTypesToSupport = createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures();
-        if ( linkToSelf != null )
-            mediaTypesToSupport.remove( linkToSelf.get( "type" ) );
-        return mediaTypesToSupport;
-    }
+		modelUri = appendFormatToURI(modelUri);
+
+		try {
+			this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
+		} catch (Exception ed) {
+			try {
+				modelUri = new URI(modelUri.toString().replace("application/json", "json"));
+
+				this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
+			} catch (Exception ignored) {
+			}
+		}
+
+	}
+
+	public OpenApi3 getApiModel() {
+
+		if (apiModel == null)
+			throw new SkipException("ApiModel is not available.");
+		return apiModel;
+	}
+
+	protected List<String> createListOfMediaTypesToSupportForOtherResources(Map<String, Object> linkToSelf) {
+		if (this.requirementClasses == null)
+			throw new SkipException("No requirement classes described in  resource /conformance available");
+		List<String> mediaTypesToSupport = new ArrayList<>();
+		for (RequirementClass requirementClass : this.requirementClasses)
+			if (requirementClass.hasMediaTypeForOtherResources())
+				mediaTypesToSupport.add(requirementClass.getMediaTypeOtherResources());
+		if (linkToSelf != null)
+			mediaTypesToSupport.remove(linkToSelf.get("type"));
+		return mediaTypesToSupport;
+	}
+
+	protected List<String> createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures() {
+		if (this.requirementClasses == null)
+			throw new SkipException("No requirement classes described in  resource /conformance available");
+		List<String> mediaTypesToSupport = new ArrayList<>();
+		for (RequirementClass requirementClass : this.requirementClasses)
+			if (requirementClass.hasMediaTypeForFeaturesAndCollections())
+				mediaTypesToSupport.add(requirementClass.getMediaTypeFeaturesAndCollections());
+		return mediaTypesToSupport;
+	}
+
+	protected List<String> createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures(
+			Map<String, Object> linkToSelf) {
+		List<String> mediaTypesToSupport = createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures();
+		if (linkToSelf != null)
+			mediaTypesToSupport.remove(linkToSelf.get("type"));
+		return mediaTypesToSupport;
+	}
 }

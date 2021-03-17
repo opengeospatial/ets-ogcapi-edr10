@@ -4,6 +4,6 @@
     <comment>Sample test run arguments</comment>
     <entry key="iut">http://labs.metoffice.gov.uk/edr</entry>
     <entry key="ics">Core</entry>
-    <entry key="apiDefinition">https://opengeospatial.github.io/ogcapi-environmental-data-retrieval/candidate-standard/openapi/EDR_OpenAPI.json</entry>
+    <entry key="apiDefinition">http://labs.metoffice.gov.uk/edr/openapi.json</entry>
 
 </properties>

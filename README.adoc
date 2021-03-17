@@ -33,16 +33,42 @@ Step 2. Then navigate into the local repo.
 
 `cd ets-ogcapi-edr10`
 
-Step 3. Now build the project.
+Step 3. Now clean the project.
+
+`mvn clean`
+
+Step 4. Now build the project.
 
 `mvn package`
 
 NOTE: On some operating systems, when building the ETS under Java 11+ for the first time, it may be necessary to run `mvn package` twice.
 
+NOTE: Running `mvn package` will automatically update the jar file `ets-ogcapi-edr10-x.x-SNAPSHOT.jar` in the `/ets-ogcapi-edr10/docker/teamengine/WEB-INF/lib`. To disable this function, modify `maven-antrun-plugin` in the pom.xml file.
+
 == How to run the test suite
 The options for running the suite are summarized in
 
 include::src/site/asciidoc/how-to-run-the-tests.adoc[]
+
+== How to debug using docker
+
+After running `mvn package`:
+
+Navigate to the docker folder.
+
+`cd /docker`
+
+Build the docker image.
+
+`docker build -t edr10:local . `
+
+Run the docker image.
+
+`docker run -p 9090:8080/tcp edr10:local`
+
+Now visit http://localhost:9090/teamengine
+
+Log into teamengine with username *developer* and password *developer*.
 
 == How to contribute
 

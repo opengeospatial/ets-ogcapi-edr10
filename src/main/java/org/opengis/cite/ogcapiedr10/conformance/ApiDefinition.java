@@ -85,8 +85,9 @@ public class ApiDefinition extends CommonFixture {
         try {
 			apiModel = (OpenApi3) parser.parse(new URL( apiUrl ).toURI(), true);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			assertTrue( false, "The API definition linked from the Landing Page resulted in "+e.getMessage() );
 		}
         
         
@@ -104,8 +105,7 @@ public class ApiDefinition extends CommonFixture {
             Object type = linkMap.get( "type" );
             if ( ("service-doc".equals( rel ) || "service-desc".equals( rel ))  )  //TODO should only be service-desc
             {
-
-            	//if(OPEN_API_MIME_TYPE.equals( type ))    //TODO should be enabled
+            	//if(OPEN_API_MIME_TYPE.equals( type ))    //TODO This should be enabled
             	  {
 
             		return (String) linkMap.get( "href" );
@@ -117,7 +117,7 @@ public class ApiDefinition extends CommonFixture {
 
     private String createValidationMsg( OpenApi3 model ) {
         StringBuilder sb = new StringBuilder();
-        sb.append( "Landing Page is not valid. Found following validation items:" );
+        sb.append( "API definition is not valid. Found following validation items:" );
         if ( !model.isValid() ) {
             for ( ValidationResults.ValidationItem item : model.getValidationItems() ) {
                 sb.append( "  - " ).append( item.getSeverity() ).append( ": " ).append( item.getMsg() );

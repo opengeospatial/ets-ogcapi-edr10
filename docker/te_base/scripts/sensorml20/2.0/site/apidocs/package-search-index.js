@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.opengis.cite.sensorml20"},{"l":"org.opengis.cite.sensorml20.level1"},{"l":"org.opengis.cite.sensorml20.level2"},{"l":"org.opengis.cite.sensorml20.util"}]
