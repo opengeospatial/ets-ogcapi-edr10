@@ -10,7 +10,7 @@
 |*Abstract Test 5* |*/conf/core/api-definition-success*| @ghobona | Yes | `ApiDefinition.apiDefinitionValidation`
 |*Abstract Test 6* |*/conf/core/conformance-op*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
 |*Abstract Test 7* |*/conf/core/conformance-success*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
-|*Abstract Test 8* |*/conf/core/crs84*| | |
+|*Abstract Test 8* |*/conf/core/crs84*| @ghobona | Yes | `CollectionsCRS.collectionsCRS84`
 |*Abstract Test 9* |*/conf/collections/rc-md-op*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
 |*Abstract Test 10* |*/conf/rc-md-success*|@ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
 |*Abstract Test 11* |*/conf/collections/src-md-op*|@ghobona | Yes | `CollectionsResponse.validateRetrievalOfEnvironmentalDataCollections`
