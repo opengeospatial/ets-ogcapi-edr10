@@ -8,8 +8,7 @@ import java.net.URI;
 
 import org.apache.sis.referencing.CRS;
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
-import org.opengis.referencing.NoSuchAuthorityCodeException;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
+
 import org.opengis.util.FactoryException;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
@@ -48,19 +47,7 @@ public class CommonFixture {
         initLogging();
         rootUri = (URI) testContext.getSuite().getAttribute( SuiteAttribute.IUT.getName() );
         
-		   	 CoordinateReferenceSystem source = null;
-			 
-			 try {
-				 
-		
-				source = CRS.fromWKT("GEOGCS[\"Unknown\", DATUM[\"Unknown\", SPHEROID[\"WGS_1984\", 6378137.0, 298.257223563]], PRIMEM[\"Greenwich\",0], UNIT[\"degree\", 0.017453], AXIS[\"Lon\", EAST], AXIS[\"Lat\", NORTH]]");
-				} catch (NoSuchAuthorityCodeException e) {
-				System.out.println("CHK ERROR 1");
-				e.printStackTrace();
-			} catch (FactoryException e) {
-				System.out.println("CHK ERROR 2");
-				e.printStackTrace();
-			}
+
         
         
     }

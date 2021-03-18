@@ -56,7 +56,7 @@
                  <label for="apiDefinition">
                    <h4 style="margin-bottom: 0.5em">Location of OpenAPI definition document</h4>
                  </label>
-                 <input id="apiDefinition" name="apiDefinition" size="128" type="text" value="https://opengeospatial.github.io/ogcapi-environmental-data-retrieval/candidate-standard/openapi/EDR_OpenAPI.json" />
+                 <input id="apiDefinition" name="apiDefinition" size="128" type="text" value="https://ogcie.iblsoft.com/edr/api" />
                </p>               
                <p>
                  <label for="level">Conformance class: </label>
