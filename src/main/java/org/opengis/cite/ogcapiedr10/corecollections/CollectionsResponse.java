@@ -1,4 +1,4 @@
-package org.opengis.cite.ogcapiedr10.collections;
+package org.opengis.cite.ogcapiedr10.corecollections;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
 import org.opengis.cite.ogcapiedr10.util.TemporalExtent;
@@ -48,26 +49,9 @@ import io.restassured.response.Response;
  * /collections/{collectionId}/
  *
  */
-public class CollectionsResponse extends AbstractFeatures {
+public class CollectionsResponse extends CommonFixture {
 
-    /*@DataProvider(name = "collectionIDs")
-    public Iterator<Object[]> collectionIDs( ITestContext testContext ) {
-
-    	System.out.println("CHK ============");
-        this.iut = (URI) testContext.getSuite().getAttribute( IUT.getName() );
-        
-        
-        Set<String> collectionTypes = extractCollectionIDs(this.iut);
-        List<Object[]> collectionsData = new ArrayList<>();
-        Iterator it = collectionTypes.iterator();
-        while(it.hasNext())
-        {
-        	collectionsData.add(new Object[] {it.next()});
-        }
-        
-        return collectionsData.iterator();
-        
-    }*/
+	protected URI iut;
     
     @DataProvider(name = "collectionIDs")
     public Iterator<Object[]> collectionIDs( ITestContext testContext ) {

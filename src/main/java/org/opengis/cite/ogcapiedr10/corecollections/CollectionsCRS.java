@@ -1,4 +1,4 @@
-package org.opengis.cite.ogcapiedr10.collections;
+package org.opengis.cite.ogcapiedr10.corecollections;
 
 import static io.restassured.http.ContentType.JSON;
 import org.apache.sis.referencing.crs.DefaultGeographicCRS;
