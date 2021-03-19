@@ -2,7 +2,7 @@
 
 == Scope
 
-This executable test suite is for the OGC API - Environmental Data Retrieval (EDR API) draft standard.
+This executable test suite is for the http://docs.ogc.org/DRAFTS/19-086.html[OGC API - Environmental Data Retrieval (EDR API)] draft standard.
 
 Visit the http://opengeospatial.github.io/ets-ogcapi-edr10/[project documentation website]
 for more information, including the API documentation.
