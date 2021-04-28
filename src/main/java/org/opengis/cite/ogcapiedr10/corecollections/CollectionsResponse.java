@@ -145,4 +145,61 @@ public class CollectionsResponse extends CommonFixture {
 
 	} 	
 	
+        /**
+         * Abstract Test 32 : Validate that an error is returned by a Position query if no query parameters are specified.
+         * Abstract Test 48 : Validate that an error is returned by a Area query if no query parameters are specified.
+         * Abstract Test 64 : Validate that an error is returned by a Trajectory query if no query parameters are specified.
+         * Abstract Test 98 : Validate that an error is returned by a Locations query if no query parameters are specified.
+         * 
+         * @param collectionIdentifiers
+         */
+        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 32 + 48 + 64 + 98, Requirements /req/queries/position + /req/queries/area + /req/queries/trajectory + /req/queries/locations")
+        public void validateNoQueryParameters(Object collectionIdentifiers) {
+            Set<String> collectionIds = (Set<String>) collectionIdentifiers;
+            for (String colletionId : collectionIds) {
+                String url = rootUri.toString() + "/collections/" + colletionId;
+                Response response = init().baseUri(url).accept(JSON).when().request(GET, "/position");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Position query with no query parameters are specified for collection " + colletionId);
+
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/area");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Area query with no query parameters are specified for collection " + colletionId);
+
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Trajectory query with no query parameters are specified for collection " + colletionId);
+
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/locations");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Locations query with no query parameters are specified for collection " + colletionId);
+            }
+        }
+
+        /**
+         * Abstract Test 33 : Validate that an error is returned by a Position query when the coords query parameter is not specified.
+         * Abstract Test 49 : Validate that an error is returned by a Area query when the coords query parameter is not specified.
+         * Abstract Test 65 : Validate that an error is returned by a Trajectory query when the coords query parameter is not specified.
+         * 
+         * @param collectionIdentifiers
+         */
+        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 33 + 49 + 65, Requirements /req/queries/position + /req/queries/area + /req/queries/trajectory")
+        public void validateCoordsQueryParameters(
+                Object collectionIdentifiers) {
+            Set<String> collectionIds = (Set<String>) collectionIdentifiers;
+            for (String colletionId : collectionIds) {
+                String url = rootUri.toString() + "/collections/" + colletionId;
+                Response response = init().baseUri(url).accept(JSON).when().request(GET, "/position?coords=");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Position query with coords query parameter is not specified for collection " + colletionId);
+
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/area?coords=");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Area query with coords query parameter is not specified for collection " + colletionId);
+
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Trajectory query with coords query parameter is not specified for collection " + colletionId);
+            }
+        }        
 }
