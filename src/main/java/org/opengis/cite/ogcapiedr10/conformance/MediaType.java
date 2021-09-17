@@ -48,6 +48,9 @@ public class MediaType extends CommonFixture {
      */
     @Test(description = "Implements Abstract Test 24 (/conf/covjson/definition)")
     public void validateResponseForCoverageJSON() {
+    	
+    	// Example query http://localhost/edr/collections/metar_demo/area?coords=POLYGON((-15.117187%2047.986193,-15.117187%2060.412144,23.90625%2059.710282,16.875%2046.554886,16.875%2046.554886,16.875%2046.554886,-15.117187%2047.986193))&parameter-name=Metar%20observation&datetime=2021-09-16T07:00Z/2021-09-16T10:00Z&crs=CRS84&f=application/prs.coverage+json
+    	
         Response response = init().baseUri(rootUri.toString()).accept("application/prs.coverage+json").when().request(Method.GET);
         assertTrue(response.getStatusCode() == 200, "CoverageJSON response not supported for landing page");
         
