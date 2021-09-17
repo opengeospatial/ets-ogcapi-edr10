@@ -56,7 +56,7 @@ public class AbstractFeatures extends CommonDataFixture {
         
         //"Locations", "Position", "Radius", "Trajectory", "Cube", "Corridor"
         
-        String[] resources = { "locations", "position", "radius", "area", "trajectory" }; 
+        String[] resources = { "locations", "position", "cube", "corridor", "area", "trajectory" }; 
         for(String res:resources) {
         	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/"+res,null));
         }

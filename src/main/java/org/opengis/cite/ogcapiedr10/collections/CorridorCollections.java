@@ -56,6 +56,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Implements Abstract Test 36, Abstract Test 52, and Abstract Test 74, meets Requirement 3 /req/edr/coords-definition Parameter coords definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorCoordsParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 		OpenApi3 model = apiModel;
 		CollectionsTime ct= new CollectionsTime();
@@ -75,6 +76,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Implements Abstract Test 40, Abstract Test 56, and Abstract Test 89, and meets Requirement 5: /req/core/datetime-parameter Datetime parameter", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorDateTimeParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 		OpenApi3 model = apiModel;
 		CollectionsTime ct= new CollectionsTime();
@@ -95,6 +97,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Implements Abstract Test 42, Abstract Test 58, Abstract Test 76, and Abstract Test 103 and meets Requirement 6: /req/edr/parameter-name-definition Parameter parametername definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorParameternameParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 		OpenApi3 model = apiModel;
 		CollectionsTime ct= new CollectionsTime();
@@ -112,6 +115,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Implements Abstract Test 44, Abstract Test 60, Abstract Test 78, and Abstract Test 105 and Requirement 8: /req/edr/crs-definition Parameter crs definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorCrsParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 		OpenApi3 model = apiModel;
 		CollectionsTime ct= new CollectionsTime();
@@ -131,6 +135,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Abstract Test 46, Abstract Test 62, Abstract Test 80, Abstract Test 107 and Requirement 10: /req/edr/f-definition Parameter f definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorFParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 
 		OpenApi3 model = apiModel;
@@ -147,6 +152,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Abstract Test 38, Abstract Test 54 and Requirement 12: /req/edr/z-definition Parameter z definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorZParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 		OpenApi3 model = apiModel;
 		CollectionsTime ct= new CollectionsTime();
@@ -165,6 +171,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Requirement 14: /req/edr/within-definition Parameter within definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorWithinParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 		OpenApi3 model = apiModel;
 		CollectionsTime ct= new CollectionsTime();
@@ -185,6 +192,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Requirement 16: /req/edr/within-units-definition Parameter withinUnits definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorWithinUnitsParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 
 		OpenApi3 model = apiModel;
@@ -195,96 +203,9 @@ public class CorridorCollections extends AbstractFeatures {
 
 
 	
-	/**
-	 * <pre>
-	 * Requirement 18: /req/edr/min-z-definition Parameter min-z
- definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 18: /req/edr/min-z-definition Parameter min-z definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
-	public void corridorMinzParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.minzParameterDefinition(testPoint,apiModel);	
-	}
 
-	/**
-	 * <pre>
-	 * Requirement 20: /req/edr/max-z-definition Parameter max-z
- definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 20: /req/edr/max-z-definition Parameter max-z definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
-	public void corridorMaxzParameterDefinition(TestPoint testPoint) {
-
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.maxzParameterDefinition(testPoint,apiModel);
-	}
-
-	/**
-	 * <pre>
-	 * Requirement 22: /req/edr/resolution-x-definition Parameter resolution-x
- definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 22: /req/edr/resolution-x-definition Parameter resolution-x definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
-	public void corridorResolutionxParameterDefinition(TestPoint testPoint) {
-
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.resolutionxParameterDefinition(testPoint,apiModel);
-
-	}
-
-	/**
-	 * <pre>
-	 * Requirement 24: /req/edr/resolution-y-definition Parameter resolution-y
- definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 24: /req/edr/resolution-y-definition Parameter resolution-y definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
-	public void corridorResolutionyParameterDefinition(TestPoint testPoint) {
-
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.resolutionyParameterDefinition(testPoint,apiModel);
-
-	}
-
-	/**
-	 * <pre>
-	 * Requirement 26: /req/edr/resolution-z-definition Parameter resolution-z definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 26: /req/edr/resolution-z-definition Parameter resolution-z definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
-	public void corridorResolutionzParameterDefinition(TestPoint testPoint) {
-
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.resolutionzParameterDefinition(testPoint,apiModel);
-	}
 
 	/**
 	 * <pre>
@@ -296,6 +217,7 @@ public class CorridorCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Requirement 28: /req/edr/corridor-height-definition Parameter corridor-height definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorCorridorHeightParameterDefinition(TestPoint testPoint) {
+		//SYNC
 
 
 		OpenApi3 model = apiModel;
@@ -305,14 +227,15 @@ public class CorridorCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition
+	 * Abstract Test 118: Validate that the corridor-width query parameter is constructed correctly. (corridor)
 	 * </pre>
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition", dataProvider = "corridorCollectionPaths", alwaysRun = true)
+	@Test(description = "Abstract Test 118 (/conf/edr/REQ_rc-corridor-width-definition)", dataProvider = "corridorCollectionPaths", alwaysRun = true)
 	public void corridorCorridorWidthParameterDefinition(TestPoint testPoint) {
+		
 
 
 		OpenApi3 model = apiModel;
