@@ -21,12 +21,13 @@ public class MediaType extends CommonFixture {
 
     /**
      * <pre>
-     * Abstract Test 17/18 : Verify support for JSON
-     * Abstract Test 20 : Verify support for the EDR GeoJSON Schema
+     * Abstract Test 18: Verify support for JSON
      * </pre>
      */
-    @Test(description = "Implements Abstract Test 17/18 + 20, Requirement /req/json/definition + /req/edr-geojson/definition")
+    @Test(description = "Implements Abstract Test 18 (/conf/json/definition)")
     public void validateResponseForJSON() {
+    	
+    	
         Response response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET);
         assertTrue(response.getStatusCode() == 200, "JSON response not supported for landing page");
         
@@ -42,10 +43,10 @@ public class MediaType extends CommonFixture {
     
     /**
      * <pre>
-     * Abstract Test 22 : Verify support for CoverageJSON
+     * Abstract Test 24: Verify support for CoverageJSON
      * </pre>
      */
-    @Test(description = "Implements Abstract Test 22, Requirement /req/covjson/definition")
+    @Test(description = "Implements Abstract Test 24 (/conf/covjson/definition)")
     public void validateResponseForCoverageJSON() {
         Response response = init().baseUri(rootUri.toString()).accept("application/prs.coverage+json").when().request(Method.GET);
         assertTrue(response.getStatusCode() == 200, "CoverageJSON response not supported for landing page");
@@ -62,10 +63,10 @@ public class MediaType extends CommonFixture {
     
     /**
      * <pre>
-     * Abstract Test 24 : Verify support for HTML
+     * Abstract Test 26 : Verify support for HTML
      * </pre>
      */
-    @Test(description = "Implements Abstract Test 24, Requirement /req/html/definition")
+    @Test(description = "Implements Abstract Test 26 (/conf/html/definition)")
     public void validateResponseForHTML() {
         Response response = init().baseUri(rootUri.toString()).accept(ContentType.HTML).when().request(Method.GET);
         assertTrue(response.getStatusCode() == 200, "HTML response not supported for landing page");

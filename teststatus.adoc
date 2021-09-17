@@ -20,15 +20,15 @@
 |*Abstract Test 15* |*/conf/edr/rc-md-query-links*|  |  |
 |*Abstract Test 16* |*/conf/core/rc-collection-info-links*|  |  |
 |*Abstract Test 17* |*/conf/edr/rc-parameters*|  |  |
-|*Abstract Test 18* |*/conf/json/definition*|  |  |
+|*Abstract Test 18* |*/conf/json/definition*| @keshavnangare | Yes | `MediaType.validateResponseForJSON`
 |*Abstract Test 19* |*/conf/json/content*|  |  |
 |*Abstract Test 20* |*/conf/geojson/definition*|  |  |
 |*Abstract Test 21* |*/conf/geojson/content*|  |  |
 |*Abstract Test 22* |*/conf/edr-geojson/definition*|  |  |
 |*Abstract Test 23* |*/conf/edr-geojson/content*|  |  |
-|*Abstract Test 24* |*/conf/covjson/definition*|  |  |
+|*Abstract Test 24* |*/conf/covjson/definition*| @keshavnangare | No | `MediaType.validateResponseForCoverageJSON`
 |*Abstract Test 25* |*/conf/covjson/content*|  |  |
-|*Abstract Test 26* |*/conf/html/definition*|  |  |
+|*Abstract Test 26* |*/conf/html/definition*| @keshavnangare | Yes | `MediaType.validateResponseForHTML`
 |*Abstract Test 27* |*/conf/html/content*|  |  |
 |*Abstract Test 28* |*/conf/oas30/completeness*|  |  |
 |*Abstract Test 29* |*/conf/oas30/exceptions-codes*|  |  |

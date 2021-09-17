@@ -102,21 +102,7 @@ public class AbstractFeatures extends CommonDataFixture {
      
         return collectionsData.iterator();
     }
-    @DataProvider(name = "radiusCollectionPaths")
-    public Iterator<Object[]> radiusCollectionPaths( ITestContext testContext ) {
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/radius",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
     @DataProvider(name = "areaCollectionPaths")
     public Iterator<Object[]> areaCollectionPaths( ITestContext testContext ) {
 

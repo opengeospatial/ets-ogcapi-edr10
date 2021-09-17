@@ -65,7 +65,7 @@ public class CollectionsTime{
 
 	public void coordsParameterDefinition(TestPoint testPoint,OpenApi3 model) {
 	
-
+ 
 		Parameter coords = null;
 		String paramName = "coords";
 
@@ -105,7 +105,7 @@ public class CollectionsTime{
 						String.format(msg, "schema -> type", "string", schema.getType()));
 			}
 
-		}
+		} 
 
 	}
 
