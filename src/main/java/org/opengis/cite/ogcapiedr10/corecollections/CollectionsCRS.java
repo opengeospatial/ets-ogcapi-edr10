@@ -61,7 +61,7 @@ public class CollectionsCRS extends CommonFixture {
 	 * </pre>
 	 *
 	 */
-	@Test(description = "Implements Abstract Test 8  Requirement 33 /req/core/crs84")
+	@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
 	public void collectionsCRS84() {
 
 		boolean compliesWithCRS84Requirement = true;

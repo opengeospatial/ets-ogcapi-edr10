@@ -96,7 +96,7 @@ public class CollectionsResponse extends CommonFixture {
      * Validate that the Collections content complies with the required structure and contents.
      */
     
-	@Test(description = "Implements Abstract Test 9 /conf/collections/rc-md-op and Abstract Test 10 /conf/rc-md-success", dataProvider = "collectionIDs", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 9 (/conf/collections/rc-md-op) and Abstract Test 10 (/conf/rc-md-success)", dataProvider = "collectionIDs", alwaysRun = true)
 	public void validateRetrievalOfCollections(Object collectionIdentifiers) {
 
 		Set<String> collectionTypes = (Set<String>) collectionIdentifiers;
@@ -115,7 +115,7 @@ public class CollectionsResponse extends CommonFixture {
      * Validate that the Collections content complies with the required structure and contents.
      */
     
-	@Test(description = "Implements Abstract Test 11 /conf/collections/src-md-op and Abstract Test 12 /conf/src-md-success", dataProvider = "collectionIDs", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 11 (/conf/collections/src-md-op) and Abstract Test 12 (/conf/collections/src-md-success)", dataProvider = "collectionIDs", alwaysRun = true)
 	public void validateRetrievalOfEnvironmentalDataCollections(Object collectionIdentifiers) {
 
 		Set<String> collectionTypes = (Set<String>) collectionIdentifiers;

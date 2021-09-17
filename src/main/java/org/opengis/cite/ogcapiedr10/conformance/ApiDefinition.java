@@ -50,7 +50,7 @@ public class ApiDefinition extends CommonFixture {
      * Abstract Test 4: Test Purpose: Validate that the API Definition document can be retrieved from the expected location.
      * </pre>
      */
-    @Test(description = "Implements Abstract Test 4 and /req/core/api-definition-op", groups = "apidefinition", dependsOnGroups = "landingpage")
+    @Test(description = "Implements Abstract Test 4 (/conf/core/api-definition)", groups = "apidefinition", dependsOnGroups = "landingpage")
     public void openapiDocumentRetrieval() {
    
         if ( apiUrl == null || apiUrl.isEmpty() )
@@ -70,7 +70,7 @@ public class ApiDefinition extends CommonFixture {
      * @throws MalformedURLException
      *             if the apiUrl is malformed
      */
-    @Test(description = "Implements Abstract Test 5 and Requirement /req/core/api-definition-success", groups = "apidefinition", dependsOnMethods = "openapiDocumentRetrieval")
+    @Test(description = "Implements Abstract Test 5 (/conf/core/api-definition-success)", groups = "apidefinition", dependsOnMethods = "openapiDocumentRetrieval")
     public void apiDefinitionValidation( ITestContext testContext )
                             throws MalformedURLException {
     	

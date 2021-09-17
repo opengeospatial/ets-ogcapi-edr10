@@ -1,0 +1,174 @@
+== Implementation Status of Abstract Tests
+
+[cols=",,,,",options="header",]
+|===
+|#|URI|assigned|completed|method
+|*Abstract Test 1* |*/conf/core/http*| @ghobona | Yes | `Conformance.http`
+|*Abstract Test 2* |*/conf/core/root-op*| @ghobona | Yes | `LandingPage.edrLandingPageValidation`
+|*Abstract Test 3* |*/conf/core/root-success*| @ghobona | Yes | `LandingPage.edrLandingPageValidation`
+|*Abstract Test 4* |*/conf/core/api-definition*| @ghobona | Yes | `ApiDefinition.openapiDocumentRetrieval`
+|*Abstract Test 5* |*/conf/core/api-definition-success*| @ghobona | Yes | `ApiDefinition.apiDefinitionValidation`
+|*Abstract Test 6* |*/conf/core/conformance*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
+|*Abstract Test 7* |*/conf/core/conformance-success*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
+|*Abstract Test 8* |*/conf/core/crs84*| @ghobona | Yes | `CollectionsCRS.collectionsCRS84`
+|*Abstract Test 9* |*/conf/collections/rc-md-op*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
+|*Abstract Test 10* |*/conf/rc-md-success*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
+|*Abstract Test 11* |*/conf/collections/src-md-op*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfEnvironmentalDataCollections`
+|*Abstract Test 12* |*/conf/collections/src-md-success*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfEnvironmentalDataCollections`
+|*Abstract Test 13* |*/conf/core/rc-extent*|  |  |
+|*Abstract Test 14* |*/conf/edr/rc-collection-info*|  |  |
+|*Abstract Test 15* |*/conf/edr/rc-md-query-links*|  |  |
+|*Abstract Test 16* |*/conf/core/rc-collection-info-links*|  |  |
+|*Abstract Test 17* |*/conf/edr/rc-parameters*|  |  |
+|*Abstract Test 18* |*/conf/json/definition*|  |  |
+|*Abstract Test 19* |*/conf/json/content*|  |  |
+|*Abstract Test 20* |*/conf/geojson/definition*|  |  |
+|*Abstract Test 21* |*/conf/geojson/content*|  |  |
+|*Abstract Test 22* |*/conf/edr-geojson/definition*|  |  |
+|*Abstract Test 23* |*/conf/edr-geojson/content*|  |  |
+|*Abstract Test 24* |*/conf/covjson/definition*|  |  |
+|*Abstract Test 25* |*/conf/covjson/content*|  |  |
+|*Abstract Test 26* |*/conf/html/definition*|  |  |
+|*Abstract Test 27* |*/conf/html/content*|  |  |
+|*Abstract Test 28* |*/conf/oas30/completeness*|  |  |
+|*Abstract Test 29* |*/conf/oas30/exceptions-codes*|  |  |
+|*Abstract Test 30* |*/conf/oas30/oas-definition-1*|  |  |
+|*Abstract Test 31* |*/conf/oas30/oas-definition-2*|  |  |
+|*Abstract Test 32* |*/conf/oas30/oas-impl*|  |  |
+|*Abstract Test 33* |*/conf/oas30/security*|  |  |
+|*Abstract Test 34* |*/conf/position*|  |  |
+|*Abstract Test 35* |*/conf/position*|  |  |
+|*Abstract Test 36* |*/conf/position*|  |  |
+|*Abstract Test 37* |*/conf/position*|  |  |
+|*Abstract Test 38* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
+|*Abstract Test 39* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 40* |*/conf/edr/rc-z-definition*| @ghobona | Yes | `CollectionsTime.zParameterDefinition`
+|*Abstract Test 41* |*/conf/edr/rc-z-response*|  |  |
+|*Abstract Test 42* |*/conf/core/datetime-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
+|*Abstract Test 43* |*/conf/core/datetime-response*|  |  |
+|*Abstract Test 44* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 45* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 46* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
+|*Abstract Test 47* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 48* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
+|*Abstract Test 49* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 50* |*/conf/area*|  |  |
+|*Abstract Test 51* |*/conf/area*|  |  |
+|*Abstract Test 52* |*/conf/area*|  |  |
+|*Abstract Test 53* |*/conf/area*|  |  |
+|*Abstract Test 54* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
+|*Abstract Test 55* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 56* |*/conf/edr/rc-z-definition*| @ghobona | Yes | `CollectionsTime.zParameterDefinition`
+|*Abstract Test 57* |*/conf/edr/rc-z-response*|  |  |
+|*Abstract Test 58* |*/conf/core/datetime-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
+|*Abstract Test 59* |*/conf/core/datetime-response*|  |  |
+|*Abstract Test 60* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 61* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 62* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
+|*Abstract Test 63* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 64* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
+|*Abstract Test 65* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 66* |*/conf/cube*|  |  |
+|*Abstract Test 67* |*/conf/cube*|  |  |
+|*Abstract Test 68* |*/conf/cube*|  |  |
+|*Abstract Test 69* |*/conf/cube*|  |  |
+|*Abstract Test 70* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
+|*Abstract Test 71* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 72* |*/conf/edr/rc-z-definition*|  |  |
+|*Abstract Test 73* |*/conf/edr/rc-cube-z-response*|  |  |
+|*Abstract Test 74* |*/conf/core/datetime-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
+|*Abstract Test 75* |*/conf/core/datetime-response*|  |  |
+|*Abstract Test 76* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 77* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 78* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
+|*Abstract Test 79* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 80* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
+|*Abstract Test 81* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 82* |*/conf/trajectory*|  |  |
+|*Abstract Test 83* |*/conf/trajectory*|  |  |
+|*Abstract Test 84* |*/conf/trajectory*|  |  |
+|*Abstract Test 85* |*/conf/trajectory*|  |  |
+|*Abstract Test 86* |*/conf/trajectory*|  |  |
+|*Abstract Test 87* |*/conf/trajectory*|  |  |
+|*Abstract Test 88* |*/conf/trajectory*|  |  |
+|*Abstract Test 89* |*/conf/trajectory*|  |  |
+|*Abstract Test 90* |*/conf/trajectory*|  |  |
+|*Abstract Test 91* |*/conf/trajectory*|  |  |
+|*Abstract Test 92* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
+|*Abstract Test 93* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 94* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 95* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 96* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
+|*Abstract Test 97* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 98* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
+|*Abstract Test 99* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 100* |*/conf/corridor*|  |  |
+|*Abstract Test 101* |*/conf/corridor*|  |  |
+|*Abstract Test 102* |*/conf/corridor*|  |  |
+|*Abstract Test 103* |*/conf/corridor*|  |  |
+|*Abstract Test 104* |*/conf/corridor*|  |  |
+|*Abstract Test 105* |*/conf/corridor*|  |  |
+|*Abstract Test 106* |*/conf/corridor*|  |  |
+|*Abstract Test 107* |*/conf/corridor*|  |  |
+|*Abstract Test 108* |*/conf/corridor*|  |  |
+|*Abstract Test 109* |*/conf/corridor*|  |  |
+|*Abstract Test 110* |*/conf/corridor*|  |  |
+|*Abstract Test 111* |*/conf/corridor*|  |  |
+|*Abstract Test 112* |*/conf/corridor*|  |  |
+|*Abstract Test 113* |*/conf/corridor*|  |  |
+|*Abstract Test 114* |*/conf/corridor*|  |  |
+|*Abstract Test 115* |*/conf/corridor*|  |  |
+|*Abstract Test 116* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
+|*Abstract Test 117* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 118* |*/conf/edr/REQ_rc-corridor-width-definition*| @ghobona | Yes | `CollectionsTime.corridorWidthParameterDefinition`
+|*Abstract Test 119* |*/conf/collections/REQ_rc-corridor-width-response*|  |  |
+|*Abstract Test 120* |*/conf/edr/REQ_rc-corridor-height-definition*|  |  |
+|*Abstract Test 121* |*/conf/collections/REQ_rc-corridor-height-response*|  |  |
+|*Abstract Test 122* |*/conf/edr/REQ_rc-width-units-definition*|  |  |
+|*Abstract Test 123* |*/conf/collections/REQ_rc-width-units-response*|  |  |
+|*Abstract Test 124* |*/conf/edr/REQ_rc-height-units-definition*|  |  |
+|*Abstract Test 125* |*/conf/collections/rc-height-units-response*|  |  |
+|*Abstract Test 126* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 127* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 128* |*/conf/edr/REQ_rc-crs-definition*|  @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
+|*Abstract Test 129* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 130* |*/conf/edr/rc-f-definition*|  @ghobona | Yes | `CollectionsTime.fParameterDefinition`
+|*Abstract Test 131* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 132* |*/conf/instances/rc-md-op*|  |  |
+|*Abstract Test 132* |*/conf/instances/rc-md-op*|  |  |
+|*Abstract Test 133* |*/conf/instances_rc-md-success*|  |  |
+|*Abstract Test 134* |*/conf/instances/src-md-op*|  |  |
+|*Abstract Test 135* |*/conf/instances/src-md-success*|  |  |
+|*Abstract Test 136* |*/conf/locations*|  |  |
+|*Abstract Test 137* |*/conf/locations*|  |  |
+|*Abstract Test 138* |*/conf/locations*|  |  |
+|*Abstract Test 139* |*/conf/core/datetime-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
+|*Abstract Test 140* |*/conf/core/datetime-response*|  |  |
+|*Abstract Test 141* |*/conf/collections/REQ_rc-parameter-name-definition*|  @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
+|*Abstract Test 142* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 143* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
+|*Abstract Test 144* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 145* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
+|*Abstract Test 146* |*/conf/collections/rc-f-response*|  |  |
+|===
+
+
+
+Tests for the following requirements also have to be implemented.
+
+[cols=",,,,",options="header",]
+|===
+|#|URI|assigned|completed|method
+|*Requirement A.21* |*/req/edr/within-definition*| @ghobona | Yes | `CollectionsTime.withinParameterDefinition`
+|*Requirement A.22* |*/req/edr/REQ_rc-within-response*| | |
+|*Requirement A.23* |*/req/edr/within-units-definition*| @ghobona | Yes | `CollectionsTime.withinUnitsParameterDefinition`
+|*Requirement A.24* |*/req/edr/REQ_rc-within-units-response*| | |
+|*Requirement A.25* |*/req/edr/resolution-x-definition*| @ghobona | Yes | `CollectionsTime.resolutionxParameterDefinition`
+|*Requirement A.26* |*/req/edr/resolution-x-response*| | |
+|*Requirement A.28* |*/req/edr/resolution-y-definition*| @ghobona | Yes | `CollectionsTime.resolutionyParameterDefinition`
+|*Requirement A.29* |*/req/edr/resolution-y-response*| | |
+|*Requirement A.30* |*/req/edr/resolution-z-definition*| @ghobona | Yes | `CollectionsTime.resolutionzParameterDefinition`
+|*Requirement A.31* |*/req/edr/resolution-z-response*| | |
+|*Requirement A.32* |*/req/edr/corridor-height-definition*| @ghobona | Yes | `CollectionsTime.corridorHeightParameterDefinition`
+|*Requirement A.37* |*/req/edr/REQ_rc-corridor-width-response*| | |
+|===

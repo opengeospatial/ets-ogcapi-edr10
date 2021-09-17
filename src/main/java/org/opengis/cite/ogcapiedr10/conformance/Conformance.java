@@ -82,7 +82,7 @@ public class Conformance extends CommonFixture {
      * @param testPoint
      *            the test point to test, never <code>null</code>
      */
-    @Test(description = "Implements Abstract Test 6 and Abstract Test 7 on /conformance,", groups = "conformance", dataProvider = "conformanceUris")
+    @Test(description = "Implements Abstract Test 6 (/conf/core/conformance) and Abstract Test 7 (/conf/core/conformance-success)", groups = "conformance", dataProvider = "conformanceUris")
     public void validateConformanceOperationAndResponse( TestPoint testPoint ) {
 
     	String f = "";

@@ -55,7 +55,7 @@ public class CollectionsTime{
 	
 	/**
 	 * <pre>
-	 * Abstract Test 36: Validate that the coords query parameters are constructed correctly. (position)
+	 * Abstract Test 36 (/conf/edr/rc-coords-definition): Validate that the coords query parameters are constructed correctly. (position)
 	 * Abstract Test 52: Validate that the coords query parameters are constructed correctly. (area)
 	 * Abstract Test 74: Validate that the coords query parameters are constructed correctly. (trajectory)
 	 * </pre>
@@ -64,6 +64,7 @@ public class CollectionsTime{
 	 */
 
 	public void coordsParameterDefinition(TestPoint testPoint,OpenApi3 model) {
+	
 
 		Parameter coords = null;
 		String paramName = "coords";
@@ -110,14 +111,16 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Abstract Test 40: Validate that the dateTime query parameters are constructed correctly. (position)
-	 * Abstract Test 56: Validate that the dateTime query parameters are constructed correctly. (area)
-	 * Abstract Test 89: Validate that the dateTime query parameters are constructed correctly. (items)
+	 * Abstract Test 42: Validate that the dateTime query parameters are constructed correctly. (position)
+	 * Abstract Test 58: Validate that the dateTime query parameters are constructed correctly. (area)
+	 * Abstract Test 74: Validate that the dateTime query parameters are constructed correctly. (cube)
+	 * Abstract Test 139: Validate that the dateTime query parameters are constructed correctly. (instances)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void dateTimeParameterDefinition(TestPoint testPoint,OpenApi3 model) {
+		
 
 		Parameter datetime = null;
 		String paramName = "datetime";
@@ -153,17 +156,18 @@ public class CollectionsTime{
 	}
 
 	/**
-	 * Abstract Test 43: Validate that the parameter-name query parameters are
-	 * processed correctly. (position) Abstract Test 59: Validate that the
-	 * parameter-name query parameters are processed correctly. (area) Abstract Test
-	 * 77: Validate that the parameter-name query parameters are processed
-	 * correctly. (trajectory) Abstract Test 104: Validate that the parameter-name
-	 * query parameters are processed correctly. (locations)
+	 * Abstract Test 44: Validate that the parameter-name query parameters are processed correctly. (position) 
+	 * Abstract Test 60: Validate that the parameter-name query parameters are processed correctly. (area) 
+	 * Abstract Test 76: Validate that the parameter-name query parameters are processed correctly. (cube) 
+	 * Abstract Test 94: Validate that the parameter-name query parameters are processed correctly. (trajectory)
+	 * Abstract Test 126: Validate that the parameter-name query parameters are processed correctly. (corridor)
+	 * Abstract Test 141: Validate that the parameter-name query parameters are processed correctly. (locations)
 	 * 
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 
 	public void parameternameParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 		Parameter parametername = null;
 		String paramName = "parameter-name";
@@ -199,16 +203,18 @@ public class CollectionsTime{
 	}
 
 	/**
-	 * Abstract Test 44: Validate that the crs query parameters are constructed
-	 * correctly. Abstract Test 60: Validate that the crs query parameters are
-	 * constructed correctly. Abstract Test 78: Validate that the crs query
-	 * parameters are constructed correctly. Abstract Test 105: Validate that the
-	 * crs query parameters are constructed correctly.
+	 * Abstract Test 46: Validate that the crs query parameters are constructed correctly. (position)
+	 * Abstract Test 62: Validate that the crs query parameters are constructed correctly. (area)
+	 * Abstract Test 78: Validate that the crs query parameters are constructed correctly. (cube)
+	 * Abstract Test 96: Validate that the crs query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 128: Validate that the crs query parameters are constructed correctly. (corridor)
+	 * Abstract Test 143: Validate that the crs query parameters are constructed correctly.	(locations) 
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 
 	public void crsParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 		Parameter crs = null;
 		String paramName = "crs";
@@ -243,14 +249,17 @@ public class CollectionsTime{
 	
 
 	/**
-	 * Abstract Test 46: Validate that the f query parameter is constructed correctly. (position)
-	 * Abstract Test 62: Validate that the f query parameter is constructed correctly. (area)
-	 * Abstract Test 80: Validate that the f query parameter is constructed correctly. (trajectory)
-	 * Abstract Test 107: Validate that the f query parameter is constructed correctly. (locations)
+	 * Abstract Test 48: Validate that the f query parameter is constructed correctly. (position)
+	 * Abstract Test 64: Validate that the f query parameter is constructed correctly. (area)
+	 * Abstract Test 80: Validate that the f query parameter is constructed correctly. (cube)
+	 * Abstract Test 98: Validate that the f query parameter is constructed correctly. (trajectory)
+	 * Abstract Test 130: Validate that the f query parameter is constructed correctly. (corridor)
+	 * Abstract Test 145: Validate that the f query parameter is constructed correctly. (locations)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void fParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+
 
 
 	  Parameter f = null;
@@ -288,13 +297,14 @@ public class CollectionsTime{
 	}	
 
 	/**
-	 * Abstract Test 38: Validate that the vertical level query parameters are constructed correctly. (position)
-	 * Abstract Test 54: Validate that the vertical level query parameters are constructed correctly. (area)
+	 * Abstract Test 40 (/conf/edr/rc-z-definition): Validate that the vertical level query parameters are constructed correctly. (position)
+	 * Abstract Test 56 (/conf/edr/rc-z-definition): Validate that the vertical level query parameters are constructed correctly. (area)
 	 *
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void zParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 	  Parameter z = null;
 	  String paramName = "z";
@@ -333,13 +343,14 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement 14: /req/edr/within-definition Parameter within definition
+	 * Requirement A.21: /req/edr/within-definition Parameter within definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void withinParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+		
 
 	  // Based on
 	  // https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/master/GettingStarted.md
@@ -382,7 +393,7 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement 16: /req/edr/within-units-definition Parameter withinUnits
+	 * Requirement A.23: /req/edr/within-units-definition Parameter withinUnits
  definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
@@ -390,6 +401,7 @@ public class CollectionsTime{
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void withinUnitsParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 
 
@@ -430,105 +442,10 @@ public class CollectionsTime{
 
 
 	
-	/**
-	 * <pre>
-	 * Requirement 18: /req/edr/min-z-definition Parameter min-z
- definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	public void minzParameterDefinition(TestPoint testPoint, OpenApi3 model) {
-
-
-
-	  Parameter minz = null;
-	  String paramName = "min-z";
-
-	  
-
-	  for (Path path : model.getPaths().values()) {
-
-
-
-	    if (testPoint.getPath().equals(path.getPathString())) {
-
-	      for (Operation op : path.getOperations().values()) {
-
-	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            minz = param;
-	        }
-	      }
-	    }
-	  }
-
-	  // ----------------
-
-
-	  if (minz != null) {
-
-	  String msg = "Expected property '%s' with value '%s' but was '%s'";
-	  assertEquals(minz.getName(), paramName, String.format(msg, "name", paramName, minz.getName()));
-	  assertEquals(minz.getIn(), "query", String.format(msg, "in", "query", minz.getIn()));
-	  assertTrue(isRequired(minz), String.format(msg, "required", "true", minz.getRequired()));
-	  assertEquals( minz.getStyle(), "form", String.format( msg, "style","form", minz.getStyle() ) );
-	  assertFalse(isExplode(minz), String.format(msg, "explode", "false", minz.getExplode()));		
-	  }		
-	}
 
 	/**
 	 * <pre>
-	 * Requirement 20: /req/edr/max-z-definition Parameter max-z
- definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	public void maxzParameterDefinition(TestPoint testPoint, OpenApi3 model) {
-
-
-
-	  Parameter maxz = null;
-	  String paramName = "max-z";
-
-	  
-
-	  for (Path path : model.getPaths().values()) {
-
-
-
-	    if (testPoint.getPath().equals(path.getPathString())) {
-
-	      for (Operation op : path.getOperations().values()) {
-
-	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            maxz = param;
-	        }
-	      }
-	    }
-	  }
-
-	  // ----------------
-
-
-	  if (maxz != null) {
-
-	  String msg = "Expected property '%s' with value '%s' but was '%s'";
-	  assertEquals(maxz.getName(), paramName, String.format(msg, "name", paramName, maxz.getName()));
-	  assertEquals(maxz.getIn(), "query", String.format(msg, "in", "query", maxz.getIn()));
-	  assertTrue(isRequired(maxz), String.format(msg, "required", "true", maxz.getRequired()));
-	  assertEquals( maxz.getStyle(), "form", String.format( msg, "style","form", maxz.getStyle() ) );
-	  assertFalse(isExplode(maxz), String.format(msg, "explode", "false", maxz.getExplode()));		
-	  }	
-	}
-
-	/**
-	 * <pre>
-	 * Requirement 22: /req/edr/resolution-x-definition Parameter resolution-x
+	 * Requirement A.25: /req/edr/resolution-x-definition Parameter resolution-x
  definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
@@ -536,6 +453,7 @@ public class CollectionsTime{
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void resolutionxParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 
 
@@ -576,7 +494,7 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement 24: /req/edr/resolution-y-definition Parameter resolution-y
+	 * Requirement A.28: /req/edr/resolution-y-definition Parameter resolution-y
  definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
@@ -584,6 +502,7 @@ public class CollectionsTime{
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void resolutionyParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 
 
@@ -625,13 +544,14 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement 26: /req/edr/resolution-z-definition Parameter resolution-z definition
+	 * Requirement A.30: /req/edr/resolution-z-definition Parameter resolution-z definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void resolutionzParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+	
 
 
 
@@ -672,13 +592,14 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement 28: /req/edr/corridor-height-definition Parameter corridor-height definition
+	 * Requirement A.32: /req/edr/REQ_rc-corridor-height-definition Parameter corridor-height definition
 	 * </pre>
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void corridorHeightParameterDefinition(TestPoint testPoint, OpenApi3 model) {
+
 
 
 
@@ -719,14 +640,13 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition
+	 * Abstract Test 118: Validate that the corridor-width query parameter is constructed correctly. (corridor)
 	 * </pre>
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	public void corridorWidthParameterDefinition(TestPoint testPoint, OpenApi3 model) {
-
 
 
 	  Parameter corridorWidth = null;
