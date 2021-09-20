@@ -47,14 +47,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 36: Validate that the coords query parameters are constructed correctly. (position)
-	 * Abstract Test 52: Validate that the coords query parameters are constructed correctly. (trajectory)
-	 * Abstract Test 74: Validate that the coords query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 92: Validate that the coords query parameters are constructed correctly. (trajectory)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 36, Abstract Test 52, and Abstract Test 74, meets Requirement 3 /req/edr/coords-definition Parameter coords definition", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 92 (/conf/edr/rc-coords-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryCoordsParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -66,14 +64,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 40: Validate that the dateTime query parameters are constructed correctly. (position)
-	 * Abstract Test 56: Validate that the dateTime query parameters are constructed correctly. (trajectory)
-	 * Abstract Test 89: Validate that the dateTime query parameters are constructed correctly. (items)
+	 * Abstract Test 91: Validate that resources can be identified and extracted from a Collection with a Trajectory query using query parameters. (trajectory)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 40, Abstract Test 56, and Abstract Test 89, and meets Requirement 5: /req/core/datetime-parameter Datetime parameter", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements datetime parameter part of Abstract Test 91 (/conf/trajectory)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryDateTimeParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -84,16 +80,11 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 43: Validate that the parameter-name query parameters are
-	 * processed correctly. (position) Abstract Test 59: Validate that the
-	 * parameter-name query parameters are processed correctly. (trajectory) Abstract Test
-	 * 77: Validate that the parameter-name query parameters are processed
-	 * correctly. (trajectory) Abstract Test 104: Validate that the parameter-name
-	 * query parameters are processed correctly. (locations)
+	 * Abstract Test 94: Validate that the parameter-name query parameters are processed correctly. (trajectory) 
 	 * 
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 42, Abstract Test 58, Abstract Test 76, and Abstract Test 103 and meets Requirement 6: /req/edr/parameter-name-definition Parameter parametername definition", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 94 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryParameternameParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -102,15 +93,11 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 44: Validate that the crs query parameters are constructed
-	 * correctly. Abstract Test 60: Validate that the crs query parameters are
-	 * constructed correctly. Abstract Test 78: Validate that the crs query
-	 * parameters are constructed correctly. Abstract Test 105: Validate that the
-	 * crs query parameters are constructed correctly.
+	 * Abstract Test 96: Validate that the crs query parameters are constructed correctly. (trajectory)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 44, Abstract Test 60, Abstract Test 78, and Abstract Test 105 and Requirement 8: /req/edr/crs-definition Parameter crs definition", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 96 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryCrsParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -122,14 +109,11 @@ public class TrajectoryCollections extends AbstractFeatures {
 	
 
 	/**
-	 * Abstract Test 46: Validate that the f query parameter is constructed correctly. (position)
-	 * Abstract Test 62: Validate that the f query parameter is constructed correctly. (trajectory)
-	 * Abstract Test 80: Validate that the f query parameter is constructed correctly. (trajectory)
-	 * Abstract Test 107: Validate that the f query parameter is constructed correctly. (locations)
+	 * Abstract Test 98: Validate that the f query parameter is constructed correctly. (trajectory)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Abstract Test 46, Abstract Test 62, Abstract Test 80, Abstract Test 107 and Requirement 10: /req/edr/f-definition Parameter f definition", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 98 (/conf/edr/rc-f-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryFParameterDefinition(TestPoint testPoint) {
 
 
@@ -139,13 +123,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}	
 
 	/**
-	 * Abstract Test 38: Validate that the vertical level query parameters are constructed correctly. (position)
-	 * Abstract Test 54: Validate that the vertical level query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 91: Validate that resources can be identified and extracted from a Collection with a Trajectory query using query parameters.
 	 *
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Abstract Test 38, Abstract Test 54 and Requirement 12: /req/edr/z-definition Parameter z definition", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements VerticalLevel part of Abstract Test 91 (/conf/trajectory)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryZParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;

@@ -122,11 +122,11 @@
 |*Abstract Test 117* |*/conf/edr/rc-coords-response*|  |  |
 |*Abstract Test 118* |*/conf/edr/REQ_rc-corridor-width-definition*| @ghobona | Yes | `CollectionsTime.corridorWidthParameterDefinition`
 |*Abstract Test 119* |*/conf/collections/REQ_rc-corridor-width-response*|  |  |
-|*Abstract Test 120* |*/conf/edr/REQ_rc-corridor-height-definition*|  |  |
+|*Abstract Test 120* |*/conf/edr/REQ_rc-corridor-height-definition*| @ghobona | Yes | `CollectionsTime.corridorHeightParameterDefinition`
 |*Abstract Test 121* |*/conf/collections/REQ_rc-corridor-height-response*|  |  |
 |*Abstract Test 122* |*/conf/edr/REQ_rc-width-units-definition*|  |  |
 |*Abstract Test 123* |*/conf/collections/REQ_rc-width-units-response*|  |  |
-|*Abstract Test 124* |*/conf/edr/REQ_rc-height-units-definition*|  |  |
+|*Abstract Test 124* |*/conf/edr/REQ_rc-height-units-definition*| @ghobona | Yes | `CollectionsTime.withinUnitsParameterDefinition`
 |*Abstract Test 125* |*/conf/collections/rc-height-units-response*|  |  |
 |*Abstract Test 126* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
 |*Abstract Test 127* |*/conf/edr/rc-parameter-name-response*|  |  |
@@ -161,14 +161,10 @@ Tests for the following requirements also have to be implemented.
 |#|URI|assigned|completed|method
 |*Requirement A.21* |*/req/edr/within-definition*| @ghobona | Yes | `CollectionsTime.withinParameterDefinition`
 |*Requirement A.22* |*/req/edr/REQ_rc-within-response*| | |
-|*Requirement A.23* |*/req/edr/within-units-definition*| @ghobona | Yes | `CollectionsTime.withinUnitsParameterDefinition`
-|*Requirement A.24* |*/req/edr/REQ_rc-within-units-response*| | |
 |*Requirement A.25* |*/req/edr/resolution-x-definition*| @ghobona | Yes | `CollectionsTime.resolutionxParameterDefinition`
 |*Requirement A.26* |*/req/edr/resolution-x-response*| | |
 |*Requirement A.28* |*/req/edr/resolution-y-definition*| @ghobona | Yes | `CollectionsTime.resolutionyParameterDefinition`
 |*Requirement A.29* |*/req/edr/resolution-y-response*| | |
 |*Requirement A.30* |*/req/edr/resolution-z-definition*| @ghobona | Yes | `CollectionsTime.resolutionzParameterDefinition`
 |*Requirement A.31* |*/req/edr/resolution-z-response*| | |
-|*Requirement A.32* |*/req/edr/corridor-height-definition*| @ghobona | Yes | `CollectionsTime.corridorHeightParameterDefinition`
-|*Requirement A.37* |*/req/edr/REQ_rc-corridor-width-response*| | |
 |===

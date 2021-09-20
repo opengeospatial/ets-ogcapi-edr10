@@ -55,9 +55,11 @@ public class CollectionsTime{
 	
 	/**
 	 * <pre>
-	 * Abstract Test 36 (/conf/edr/rc-coords-definition): Validate that the coords query parameters are constructed correctly. (position)
-	 * Abstract Test 52: Validate that the coords query parameters are constructed correctly. (area)
-	 * Abstract Test 74: Validate that the coords query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 38: Validate that the coords query parameters are constructed correctly. (position)
+	 * Abstract Test 54: Validate that the coords query parameters are constructed correctly. (area)
+	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
+	 * Abstract Test 92: Validate that the coords query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 116: Validate that the coords query parameters are constructed correctly. (corridor)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
@@ -592,9 +594,8 @@ public class CollectionsTime{
 
 	/**
 	 * <pre>
-	 * Requirement A.32: /req/edr/REQ_rc-corridor-height-definition Parameter corridor-height definition
+	 * Abstract Test 120: Validate that the corridor-height query parameter is constructed correctly.
 	 * </pre>
-	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */

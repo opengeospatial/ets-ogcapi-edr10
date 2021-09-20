@@ -47,14 +47,12 @@ public class CubeCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 36: Validate that the coords query parameters are constructed correctly. (position)
-	 * Abstract Test 52: Validate that the coords query parameters are constructed correctly. (cube)
-	 * Abstract Test 74: Validate that the coords query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 36, Abstract Test 52, and Abstract Test 74, meets Requirement 3 /req/edr/coords-definition Parameter coords definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 70 (/conf/edr/rc-coords-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeCoordsParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -66,14 +64,12 @@ public class CubeCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 40: Validate that the dateTime query parameters are constructed correctly. (position)
-	 * Abstract Test 56: Validate that the dateTime query parameters are constructed correctly. (cube)
-	 * Abstract Test 89: Validate that the dateTime query parameters are constructed correctly. (items)
+	 * Abstract Test 74: Validate that the dateTime query parameters are constructed correctly. (cube)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 40, Abstract Test 56, and Abstract Test 89, and meets Requirement 5: /req/core/datetime-parameter Datetime parameter", dataProvider = "cubeCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 74 (/conf/core/datetime-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeDateTimeParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -84,16 +80,11 @@ public class CubeCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 43: Validate that the parameter-name query parameters are
-	 * processed correctly. (position) Abstract Test 59: Validate that the
-	 * parameter-name query parameters are processed correctly. (cube) Abstract Test
-	 * 77: Validate that the parameter-name query parameters are processed
-	 * correctly. (trajectory) Abstract Test 104: Validate that the parameter-name
-	 * query parameters are processed correctly. (locations)
+	 * Abstract Test 76: Validate that the parameter-name query parameters are processed correctly. (cube)
 	 * 
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 42, Abstract Test 58, Abstract Test 76, and Abstract Test 103 and meets Requirement 6: /req/edr/parameter-name-definition Parameter parametername definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements 76 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeParameternameParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -102,15 +93,11 @@ public class CubeCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 44: Validate that the crs query parameters are constructed
-	 * correctly. Abstract Test 60: Validate that the crs query parameters are
-	 * constructed correctly. Abstract Test 78: Validate that the crs query
-	 * parameters are constructed correctly. Abstract Test 105: Validate that the
-	 * crs query parameters are constructed correctly.
+	 * Abstract Test 78: Validate that the crs query parameters are constructed correctly. (cube)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 44, Abstract Test 60, Abstract Test 78, and Abstract Test 105 and Requirement 8: /req/edr/crs-definition Parameter crs definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 78 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeCrsParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -122,14 +109,11 @@ public class CubeCollections extends AbstractFeatures {
 	
 
 	/**
-	 * Abstract Test 46: Validate that the f query parameter is constructed correctly. (position)
-	 * Abstract Test 62: Validate that the f query parameter is constructed correctly. (cube)
-	 * Abstract Test 80: Validate that the f query parameter is constructed correctly. (trajectory)
-	 * Abstract Test 107: Validate that the f query parameter is constructed correctly. (locations)
+	 * Abstract Test 80: Validate that the f query parameter is constructed correctly. (cube)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Abstract Test 46, Abstract Test 62, Abstract Test 80, Abstract Test 107 and Requirement 10: /req/edr/f-definition Parameter f definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements Abstract Test 80 (/conf/edr/rc-f-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeFParameterDefinition(TestPoint testPoint) {
 
 
@@ -139,13 +123,12 @@ public class CubeCollections extends AbstractFeatures {
 	}	
 
 	/**
-	 * Abstract Test 38: Validate that the vertical level query parameters are constructed correctly. (position)
-	 * Abstract Test 54: Validate that the vertical level query parameters are constructed correctly. (cube)
+	 * Abstract Test 69: Validate that resources can be identified and extracted from a Collection with a Cube query using query parameters.
 	 *
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Abstract Test 38, Abstract Test 54 and Requirement 12: /req/edr/z-definition Parameter z definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
+	@Test(description = "Implements VerticalLevel check of Abstract Test 69 (/conf/cube)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeZParameterDefinition(TestPoint testPoint) {
 
 		OpenApi3 model = apiModel;
@@ -155,46 +138,6 @@ public class CubeCollections extends AbstractFeatures {
 	}	
 
 
-
-	
-	
-
-
-
-
-	/**
-	 * <pre>
-	 * Requirement 28: /req/edr/corridor-height-definition Parameter corridor-height definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 28: /req/edr/corridor-height-definition Parameter corridor-height definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
-	public void cubeCorridorHeightParameterDefinition(TestPoint testPoint) {
-
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.corridorHeightParameterDefinition(testPoint,apiModel);
-	}
-
-	/**
-	 * <pre>
-	 * Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition
-	 * </pre>
-	 * NOTE: Not referenced by ATS
-	 *
-	 * @param testPoint the testPoint under test, never <code>null</code>
-	 */
-	@Test(description = "Requirement 30: /req/edr/corridor-width-definition Parameter corridor-width definition", dataProvider = "cubeCollectionPaths", alwaysRun = true)
-	public void cubeCorridorWidthParameterDefinition(TestPoint testPoint) {
-
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.corridorWidthParameterDefinition(testPoint,apiModel);
-	}
 	
 	
 }
