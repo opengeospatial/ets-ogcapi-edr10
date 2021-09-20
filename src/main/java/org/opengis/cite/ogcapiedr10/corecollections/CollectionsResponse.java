@@ -146,14 +146,16 @@ public class CollectionsResponse extends CommonFixture {
 	} 	
 	
         /**
-         * Abstract Test 32 : Validate that an error is returned by a Position query if no query parameters are specified.
-         * Abstract Test 48 : Validate that an error is returned by a Area query if no query parameters are specified.
-         * Abstract Test 64 : Validate that an error is returned by a Trajectory query if no query parameters are specified.
-         * Abstract Test 98 : Validate that an error is returned by a Locations query if no query parameters are specified.
+         * Abstract Test 34 : Validate that an error is returned by a Position query if no query parameters are specified.
+         * Abstract Test 50 : Validate that an error is returned by a Area query if no query parameters are specified.
+         * Abstract Test 66 : Validate that an error is returned by a Cube query if no query parameters are specified.         
+         * Abstract Test 82 : Validate that an error is returned by a Trajectory query if no query parameters are specified.
+         * Abstract Test 100 : Validate that an error is returned by a Corridor query if no query parameters are specified.
+         * Abstract Test 136 : Validate that an error is returned by a Locations query if no query parameters are specified.          
          * 
          * @param collectionIdentifiers
          */
-        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 32 + 48 + 64 + 98, Requirements /req/queries/position + /req/queries/area + /req/queries/trajectory + /req/queries/locations")
+        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 34 (/conf/position), Abstract Test 50 (/conf/area), Abstract Test 66 (/conf/cube), Abstract Test 82 (/conf/trajectory), Abstract Test 100 (/conf/corridor), Abstract Test 136 (/conf/locations) ")
         public void validateNoQueryParameters(Object collectionIdentifiers) {
             Set<String> collectionIds = (Set<String>) collectionIdentifiers;
             for (String colletionId : collectionIds) {
@@ -177,13 +179,14 @@ public class CollectionsResponse extends CommonFixture {
         }
 
         /**
-         * Abstract Test 33 : Validate that an error is returned by a Position query when the coords query parameter is not specified.
-         * Abstract Test 49 : Validate that an error is returned by a Area query when the coords query parameter is not specified.
-         * Abstract Test 65 : Validate that an error is returned by a Trajectory query when the coords query parameter is not specified.
+         * Abstract Test 35 : Validate that an error is returned by a Position query when the coords query parameter is not specified.
+         * Abstract Test 51 : Validate that an error is returned by a Area query when the coords query parameter is not specified.
+         * Abstract Test 83 : Validate that an error is returned by a Trajectory query when the coords query parameter is not specified.
+         * Abstract Test 101 : Validate that an error is returned by a Corridor query when the coords query parameter is not specified.
          * 
          * @param collectionIdentifiers
          */
-        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 33 + 49 + 65, Requirements /req/queries/position + /req/queries/area + /req/queries/trajectory")
+        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
         public void validateCoordsQueryParameters(
                 Object collectionIdentifiers) {
             Set<String> collectionIds = (Set<String>) collectionIdentifiers;
@@ -200,6 +203,12 @@ public class CollectionsResponse extends CommonFixture {
                 response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=");
                 assertTrue(response.getStatusCode() == 400,
                         "Expected status code 400 when a Trajectory query with coords query parameter is not specified for collection " + colletionId);
+                
+                
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/corridor?coords=");
+                assertTrue(response.getStatusCode() == 400,
+                        "Expected status code 400 when a Corridor query with coords query parameter is not specified for collection " + colletionId);                
+                
             }
         }        
 }

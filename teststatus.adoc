@@ -36,8 +36,8 @@
 |*Abstract Test 31* |*/conf/oas30/oas-definition-2*|  |  |
 |*Abstract Test 32* |*/conf/oas30/oas-impl*|  |  |
 |*Abstract Test 33* |*/conf/oas30/security*|  |  |
-|*Abstract Test 34* |*/conf/position*|  |  |
-|*Abstract Test 35* |*/conf/position*|  |  |
+|*Abstract Test 34* |*/conf/position*| @keshavnangare | Yes | `CollectionsResponse.validateNoQueryParameters`
+|*Abstract Test 35* |*/conf/position*| @keshavnangare | Yes | `CollectionsResponse.validateCoordsQueryParameters`
 |*Abstract Test 36* |*/conf/position*|  |  |
 |*Abstract Test 37* |*/conf/position*|  |  |
 |*Abstract Test 38* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
@@ -52,8 +52,8 @@
 |*Abstract Test 47* |*/conf/edr/REQ_rc-crs-response*|  |  |
 |*Abstract Test 48* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
 |*Abstract Test 49* |*/conf/collections/rc-f-response*|  |  |
-|*Abstract Test 50* |*/conf/area*|  |  |
-|*Abstract Test 51* |*/conf/area*|  |  |
+|*Abstract Test 50* |*/conf/area*| @keshavnangare | Yes | `CollectionsResponse.validateNoQueryParameters`
+|*Abstract Test 51* |*/conf/area*| @keshavnangare | Yes | `CollectionsResponse.validateCoordsQueryParameters`
 |*Abstract Test 52* |*/conf/area*|  |  |
 |*Abstract Test 53* |*/conf/area*|  |  |
 |*Abstract Test 54* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
@@ -68,7 +68,7 @@
 |*Abstract Test 63* |*/conf/edr/REQ_rc-crs-response*|  |  |
 |*Abstract Test 64* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
 |*Abstract Test 65* |*/conf/collections/rc-f-response*|  |  |
-|*Abstract Test 66* |*/conf/cube*|  |  |
+|*Abstract Test 66* |*/conf/cube*| @keshavnangare | Yes | `CollectionsResponse.validateNoQueryParameters`
 |*Abstract Test 67* |*/conf/cube*|  |  |
 |*Abstract Test 68* |*/conf/cube*|  |  |
 |*Abstract Test 69* |*/conf/cube*|  |  |
@@ -84,8 +84,8 @@
 |*Abstract Test 79* |*/conf/edr/REQ_rc-crs-response*|  |  |
 |*Abstract Test 80* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
 |*Abstract Test 81* |*/conf/collections/rc-f-response*|  |  |
-|*Abstract Test 82* |*/conf/trajectory*|  |  |
-|*Abstract Test 83* |*/conf/trajectory*|  |  |
+|*Abstract Test 82* |*/conf/trajectory*| @keshavnangare | Yes | `CollectionsResponse.validateNoQueryParameters`
+|*Abstract Test 83* |*/conf/trajectory*| @keshavnangare | Yes | `CollectionsResponse.validateCoordsQueryParameters`
 |*Abstract Test 84* |*/conf/trajectory*|  |  |
 |*Abstract Test 85* |*/conf/trajectory*|  |  |
 |*Abstract Test 86* |*/conf/trajectory*|  |  |
@@ -102,8 +102,8 @@
 |*Abstract Test 97* |*/conf/edr/REQ_rc-crs-response*|  |  |
 |*Abstract Test 98* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
 |*Abstract Test 99* |*/conf/collections/rc-f-response*|  |  |
-|*Abstract Test 100* |*/conf/corridor*|  |  |
-|*Abstract Test 101* |*/conf/corridor*|  |  |
+|*Abstract Test 100* |*/conf/corridor*| @keshavnangare | Yes | `CollectionsResponse.validateNoQueryParameters`
+|*Abstract Test 101* |*/conf/corridor*| @keshavnangare | Yes | `CollectionsResponse.validateCoordsQueryParameters`
 |*Abstract Test 102* |*/conf/corridor*|  |  |
 |*Abstract Test 103* |*/conf/corridor*|  |  |
 |*Abstract Test 104* |*/conf/corridor*|  |  |
@@ -139,7 +139,7 @@
 |*Abstract Test 133* |*/conf/instances_rc-md-success*|  |  |
 |*Abstract Test 134* |*/conf/instances/src-md-op*|  |  |
 |*Abstract Test 135* |*/conf/instances/src-md-success*|  |  |
-|*Abstract Test 136* |*/conf/locations*|  |  |
+|*Abstract Test 136* |*/conf/locations*| @keshavnangare | Yes | `CollectionsResponse.validateNoQueryParameters`
 |*Abstract Test 137* |*/conf/locations*|  |  |
 |*Abstract Test 138* |*/conf/locations*|  |  |
 |*Abstract Test 139* |*/conf/core/datetime-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
