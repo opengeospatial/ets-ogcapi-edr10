@@ -20,6 +20,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -27,10 +28,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.sis.referencing.CRS;
+import org.apache.sis.referencing.crs.DefaultGeographicCRS;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
 import org.opengis.cite.ogcapiedr10.util.TemporalExtent;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
@@ -210,5 +214,141 @@ public class CollectionsResponse extends CommonFixture {
                         "Expected status code 400 when a Corridor query with coords query parameter is not specified for collection " + colletionId);                
                 
             }
-        }        
+        }
+        
+
+    	/**
+    	 * <pre>
+    	 * Abstract Test 8: Validate that all spatial geometries provided through the API are in the CRS84 spatial reference system unless otherwise requested by the client.
+    	 * </pre>
+    	 *
+    	 */
+    	@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
+    	public void collectionsCRS84() {
+
+    		boolean compliesWithCRS84Requirement = true;
+    		StringBuffer resultMessage = new StringBuffer();
+
+    		TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections", null);
+    		String testPointUri = new UriBuilder(testPoint).buildUrl();
+    		Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    		JsonPath jsonPath = response.jsonPath();
+
+    		List<Object> collectionsList = jsonPath.getList("collections");
+
+    		for (int t = 0; t < collectionsList.size(); t++) {
+    			boolean supportsCRS84 = false;
+    			HashMap collectionMap = (HashMap) collectionsList.get(t);
+
+    			String crsText = collectionMap.get("crs").toString();
+    			ArrayList crsList = (ArrayList) collectionMap.get("crs");
+    			HashMap crsMap = (HashMap) crsList.get(0);
+
+    			CoordinateReferenceSystem source = null;
+
+    			try {
+
+    				source = CRS.fromWKT(crsMap.get("wkt").toString());
+    			} catch (Exception e) {
+
+    				e.printStackTrace();
+    			}
+
+    			DefaultGeographicCRS crs = (DefaultGeographicCRS) source;
+
+    			if (crs.getDatum().getEllipsoid().getName().toString().equals("WGS 84")
+    					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS_1984")
+    					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS84")) {
+
+    				if (source.getCoordinateSystem().getAxis(0).toString().toLowerCase().contains("longitude")
+    						&& source.getCoordinateSystem().getAxis(1).toString().toLowerCase().contains("latitude")) {
+
+    					supportsCRS84 = true;
+
+    				}
+    			}
+    			if (supportsCRS84 == false) {
+    				compliesWithCRS84Requirement = false;
+    				resultMessage.append("Collection " + collectionMap.get("id").toString() + " fails. ");
+    			}
+
+    		}
+
+    		org.testng.Assert.assertTrue(compliesWithCRS84Requirement,
+    				"Fails Abstract Test 8 because " + resultMessage.toString());
+
+    	}
+
+    	/**
+    	 * <pre>
+    	 * Abstract Test 17: Validate that each parameter in a collection is correctly defined.
+    	 * </pre>
+    	 *
+    	 */
+    	@Test(description = "Implements Abstract Test 17 (/conf/edr/rc-parameters)")
+    	public void collectionsParameters() {
+    		boolean compliesWithCollectionParametersRequirement = true;
+    		StringBuffer resultMessage = new StringBuffer();
+
+    		TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections", null);
+    		String testPointUri = new UriBuilder(testPoint).buildUrl();
+    		Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    		JsonPath jsonPath = response.jsonPath();
+
+    		List<Object> collectionsList = jsonPath.getList("collections");
+    		
+    		
+
+    		for (int t = 0; t < collectionsList.size(); t++) {
+    			boolean supportsCRS84 = false;
+    			HashMap collectionMap = (HashMap) collectionsList.get(t);
+
+    			String parameterNameText = collectionMap.get("parameter_names").toString();
+    			HashMap parameterNameMap = (HashMap) collectionMap.get("parameter_names");
+    			
+    			
+    			ArrayList<String> parameterNameList = new ArrayList<String>();
+    			
+    			//Implements Test Method 2: Verify that each parameter property has a unique name (in the collection).
+    			for (Object k: parameterNameMap.keySet())
+    			{
+    				if(parameterNameList.contains(k.toString())) {
+    					org.testng.Assert.fail(	"Fails Abstract Test 17 because the parameter " + k.toString()+" is duplicated in collection "+collectionMap.get("id"));		
+    				}
+    				else {
+    					parameterNameList.add(k.toString());
+    				}
+    			}
+    			
+    			//Implements Test Method 1: Verify that all parameters listed in a collection have the required properties.
+    			//Implements Test Method 3: Verify that each parameter property has a type property.
+    			//Implements Test Method 4: Verify that each parameter property has a observedProperty property.
+    			for(int i=0; i < parameterNameList.size(); i++)
+    			{
+    				String parameterName = parameterNameList.get(i);
+    		
+    				
+    				boolean hasType = false; 
+    				boolean hasObservedProperty = false;
+    				
+    				HashMap parameterValueMap = (HashMap) parameterNameMap.get(parameterName);
+    				for (Object prop: parameterValueMap.keySet())
+    				{
+    					if(prop.toString().equals("type")) hasType = true;
+    					if(prop.toString().equals("observedProperty")) hasObservedProperty = true;
+    					
+    				}
+    				hasType = false;
+    				
+    				org.testng.Assert.assertTrue(hasType,	"Fails Abstract Test 17 because parameter " + parameterName+" in collection "+collectionMap.get("id") + " is missing a 'type' property");
+    				org.testng.Assert.assertTrue(hasObservedProperty,	"Fails Abstract Test 17 because parameter " + parameterName+" in collection "+collectionMap.get("id") + " is missing a 'observedProperty' property");				
+    			}
+    			
+
+    			org.testng.Assert.assertTrue(compliesWithCollectionParametersRequirement,	"Fails Abstract Test 17 because " + resultMessage.toString());
+    		}
+    	}
+        
+        
+        
 }

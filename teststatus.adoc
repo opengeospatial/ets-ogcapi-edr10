@@ -10,7 +10,7 @@
 |*Abstract Test 5* |*/conf/core/api-definition-success*| @ghobona | Yes | `ApiDefinition.apiDefinitionValidation`
 |*Abstract Test 6* |*/conf/core/conformance*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
 |*Abstract Test 7* |*/conf/core/conformance-success*| @ghobona | Yes | `Conformance.validateConformanceOperationAndResponse`
-|*Abstract Test 8* |*/conf/core/crs84*| @ghobona | Yes | `CollectionsCRS.collectionsCRS84`
+|*Abstract Test 8* |*/conf/core/crs84*| @ghobona | Yes | `CollectionsResponse.collectionsCRS84`
 |*Abstract Test 9* |*/conf/collections/rc-md-op*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
 |*Abstract Test 10* |*/conf/rc-md-success*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfCollections`
 |*Abstract Test 11* |*/conf/collections/src-md-op*| @ghobona | Yes | `CollectionsResponse.validateRetrievalOfEnvironmentalDataCollections`
@@ -19,7 +19,7 @@
 |*Abstract Test 14* |*/conf/edr/rc-collection-info*|  |  |
 |*Abstract Test 15* |*/conf/edr/rc-md-query-links*|  |  |
 |*Abstract Test 16* |*/conf/core/rc-collection-info-links*|  |  |
-|*Abstract Test 17* |*/conf/edr/rc-parameters*|  |  |
+|*Abstract Test 17* |*/conf/edr/rc-parameters*| @ghobona | Yes | `CollectionsResponse.collectionsParameters`
 |*Abstract Test 18* |*/conf/json/definition*| @keshavnangare | Yes | `MediaType.validateResponseForJSON`
 |*Abstract Test 19* |*/conf/json/content*|  |  |
 |*Abstract Test 20* |*/conf/geojson/definition*|  |  |
