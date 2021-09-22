@@ -149,73 +149,8 @@ public class CollectionsResponse extends CommonFixture {
 
 	} 	
 	
-        /**
-         * Abstract Test 34 : Validate that an error is returned by a Position query if no query parameters are specified.
-         * Abstract Test 50 : Validate that an error is returned by a Area query if no query parameters are specified.
-         * Abstract Test 66 : Validate that an error is returned by a Cube query if no query parameters are specified.         
-         * Abstract Test 82 : Validate that an error is returned by a Trajectory query if no query parameters are specified.
-         * Abstract Test 100 : Validate that an error is returned by a Corridor query if no query parameters are specified.
-         * Abstract Test 136 : Validate that an error is returned by a Locations query if no query parameters are specified.          
-         * 
-         * @param collectionIdentifiers
-         */
-        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 34 (/conf/position), Abstract Test 50 (/conf/area), Abstract Test 66 (/conf/cube), Abstract Test 82 (/conf/trajectory), Abstract Test 100 (/conf/corridor), Abstract Test 136 (/conf/locations) ")
-        public void validateNoQueryParameters(Object collectionIdentifiers) {
-            Set<String> collectionIds = (Set<String>) collectionIdentifiers;
-            for (String colletionId : collectionIds) {
-                String url = rootUri.toString() + "/collections/" + colletionId;
-                Response response = init().baseUri(url).accept(JSON).when().request(GET, "/position");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Position query with no query parameters are specified for collection " + colletionId);
+   
 
-                response = init().baseUri(url).accept(JSON).when().request(GET, "/area");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Area query with no query parameters are specified for collection " + colletionId);
-
-                response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Trajectory query with no query parameters are specified for collection " + colletionId);
-
-                response = init().baseUri(url).accept(JSON).when().request(GET, "/locations");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Locations query with no query parameters are specified for collection " + colletionId);
-            }
-        }
-
-        /**
-         * Abstract Test 35 : Validate that an error is returned by a Position query when the coords query parameter is not specified.
-         * Abstract Test 51 : Validate that an error is returned by a Area query when the coords query parameter is not specified.
-         * Abstract Test 83 : Validate that an error is returned by a Trajectory query when the coords query parameter is not specified.
-         * Abstract Test 101 : Validate that an error is returned by a Corridor query when the coords query parameter is not specified.
-         * 
-         * @param collectionIdentifiers
-         */
-        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
-        public void validateCoordsQueryParameters(
-                Object collectionIdentifiers) {
-            Set<String> collectionIds = (Set<String>) collectionIdentifiers;
-            for (String colletionId : collectionIds) {
-                String url = rootUri.toString() + "/collections/" + colletionId;
-                Response response = init().baseUri(url).accept(JSON).when().request(GET, "/position?coords=");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Position query with coords query parameter is not specified for collection " + colletionId);
-
-                response = init().baseUri(url).accept(JSON).when().request(GET, "/area?coords=");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Area query with coords query parameter is not specified for collection " + colletionId);
-
-                response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Trajectory query with coords query parameter is not specified for collection " + colletionId);
-                
-                
-                response = init().baseUri(url).accept(JSON).when().request(GET, "/corridor?coords=");
-                assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Corridor query with coords query parameter is not specified for collection " + colletionId);                
-                
-            }
-        }
-        
 
     	/**
     	 * <pre>
@@ -300,7 +235,7 @@ public class CollectionsResponse extends CommonFixture {
     		
 
     		for (int t = 0; t < collectionsList.size(); t++) {
-    			boolean supportsCRS84 = false;
+    		
     			HashMap collectionMap = (HashMap) collectionsList.get(t);
 
     			String parameterNameText = collectionMap.get("parameter_names").toString();
@@ -326,20 +261,11 @@ public class CollectionsResponse extends CommonFixture {
     			for(int i=0; i < parameterNameList.size(); i++)
     			{
     				String parameterName = parameterNameList.get(i);
-    		
-    				
-    				boolean hasType = false; 
-    				boolean hasObservedProperty = false;
-    				
+    	    				
     				HashMap parameterValueMap = (HashMap) parameterNameMap.get(parameterName);
-    				for (Object prop: parameterValueMap.keySet())
-    				{
-    					if(prop.toString().equals("type")) hasType = true;
-    					if(prop.toString().equals("observedProperty")) hasObservedProperty = true;
-    					
-    				}
-    				hasType = false;
-    				
+    				boolean hasType = parameterValueMap.containsKey("type"); 
+    				boolean hasObservedProperty = parameterValueMap.containsKey("observedProperty"); 
+       				
     				org.testng.Assert.assertTrue(hasType,	"Fails Abstract Test 17 because parameter " + parameterName+" in collection "+collectionMap.get("id") + " is missing a 'type' property");
     				org.testng.Assert.assertTrue(hasObservedProperty,	"Fails Abstract Test 17 because parameter " + parameterName+" in collection "+collectionMap.get("id") + " is missing a 'observedProperty' property");				
     			}
@@ -349,6 +275,145 @@ public class CollectionsResponse extends CommonFixture {
     		}
     	}
         
+    	/**
+    	 * <pre>
+    	 * Abstract Test 13: Validate the extent property if it is present
+    	 * Abstract Test 14: Validate that each collection provided by the server is described in the Collections Metadata.
+    	 * Abstract Test 15: Validate that each Collection metadata entry in the Collections Metadata document includes all required links (data or collection).
+    	 * Abstract Test 16: Validate that the required links are included in the Collections Metadata document (self and alternate).
+    	 * </pre>
+    	 *
+    	 */
+    	@Test(description = "Implements Abstract Test 13 (/conf/core/rc-extent), Abstract Test 14 (/conf/edr/rc-collection-info), Abstract Test 15 (/conf/edr/rc-md-query-links), Abstract Test 16 (/conf/core/rc-collection-info-links)")
+    	public void verifyCollectionsMetadata() {
+
+    	  StringBuffer resultMessageForSelfAndAlternateLinks = new StringBuffer();
+    	  StringBuffer resultMessageForDataOrCollectionLinks = new StringBuffer();
+    	  StringBuffer resultMessageForCollectionId = new StringBuffer();
+    	  StringBuffer resultMessageForCollectionExtent = new StringBuffer();
+
+    	  TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections", null);
+    	  String testPointUri = new UriBuilder(testPoint).buildUrl();
+    	  Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    	  JsonPath jsonPath = response.jsonPath();
+
+    	  List<Object> collectionsList = jsonPath.getList("collections");
+    	  
+    	  
+
+    	  for (int t = 0; t < collectionsList.size(); t++) {
+        	boolean collectionHasSelfAndAlternateLinks = false;
+        	boolean collectionHasDataOrCollectionLinks = false;
+        	boolean collectionHasID = false;
+        	boolean collectionHasValidExtent = false;
+    	
+    	    HashMap collectionMap = (HashMap) collectionsList.get(t);
+    	    
+    	    
+
+    	    //Test Method 2 of Abstract Test 14: Verify that each collection entry includes an identifier.
+    	    if(collectionMap.containsKey("id")==false) resultMessageForCollectionId.append(collectionMap.get("id").toString()+" , ");
+    	    
+    	    //Test Method 1 of Abstract Test 14: Verify that all collections listed in the collections array of the Collections Metadata exist.    	    
+    	    JsonPath jsonPathCol = getCollectionMetadata(collectionMap.get("id").toString());
         
-        
+    	    //Abstract Test 13
+    	    if(checkExtentInCollection(jsonPathCol)==false) resultMessageForCollectionExtent.append(collectionMap.get("id").toString()+" , ");
+    	    
+    	    //Abstract Test 16
+    	    List<Object> linksList = jsonPathCol.getList("links");    	    
+    	    collectionHasSelfAndAlternateLinks = checkSelfAndAlternateLinksArePresentInCollectionMetadata(linksList);
+    	    //Abstract Test 15
+    	    collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList);
+    	    
+    	    if(collectionHasSelfAndAlternateLinks==false) resultMessageForSelfAndAlternateLinks.append(collectionMap.get("id").toString()+" , ");
+    	    if(collectionHasDataOrCollectionLinks==false) resultMessageForDataOrCollectionLinks.append(collectionMap.get("id").toString()+" , ");
+    	    
+    	  }
+    	  
+    	  StringBuffer resultMessage = new StringBuffer();
+    	  
+    	  if(!resultMessageForCollectionExtent.toString().isEmpty())
+    	  resultMessage.append("Fails Abstract Test 13 because these collections have invalid or missing extent elements: " + resultMessageForCollectionExtent.toString()+". ");    	  
+
+    	  if(!resultMessageForCollectionId.toString().isEmpty())
+    	  resultMessage.append("Fails Abstract Test 14 because these collections are missing 'id' properties: " + resultMessageForCollectionId.toString()+". ");
+    	  
+    	  if(!resultMessageForDataOrCollectionLinks.toString().isEmpty())
+    	  resultMessage.append("Fails Abstract Test 15 because these collections are missing 'data' or 'collection' rel links: " + resultMessageForDataOrCollectionLinks.toString()+". ");
+    	  
+    	  if(!resultMessageForSelfAndAlternateLinks.toString().isEmpty())
+    	  resultMessage.append("Fails Abstract Test 16 because these collections are missing 'self' or 'alternate' rel links: " + resultMessageForSelfAndAlternateLinks.toString()+". ");
+
+    	  
+    	  org.testng.Assert.assertTrue(resultMessage.toString().isEmpty(),	resultMessage.toString());
+    	}  
+    	/*
+    	 * check that the collection extent contains bbox
+    	 */
+    	private boolean checkExtentInCollection(JsonPath jsonPathCol)
+    	{
+    
+      	  HashMap extentMap = (HashMap) jsonPathCol.get("extent");
+ 
+      	  HashMap spatialMap = (HashMap) extentMap.get("spatial");
+      	  
+      	  return spatialMap.containsKey("bbox");
+       	
+    	}    	
+    	/*
+    	 * check that the collection exists and get links from it
+    	 */
+    	private JsonPath getCollectionMetadata(String collectionId)
+    	{
+    		
+      	  TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections/"+collectionId, null);
+      	  String testPointUri = new UriBuilder(testPoint).buildUrl();
+      	  Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+      	  JsonPath jsonPath = response.jsonPath();    	
+      
+       	  return jsonPath;
+    	}
+    	private boolean checkSelfAndAlternateLinksArePresentInCollectionMetadata(List<Object> linksList)
+    	{
+    		
+    
+
+    		
+       	  boolean hasSelfRel = false;
+       	  boolean hasAlternateRel = false;
+       	    
+    	    for(int w = 0; w < linksList.size(); w++)
+    	    {
+    			HashMap linksMap = (HashMap) linksList.get(w);
+    	   
+    	        if (linksMap.get("rel").toString().equals("self")) hasSelfRel = true;
+    	        if (linksMap.get("rel").toString().equals("alternate")) hasAlternateRel = true;
+    	    }
+    	    
+    	    if (hasSelfRel && hasAlternateRel) return true;
+    	    return false;
+    	    
+    	}
+    	private boolean checkDataOrCollectionLinksArePresentInCollectionMetadata(List<Object> linksList)
+    	{
+    		
+    
+    		
+       	  boolean hasDataRel = false;
+       	  boolean hasCollectionRel = false;
+       	    
+    	    for(int w = 0; w < linksList.size(); w++)
+    	    {
+    			HashMap linksMap = (HashMap) linksList.get(w);
+    	        if (linksMap.get("rel").toString().equals("data")) hasDataRel = true;
+    	        if (linksMap.get("rel").toString().equals("collection")) hasCollectionRel = true;
+    	    }
+    	    
+    	    if (hasDataRel || hasCollectionRel) return true;
+    	    return false;
+    	    
+    	}   	
+    	
+        //http://localhost/edr/collections/metar_demo/position?coords=POINT(-1.054687%2052.498649)&parameter-name=Metar%20observation&datetime=2021-09-19T01:00Z/2021-09-19T02:00Z&crs=CRS84&f=GeoJSON
 }
