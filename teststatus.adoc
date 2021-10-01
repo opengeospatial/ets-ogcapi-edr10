@@ -21,7 +21,7 @@
 |*Abstract Test 16* |*/conf/core/rc-collection-info-links*| @ghobona | Yes | `CollectionsResponse.verifyCollectionsMetadata`
 |*Abstract Test 17* |*/conf/edr/rc-parameters*| @ghobona | Yes | `CollectionsResponse.collectionsParameters`
 |*Abstract Test 18* |*/conf/json/definition*| @keshavnangare | Yes | `MediaType.validateResponseForJSON`
-|*Abstract Test 19* |*/conf/json/content*|  |  |
+|*Abstract Test 19* |*/conf/json/content*| @ghobona | Yes | `MediaType.validateResponseForJSON`
 |*Abstract Test 20* |*/conf/geojson/definition*|  |  |
 |*Abstract Test 21* |*/conf/geojson/content*|  |  |
 |*Abstract Test 22* |*/conf/edr-geojson/definition*|  |  |

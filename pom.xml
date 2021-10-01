@@ -125,7 +125,11 @@
     <version>3.0.1</version>
 </dependency>
 
-
+<dependency>
+    <groupId>com.github.everit-org.json-schema</groupId>
+    <artifactId>org.everit.json.schema</artifactId>
+    <version>1.13.0</version>
+</dependency>
   </dependencies>
 
   <build>
@@ -413,6 +417,13 @@
       </build>
     </profile>
   </profiles>
+  
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 
   <distributionManagement>
     <repository>

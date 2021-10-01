@@ -1,0 +1,39 @@
+{
+    "required": [
+        "href", 
+        "rel"
+    ], 
+    "type": "object", 
+    "properties": {
+        "title": {
+            "type": "string", 
+            "example": "Monitoring site name"
+        }, 
+        "variables": {
+            "$ref": "dataQuery.yaml"
+        }, 
+        "hreflang": {
+            "type": "string", 
+            "example": "en"
+        }, 
+        "length": {
+            "type": "integer"
+        }, 
+        "href": {
+            "type": "string", 
+            "example": "http://data.example.com/collections/monitoringsites/locations/1234"
+        }, 
+        "rel": {
+            "type": "string", 
+            "example": "alternate"
+        }, 
+        "templated": {
+            "type": "boolean", 
+            "description": "defines if the link href value is a template with values requiring replacement"
+        }, 
+        "type": {
+            "type": "string", 
+            "example": "application/geo+json"
+        }
+    }
+}

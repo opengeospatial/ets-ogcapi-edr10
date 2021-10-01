@@ -1,0 +1,79 @@
+{
+    "required": [
+        "links"
+    ],
+    "type": "object",
+    "properties": {
+        "contact": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "fax": {
+                    "type": "string",
+                    "description": "Fax number of service provider"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "hours": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number of service provider"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "postalCode": {
+                    "type": "string"
+                },
+                "stateorprovince": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email address of service provider"
+                },
+                "instructions": {
+                    "type": "string"
+                }
+            }
+        },
+        "description": {
+            "type": "string",
+            "example": "Access to Meteorological data via a Web API that conforms to the OGC API Environmental Data Retrieval specification."
+        }, 
+        "title": {
+            "type": "string",
+            "example": "Meteorological data server"
+        },
+        "keywords": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array",
+            "example": [
+                "Temperature",
+                "Wind",
+                "Point",
+                "Trajectory"
+            ]
+        },
+        "provider": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "Link to service providers website"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of organization providing the service"
+                }
+            }
+        }
+    }
+}

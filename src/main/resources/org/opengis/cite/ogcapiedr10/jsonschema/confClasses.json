@@ -1,0 +1,14 @@
+{
+    "required": [
+        "conformsTo"
+    ], 
+    "type": "object", 
+    "properties": {
+        "conformsTo": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }
+    }
+}

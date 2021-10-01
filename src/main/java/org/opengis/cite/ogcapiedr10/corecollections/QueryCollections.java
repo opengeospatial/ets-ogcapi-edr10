@@ -54,6 +54,8 @@ import io.restassured.response.Response;
  *
  */
 public class QueryCollections extends CommonFixture {
+	
+	boolean disable = true; //TODO Remove
 
 	protected URI iut;
 
@@ -105,6 +107,9 @@ public class QueryCollections extends CommonFixture {
          */
         @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 34 (/conf/position), Abstract Test 50 (/conf/area), Abstract Test 66 (/conf/cube), Abstract Test 82 (/conf/trajectory), Abstract Test 100 (/conf/corridor), Abstract Test 136 (/conf/locations) ")
         public void validateNoQueryParameters(Object collectionIdentifiers) {
+        	
+        	if (disable) return;   //TODO REMOVE
+        	
             Set<String> collectionIds = (Set<String>) collectionIdentifiers;
             for (String colletionId : collectionIds) {
                 String url = rootUri.toString() + "/collections/" + colletionId;
@@ -135,8 +140,10 @@ public class QueryCollections extends CommonFixture {
          * @param collectionIdentifiers
          */
         @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
-        public void validateCoordsQueryParameters(
-                Object collectionIdentifiers) {
+        public void validateCoordsQueryParameters(Object collectionIdentifiers) {
+        	
+        	if (disable) return;   //TODO REMOVE
+        	
             Set<String> collectionIds = (Set<String>) collectionIdentifiers;
             for (String colletionId : collectionIds) {
                 String url = rootUri.toString() + "/collections/" + colletionId;
