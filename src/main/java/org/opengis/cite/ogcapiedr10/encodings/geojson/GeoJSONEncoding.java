@@ -88,12 +88,12 @@ public class GeoJSONEncoding extends CommonFixture {
 
 	}
 
-	private boolean isGeoJSONValidPerSchema(String doc, String path) {
+	private boolean isGeoJSONValidPerSchema(String doc) {
 
 		boolean valid = false;
 
 		try (InputStream inputStream = getClass()
-				.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/landingPage.json")) {
+				.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/geojson_partial_schema.json")) {
 			JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 			Schema schema = SchemaLoader.load(rawSchema);
 			schema.validate(new JSONObject(doc)); // throws a ValidationException if this object is invalid
@@ -106,11 +106,15 @@ public class GeoJSONEncoding extends CommonFixture {
 
 	private boolean validateGeoJSON(String jsonObject) {
 		boolean isValid = false;
-		JsonPath geoJsonObject = new JsonPath(jsonObject);
+		
+		/*JsonPath geoJsonObject = new JsonPath(jsonObject);
 		isValid = geoJsonObject.get("type").toString().equals("Feature");
 		if (isValid == false) {
 			isValid = geoJsonObject.get("type").toString().equals("FeatureCollection");
-		}
+		}*/
+		
+		isValid = isGeoJSONValidPerSchema(jsonObject);
+		
 		return isValid;
 	}
 

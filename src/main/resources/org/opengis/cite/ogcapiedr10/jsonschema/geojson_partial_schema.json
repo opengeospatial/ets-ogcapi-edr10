@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "ets-ogcapi-edr10#geojson",
+    "title": "featurecollection",
+    "description": "Prototype Schema for Validating GeoJSON in the EDR API ETS",
+    "type": "object",
+    "required": [ "type" ],
+    "oneOf": [
+        {
+            "title": "FeatureCollection",
+            "properties": {
+                "type": { "enum": [ "FeatureCollection" ] }
+            }
+        },
+        {
+            "title": "Feature",
+            "properties": {
+                "type": { "enum": [ "Feature" ] }
+            }
+        }
+  ]
+}
