@@ -20,15 +20,15 @@
 |*Abstract Test 15* |*/conf/edr/rc-md-query-links*| @ghobona | Yes | `CollectionsResponse.verifyCollectionsMetadata`
 |*Abstract Test 16* |*/conf/core/rc-collection-info-links*| @ghobona | Yes | `CollectionsResponse.verifyCollectionsMetadata`
 |*Abstract Test 17* |*/conf/edr/rc-parameters*| @ghobona | Yes | `CollectionsResponse.collectionsParameters`
-|*Abstract Test 18* |*/conf/json/definition*| @keshavnangare | Yes | `MediaType.validateResponseForJSON`
-|*Abstract Test 19* |*/conf/json/content*| @ghobona | Yes | `MediaType.validateResponseForJSON`
-|*Abstract Test 20* |*/conf/geojson/definition*| @ghobona  | Yes | `MediaType.validateResponseForGeoJSON`
-|*Abstract Test 21* |*/conf/geojson/content*|  @ghobona  | Yes | `MediaType.validateResponseForGeoJSON`
+|*Abstract Test 18* |*/conf/json/definition*| @keshavnangare | Yes | `JSONEncoding.validateResponseForJSON`
+|*Abstract Test 19* |*/conf/json/content*| @ghobona | Yes | `JSONEncoding.validateResponseForJSON`
+|*Abstract Test 20* |*/conf/geojson/definition*| @ghobona  | Yes | `GeoJSONEncoding.validateResponseForGeoJSON`
+|*Abstract Test 21* |*/conf/geojson/content*|  @ghobona  | Yes | `GeoJSONEncoding.validateResponseForGeoJSON`
 |*Abstract Test 22* |*/conf/edr-geojson/definition*|  |  |
 |*Abstract Test 23* |*/conf/edr-geojson/content*|  |  |
-|*Abstract Test 24* |*/conf/covjson/definition*| @ghobona  | Yes | `MediaType.validateResponseForCoverageJSON`
-|*Abstract Test 25* |*/conf/covjson/content*| @ghobona  | Yes | `MediaType.validateResponseForCoverageJSON`
-|*Abstract Test 26* |*/conf/html/definition*| @keshavnangare | Yes | `MediaType.validateResponseForHTML`
+|*Abstract Test 24* |*/conf/covjson/definition*| @ghobona  | Yes | `CoverageJSONEncoding.validateResponseForCoverageJSON`
+|*Abstract Test 25* |*/conf/covjson/content*| @ghobona  | Yes | `CoverageJSONEncoding.validateResponseForCoverageJSON`
+|*Abstract Test 26* |*/conf/html/definition*| @keshavnangare | Yes | `HTMLEncoding.validateResponseForHTML`
 |*Abstract Test 27* |*/conf/html/content*|  |  |
 |*Abstract Test 28* |*/conf/oas30/completeness*|  |  |
 |*Abstract Test 29* |*/conf/oas30/exceptions-codes*|  |  |

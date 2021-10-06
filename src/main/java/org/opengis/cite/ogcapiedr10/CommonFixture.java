@@ -5,6 +5,9 @@ import static io.restassured.RestAssured.given;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import org.apache.sis.referencing.CRS;
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
@@ -34,7 +37,8 @@ public class CommonFixture {
 
     protected URI rootUri;
     
-
+	protected String testingWktPOINT = "POINT(-1.054687%2052.498649)";  //TODO change to user inputs
+	protected String geoJSONTestingCollection = "gfs-surface-precip";   //TODO change to user inputs
 
     /**
      * Initializes the common test fixture with a client component for interacting with HTTP endpoints.
@@ -102,5 +106,36 @@ public class CommonFixture {
         requestLoggingFilter = new RequestLoggingFilter( requestPrintStream );
         responseLoggingFilter = new ResponseLoggingFilter( responsePrintStream );
     }
+    
+	protected String constructDateTimeValue(String input) throws Exception {
+		
+		// Example input is R36/2021-10-05T03:00:00Z/PT3H
+		
+		String startDateOfInterval = null;
+		String endDateOfInterval = null;
+		
 
+		if (!input.contains("00:00Z"))
+			input = input.replace(":00Z", ":00:00Z"); // TODO For testing. REMOVE when done.
+
+		String[] token = input.split("/");
+
+		for (int i = 0; i < token.length; i++) {
+			if (token[i].split("-").length == 3) {
+				startDateOfInterval = token[i];
+				i = token.length; // we found a valid token so we break the loop
+			}
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		Calendar c = Calendar.getInstance();
+
+		c.setTime(sdf.parse(startDateOfInterval));
+
+		c.add(Calendar.HOUR, 3);
+		endDateOfInterval = sdf.format(c.getTime());
+
+		return startDateOfInterval + "/" + endDateOfInterval;
+	}
 }

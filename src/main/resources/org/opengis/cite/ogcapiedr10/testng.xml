@@ -31,5 +31,33 @@
     </packages>
   </test>
   
+  <test name="JSON">
+    <packages>
+      <package name="org.opengis.cite.ogcapiedr10.encodings.json" />      
+    </packages>
+  </test>  
+  
+  <test name="GeoJSON">
+    <packages>
+      <package name="org.opengis.cite.ogcapiedr10.encodings.geojson" />      
+    </packages>
+  </test>  
+  
+  <test name="EDRGeoJSON">
+    <packages>
+      <package name="org.opengis.cite.ogcapiedr10.encodings.edrgeojson" />      
+    </packages>
+  </test>  
+  
+<test name="CoverageJSON">
+    <packages>
+      <package name="org.opengis.cite.ogcapiedr10.encodings.coveragejson" />      
+    </packages>
+</test>
+<test name="HTML">
+    <packages>
+      <package name="org.opengis.cite.ogcapiedr10.encodings.html" />      
+    </packages>
+</test>
   <!-- Add test sets for other conformance classes/levels -->
 </suite>
