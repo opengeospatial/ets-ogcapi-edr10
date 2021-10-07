@@ -89,13 +89,13 @@ public class CoverageJSONEncoding extends CommonFixture {
 
 	}
 
-	private boolean isCoverageJSONValidPerSchema(String doc, String path) {
+	private boolean isCoverageJSONValidPerSchema(String doc) {
 
 		boolean valid = false;
 
 	
 			try (InputStream inputStream = getClass()
-					.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/landingPage.json")) {
+					.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/covjson_partial_schema.json")) {
 				JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 				Schema schema = SchemaLoader.load(rawSchema);
 				schema.validate(new JSONObject(doc)); // throws a ValidationException if this object is invalid
@@ -117,6 +117,8 @@ public class CoverageJSONEncoding extends CommonFixture {
 	 */
 	@Test(description = "Implements Abstract Test 24 (/conf/covjson/definition), Abstract Test 25 (/conf/covjson/content)", dataProvider = "collectionIDs", alwaysRun = true)
 	public void validateResponseForCoverageJSON(Object collectionIdentifiers) {
+		
+		//http://localhost/edr/collections/obs_demo/position?coords=POINT(-1.054687%2052.498649)&parameter-name=Weather&datetime=2021-10-07T01:00Z/2021-10-07T05:00Z&crs=CRS84&f=CovJSON
 
 		boolean supportsCoverageJSON = false;
 	
@@ -212,7 +214,7 @@ public class CoverageJSONEncoding extends CommonFixture {
 							}
 							in.close();
 					
-							returnsValidCoverageJSON = validateCoverageJSON(sb.toString());
+							returnsValidCoverageJSON = isCoverageJSONValidPerSchema(sb.toString());
 						}
 					} catch (Exception et) {
 						et.printStackTrace();
@@ -232,14 +234,6 @@ public class CoverageJSONEncoding extends CommonFixture {
 	}
 
 
-
-	private boolean validateCoverageJSON(String jsonObject) {
-		boolean isValid = false;
-		JsonPath covJsonObject = new JsonPath(jsonObject);
-		isValid = covJsonObject.get("type").toString().equals("Coverage");
-
-		return isValid;
-	}
 
 	
 

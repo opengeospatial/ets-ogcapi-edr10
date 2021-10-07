@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "ets-ogcapi-edr10#covjson",
+    "title": "CovJSON",
+    "description": "Prototype Schema for Validating CovJSON in the EDR API ETS",
+    "type": "object",
+    "required": [ "type" ],
+    "oneOf": [
+        {
+            "title": "CoverageCollection",
+            "properties": {
+                "type": { "enum": [ "CoverageCollection" ] }
+            }
+        },
+        {
+            "title": "Coverage",
+            "properties": {
+                "type": { "enum": [ "Coverage" ] }
+            }
+        }
+  ]
+}

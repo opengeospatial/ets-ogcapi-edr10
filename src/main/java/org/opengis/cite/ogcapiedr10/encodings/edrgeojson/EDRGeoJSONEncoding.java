@@ -91,36 +91,21 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
 	
 
-	private boolean isJSONValidPerSchema(String doc, String path) {
+	private boolean isEDRGeoJSONValidPerSchema(String doc) {
 
 		boolean valid = false;
 
-	
-			try (InputStream inputStream = getClass()
-					.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/landingPage.json")) {
-				JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
-				Schema schema = SchemaLoader.load(rawSchema);
-				schema.validate(new JSONObject(doc)); // throws a ValidationException if this object is invalid
-				valid = true;
-			} catch (Exception ee) {
-				ee.printStackTrace();
-			}
-	
-
+		try (InputStream inputStream = getClass()
+				.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/edr_geojson_partial_schema.json")) {
+			JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
+			Schema schema = SchemaLoader.load(rawSchema);
+			schema.validate(new JSONObject(doc)); // throws a ValidationException if this object is invalid
+			valid = true;
+		} catch (Exception ee) {
+			ee.printStackTrace();
+		}
 		return valid;
 
-	}
-
-
-
-	private boolean validateEDRGeoJSON(String jsonObject) {
-		boolean isValid = false;
-		JsonPath geoJsonObject = new JsonPath(jsonObject);
-		isValid = geoJsonObject.get("type").toString().equals("Feature");
-		if (isValid == false) {
-			isValid = geoJsonObject.get("type").toString().equals("FeatureCollection");
-		}
-		return isValid;
 	}
 
 
@@ -138,7 +123,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 	@Test(description = "Implements Abstract Test 22 (/conf/edr-geojson/definition), Abstract Test 23 (/conf/edr-geojson/content)", dataProvider = "collectionIDs", alwaysRun = true)
 	public void validateResponseForEDRGeoJSON(Object collectionIdentifiers) {
 
-	  // http://localhost/edr/collections/metar_demo/position?coords=POINT(-1.054687%2052.498649)&parameter-name=Metar%20observation&datetime=2021-10-05T01:00Z/2021-10-05T05:00Z&crs=CRS84&f=GeoJSON
+	  // http://localhost/edr/collections/obs_demo/position?coords=POINT(-1.054687%2052.498649)&parameter-name=Weather&datetime=2021-10-07T01:00Z/2021-10-07T05:00Z&crs=CRS84&f=GeoJSON
 
 
 	  boolean supportsEDRGeoJSON = false;
@@ -238,7 +223,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 	              sb.append(line + "\n");
 	            }
 	            in.close();
-	            returnsValidEDRGeoJSON = validateEDRGeoJSON(sb.toString());
+	            returnsValidEDRGeoJSON = isEDRGeoJSONValidPerSchema(sb.toString());
 	          
 	          }
 	        } catch (Exception et) {

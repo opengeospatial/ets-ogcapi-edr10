@@ -104,19 +104,7 @@ public class GeoJSONEncoding extends CommonFixture {
 		return valid;
 	}
 
-	private boolean validateGeoJSON(String jsonObject) {
-		boolean isValid = false;
-		
-		/*JsonPath geoJsonObject = new JsonPath(jsonObject);
-		isValid = geoJsonObject.get("type").toString().equals("Feature");
-		if (isValid == false) {
-			isValid = geoJsonObject.get("type").toString().equals("FeatureCollection");
-		}*/
-		
-		isValid = isGeoJSONValidPerSchema(jsonObject);
-		
-		return isValid;
-	}
+
 
 
 
@@ -129,7 +117,7 @@ public class GeoJSONEncoding extends CommonFixture {
 	@Test(description = "Implements Abstract Test 20 (/conf/geojson/definition), Abstract Test 21 (/conf/geojson/content)", dataProvider = "collectionIDs", alwaysRun = true)
 	public void validateResponseForGeoJSON(Object collectionIdentifiers) {
 
-		// http://localhost/edr/collections/metar_demo/position?coords=POINT(-1.054687%2052.498649)&parameter-name=Metar%20observation&datetime=2021-10-05T01:00Z/2021-10-05T05:00Z&crs=CRS84&f=GeoJSON
+		// http://localhost/edr/collections/obs_demo/position?coords=POINT(-1.054687%2052.498649)&parameter-name=Weather&datetime=2021-10-07T01:00Z/2021-10-07T05:00Z&crs=CRS84&f=GeoJSON
 
 		boolean supportsGeoJSON = false;
 
@@ -213,7 +201,7 @@ public class GeoJSONEncoding extends CommonFixture {
 							sb.append(line + "\n");
 						}
 						in.close();
-						returnsValidGeoJSON = validateGeoJSON(sb.toString());
+						returnsValidGeoJSON = isGeoJSONValidPerSchema(sb.toString());
 
 					}
 				} catch (Exception et) {

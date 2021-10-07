@@ -24,12 +24,12 @@
 |*Abstract Test 19* |*/conf/json/content*| @ghobona | Yes | `JSONEncoding.validateResponseForJSON`
 |*Abstract Test 20* |*/conf/geojson/definition*| @ghobona  | Yes | `GeoJSONEncoding.validateResponseForGeoJSON`
 |*Abstract Test 21* |*/conf/geojson/content*|  @ghobona  | Yes | `GeoJSONEncoding.validateResponseForGeoJSON`
-|*Abstract Test 22* |*/conf/edr-geojson/definition*|  |  |
-|*Abstract Test 23* |*/conf/edr-geojson/content*|  |  |
+|*Abstract Test 22* |*/conf/edr-geojson/definition*| @ghobona  | Yes |`EDRGeoJSONEncoding.validateResponseForEDRGeoJSON`
+|*Abstract Test 23* |*/conf/edr-geojson/content*| @ghobona  | Yes |`EDRGeoJSONEncoding.validateResponseForEDRGeoJSON`
 |*Abstract Test 24* |*/conf/covjson/definition*| @ghobona  | Yes | `CoverageJSONEncoding.validateResponseForCoverageJSON`
 |*Abstract Test 25* |*/conf/covjson/content*| @ghobona  | Yes | `CoverageJSONEncoding.validateResponseForCoverageJSON`
 |*Abstract Test 26* |*/conf/html/definition*| @keshavnangare | Yes | `HTMLEncoding.validateResponseForHTML`
-|*Abstract Test 27* |*/conf/html/content*|  |  |
+|*Abstract Test 27* |*/conf/html/content*| @ghobona | Yes | `HTMLEncoding.validateResponseForHTML`
 |*Abstract Test 28* |*/conf/oas30/completeness*|  |  |
 |*Abstract Test 29* |*/conf/oas30/exceptions-codes*|  |  |
 |*Abstract Test 30* |*/conf/oas30/oas-definition-1*|  |  |

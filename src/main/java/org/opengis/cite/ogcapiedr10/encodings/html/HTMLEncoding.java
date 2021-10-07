@@ -60,23 +60,40 @@ public class HTMLEncoding extends CommonFixture {
 	/**
 	 * <pre>
 	 * Abstract Test 26 : Verify support for HTML
+	 * Abstract Test 27 : Verify the content of an HTML document given an input document and schema.
 	 * </pre>
 	 */
-	@Test(description = "Implements Abstract Test 26 (/conf/html/definition)")
+	@Test(description = "Implements Abstract Test 26 (/conf/html/definition), Abstract Test 27 (/conf/html/content)")
 	public void validateResponseForHTML() {
 		Response response = init().baseUri(rootUri.toString()).accept(ContentType.HTML).when().request(Method.GET);
 		assertTrue(response.getStatusCode() == 200, "HTML response not supported for Landing Page");
+		assertTrue(validateHTML(response.getBody().asString()), "Landing Page response does contain valid HTML");
 
 		response = init().baseUri(rootUri.toString()).accept(ContentType.HTML).when().request(Method.GET, "/api");
 		assertTrue(response.getStatusCode() == 200, "HTML response not supported for API description");
+		assertTrue(validateHTML(response.getBody().asString()), "API response does contain valid HTML");
 
 		response = init().baseUri(rootUri.toString()).accept(ContentType.HTML).when().request(Method.GET,
 				"/conformance");
 		assertTrue(response.getStatusCode() == 200, "HTML response not supported for Conformance Declaration");
+		assertTrue(validateHTML(response.getBody().asString()), "Conformance Declaration response does contain valid HTML");
 
 		response = init().baseUri(rootUri.toString()).accept(ContentType.HTML).when().request(Method.GET,
 				"/collections");
 		assertTrue(response.getStatusCode() == 200, "HTML response not supported for Collections metadata");
+		assertTrue(validateHTML(response.getBody().asString()), "Collections metadata response does contain valid HTML");
+	}
+	
+	private boolean validateHTML(String input)
+	{
+		boolean isValid = false;
+		
+		isValid = (input.toLowerCase().contains("<html>") && 
+				input.toLowerCase().contains("<body>") && 
+				input.toLowerCase().contains("</body>") && 
+				input.toLowerCase().contains("</html>"));
+		
+		return isValid;
 	}
 	
 }

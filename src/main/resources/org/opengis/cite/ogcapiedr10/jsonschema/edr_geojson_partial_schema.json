@@ -1,10 +1,10 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "ets-ogcapi-edr10#geojson",
-    "title": "GeoJSON",
-    "description": "Prototype Schema for Validating GeoJSON in the EDR API ETS",
+    "id": "ets-ogcapi-edr10#edrgeojson",
+    "title": "EDR GeoJSON",
+    "description": "Prototype Schema for Validating EDR GeoJSON in the EDR API ETS",
     "type": "object",
-    "required": [ "type" ],
+    "required": [ "type" , "links" ],
     "oneOf": [
         {
             "title": "FeatureCollection",
