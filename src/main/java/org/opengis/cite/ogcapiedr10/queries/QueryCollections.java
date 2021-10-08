@@ -1,4 +1,4 @@
-package org.opengis.cite.ogcapiedr10.corecollections;
+package org.opengis.cite.ogcapiedr10.queries;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;

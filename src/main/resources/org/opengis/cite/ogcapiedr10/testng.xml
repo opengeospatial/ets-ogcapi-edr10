@@ -27,7 +27,8 @@
   
   <test name="Collections">
     <packages>
-      <package name="org.opengis.cite.ogcapiedr10.collections" />      
+      <package name="org.opengis.cite.ogcapiedr10.collections" />
+      <package name="org.opengis.cite.ogcapiedr10.queries" />       
     </packages>
   </test>
   

@@ -30,12 +30,12 @@
 |*Abstract Test 25* |*/conf/covjson/content*| @ghobona  | Yes | `CoverageJSONEncoding.validateResponseForCoverageJSON`
 |*Abstract Test 26* |*/conf/html/definition*| @keshavnangare | Yes | `HTMLEncoding.validateResponseForHTML`
 |*Abstract Test 27* |*/conf/html/content*| @ghobona | Yes | `HTMLEncoding.validateResponseForHTML`
-|*Abstract Test 28* |*/conf/oas30/completeness*|  |  |
-|*Abstract Test 29* |*/conf/oas30/exceptions-codes*|  |  |
-|*Abstract Test 30* |*/conf/oas30/oas-definition-1*|  |  |
-|*Abstract Test 31* |*/conf/oas30/oas-definition-2*|  |  |
-|*Abstract Test 32* |*/conf/oas30/oas-impl*|  |  |
-|*Abstract Test 33* |*/conf/oas30/security*|  |  |
+|*Abstract Test 28* |*/conf/oas30/completeness*| @ghobona | NO | SKIPPED
+|*Abstract Test 29* |*/conf/oas30/exceptions-codes*| @ghobona | NO | SKIPPED
+|*Abstract Test 30* |*/conf/oas30/oas-definition-1*| @ghobona | NO | SKIPPED
+|*Abstract Test 31* |*/conf/oas30/oas-definition-2*|  @ghobona | NO | SKIPPED
+|*Abstract Test 32* |*/conf/oas30/oas-impl*| @ghobona | NO | SKIPPED
+|*Abstract Test 33* |*/conf/oas30/security*| @ghobona | NO | SKIPPED
 |*Abstract Test 34* |*/conf/position*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 35* |*/conf/position*| @keshavnangare | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 36* |*/conf/position*|  |  |
