@@ -38,7 +38,7 @@
 |*Abstract Test 33* |*/conf/oas30/security*| @ghobona | NO | SKIPPED
 |*Abstract Test 34* |*/conf/position*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 35* |*/conf/position*| @keshavnangare | Yes | `QueryCollections.validateCoordsQueryParameters`
-|*Abstract Test 36* |*/conf/position*|  |  |
+|*Abstract Test 36* |*/conf/position*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 37* |*/conf/position*|  |  |
 |*Abstract Test 38* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
 |*Abstract Test 39* |*/conf/edr/rc-coords-response*|  |  |

@@ -115,31 +115,34 @@ public class QueryCollections extends CommonFixture {
                 String url = rootUri.toString() + "/collections/" + colletionId;
                 Response response = init().baseUri(url).accept(JSON).when().request(GET, "/position");
                 assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Position query with no query parameters are specified for collection " + colletionId);
+                        "Fails Abstract Test 34. Expected status code 400 when a Position query with no query parameters are specified for collection " + colletionId);
 
+   
+                
                 response = init().baseUri(url).accept(JSON).when().request(GET, "/area");
                 assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Area query with no query parameters are specified for collection " + colletionId);
+                        "Fails Abstract Test 50. Expected status code 400 when a Area query with no query parameters are specified for collection " + colletionId);
 
                 response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory");
                 assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Trajectory query with no query parameters are specified for collection " + colletionId);
+                        "Fails Abstract Test 82. Expected status code 400 when a Trajectory query with no query parameters are specified for collection " + colletionId);
 
                 response = init().baseUri(url).accept(JSON).when().request(GET, "/locations");
                 assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Locations query with no query parameters are specified for collection " + colletionId);
+                        "Fails Abstract Test 136. Expected status code 400 when a Locations query with no query parameters are specified for collection " + colletionId);
             }
         }
 
         /**
          * Abstract Test 35 : Validate that an error is returned by a Position query when the coords query parameter is not specified.
+         * Abstract Test 36 : Validate that an error is returned by a Position query when the coords query parameter does not contain a valid POINT Well Known Text value.
          * Abstract Test 51 : Validate that an error is returned by a Area query when the coords query parameter is not specified.
          * Abstract Test 83 : Validate that an error is returned by a Trajectory query when the coords query parameter is not specified.
          * Abstract Test 101 : Validate that an error is returned by a Corridor query when the coords query parameter is not specified.
          *
          * @param collectionIdentifiers
          */
-        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
+        @Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position),Abstract Test 36 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
         public void validateCoordsQueryParameters(Object collectionIdentifiers) {
         	
         	if (disable) return;   //TODO REMOVE
@@ -149,8 +152,13 @@ public class QueryCollections extends CommonFixture {
                 String url = rootUri.toString() + "/collections/" + colletionId;
                 Response response = init().baseUri(url).accept(JSON).when().request(GET, "/position?coords=");
                 assertTrue(response.getStatusCode() == 400,
-                        "Expected status code 400 when a Position query with coords query parameter is not specified for collection " + colletionId);
+                        "Fails Abstract Test 35. Expected status code 400 when a Position query with coords query parameter is not specified for collection " + colletionId);
 
+                response = init().baseUri(url).accept(JSON).when().request(GET, "/position?coords=POINT()");
+                assertTrue(response.getStatusCode() == 400,
+                        "Fails Abstract Test 36. Expected status code 400 when a Position coords query parameter does not contain a valid POINT Well Known Text value for collection " + colletionId);
+                             
+                
                 response = init().baseUri(url).accept(JSON).when().request(GET, "/area?coords=");
                 assertTrue(response.getStatusCode() == 400,
                         "Expected status code 400 when a Area query with coords query parameter is not specified for collection " + colletionId);
