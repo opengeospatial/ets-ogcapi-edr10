@@ -63,6 +63,7 @@ public class CollectionsTime{
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 
 	public void coordsParameterDefinition(TestPoint testPoint,OpenApi3 model) {
@@ -120,6 +121,7 @@ public class CollectionsTime{
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void dateTimeParameterDefinition(TestPoint testPoint,OpenApi3 model) {
 		
@@ -166,6 +168,7 @@ public class CollectionsTime{
 	 * Abstract Test 141: Validate that the parameter-name query parameters are processed correctly. (locations)
 	 * 
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 
 	public void parameternameParameterDefinition(TestPoint testPoint, OpenApi3 model) {
@@ -213,6 +216,7 @@ public class CollectionsTime{
 	 * Abstract Test 143: Validate that the crs query parameters are constructed correctly.	(locations) 
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 
 	public void crsParameterDefinition(TestPoint testPoint, OpenApi3 model) {
@@ -259,6 +263,7 @@ public class CollectionsTime{
 	 * Abstract Test 145: Validate that the f query parameter is constructed correctly. (locations)
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void fParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 
@@ -304,6 +309,7 @@ public class CollectionsTime{
 	 *
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void zParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 	
@@ -350,6 +356,7 @@ public class CollectionsTime{
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void withinParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 		
@@ -401,6 +408,7 @@ public class CollectionsTime{
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code> 
 	 */
 	public void withinUnitsParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 	
@@ -453,6 +461,7 @@ public class CollectionsTime{
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void resolutionxParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 	
@@ -502,6 +511,7 @@ public class CollectionsTime{
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void resolutionyParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 	
@@ -551,6 +561,7 @@ public class CollectionsTime{
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void resolutionzParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 	
@@ -598,6 +609,7 @@ public class CollectionsTime{
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void corridorHeightParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 
@@ -646,6 +658,7 @@ public class CollectionsTime{
 	 * NOTE: Not referenced by ATS
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
+	 * @param model api definition, never <code>null</code>
 	 */
 	public void corridorWidthParameterDefinition(TestPoint testPoint, OpenApi3 model) {
 
