@@ -136,14 +136,15 @@ public class Collections extends CommonDataFixture {
         List<String> mediaTypesToSupport = createListOfMediaTypesToSupportForOtherResources(linkToSelf);
         List<Map<String, Object>> alternateLinks = findLinksWithSupportedMediaTypeByRel(links, mediaTypesToSupport, "alternate");
         List<String> typesWithoutLink = findUnsupportedTypes(alternateLinks, mediaTypesToSupport);
-        assertFalse(typesWithoutLink.isEmpty(),
+        
+        assertTrue(typesWithoutLink.isEmpty(),
                 "Collections Metadata document must include links for alternate encodings. Missing links for types " + typesWithoutLink);
 
         Set<String> rels = new HashSet<>();
         rels.add("self");
         rels.add("alternate");
         List<String> linksWithoutRelOrType = findLinksWithoutRelOrType(alternateLinks, rels);
-        assertFalse(linksWithoutRelOrType.isEmpty(),
+        assertTrue(linksWithoutRelOrType.isEmpty(),
                 "Links for alternate encodings must include a rel and type parameter. Missing for links " + linksWithoutRelOrType);
     }
 }

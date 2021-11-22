@@ -14,6 +14,7 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseTemporalExtent;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import java.io.FileWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;
@@ -171,47 +172,82 @@ public class CollectionsResponse extends CommonFixture {
 
     		List<Object> collectionsList = jsonPath.getList("collections");
 
+    		FileWriter fw = null;
+
+    		
+    		
     		for (int t = 0; t < collectionsList.size(); t++) {
     			boolean supportsCRS84 = false;
+    			
+    		
+    			
     			HashMap collectionMap = (HashMap) collectionsList.get(t);
 
     			String crsText = collectionMap.get("crs").toString();
-    			ArrayList crsList = (ArrayList) collectionMap.get("crs");
-    			HashMap crsMap = (HashMap) crsList.get(0);
-
-    			CoordinateReferenceSystem source = null;
-
-    			try {
-
-    				source = CRS.fromWKT(crsMap.get("wkt").toString());
-    			} catch (Exception e) {
-
-    				e.printStackTrace();
-    			}
-
-    			DefaultGeographicCRS crs = (DefaultGeographicCRS) source;
-
-    			if (crs.getDatum().getEllipsoid().getName().toString().equals("WGS 84")
-    					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS_1984")
-    					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS84")) {
-
-    				if (source.getCoordinateSystem().getAxis(0).toString().toLowerCase().contains("longitude")
-    						&& source.getCoordinateSystem().getAxis(1).toString().toLowerCase().contains("latitude")) {
-
-    					supportsCRS84 = true;
-
-    				}
-    			}
-    			if (supportsCRS84 == false) {
+    			
+    			System.out.println("CHKDA "+crsText);
+    			
+    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84")){ 
+    				compliesWithCRS84Requirement = true;
+    			} 
+    			else{
     				compliesWithCRS84Requirement = false;
     				resultMessage.append("Collection " + collectionMap.get("id").toString() + " fails. ");
     			}
 
     		}
+    		
+    	
+  
 
     		org.testng.Assert.assertTrue(compliesWithCRS84Requirement,
     				"Fails Abstract Test 8 because " + resultMessage.toString());
 
+    	}
+    	
+    	/*
+    	 * We keep code here for future use
+    	 * 
+    	 */
+    	
+    	private void crsChecking_NotUsed(ArrayList crsList)
+    	{
+    		boolean compliesWithCRS84Requirement = true;
+    		StringBuffer resultMessage = new StringBuffer();
+    		boolean supportsCRS84 = false;
+    		HashMap collectionMap = null; //(HashMap) collectionsList.get(t);
+    		
+			//ArrayList crsList = (ArrayList) collectionMap.get("crs");
+			
+			HashMap crsMap = (HashMap) crsList.get(0);
+
+			CoordinateReferenceSystem source = null;
+
+			try {
+
+				source = CRS.fromWKT(crsMap.get("wkt").toString());
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+
+			DefaultGeographicCRS crs = (DefaultGeographicCRS) source;
+
+			if (crs.getDatum().getEllipsoid().getName().toString().equals("WGS 84")
+					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS_1984")
+					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS84")) {
+
+				if (source.getCoordinateSystem().getAxis(0).toString().toLowerCase().contains("longitude")
+						&& source.getCoordinateSystem().getAxis(1).toString().toLowerCase().contains("latitude")) {
+
+					supportsCRS84 = true;
+
+				}
+			}
+			if (supportsCRS84 == false) {
+				compliesWithCRS84Requirement = false;
+				resultMessage.append("Collection " + collectionMap.get("id").toString() + " fails. ");
+			}
     	}
 
     	/**
