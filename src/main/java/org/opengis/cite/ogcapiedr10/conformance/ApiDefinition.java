@@ -80,7 +80,6 @@ public class ApiDefinition extends CommonFixture {
 
         OpenApi3 apiModel = null;
         
-        //OpenApi3 apiModel = parser.parse( response, new URL( apiUrl ), true );
      
         try {
 			apiModel = (OpenApi3) parser.parse(new URL( apiUrl ).toURI(), true);
@@ -119,8 +118,8 @@ public class ApiDefinition extends CommonFixture {
         StringBuilder sb = new StringBuilder();
         sb.append( "API definition is not valid. Found following validation items:" );
         if ( !model.isValid() ) {
-            for ( ValidationResults.ValidationItem item : model.getValidationItems() ) {
-                sb.append( "  - " ).append( item.getSeverity() ).append( ": " ).append( item.getMsg() );
+            for ( ValidationResults.ValidationItem item : model.getValidationItems() ) {            	
+            	sb.append( "  @ " ).append( item.getPositionInfo() ).append( "  - " ).append( item.getSeverity() ).append( ": " ).append( item.getMsg() );
 
             }
         }

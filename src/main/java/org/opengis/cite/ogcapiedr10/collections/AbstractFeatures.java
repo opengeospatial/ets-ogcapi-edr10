@@ -16,11 +16,15 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findUnsupportedTypes;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
 import org.opengis.cite.ogcapiedr10.SuiteAttribute;
@@ -42,381 +46,391 @@ import io.restassured.response.Response;
  */
 public class AbstractFeatures extends CommonDataFixture {
 
-    protected final Map<CollectionResponseKey, ResponseData> collectionIdAndResponse = new HashMap<>();
+	String apiDef = null;
 
-    //protected List<Map<String, Object>> collections;
+	protected final Map<CollectionResponseKey, ResponseData> collectionIdAndResponse = new HashMap<>();
 
-    protected URI iut;
+	// protected List<Map<String, Object>> collections;
 
-    @DataProvider(name = "collectionPaths")
-    public Iterator<Object[]> collectionPaths( ITestContext testContext ) {
+	protected URI iut;
 
+	@DataProvider(name = "collectionPaths")
+	public Iterator<Object[]> collectionPaths(ITestContext testContext) {
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-        
-        //"Locations", "Position", "Radius", "Trajectory", "Cube", "Corridor"
-        
-        String[] resources = { "locations", "position", "cube", "corridor", "area", "trajectory" }; 
-        for(String res:resources) {
-        	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/"+res,null));
-        }
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
-    
-    @DataProvider(name = "locationsCollectionPaths")
-    public Iterator<Object[]> locationsCollectionPaths( ITestContext testContext ) {
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/locations",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
-    @DataProvider(name = "positionCollectionPaths")
-    public Iterator<Object[]> positionCollectionPaths( ITestContext testContext ) {
+		// "Locations", "Position", "Radius", "Trajectory", "Cube", "Corridor"
 
-    
-    	
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/position",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
+		String[] resources = { "locations", "position", "cube", "corridor", "area", "trajectory" };
+		for (String res : resources) {
+			testPointsForCollections.add(new TestPoint(rootUri.toString(), "/" + res, null));
+		}
 
-    @DataProvider(name = "areaCollectionPaths")
-    public Iterator<Object[]> areaCollectionPaths( ITestContext testContext ) {
+		List<Object[]> collectionsData = new ArrayList<>();
+		for (TestPoint testPointForCollections : testPointsForCollections) {
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/area",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
-    
-    @DataProvider(name = "trajectoryCollectionPaths")
-    public Iterator<Object[]> trajectoryCollectionPaths( ITestContext testContext ) {
+			collectionsData.add(new Object[] { testPointForCollections });
+		}
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/trajectory",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
+		return collectionsData.iterator();
+	}
 
-    @DataProvider(name = "cubeCollectionPaths")
-    public Iterator<Object[]> cubeCollectionPaths( ITestContext testContext ) {
+	@DataProvider(name = "locationsCollectionPaths")
+	public Iterator<Object[]> locationsCollectionPaths(ITestContext testContext) {
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/cube",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }    
-    
-    @DataProvider(name = "corridorCollectionPaths")
-    public Iterator<Object[]> corridorCollectionPaths( ITestContext testContext ) {
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-        List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
-   
-       	testPointsForCollections.add(new TestPoint(rootUri.toString(),"/corridor",null));
-        
-        List<Object[]> collectionsData = new ArrayList<>();
-        for ( TestPoint testPointForCollections : testPointsForCollections ) {
-        
-            collectionsData.add( new Object[] { testPointForCollections } );
-        }
-     
-        return collectionsData.iterator();
-    }
-    
+		testPointsForCollections.add(new TestPoint(rootUri.toString(), "/locations", null));
 
+		List<Object[]> collectionsData = new ArrayList<>();
+		if (apiDef.contains("/locations")) {
+			for (TestPoint testPointForCollections : testPointsForCollections) {
 
-    @BeforeClass
-    public void retrieveRequiredInformationFromTestContext( ITestContext testContext ) {
-  
-     
-    }
+				collectionsData.add(new Object[] { testPointForCollections });
+			}
+		}
 
-    /**
-     * Abstract Test 22, Test Method 1
-     *
-     * <pre>
-     * Abstract Test 22: /ats/core/fc-response
-     * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
-     * Requirement: /req/core/fc-response
-     *
-     * Test Method
-     *   1. Validate that the type property is present and has a value of FeatureCollection
-     * </pre>
-     *
-     * @param collection
-     *            the collection under test, never <code>null</code>
-     */
-    public void validateTypeProperty( CollectionResponseKey collection ) {
-        ResponseData response = collectionIdAndResponse.get( collection );
-        if ( response == null )
-            throw new SkipException( "Could not find a response for collection with id " + collection.id );
+		return collectionsData.iterator();
+	}
 
-        JsonPath jsonPath = response.jsonPath();
-        String type = jsonPath.get( "type" );
-        assertNotNull( type, "type property is missing" );
-        assertEquals( type, "FeatureCollection", "Expected type property value of FeatureCollection but was " + type );
-    }
+	@DataProvider(name = "positionCollectionPaths")
+	public Iterator<Object[]> positionCollectionPaths(ITestContext testContext) {
 
-    /**
-     * Abstract Test 22, Test Method 2
-     *
-     * <pre>
-     * Abstract Test 22: /ats/core/fc-response
-     * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
-     * Requirement: /req/core/fc-response
-     *
-     * Test Method
-     *   2. Validate the features property is present and that it is populated with an array of feature items.
-     * </pre>
-     *
-     * @param collection
-     *            the collection under test, never <code>null</code>
-     */
-    void validateFeaturesProperty( CollectionResponseKey collection ) {
-        ResponseData response = collectionIdAndResponse.get( collection );
-        if ( response == null )
-            throw new SkipException( "Could not find a response for collection with id " + collection.id );
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-        JsonPath jsonPath = response.jsonPath();
-        List<Object> type = jsonPath.get( "features" );
-        assertNotNull( type, "features property is missing" );
-    }
+		testPointsForCollections.add(new TestPoint(rootUri.toString(), "/position", null));
 
-    /**
-     * Abstract Test 22, Test Method 4 (Abstract Test 23)
-     *
-     * <pre>
-     * Abstract Test 22: /ats/core/fc-response
-     * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
-     * Requirement: /req/core/fc-response
-     *
-     * Test Method
-     *   4. If the links property is present, validate that all entries comply with /ats/core/fc-links
-     * </pre>
-     *
-     * <pre>
-     * Abstract Test 23: /ats/core/fc-links
-     * Test Purpose: Validate that the required links are included in the Collections document.
-     * Requirement: /req/core/fc-links, /req/core/fc-rel-type
-     *
-     * Test Method:
-     * Verify that the response document includes:
-     *   1. a link to this response document (relation: self),
-     *   2. a link to the response document in every other media type supported by the server (relation: alternate).
-     *
-     * Verify that all links include the rel and type link parameters.
-     * </pre>
-     *
-     * @param collection
-     *            the collection under test, never <code>null</code>
-     */
-    void validateLinks( CollectionResponseKey collection ) {
-        ResponseData response = collectionIdAndResponse.get( collection );
-        if ( response == null )
-            throw new SkipException( "Could not find a response for collection with id " + collection.id );
+		List<Object[]> collectionsData = new ArrayList<>();
+		if (apiDef.contains("/position")) {
+			for (TestPoint testPointForCollections : testPointsForCollections) {
 
-        JsonPath jsonPath = response.jsonPath();
-        List<Map<String, Object>> links = jsonPath.getList( "links" );
+				collectionsData.add(new Object[] { testPointForCollections });
+			}
+		}
 
-        // 1. a link to this response document (relation: self)
-        Map<String, Object> linkToSelf = findLinkByRel( links, "self" );
-        assertNotNull( linkToSelf, "Feature Collection Metadata document must include a link for itself" );
+		return collectionsData.iterator();
+	}
 
-        // 2. a link to the response document in every other media type supported by the server (relation: alternate)
-        // Dev: Supported media type are identified by the compliance classes for this server
-        List<String> mediaTypesToSupport = createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures( linkToSelf );
-        List<Map<String, Object>> alternateLinks = findLinksWithSupportedMediaTypeByRel( links, mediaTypesToSupport,
-                                                                                         "alternate" );
-        List<String> typesWithoutLink = findUnsupportedTypes( alternateLinks, mediaTypesToSupport );
-        assertTrue( typesWithoutLink.isEmpty(),
-                    "Feature Collection Metadata document must include links for alternate encodings. Missing links for types "
-                                                + typesWithoutLink );
+	@DataProvider(name = "areaCollectionPaths")
+	public Iterator<Object[]> areaCollectionPaths(ITestContext testContext) {
 
-        // Validate that each "self"/"alternate" link includes a rel and type parameter.
-        Set<String> rels = new HashSet<>();
-        rels.add("self");
-        rels.add("alternate");
-        List<String> linksWithoutRelOrType = findLinksWithoutRelOrType( links, rels );
-        assertTrue( linksWithoutRelOrType.isEmpty(),
-                    "Links for alternate encodings must include a rel and type parameter. Missing for links "
-                                                     + linksWithoutRelOrType );
-    }
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-    /**
-     * Abstract Test 22, Test Method 5 (Abstract Test 24)
-     *
-     * <pre>
-     * Abstract Test 22: /ats/core/fc-response
-     * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
-     * Requirement: /req/core/fc-response
-     *
-     * Test Method
-     *   5. If the timeStamp property is present, validate that it complies with /ats/core/fc-timeStamp
-     * </pre>
-     *
-     * <pre>
-     * Abstract Test 24: /ats/core/fc-timeStamp
-     * Test Purpose: Validate the timeStamp parameter returned with a Features response
-     * Requirement: /req/core/fc-timeStamp
-     *
-     * Test Method: Validate that the timeStamp value is set to the time when the response was generated.
-     * </pre>
-     *
-     * @param collection
-     *            the collection under test, never <code>null</code>
-     */
-    public void validateTimeStamp( CollectionResponseKey collection ) {
-        ResponseData response = collectionIdAndResponse.get( collection );
-        if ( response == null )
-            throw new SkipException( "Could not find a response for collection with id " + collection.id );
+		testPointsForCollections.add(new TestPoint(rootUri.toString(), "/area", null));
 
-        JsonPath jsonPath = response.jsonPath();
+		List<Object[]> collectionsData = new ArrayList<>();
+		if (apiDef.contains("/area")) {
+			for (TestPoint testPointForCollections : testPointsForCollections) {
 
-        assertTimeStamp( collection.id, jsonPath, response.timeStampBeforeResponse, response.timeStampAfterResponse,
-                         true );
-    }
+				collectionsData.add(new Object[] { testPointForCollections });
+			}
+		}
 
-  
+		return collectionsData.iterator();
+	}
 
-    /**
-     * Abstract Test 22, Test Method 7 (Abstract Test 26)
-     *
-     * <pre>
-     * Abstract Test 22: /ats/core/fc-response
-     * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
-     * Requirement: /req/core/fc-response
-     *
-     * Test Method
-     *   7. If the numberReturned property is present, validate that it complies with /ats/core/fc-numberReturned
-     * </pre>
-     *
-     * <pre>
-     * Abstract Test 26: /ats/core/fc-numberReturned
-     * Test Purpose: Validate the numberReturned parameter returned with a Features response
-     * Requirement: /req/core/fc-numberReturned
-     *
-     * Test Method: Validate that the numberReturned value is identical to the number of features in the response.
-     * </pre>
-     *
-     * @param collection
-     *            the collection under test, never <code>null</code>
-     */
-    void validateNumberReturned( CollectionResponseKey collection ) {
-        ResponseData response = collectionIdAndResponse.get( collection );
-        if ( response == null )
-            throw new SkipException( "Could not find a response for collection with id " + collection.id );
+	@DataProvider(name = "trajectoryCollectionPaths")
+	public Iterator<Object[]> trajectoryCollectionPaths(ITestContext testContext) {
 
-        JsonPath jsonPath = response.jsonPath();
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-        assertNumberReturned( collection.id, jsonPath, true );
-    }
+		testPointsForCollections.add(new TestPoint(rootUri.toString(), "/trajectory", null));
 
-    protected String findFeaturesUrlForGeoJson( Map<String, Object> collection ) {
-        List<Object> links = (List<Object>) collection.get( "links" );
-        for ( Object linkObject : links ) {
-            Map<String, Object> link = (Map<String, Object>) linkObject;
-            Object rel = link.get( "rel" );
-            Object type = link.get( "type" );
-            if ( "items".equals( rel ) && GEOJSON_MIME_TYPE.equals( type ) )
-                return (String) link.get( "href" );
-        }
-        return null;
-    }
+		List<Object[]> collectionsData = new ArrayList<>();
+		if (apiDef.contains("/trajectory")) {
+			for (TestPoint testPointForCollections : testPointsForCollections) {
 
-    protected boolean isRequired( Parameter param ) {
-        return param.getRequired() != null && param.getRequired();
-    }
+				collectionsData.add(new Object[] { testPointForCollections });
+			}
+		}
 
-    protected Boolean isExplode( Parameter param ) {
-        return param.getExplode() != null && param.getExplode();
-    }
+		return collectionsData.iterator();
+	}
 
-    protected class ResponseData {
+	@DataProvider(name = "cubeCollectionPaths")
+	public Iterator<Object[]> cubeCollectionPaths(ITestContext testContext) {
 
-        private final Response response;
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-        protected final ZonedDateTime timeStampBeforeResponse;
+		testPointsForCollections.add(new TestPoint(rootUri.toString(), "/cube", null));
 
-        protected final ZonedDateTime timeStampAfterResponse;
+		List<Object[]> collectionsData = new ArrayList<>();
+		if (apiDef.contains("/cube")) {
+			for (TestPoint testPointForCollections : testPointsForCollections) {
 
-        public ResponseData( Response response, ZonedDateTime timeStampBeforeResponse,
-                             ZonedDateTime timeStampAfterResponse ) {
-            this.response = response;
-            this.timeStampBeforeResponse = timeStampBeforeResponse;
-            this.timeStampAfterResponse = timeStampAfterResponse;
-        }
+				collectionsData.add(new Object[] { testPointForCollections });
+			}
+		}
 
-        public JsonPath jsonPath() {
-            return response.jsonPath();
-        }
-    }
+		return collectionsData.iterator();
+	}
 
-    protected class CollectionResponseKey {
+	@DataProvider(name = "corridorCollectionPaths")
+	public Iterator<Object[]> corridorCollectionPaths(ITestContext testContext) {
 
-        private final String id;
+		List<TestPoint> testPointsForCollections = new ArrayList<TestPoint>();
 
-        protected CollectionResponseKey( String id ) {
-            this.id = id;
-        }
+		testPointsForCollections.add(new TestPoint(rootUri.toString(), "/corridor", null));
 
-        @Override
-        public boolean equals( Object o ) {
-            if ( this == o )
-                return true;
-            if ( o == null || getClass() != o.getClass() )
-                return false;
-            CollectionResponseKey that = (CollectionResponseKey) o;
-            return Objects.equals( id, that.id );
-        }
+		List<Object[]> collectionsData = new ArrayList<>();
+		if (apiDef.contains("/corridor")) {
+			for (TestPoint testPointForCollections : testPointsForCollections) {
 
-        @Override
-        public int hashCode() {
-            return Objects.hash( id );
-        }
-    }
-    
+				collectionsData.add(new Object[] { testPointForCollections });
+			}
+		}
+
+		return collectionsData.iterator();
+	}
+
+	@BeforeClass
+	public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
+
+		try (InputStream in = new URL(rootUri.toString() + "/api?f=JSON").openStream()) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			apiDef = reader.lines().collect(Collectors.joining(System.lineSeparator()));
+		} catch (Exception ew) {
+			ew.printStackTrace();
+		}
+	}
+
+	/**
+	 * Abstract Test 22, Test Method 1
+	 *
+	 * <pre>
+	 * Abstract Test 22: /ats/core/fc-response
+	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
+	 * Requirement: /req/core/fc-response
+	 *
+	 * Test Method
+	 *   1. Validate that the type property is present and has a value of FeatureCollection
+	 * </pre>
+	 *
+	 * @param collection the collection under test, never <code>null</code>
+	 */
+	public void validateTypeProperty(CollectionResponseKey collection) {
+		ResponseData response = collectionIdAndResponse.get(collection);
+		if (response == null)
+			throw new SkipException("Could not find a response for collection with id " + collection.id);
+
+		JsonPath jsonPath = response.jsonPath();
+		String type = jsonPath.get("type");
+		assertNotNull(type, "type property is missing");
+		assertEquals(type, "FeatureCollection", "Expected type property value of FeatureCollection but was " + type);
+	}
+
+	/**
+	 * Abstract Test 22, Test Method 2
+	 *
+	 * <pre>
+	 * Abstract Test 22: /ats/core/fc-response
+	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
+	 * Requirement: /req/core/fc-response
+	 *
+	 * Test Method
+	 *   2. Validate the features property is present and that it is populated with an array of feature items.
+	 * </pre>
+	 *
+	 * @param collection the collection under test, never <code>null</code>
+	 */
+	void validateFeaturesProperty(CollectionResponseKey collection) {
+		ResponseData response = collectionIdAndResponse.get(collection);
+		if (response == null)
+			throw new SkipException("Could not find a response for collection with id " + collection.id);
+
+		JsonPath jsonPath = response.jsonPath();
+		List<Object> type = jsonPath.get("features");
+		assertNotNull(type, "features property is missing");
+	}
+
+	/**
+	 * Abstract Test 22, Test Method 4 (Abstract Test 23)
+	 *
+	 * <pre>
+	 * Abstract Test 22: /ats/core/fc-response
+	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
+	 * Requirement: /req/core/fc-response
+	 *
+	 * Test Method
+	 *   4. If the links property is present, validate that all entries comply with /ats/core/fc-links
+	 * </pre>
+	 *
+	 * <pre>
+	 * Abstract Test 23: /ats/core/fc-links
+	 * Test Purpose: Validate that the required links are included in the Collections document.
+	 * Requirement: /req/core/fc-links, /req/core/fc-rel-type
+	 *
+	 * Test Method:
+	 * Verify that the response document includes:
+	 *   1. a link to this response document (relation: self),
+	 *   2. a link to the response document in every other media type supported by the server (relation: alternate).
+	 *
+	 * Verify that all links include the rel and type link parameters.
+	 * </pre>
+	 *
+	 * @param collection the collection under test, never <code>null</code>
+	 */
+	void validateLinks(CollectionResponseKey collection) {
+		ResponseData response = collectionIdAndResponse.get(collection);
+		if (response == null)
+			throw new SkipException("Could not find a response for collection with id " + collection.id);
+
+		JsonPath jsonPath = response.jsonPath();
+		List<Map<String, Object>> links = jsonPath.getList("links");
+
+		// 1. a link to this response document (relation: self)
+		Map<String, Object> linkToSelf = findLinkByRel(links, "self");
+		assertNotNull(linkToSelf, "Feature Collection Metadata document must include a link for itself");
+
+		// 2. a link to the response document in every other media type supported by the
+		// server (relation: alternate)
+		// Dev: Supported media type are identified by the compliance classes for this
+		// server
+		List<String> mediaTypesToSupport = createListOfMediaTypesToSupportForFeatureCollectionsAndFeatures(linkToSelf);
+		List<Map<String, Object>> alternateLinks = findLinksWithSupportedMediaTypeByRel(links, mediaTypesToSupport,
+				"alternate");
+		List<String> typesWithoutLink = findUnsupportedTypes(alternateLinks, mediaTypesToSupport);
+		assertTrue(typesWithoutLink.isEmpty(),
+				"Feature Collection Metadata document must include links for alternate encodings. Missing links for types "
+						+ typesWithoutLink);
+
+		// Validate that each "self"/"alternate" link includes a rel and type parameter.
+		Set<String> rels = new HashSet<>();
+		rels.add("self");
+		rels.add("alternate");
+		List<String> linksWithoutRelOrType = findLinksWithoutRelOrType(links, rels);
+		assertTrue(linksWithoutRelOrType.isEmpty(),
+				"Links for alternate encodings must include a rel and type parameter. Missing for links "
+						+ linksWithoutRelOrType);
+	}
+
+	/**
+	 * Abstract Test 22, Test Method 5 (Abstract Test 24)
+	 *
+	 * <pre>
+	 * Abstract Test 22: /ats/core/fc-response
+	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
+	 * Requirement: /req/core/fc-response
+	 *
+	 * Test Method
+	 *   5. If the timeStamp property is present, validate that it complies with /ats/core/fc-timeStamp
+	 * </pre>
+	 *
+	 * <pre>
+	 * Abstract Test 24: /ats/core/fc-timeStamp
+	 * Test Purpose: Validate the timeStamp parameter returned with a Features response
+	 * Requirement: /req/core/fc-timeStamp
+	 *
+	 * Test Method: Validate that the timeStamp value is set to the time when the response was generated.
+	 * </pre>
+	 *
+	 * @param collection the collection under test, never <code>null</code>
+	 */
+	public void validateTimeStamp(CollectionResponseKey collection) {
+		ResponseData response = collectionIdAndResponse.get(collection);
+		if (response == null)
+			throw new SkipException("Could not find a response for collection with id " + collection.id);
+
+		JsonPath jsonPath = response.jsonPath();
+
+		assertTimeStamp(collection.id, jsonPath, response.timeStampBeforeResponse, response.timeStampAfterResponse,
+				true);
+	}
+
+	/**
+	 * Abstract Test 22, Test Method 7 (Abstract Test 26)
+	 *
+	 * <pre>
+	 * Abstract Test 22: /ats/core/fc-response
+	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
+	 * Requirement: /req/core/fc-response
+	 *
+	 * Test Method
+	 *   7. If the numberReturned property is present, validate that it complies with /ats/core/fc-numberReturned
+	 * </pre>
+	 *
+	 * <pre>
+	 * Abstract Test 26: /ats/core/fc-numberReturned
+	 * Test Purpose: Validate the numberReturned parameter returned with a Features response
+	 * Requirement: /req/core/fc-numberReturned
+	 *
+	 * Test Method: Validate that the numberReturned value is identical to the number of features in the response.
+	 * </pre>
+	 *
+	 * @param collection the collection under test, never <code>null</code>
+	 */
+	void validateNumberReturned(CollectionResponseKey collection) {
+		ResponseData response = collectionIdAndResponse.get(collection);
+		if (response == null)
+			throw new SkipException("Could not find a response for collection with id " + collection.id);
+
+		JsonPath jsonPath = response.jsonPath();
+
+		assertNumberReturned(collection.id, jsonPath, true);
+	}
+
+	protected String findFeaturesUrlForGeoJson(Map<String, Object> collection) {
+		List<Object> links = (List<Object>) collection.get("links");
+		for (Object linkObject : links) {
+			Map<String, Object> link = (Map<String, Object>) linkObject;
+			Object rel = link.get("rel");
+			Object type = link.get("type");
+			if ("items".equals(rel) && GEOJSON_MIME_TYPE.equals(type))
+				return (String) link.get("href");
+		}
+		return null;
+	}
+
+	protected boolean isRequired(Parameter param) {
+		return param.getRequired() != null && param.getRequired();
+	}
+
+	protected Boolean isExplode(Parameter param) {
+		return param.getExplode() != null && param.getExplode();
+	}
+
+	protected class ResponseData {
+
+		private final Response response;
+
+		protected final ZonedDateTime timeStampBeforeResponse;
+
+		protected final ZonedDateTime timeStampAfterResponse;
+
+		public ResponseData(Response response, ZonedDateTime timeStampBeforeResponse,
+				ZonedDateTime timeStampAfterResponse) {
+			this.response = response;
+			this.timeStampBeforeResponse = timeStampBeforeResponse;
+			this.timeStampAfterResponse = timeStampAfterResponse;
+		}
+
+		public JsonPath jsonPath() {
+			return response.jsonPath();
+		}
+	}
+
+	protected class CollectionResponseKey {
+
+		private final String id;
+
+		protected CollectionResponseKey(String id) {
+			this.id = id;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			CollectionResponseKey that = (CollectionResponseKey) o;
+			return Objects.equals(id, that.id);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(id);
+		}
+	}
+
 }

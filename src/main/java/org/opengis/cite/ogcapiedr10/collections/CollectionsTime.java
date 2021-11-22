@@ -101,7 +101,7 @@ public class CollectionsTime{
 				assertEquals(coords.getIn(), "query", String.format(msg, "in", "query", coords.getIn()));
 				assertTrue(isRequired(coords), String.format(msg, "required", "true", coords.getRequired()));
 				// assertEquals( coords.getStyle(), "form", String.format( msg, "style","form",
-				// coords.getStyle() ) ); //SHOULD BE Enabled
+				// coords.getStyle() ) ); //TODO SHOULD BE Enabled
 				assertFalse(isExplode(coords), String.format(msg, "explode", "false", coords.getExplode()));
 				Schema schema = coords.getSchema();
 				assertEquals(schema.getType(), "string",
