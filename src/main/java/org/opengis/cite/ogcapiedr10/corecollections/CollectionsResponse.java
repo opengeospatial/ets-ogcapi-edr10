@@ -185,7 +185,7 @@ public class CollectionsResponse extends CommonFixture {
 
     			String crsText = collectionMap.get("crs").toString();
     			
-    			System.out.println("CHKDA "+crsText);
+    		
     			
     			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84")){ 
     				compliesWithCRS84Requirement = true;

@@ -51,6 +51,7 @@ public class Collections extends CommonDataFixture {
             int i = 0;
             for (TestPoint testPoint : testPoints) {
                 this.testPointsData[i++] = new Object[] { testPoint };
+                System.out.println("CHKDA1 "+testPoint.getServerUrl()+ " | "+testPoint.getPath());
             }
         }
         return testPointsData;
@@ -65,6 +66,9 @@ public class Collections extends CommonDataFixture {
      */
     @Test(description = "Implements Abstract Test 82, meets Requirement /req/collections/rc-md-op", dataProvider = "collectionsUris", dependsOnGroups = "conformance")
     public void validateCollectionsMetadataOperation(TestPoint testPoint) {
+    	
+    	System.out.println("CHKDA2 "+testPoint.getServerUrl()+ " | "+testPoint.getPath());
+    	
         String testPointUri = new UriBuilder(testPoint).buildUrl();
         Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
         response.then().statusCode(200);

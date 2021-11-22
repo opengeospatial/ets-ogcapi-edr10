@@ -305,7 +305,7 @@ public class OpenApiUtils {
 
 	private static List<TestPoint> retrieveTestPoints(OpenApi3 apiModel, URI iut, PATH path,
 			boolean allowEmptyTemplateReplacements) {
-		String requestedPath = "/" + path.getPathItem();
+		String requestedPath = path.getPathItem();
 		return retrieveTestPoints(apiModel, iut, requestedPath, allowEmptyTemplateReplacements);
 	}
 
