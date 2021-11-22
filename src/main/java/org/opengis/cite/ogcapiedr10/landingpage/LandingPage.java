@@ -99,7 +99,7 @@ public class LandingPage extends CommonFixture {
               && linkTypes.contains( "conformance" ) && linkTypes.contains( "data" );
         
         assertTrue( expectedLinkTypesExists,
-                    "The landing page must include at least links with relation type 'conformance', but contains "
+                    "The landing page must include at least links with relation types ('service-desc' and/or 'service-doc' ) and 'data' and 'conformance', but contains "
                                              + String.join( ", ", linkTypes ) );
     }
 
