@@ -1,7 +1,6 @@
 = Release Notes
 
-== ${project.version} (YYYY-MM-DD)
+== 0.1 (2021-11-26)
 
-The initial release implements the following test requirements:
+The initial release.
 
-- all mandatory conformance classes (Class A, Class B)
