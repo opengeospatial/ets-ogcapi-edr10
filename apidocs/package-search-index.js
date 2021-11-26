@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.opengis.cite.ogcapiedr10"},{"l":"org.opengis.cite.ogcapiedr10.level1"},{"l":"org.opengis.cite.ogcapiedr10.util"}]
