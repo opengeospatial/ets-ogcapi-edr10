@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import org.apache.sis.referencing.CRS;
+
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
 
 import org.opengis.util.FactoryException;

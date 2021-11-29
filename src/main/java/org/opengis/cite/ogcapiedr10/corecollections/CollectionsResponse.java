@@ -29,8 +29,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.apache.sis.referencing.CRS;
-import org.apache.sis.referencing.crs.DefaultGeographicCRS;
+import org.geotoolkit.referencing.CRS;
+import org.geotoolkit.referencing.crs.DefaultGeographicCRS;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
@@ -225,7 +225,7 @@ public class CollectionsResponse extends CommonFixture {
 
 			try {
 
-				source = CRS.fromWKT(crsMap.get("wkt").toString());
+				source = CRS.parseWKT(crsMap.get("wkt").toString());
 			} catch (Exception e) {
 
 				e.printStackTrace();
