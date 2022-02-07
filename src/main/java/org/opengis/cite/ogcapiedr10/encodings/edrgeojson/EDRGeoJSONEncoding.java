@@ -1,7 +1,5 @@
-package org.opengis.cite.ogcapiedr10.encodings.geojson;
+package org.opengis.cite.ogcapiedr10.encodings.edrgeojson;
 
-import io.restassured.http.ContentType;
-import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.everit.json.schema.Schema;
@@ -10,46 +8,38 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.EtsAssert;
-import org.testng.ITestContext;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
+import org.opengis.cite.ogcapiedr10.encodings.geojson.GeoJSONValidator;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
-import static org.testng.Assert.assertTrue;
 
-public class GeoJSONEncoding extends CommonFixture {
+public class EDRGeoJSONEncoding extends CommonFixture {
 
 
-
+    private String schemaToApply = "/org/opengis/cite/ogcapiedr10/jsonschema/edrgeojson.json";
     protected URI iut;
 
 
 
     /**
      * <pre>
-     * Abstract Test 20: Verify support for JSON and GeoJSON
-     * Abstract Test 21: Verify the content of a JSON document given an input document and schema.
-     * Note that the first locations resource that supports GeoJSON is tested.
+     * Abstract Test 22: Verify support for the EDR GeoJSON Schema
+     * Abstract Test 23: Verify the content of an EDR GeoJSON document given an input document and schema.
+     * Note that the first positions resource that supports GeoJSON is tested.
      * </pre>
      */
-    @Test(description = "Implements Abstract Test 20 (/conf/geojson/definition), Abstract Test 21 (/conf/geojson/content)")
-    public void validateResponseForGeoJSON() {
-
-
+    @Test(description = "Implements Abstract Test 22 (/conf/edr-geojson/definition), Abstract Test 23 (/conf/edr-geojson/content)")
+    public void validateResponseForEDRGeoJSON() {
 
         StringBuffer sb = new StringBuffer();
         boolean atLeastOneCollectionTested = false; //we test the first locations resource we find
@@ -81,7 +71,7 @@ public class GeoJSONEncoding extends CommonFixture {
                         String locationsURL = link.get("href").toString()+"?f="+supportedFormat;
                         System.out.println("CHK URL "+locationsURL);
                         GeoJSONValidator validator = new GeoJSONValidator();
-                        boolean result = validator.isGeoJSONValidPerSchema(locationsURL,GeoJSONValidator.GeoJSON);
+                        boolean result = validator.isGeoJSONValidPerSchema(locationsURL,GeoJSONValidator.EDRGeoJSON);
                         atLeastOneCollectionTested = true;
                         if(result==false) {
                             sb.append(" None of the collections with locations resources were found to offer GeoJSON encoded responses.\n");
@@ -107,11 +97,12 @@ public class GeoJSONEncoding extends CommonFixture {
 
         String resultMessage = sb.toString();
         EtsAssert.assertTrue(resultMessage.length()==0,
-                "Fails Abstract Test 21. "
+                "Fails Abstract Test 23. "
                         + resultMessage);
 
 
 
     }
+
 
 }
