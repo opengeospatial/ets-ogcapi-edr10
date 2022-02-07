@@ -7,6 +7,7 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -36,11 +37,16 @@ public class GeoJSONValidator {
     }
 
     public JSONObject readJSONObjectFromURL(URL requestURL) throws IOException {
-        try ( Scanner scanner = new Scanner(requestURL.openStream(),
+
+        HttpURLConnection urlConnection = (HttpURLConnection) requestURL.openConnection();
+        urlConnection.setRequestProperty("Accept","application/json");
+        InputStream is = urlConnection.getInputStream();
+        try ( Scanner scanner = new Scanner(is,
                 StandardCharsets.UTF_8.toString())) {
             scanner.useDelimiter("\\A");
 
             return new JSONObject(scanner.hasNext() ? scanner.next() : "");
         }
+
     }
 }
