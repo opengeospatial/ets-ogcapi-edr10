@@ -298,11 +298,6 @@ public class QueryCollections extends CommonFixture {
 		// //TODO REMOVE
 
 		StringBuffer sb = new StringBuffer();
-		
-	
-		
-        
-        
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		
 		ArrayList<String> collectionsList = new ArrayList<String>();
@@ -432,9 +427,11 @@ public class QueryCollections extends CommonFixture {
 						}
 						
 					}
+					else {
+						sb.append("Response of Position Query to collection" + collectionId
+								+ " was null \n");
+					}
 					
-					//TODO check that returned content is JSON
-					//TODO if not JSON then add error message to StringBuffer
 					
 									
 

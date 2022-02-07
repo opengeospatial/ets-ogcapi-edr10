@@ -1,0 +1,540 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Schema for validating EDR GeoJSON files",
+    "description": "Schema for validating EDR GeoJSON files.",
+    "$ref": "#/definitions/FeatureCollection",
+    "type": "object",
+    "required": ["type","features"],
+    "oneOf": [
+        {
+            "title": "FeatureCollection",
+            "$ref": "#/definitions/FeatureCollection"
+        },
+        {
+            "title": "Feature",
+            "$ref": "#/definitions/Feature"
+        }
+    ],   
+
+    "definitions": {
+
+        "Feature": {
+            "description": "GeoJSON Feature",
+            "type": "object",
+            "properties": {
+                "@context": {
+                    "type": "string"
+                },
+                "type": {
+                    "title": "type",
+                    "type": "string",
+                    "enum": [
+                        "Feature"
+                    ]
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "geometry": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/Geometry"                   
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "properties": {
+                    "type": ["object"]
+                },
+                "bbox": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "type",
+                "geometry",
+                "properties"
+            ]
+        },
+        "FeatureCollection": {
+            "description": "GeoJSON FeatureCollection",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "FeatureCollection"
+                    ]
+                },
+                "bbox": {
+                    "type": "array"
+                },
+                "features": {
+                    "type": "array",
+                    "minItems": 0,
+                    "items": {
+                        "$ref": "#/definitions/Feature"
+                    }
+                },
+                "parameters": {	
+                    "type": "array",
+                    "minItems": 0,
+                    "items": {
+                        "$ref": "#/definitions/Parameter"
+                    }				
+                },
+                "links": {	
+                    "type": "array",
+                    "minItems": 0,
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }		
+                },
+                "timeStamp": {	
+                    "type": "string",
+                    "format": "date-time"
+                }                
+            },
+            "required": [
+                "type",
+                "features"
+            ]
+        },
+
+        "Point": {
+            "title": "Point",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Point"
+                    ]
+                }
+            },
+            "required": [
+                "coordinates",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "MultiPoint": {
+            "title": "point",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": [
+                        {
+                            "type": "array",
+                            "minItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    ],
+                    "additionalItems": false
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MultiPoint"
+                    ]
+                }
+            },
+            "required": [
+                "coordinates",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LineString": {
+            "title": "LineString",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "LineString",
+                        "LineStringM",
+                        "LineStringZ",
+                        "LineStringZM"
+                    ]
+                }
+            },
+            "required": [
+                "coordinates",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "MultiLineString": {
+            "title": "MultiLineString",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                            "type": "array",
+                            "minItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MultiLineString"
+                    ]
+                }
+            },
+            "required": [
+                "coordinates",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "Polygon": {
+            "title": "Polygon",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "array",
+                        "minItems": 4,
+                        "items": {
+                            "type": "array",
+                            "minItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Polygon"
+                    ]
+                }
+            },
+            "required": [
+                "coordinates",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "MultiPolygon": {
+            "title": "MultiPolygon",
+            "type": "object",
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "minItems": 2,
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MultiPolygon"
+                    ]
+                }
+            },
+            "required": [
+                "coordinates",
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "Geometry": {
+            "title": "Geometry",
+            "type": "object",
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/Point"
+                },
+                {
+                    "$ref": "#/definitions/MultiPoint"
+                },
+                {
+                    "$ref": "#/definitions/LineString"
+                },
+                {
+                    "$ref": "#/definitions/MultiLineString"
+                },
+                {
+                    "$ref": "#/definitions/Polygon"
+                },
+                {
+                    "$ref": "#/definitions/MultiPolygon"
+                }
+            ]
+        },
+        "Parameter": {
+            "title": "Parameter",
+            "type": "object",
+            "required": [
+                "observedProperty",
+                "type"
+            ],            
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Parameter"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "data-type": {
+                    "type": "string",
+                    "enum": [
+                        "integer", "float", "string"
+                    ]
+                },
+                "unit": {
+                    "type": "object"
+                },
+                "observedProperty": {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "categories": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "categoryEncoding": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "oneOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "extent": {
+                    "$ref": "#/definitions/Extent"
+                },
+                "measurementType": {
+                    "type": "object",
+                    "required": ["method"],
+                    "properties": {
+                        "method": {
+                            "type": "string"
+                        },
+                        "duration": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "id": {
+                    "type": "string"
+                }                                 
+            }
+        },
+        "Link": {
+            "title": "Link",
+            "type": "object",
+            "required": [
+                "href",
+                "rel"
+            ],            
+            "properties": {
+                "href": {
+                    "type": "string"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "hreflang": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "length": {
+                    "type": "integer"
+                },
+                "templated": {
+                    "type": "boolean"
+                },
+                "variables": {
+                    "type": "object"
+                }                 
+            }
+        },
+        "Extent": {
+            "type": "object",
+            "properties": {
+                "spatial": {
+                    "type": "object",
+                    "required": [
+                        "bbox",
+                        "crs"
+                    ],
+                    "properties": {
+                        "bbox": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "array",
+                                "oneOf": [
+                                    {
+                                        "minItems": 4,
+                                        "maxItems": 4
+                                    },
+                                    {
+                                        "minItems": 6,
+                                        "maxItems": 6
+                                    }
+                                ],
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "crs": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "temporal": {
+                    "type": "object",
+                    "required": [
+                        "interval",
+                        "trs"
+                    ],
+                    "properties": {
+                        "interval": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "array",
+                                "minItems": 2,
+                                "maxItems": 2,
+                                "items": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        },
+                        "trs": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "vertical": {
+                    "type": "object",
+                    "required": [
+                        "interval",
+                        "vrs"
+                    ],
+                    "properties": {
+                        "interval": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "example": [
+                                    "850"
+                                ]
+                            }
+                        },
+                        "vrs": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

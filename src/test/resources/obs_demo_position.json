@@ -1,0 +1,105 @@
+{
+    "type": "FeatureCollection",
+    "timeStamp": "2022-02-02T08:05:32Z",
+    "parameters": [
+        {
+            "type": "Parameter",
+            "description": "Wind Direction",
+            "unit": {
+                "label": "degree true",
+                "symbol": {
+                    "value": "\u00b0",
+                    "type": "\u00a3server\u00a3metadata/units/degree"
+                }
+            },
+            "observedProperty": {
+                "id": "http://codes.wmo.int/common/quantity-kind/_aerodromeMeanWindDirection",
+                "label": "Wind Direction"
+            },
+            "extent": {
+                "spatial": {
+                    "bbox": [
+                        [
+                            -180.0,
+                            -89.9,
+                            180.0,
+                            89.9
+                        ]
+                    ],
+                    "crs": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.01745329251994328,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]]"
+                },
+                "temporal": {
+                    "interval": [
+                        [
+                            "2022-02-04T22:00Z",
+                            "2022-02-06T10:00Z"
+                        ]
+                    ],
+                    "values": [
+                        "R36/2022-02-04T22:00Z/PT1H"
+                    ],
+                    "trs": "TIMECRS[\"DateTime\",TDATUM[\"Gregorian Calendar\"],CS[TemporalDateTime,1],AXIS[\"Time (T)\",future]"
+                }
+            }
+            ,
+            "measurementType": {
+                "method": "mean",
+                "period": "-PT10M/PT0M"
+            }
+        }
+    ],
+    "links": [
+        {
+            "href": "http://labs.metoffice.gov.uk/collections/obs_demo",
+            "hreflang": "en",
+            "rel": "self",
+            "type": "application/json"
+        },
+        {
+            "href": "http://labs.metoffice.gov.uk/collections/obs_demo?f=html",
+            "hreflang": "en",
+            "rel": "alternate",
+            "type": "text/html"
+        },
+        {
+            "href": "http://labs.metoffice.gov.uk/collections/obs_demo?f=xml",
+            "hreflang": "en",
+            "rel": "alternate",
+            "type": "application/xml"
+        }]
+    ,
+    "bbox": [
+        0.05,
+        51.5,
+        0.05,
+        51.5
+    ],
+    "features": [
+        {
+            "id": "EGLC",
+            "type": "Feature",
+            "properties": {
+                "name": "LONDON CITY AIRP",
+                "Wind Direction": [
+                    240.0,
+                    250.0,
+                    250.0,
+                    240.0
+                ],
+                "time": [
+                    "2022-02-05T11:50:00Z",
+                    "2022-02-05T11:20:00Z",
+                    "2022-02-05T10:50:00Z",
+                    "2022-02-05T10:20:00Z"
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0.05,
+                    51.5
+                ]
+            }
+        }
+    ]
+}

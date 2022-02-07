@@ -1,0 +1,307 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Schema for validating GeoJSON files",
+	"description": "Schema for validating GeoJSON files.",
+	"$ref": "#/definitions/FeatureCollection",
+     "type": "object",
+    "required": ["type"],
+    "oneOf": [
+        {
+            "title": "FeatureCollection",
+            "$ref": "#/definitions/FeatureCollection"
+        },
+        {
+            "title": "Feature",
+            "$ref": "#/definitions/Feature"
+        }
+    ],   
+    
+	"definitions": {
+		
+		"Feature": {
+			"description": "GeoJSON Feature",
+			"type": "object",
+			"properties": {
+				"@context": {
+					"type": "string"
+				},
+				"type": {
+					"title": "type",
+					"type": "string",
+					"enum": [
+						"Feature"
+					]
+				},
+				"id": {
+					"type": "string",
+					"format": "uri"
+				},
+				"geometry": {
+					"oneOf": [
+						{
+							"$ref": "#/definitions/Geometry"                   
+						},
+						{
+							"type": "null"
+						}
+					]
+				},
+				"properties": {
+					"type": ["object"]
+				},
+				"bbox": {
+					"type": "array",
+					"minItems": 4,
+					"maxItems": 4,
+					"items": {
+						"type": "number"
+					}
+				}
+			},
+			"required": [
+				"type",
+				"geometry",
+				"properties"
+			]
+		},
+		"FeatureCollection": {
+			"description": "GeoJSON FeatureCollection",
+			"type": "object",
+			"properties": {
+				"type": {
+					"type": "string",
+					"enum": [
+						"FeatureCollection"
+					]
+				},
+				"bbox": {
+					"type": "array"
+				},
+				"features": {
+					"type": "array",
+					"minItems": 0,
+					"items": {
+						"$ref": "#/definitions/Feature"
+					}
+				}
+			},
+			"required": [
+				"type",
+				"features"
+			]
+		},
+                
+		"Point": {
+			"title": "Point",
+			"type": "object",
+			"properties": {
+				"coordinates": {
+					"type": "array",
+					"minItems": 2,
+					"items": {
+						"type": "number"
+					}
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"Point"
+					]
+				}
+			},
+			"required": [
+				"coordinates",
+				"type"
+			],
+			"additionalProperties": false
+		},
+		"MultiPoint": {
+			"title": "point",
+			"type": "object",
+			"properties": {
+				"coordinates": {
+					"type": "array",
+					"minItems": 1,
+					"items": [
+						{
+							"type": "array",
+							"minItems": 2,
+							"items": {
+								"type": "number"
+							}
+						}
+					],
+					"additionalItems": false
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"MultiPoint"
+					]
+				}
+			},
+			"required": [
+				"coordinates",
+				"type"
+			],
+			"additionalProperties": false
+		},
+		"LineString": {
+			"title": "LineString",
+			"type": "object",
+			"properties": {
+				"coordinates": {
+					"type": "array",
+					"minItems": 2,
+					"items": {
+						"type": "array",
+						"minItems": 2,
+						"items": {
+							"type": "number"
+						}
+					}
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"LineString",
+                                                "LineStringM",
+                                                "LineStringZ",
+                                                "LineStringZM"
+					]
+				}
+			},
+			"required": [
+				"coordinates",
+				"type"
+			],
+			"additionalProperties": false
+		},
+		"MultiLineString": {
+			"title": "MultiLineString",
+			"type": "object",
+			"properties": {
+				"coordinates": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "array",
+						"minItems": 2,
+						"items": {
+							"type": "array",
+							"minItems": 2,
+							"items": {
+								"type": "number"
+							}
+						}
+					}
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"MultiLineString"
+					]
+				}
+			},
+			"required": [
+				"coordinates",
+				"type"
+			],
+			"additionalProperties": false
+		},
+		"Polygon": {
+			"title": "Polygon",
+			"type": "object",
+			"properties": {
+				"coordinates": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "array",
+						"minItems": 4,
+						"items": {
+							"type": "array",
+							"minItems": 2,
+							"items": {
+								"type": "number"
+							}
+						}
+					}
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"Polygon"
+					]
+				}
+			},
+			"required": [
+				"coordinates",
+				"type"
+			],
+			"additionalProperties": false
+		},
+		"MultiPolygon": {
+			"title": "MultiPolygon",
+			"type": "object",
+			"properties": {
+				"coordinates": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "array",
+						"minItems": 1,
+						"items": {
+							"type": "array",
+							"items": {
+								"type": "array",
+								"minItems": 2,
+								"items": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				},
+				"type": {
+					"type": "string",
+					"enum": [
+						"MultiPolygon"
+					]
+				}
+			},
+			"required": [
+				"coordinates",
+				"type"
+			],
+			"additionalProperties": false
+		},
+		"Geometry": {
+			"title": "Geometry",
+			"type": "object",
+			"oneOf": [
+				{
+					"$ref": "#/definitions/Point"
+				},
+				{
+					"$ref": "#/definitions/MultiPoint"
+				},
+				{
+					"$ref": "#/definitions/LineString"
+				},
+				{
+					"$ref": "#/definitions/MultiLineString"
+				},
+				{
+					"$ref": "#/definitions/Polygon"
+				},
+				{
+					"$ref": "#/definitions/MultiPolygon"
+				}
+			]
+		}                
+                
+                
+                
+	}
+}
