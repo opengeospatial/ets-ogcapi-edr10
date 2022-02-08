@@ -55,19 +55,19 @@
 |*Abstract Test 50* |*/conf/area*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 51* |*/conf/area*| @keshavnangare | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 52* |*/conf/area*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
-|*Abstract Test 53* |*/conf/area*|  |  |
+|*Abstract Test 53* |*/conf/area*| @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 54* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
-|*Abstract Test 55* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 55* |*/conf/edr/rc-coords-response*| @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 56* |*/conf/edr/rc-z-definition*| @ghobona | Yes | `CollectionsTime.zParameterDefinition`
-|*Abstract Test 57* |*/conf/edr/rc-z-response*|  |  |
+|*Abstract Test 57* |*/conf/edr/rc-z-response*| @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 58* |*/conf/core/datetime-definition*| @ghobona | Yes  | `CollectionsTime.dateTimeParameterDefinition`
-|*Abstract Test 59* |*/conf/core/datetime-response*|  |  |
+|*Abstract Test 59* |*/conf/core/datetime-response*| @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 60* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
-|*Abstract Test 61* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 61* |*/conf/edr/rc-parameter-name-response*|  @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 62* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
-|*Abstract Test 63* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 63* |*/conf/edr/REQ_rc-crs-response*| @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 64* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
-|*Abstract Test 65* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 65* |*/conf/collections/rc-f-response*|  @ghobona | Yes | `QueryCollections.validateAreaQueryUsingParameters`
 |*Abstract Test 66* |*/conf/cube*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 67* |*/conf/cube*|  |  |
 |*Abstract Test 68* |*/conf/cube*|  |  |

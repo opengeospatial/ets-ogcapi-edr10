@@ -310,6 +310,7 @@ public class QueryCollections extends CommonFixture {
 		}
 	}
 
+
 	/**
 	 * Abstract Test 37 : Validate that resources can be identified and extracted from a Collection with a Position query using query parameters.
 	 * Abstract Test 39 : Validate that the coords query parameters are processed correctly.
@@ -336,7 +337,9 @@ public class QueryCollections extends CommonFixture {
 
 		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
 
+
 			String collectionId = collectionsList.get(c);
+
 
 			boolean supportsPositionQuery = false;
 
@@ -379,8 +382,10 @@ public class QueryCollections extends CommonFixture {
 				ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
 				String supportedFormat = null;
 				for (int f = 0; f < outputFormatList.size(); f++) {
-					if (outputFormatList.get(f).equals("CoverageJSON")
-							|| outputFormatList.get(f).equals("GeoJSON")) {
+					if (outputFormatList.get(f).equals("CoverageJSON")) {  //preference for CoverageJSON if supported
+						supportedFormat = outputFormatList.get(f);
+					}
+					else if (outputFormatList.get(f).equals("GeoJSON")) {
 						supportedFormat = outputFormatList.get(f);
 					}
 				}
@@ -399,11 +404,20 @@ public class QueryCollections extends CommonFixture {
 						continue;
 					}
 
-					ArrayList bboxEnv = (ArrayList) spatial.get("bbox"); // for some unknown reason the library returns
-					// JSON Number types as Integers only
+					ArrayList bboxEnv = (ArrayList) spatial.get("bbox"); // for some unknown reason the library returns JSON types as Integers only
 
-					ArrayList bbox = (ArrayList) bboxEnv.get(0);
-					// JSON Number types as Integers only
+
+					ArrayList bbox = null;
+
+					if(bboxEnv.get(0).getClass().toString().contains("java.lang.Integer") ||
+							bboxEnv.get(0).getClass().toString().contains("java.lang.Double")||
+							bboxEnv.get(0).getClass().toString().contains("java.lang.Float")) {	//for EDR API V1.0.0
+						bbox = bboxEnv;
+
+					}
+					else if(bboxEnv.get(0).getClass().toString().contains("java.util.ArrayList")) {  //for EDR API V1.0.1
+						bbox = (ArrayList) bboxEnv.get(0);
+					}
 
 					if (bbox.size() > 3) {
 
@@ -429,7 +443,6 @@ public class QueryCollections extends CommonFixture {
 
 				}
 
-				// https://example.org/ibl/edr/collections/GFS_0-isoterm/position?parameter-name=relative-humidity&coords=POINT(0.00577%2051.562608)&crs=CRS:84&f=CoverageJSON
 
 				String sampleParamaterNameSafe = null;
 				try {
@@ -451,10 +464,19 @@ public class QueryCollections extends CommonFixture {
 					}
 
 
-					ArrayList intervalEnv = (ArrayList) temporal.get("interval"); // for some unknown reason the library returns
+					ArrayList intervalEnv = (ArrayList) temporal.get("interval");
 
 
-					ArrayList interval = (ArrayList) intervalEnv.get(0);
+					ArrayList interval = null;
+
+					if(intervalEnv.get(0).getClass().toString().contains("java.lang.String")) {
+						interval = intervalEnv;
+					}
+					else if(intervalEnv.get(0).getClass().toString().contains("java.util.ArrayList")) {
+
+						interval = (ArrayList) intervalEnv.get(0);
+					}
+
 
 
 
@@ -476,7 +498,7 @@ public class QueryCollections extends CommonFixture {
 						+ mediany + ")" + "&crs=" + supportedCRS + "&f=" + supportedFormat+"&datetime="+sampleDateTime;
 
 
-
+				System.out.println(constructedURL);
 
 
 				String pageContent = null;
@@ -492,7 +514,7 @@ public class QueryCollections extends CommonFixture {
 						//do nothing
 					}
 					else {
-						sb.append("Response of Position Query on collection" + collectionId
+						sb.append("Response of Position Query on collection " + collectionId
 								+ " did not contain a recognised encoding. \n");
 					}
 
@@ -519,6 +541,8 @@ public class QueryCollections extends CommonFixture {
 
 
 	}
+
+
 
 
 	private String printKeys(HashMap input) {
@@ -555,5 +579,257 @@ public class QueryCollections extends CommonFixture {
 
 	        return response.toString();
 	}
+
+
+	/**
+	 * Abstract Test 53 : Validate that resources can be identified and extracted from a Collection with an Area query using query parameters.
+	 * Abstract Test 55 : Validate that the coords query parameters are processed correctly.
+	 * Abstract Test 57 : Validate that the vertical level query parameters are constructed correctly.
+	 * Abstract Test 59 : Validate that the datetime query parameters are processed correctly.
+	 * Abstract Test 61 : Validate that the parameter-name query parameters are processed correctly.
+	 * Abstract Test 63 : Validate that the crs query parameters are processed correctly.
+	 * Abstract Test 65 : Validate that the f query parameters are processed correctly.
+	 *
+	 * @param collectionIdentifiers
+	 */
+	@SuppressWarnings("unchecked")
+	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 53 (/conf/area), Abstract Test 55 (/conf/edr/rc-coords-response), Abstract Test 57 (/conf/edr/rc-z-response),  Abstract Test 59 (/conf/core/datetime-response),  Abstract Test 61 (/conf/edr/rc-parameter-name-response), Abstract Test 63 (/conf/edr/REQ_rc-crs-response), Abstract Test 65 (/conf/collections/rc-f-response)")
+	public void validateAreaQueryUsingParameters(Object collectionIdentifiers) {
+
+		if (enable==false) { throw new SkipException("Test has been Disabled");}
+		// //TODO REMOVE
+
+		double sizeOfLensSide = 1d; //in degrees
+
+		StringBuffer sb = new StringBuffer();
+		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
+
+		ArrayList<String> collectionsList = new ArrayList<String>();
+		collectionsList.addAll(collectionIds);
+
+		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
+
+			String collectionId = collectionsList.get(c);
+
+
+
+			boolean supportsAreaQuery = false;
+
+			String url = rootUri.toString() + "/collections/" + collectionId;
+
+			Response response = init().baseUri(url).accept(JSON).when().request(GET);
+			JsonPath jsonResponse = response.jsonPath();
+			HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
+			supportsAreaQuery = dataQueries.containsKey("area");
+
+
+
+
+
+			if (supportsAreaQuery) {
+
+				HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
+				Set parameterNamesSet = parameterNames.keySet();
+				Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
+
+				parameterNamesIterator.hasNext();
+				String sampleParamaterName = parameterNamesIterator.next();
+
+				List<String> crsList = jsonResponse.getList("crs");
+
+				String supportedCRS = null;
+				for (int q = 0; q < crsList.size(); q++) {
+					if (crsList.get(q).equals("CRS:84") || crsList.get(q).equals("CRS84") || crsList.get(q).equals("EPSG:4326")) {
+						supportedCRS = "CRS84";
+					}
+				}
+				if (supportedCRS == null) {
+					sb.append(collectionId + " does not support CRS84 CRS. \n");
+
+				}
+
+				HashMap areaQuery = (HashMap) dataQueries.get("area");
+				HashMap link = (HashMap) areaQuery.get("link");
+				HashMap variables = (HashMap) link.get("variables");
+				ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
+				String supportedFormat = null;
+				for (int f = 0; f < outputFormatList.size(); f++) {
+					if (outputFormatList.get(f).equals("CoverageJSON")) {  //preference for CoverageJSON if supported
+						supportedFormat = outputFormatList.get(f);
+					}
+					else if (outputFormatList.get(f).equals("GeoJSON")) {
+						supportedFormat = outputFormatList.get(f);
+					}
+				}
+
+				double medianx = 0d;
+				double mediany = 0d;
+				double lminx = 0d; //lens
+				double lminy = 0d; //lens
+				double lmaxx = 0d; //lens
+				double lmaxy = 0d; //lens
+
+				HashMap extent = jsonResponse.getJsonObject("extent");
+				if (extent.containsKey("spatial")) {
+
+					HashMap spatial = (HashMap) extent.get("spatial");
+
+					if (!spatial.containsKey("bbox"))
+					{
+						sb.append("spatial extent of collection "+collectionId+" missing bbox. \n");
+						continue;
+					}
+
+					ArrayList bboxEnv = (ArrayList) spatial.get("bbox"); // for some unknown reason the library returns JSON types as Integers only
+
+
+					ArrayList bbox = null;
+
+					if(bboxEnv.get(0).getClass().toString().contains("java.lang.Integer") ||
+							bboxEnv.get(0).getClass().toString().contains("java.lang.Double")||
+							bboxEnv.get(0).getClass().toString().contains("java.lang.Float")) {	//for EDR API V1.0.0
+						bbox = bboxEnv;
+
+					}
+					else if(bboxEnv.get(0).getClass().toString().contains("java.util.ArrayList")) {  //for EDR API V1.0.1
+						bbox = (ArrayList) bboxEnv.get(0);
+					}
+
+
+
+					if (bbox.size() > 3) {
+
+						if (bbox.get(0).getClass().toString().contains("Integer")
+								|| bbox.get(0).getClass().toString().contains("Double")
+								|| bbox.get(0).getClass().toString().contains("Float")) {
+							double minx = Double.parseDouble(bbox.get(0).toString());
+							double miny = Double.parseDouble(bbox.get(1).toString());
+							double maxx = Double.parseDouble(bbox.get(2).toString());
+							double maxy = Double.parseDouble(bbox.get(3).toString());
+
+							medianx = minx + ((maxx - minx) / 2d);
+							mediany = miny + ((maxy - miny) / 2d);
+
+							lminx = medianx - sizeOfLensSide;
+							lminy = mediany - sizeOfLensSide;
+							lmaxx = medianx + sizeOfLensSide;
+							lmaxy = mediany + sizeOfLensSide;
+
+
+
+						}
+
+					} else {
+						sb.append("bbox of spatial extent of collection" + collectionId
+								+ " has fewer than four coordinates. \n");
+					}
+
+
+				}
+
+
+				String sampleParamaterNameSafe = null;
+				try {
+					sampleParamaterNameSafe = URLEncoder.encode(sampleParamaterName,"UTF8");
+				}
+				catch(Exception ex) {ex.printStackTrace();}
+
+
+				String sampleDateTime = null;
+				if (extent.containsKey("temporal")) {
+
+
+					HashMap temporal = (HashMap) extent.get("temporal");
+
+					if (!temporal.containsKey("interval"))
+					{
+
+						sb.append("Temporal extent of collection "+collectionId+" missing interval. \n");
+						continue;
+					}
+
+
+					ArrayList intervalEnv = (ArrayList) temporal.get("interval");
+
+
+					ArrayList interval = null;
+
+					if(intervalEnv.get(0).getClass().toString().contains("java.lang.String")) {
+						interval = intervalEnv;
+					}
+					else if(intervalEnv.get(0).getClass().toString().contains("java.util.ArrayList")) {
+
+						interval = (ArrayList) intervalEnv.get(0);
+					}
+
+
+					if (interval.size() > 1) {
+
+
+						sampleDateTime = interval.get(0)+"/"+interval.get(1);
+
+
+					}
+
+				}
+
+
+
+
+				String constructedURL = url + "/area?parameter-name="
+						+ sampleParamaterNameSafe + "&coords=" + "POLYGON((" +
+						lminx + "+"+ lminy + ","+
+						lminx + "+"+ lmaxy + ","+
+						lmaxx + "+"+ lmaxy + ","+
+						lmaxx + "+"+ lminy + ","+
+						lminx + "+"+ lminy +
+						"))" + "&crs=" + supportedCRS + "&f=" + supportedFormat+"&datetime="+sampleDateTime;
+
+				System.out.println(constructedURL);
+
+
+
+				String pageContent = null;
+				try {
+					pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
+
+				}
+				catch(Exception ex) {System.out.println(pageContent); ex.printStackTrace();}
+
+				if(pageContent!=null) {
+
+					if(pageContent.contains("Coverage") || pageContent.contains("Feature")) {
+						//do nothing
+					}
+					else {
+						sb.append("Response of Area Query on collection " + collectionId
+								+ " did not contain a recognised encoding. \n");
+					}
+
+				}
+				else {
+					sb.append("Response of Area Query on collection " + collectionId
+							+ " was null. \n");
+				}
+
+
+
+			}
+
+
+
+		}
+
+
+		String resultMessage = sb.toString();
+		assertTrue(resultMessage.length()==0,
+				"Fails Abstract Test 53. Expected information that matches the selection criteria is returned for Area query. "
+						+ resultMessage);
+
+
+	}
+
+
+
 
 }
