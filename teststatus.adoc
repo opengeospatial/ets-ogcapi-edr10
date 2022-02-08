@@ -54,7 +54,7 @@
 |*Abstract Test 49* |*/conf/collections/rc-f-response*| @ghobona | Yes | `QueryCollections.validatePositionQueryUsingParameters`
 |*Abstract Test 50* |*/conf/area*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 51* |*/conf/area*| @keshavnangare | Yes | `QueryCollections.validateCoordsQueryParameters`
-|*Abstract Test 52* |*/conf/area*|  |  |
+|*Abstract Test 52* |*/conf/area*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 53* |*/conf/area*|  |  |
 |*Abstract Test 54* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
 |*Abstract Test 55* |*/conf/edr/rc-coords-response*|  |  |
@@ -86,12 +86,12 @@
 |*Abstract Test 81* |*/conf/collections/rc-f-response*|  |  |
 |*Abstract Test 82* |*/conf/trajectory*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 83* |*/conf/trajectory*| @keshavnangare | Yes | `QueryCollections.validateCoordsQueryParameters`
-|*Abstract Test 84* |*/conf/trajectory*|  |  |
-|*Abstract Test 85* |*/conf/trajectory*|  |  |
+|*Abstract Test 84* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
+|*Abstract Test 85* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 86* |*/conf/trajectory*|  |  |
 |*Abstract Test 87* |*/conf/trajectory*|  |  |
-|*Abstract Test 88* |*/conf/trajectory*|  |  |
-|*Abstract Test 89* |*/conf/trajectory*|  |  |
+|*Abstract Test 88* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
+|*Abstract Test 89* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 90* |*/conf/trajectory*|  |  |
 |*Abstract Test 91* |*/conf/trajectory*|  |  |
 |*Abstract Test 92* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
@@ -108,7 +108,7 @@
 |*Abstract Test 103* |*/conf/corridor*|  |  |
 |*Abstract Test 104* |*/conf/corridor*|  |  |
 |*Abstract Test 105* |*/conf/corridor*|  |  |
-|*Abstract Test 106* |*/conf/corridor*|  |  |
+|*Abstract Test 106* |*/conf/corridor*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 107* |*/conf/corridor*|  |  |
 |*Abstract Test 108* |*/conf/corridor*|  |  |
 |*Abstract Test 109* |*/conf/corridor*|  |  |

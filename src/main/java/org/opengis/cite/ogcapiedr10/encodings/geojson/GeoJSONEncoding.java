@@ -79,7 +79,7 @@ public class GeoJSONEncoding extends CommonFixture {
                 try {
                     if(supportedFormat!=null) {
                         String locationsURL = link.get("href").toString()+"?f="+supportedFormat;
-                        System.out.println("CHK URL "+locationsURL);
+
                         GeoJSONValidator validator = new GeoJSONValidator();
                         boolean result = validator.isGeoJSONValidPerSchema(locationsURL,GeoJSONValidator.GeoJSON);
                         atLeastOneCollectionTested = true;
