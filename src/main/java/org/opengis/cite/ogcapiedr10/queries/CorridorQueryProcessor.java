@@ -16,6 +16,8 @@ import static io.restassured.http.Method.GET;
 public class CorridorQueryProcessor extends AbstractProcessor{
 
     double sizeOfLensSide = 1d; //in degrees
+    double corridorWidth = 2;
+    String corridorWidthUnit = "m";
     public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
 
@@ -203,7 +205,7 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                         lminx + "+"+ lminy + ","+
                         medianx + "+"+ mediany + ","+
                         lmaxx + "+"+ lmaxy +
-                        ")" + "&corridor-width=2&width-units=m&f=" + supportedFormat+"&datetime="+sampleDateTime;
+                        ")" + "&corridor-width="+corridorWidth+"&width-units="+corridorWidthUnit+"&f=" + supportedFormat+"&datetime="+sampleDateTime;
                 System.out.println("C "+constructedURL);
 
 
