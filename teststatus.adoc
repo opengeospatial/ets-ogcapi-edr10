@@ -93,15 +93,15 @@
 |*Abstract Test 88* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 89* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 90* |*/conf/trajectory*|  |  |
-|*Abstract Test 91* |*/conf/trajectory*|  |  |
+|*Abstract Test 91* |*/conf/trajectory*| @ghobona | Yes | `QueryCollections.validateTrajectoryQueryUsingParameters`
 |*Abstract Test 92* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
-|*Abstract Test 93* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 93* |*/conf/edr/rc-coords-response*|  @ghobona | Yes | `QueryCollections.validateTrajectoryQueryUsingParameters`
 |*Abstract Test 94* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
-|*Abstract Test 95* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 95* |*/conf/edr/rc-parameter-name-response*| @ghobona | Yes | `QueryCollections.validateTrajectoryQueryUsingParameters`
 |*Abstract Test 96* |*/conf/edr/REQ_rc-crs-definition*| @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
-|*Abstract Test 97* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 97* |*/conf/edr/REQ_rc-crs-response*| @ghobona | Yes | `QueryCollections.validateTrajectoryQueryUsingParameters`
 |*Abstract Test 98* |*/conf/edr/rc-f-definition*| @ghobona | Yes | `CollectionsTime.fParameterDefinition`
-|*Abstract Test 99* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 99* |*/conf/collections/rc-f-response*| @ghobona | Yes | `QueryCollections.validateTrajectoryQueryUsingParameters`
 |*Abstract Test 100* |*/conf/corridor*| @keshavnangare | Yes | `QueryCollections.validateNoQueryParameters`
 |*Abstract Test 101* |*/conf/corridor*| @keshavnangare | Yes | `QueryCollections.validateCoordsQueryParameters`
 |*Abstract Test 102* |*/conf/corridor*|  |  |
@@ -117,23 +117,23 @@
 |*Abstract Test 112* |*/conf/corridor*|  |  |
 |*Abstract Test 113* |*/conf/corridor*|  |  |
 |*Abstract Test 114* |*/conf/corridor*|  |  |
-|*Abstract Test 115* |*/conf/corridor*|  |  |
+|*Abstract Test 115* |*/conf/corridor*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 116* |*/conf/edr/rc-coords-definition*| @ghobona | Yes | `CollectionsTime.coordsParameterDefinition`
-|*Abstract Test 117* |*/conf/edr/rc-coords-response*|  |  |
+|*Abstract Test 117* |*/conf/edr/rc-coords-response*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 118* |*/conf/edr/REQ_rc-corridor-width-definition*| @ghobona | Yes | `CollectionsTime.corridorWidthParameterDefinition`
-|*Abstract Test 119* |*/conf/collections/REQ_rc-corridor-width-response*|  |  |
+|*Abstract Test 119* |*/conf/collections/REQ_rc-corridor-width-response*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 120* |*/conf/edr/REQ_rc-corridor-height-definition*| @ghobona | Yes | `CollectionsTime.corridorHeightParameterDefinition`
-|*Abstract Test 121* |*/conf/collections/REQ_rc-corridor-height-response*|  |  |
+|*Abstract Test 121* |*/conf/collections/REQ_rc-corridor-height-response*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 122* |*/conf/edr/REQ_rc-width-units-definition*|  |  |
-|*Abstract Test 123* |*/conf/collections/REQ_rc-width-units-response*|  |  |
+|*Abstract Test 123* |*/conf/collections/REQ_rc-width-units-response*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 124* |*/conf/edr/REQ_rc-height-units-definition*| @ghobona | Yes | `CollectionsTime.withinUnitsParameterDefinition`
 |*Abstract Test 125* |*/conf/collections/rc-height-units-response*|  |  |
 |*Abstract Test 126* |*/conf/collections/REQ_rc-parameter-name-definition*| @ghobona | Yes| `CollectionsTime.parameternameParameterDefinition`
-|*Abstract Test 127* |*/conf/edr/rc-parameter-name-response*|  |  |
+|*Abstract Test 127* |*/conf/edr/rc-parameter-name-response*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 128* |*/conf/edr/REQ_rc-crs-definition*|  @ghobona | Yes | `CollectionsTime.crsParameterDefinition`
-|*Abstract Test 129* |*/conf/edr/REQ_rc-crs-response*|  |  |
+|*Abstract Test 129* |*/conf/edr/REQ_rc-crs-response*|  @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 130* |*/conf/edr/rc-f-definition*|  @ghobona | Yes | `CollectionsTime.fParameterDefinition`
-|*Abstract Test 131* |*/conf/collections/rc-f-response*|  |  |
+|*Abstract Test 131* |*/conf/collections/rc-f-response*| @ghobona | Yes | `QueryCollections.validateCorridorQueryUsingParameters`
 |*Abstract Test 132* |*/conf/instances/rc-md-op*|  |  |
 |*Abstract Test 132* |*/conf/instances/rc-md-op*|  |  |
 |*Abstract Test 133* |*/conf/instances_rc-md-success*|  |  |
