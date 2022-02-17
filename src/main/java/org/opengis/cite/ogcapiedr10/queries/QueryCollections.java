@@ -117,7 +117,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 100 : Validate that an error is returned by a Corridor query if no query parameters are specified. 
 	 * Abstract Test 136 : Validate that an error is returned by a Locations query if no query parameters are specified.
 	 *
-	 * @param collectionIdentifiers
+	 * @param collectionIdentifiers collection identifiers
 	 */
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 34 (/conf/position), Abstract Test 50 (/conf/area), Abstract Test 66 (/conf/cube), Abstract Test 82 (/conf/trajectory), Abstract Test 100 (/conf/corridor), Abstract Test 136 (/conf/locations) ")
 	public void validateNoQueryParameters(Object collectionIdentifiers) {
@@ -198,7 +198,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 101 : Validate that an error is returned by a Corridor query when the coords query parameter is not specified.
 	 * Abstract Test 106 : Validate that an error is returned by a corridor query when the coords query parameter does not contain a valid LINESTRING Well Known Text value.
 	 *
-	 * @param collectionIdentifiers
+	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position),Abstract Test 36 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 52 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
@@ -315,7 +315,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 47 : Validate that the crs query parameters are processed correctly.
 	 * Abstract Test 49 : Validate that the f query parameters are processed correctly.
 	 *
-	 * @param collectionIdentifiers
+	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 37 (/conf/position), Abstract Test 39 (/conf/edr/rc-coords-response), Abstract Test 41 (/conf/edr/rc-z-response),  Abstract Test 43 (/conf/core/datetime-response),  Abstract Test 45 (/conf/edr/rc-parameter-name-response), Abstract Test 47 (/conf/edr/REQ_rc-crs-response), Abstract Test 49 (/conf/collections/rc-f-response)")
@@ -359,7 +359,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 63 : Validate that the crs query parameters are processed correctly.
 	 * Abstract Test 65 : Validate that the f query parameters are processed correctly.
 	 *
-	 * @param collectionIdentifiers
+	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 53 (/conf/area), Abstract Test 55 (/conf/edr/rc-coords-response), Abstract Test 57 (/conf/edr/rc-z-response),  Abstract Test 59 (/conf/core/datetime-response),  Abstract Test 61 (/conf/edr/rc-parameter-name-response), Abstract Test 63 (/conf/edr/REQ_rc-crs-response), Abstract Test 65 (/conf/collections/rc-f-response)")
@@ -385,7 +385,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 97 : Validate that the crs query parameters are processed correctly.
 	 * Abstract Test 99 : Validate that the f query parameters are processed correctly.
 	 *
-	 * @param collectionIdentifiers
+	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 91 (/conf/trajectory), Abstract Test 93 (/conf/edr/rc-coords-response),  Abstract Test 95 (/conf/edr/rc-parameter-name-response), Abstract Test 97 (/conf/edr/REQ_rc-crs-response), Abstract Test 99 (/conf/collections/rc-f-response)")
@@ -419,7 +419,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 129 : Validate that the crs query parameters are processed correctly.
 	 * Abstract Test 131 : Validate that the f query parameters are processed correctly.
 	 *
-	 * @param collectionIdentifiers
+	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 115 (/conf/corridor), Abstract Test 117 (/conf/edr/rc-coords-response), Abstract Test 119 (/conf/collections/REQ_rc-corridor-width-response), Abstract Test 121 (/conf/collections/REQ_rc-corridor-height-response), Abstract Test 123 (/conf/collections/REQ_rc-width-units-response), Abstract Test 125 (/conf/collections/rc-height-units-response),  Abstract Test 127 (/conf/edr/rc-parameter-name-response), Abstract Test 129 (/conf/edr/REQ_rc-crs-response), Abstract Test 131 (/conf/collections/rc-f-response)")
