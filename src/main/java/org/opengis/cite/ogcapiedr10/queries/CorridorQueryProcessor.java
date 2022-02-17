@@ -13,15 +13,19 @@ import java.util.*;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 
-public class AreaQueryProcessor extends AbstractProcessor{
+public class CorridorQueryProcessor extends AbstractProcessor{
 
     double sizeOfLensSide = 1d; //in degrees
+    public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
-    public String validateAreaQueryUsingParameters(Set<String> collectionIds, String rootUri, int noOfCollections, RequestSpecification ini){
+
+    public String validateCorridorQueryUsingParameters(Set<String> collectionIds, String rootUri, int noOfCollections, RequestSpecification ini){
         StringBuffer sb = new StringBuffer();
 
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);
+        
+        int numberOfCollectionsWithCorridorSupport = 0;
 
         for (int c = 0; c < Math.min(noOfCollections,collectionsList.size()); c++) {
 
@@ -29,20 +33,22 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
 
 
-            boolean supportsAreaQuery = false;
+            boolean supportsCorridorQuery = false;
 
             String url = rootUri.toString() + "/collections/" + collectionId;
 
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
-            supportsAreaQuery = dataQueries.containsKey("area");
+            supportsCorridorQuery = dataQueries.containsKey("corridor");
 
 
 
 
 
-            if (supportsAreaQuery) {
+            if (supportsCorridorQuery) {
+            	
+            	numberOfCollectionsWithCorridorSupport++;
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
@@ -64,8 +70,8 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
                 }
 
-                HashMap areaQuery = (HashMap) dataQueries.get("area");
-                HashMap link = (HashMap) areaQuery.get("link");
+                HashMap corridorQuery = (HashMap) dataQueries.get("corridor");
+                HashMap link = (HashMap) corridorQuery.get("link");
                 HashMap variables = (HashMap) link.get("variables");
                 ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
                 String supportedFormat = null;
@@ -192,22 +198,21 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
 
 
-                String constructedURL = url + "/area?parameter-name="
-                        + sampleParamaterNameSafe + "&coords=" + "POLYGON((" +
+                String constructedURL = url + "/corridor?parameter-name="
+                        + sampleParamaterNameSafe + "&coords=" + "LINESTRING(" +
                         lminx + "+"+ lminy + ","+
-                        lminx + "+"+ lmaxy + ","+
-                        lmaxx + "+"+ lmaxy + ","+
-                        lmaxx + "+"+ lminy + ","+
-                        lminx + "+"+ lminy +
-                        "))" + "&crs=" + supportedCRS + "&f=" + supportedFormat+"&datetime="+sampleDateTime;
+                        medianx + "+"+ mediany + ","+
+                        lmaxx + "+"+ lmaxy +
+                        ")" + "&corridor-width=2&width-units=m&f=" + supportedFormat+"&datetime="+sampleDateTime;
+                System.out.println("C "+constructedURL);
 
 
 
                 String pageContent = null;
                 try {
                     pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
-
-                }
+                    
+                    }
                 catch(Exception ex) { ex.printStackTrace();}
 
                 if(pageContent!=null) {
@@ -216,29 +221,34 @@ public class AreaQueryProcessor extends AbstractProcessor{
                         //do nothing
                     }
                     else {
-                        sb.append("Response of Area Query on collection " + collectionId
+                        sb.append("Response of Corridor Query on collection " + collectionId
                                 + " did not contain a recognised encoding. \n");
                     }
 
                 }
                 else {
-                    sb.append("Response of Area Query on collection " + collectionId
+                    sb.append("Response of Corridor Query on collection " + collectionId
                             + " was null. \n");
                 }
 
 
 
             }
+            else { //does not support Corridor queries
+            	continue;
+            }
 
 
 
         }
-
+        if(numberOfCollectionsWithCorridorSupport==0) {
+        	sb.append(queryTypeNotSupported+"\n");
+        }
 
 
         return sb.toString();
     }
 
 
-
+ 
 }

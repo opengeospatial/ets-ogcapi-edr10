@@ -378,6 +378,69 @@ public class QueryCollections extends CommonFixture {
 
 	}
 
+	/**
+	 * Abstract Test 91 : Validate that resources can be identified and extracted from a Collection with a Trajectory query using query parameters.
+	 * Abstract Test 93 : Validate that the coords query parameters are processed correctly.
+	 * Abstract Test 95 : Validate that the parameter-name query parameters are processed correctly.
+	 * Abstract Test 97 : Validate that the crs query parameters are processed correctly.
+	 * Abstract Test 99 : Validate that the f query parameters are processed correctly.
+	 *
+	 * @param collectionIdentifiers
+	 */
+	@SuppressWarnings("unchecked")
+	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 91 (/conf/trajectory), Abstract Test 93 (/conf/edr/rc-coords-response),  Abstract Test 95 (/conf/edr/rc-parameter-name-response), Abstract Test 97 (/conf/edr/REQ_rc-crs-response), Abstract Test 99 (/conf/collections/rc-f-response)")
+	public void validateTrajectoryQueryUsingParameters(Object collectionIdentifiers) {
+
+
+
+		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
+
+		TrajectoryQueryProcessor processor = new TrajectoryQueryProcessor();
+		String resultMessage = processor.validateTrajectoryQueryUsingParameters(collectionIds,rootUri.toString(),this.noOfCollections,init());
+		if(resultMessage.contains(processor.queryTypeNotSupported)) {
+			throw new SkipException(processor.queryTypeNotSupported);
+		}
+		assertTrue(resultMessage.length()==0,
+				"Fails Abstract Test 91. Therefore could not verify the implementation passes Abstract Tests 91, 93, 95, 97, 99. Expected information that matches the selection criteria is returned for Trajectory query. "
+						+ resultMessage);
+
+
+	}
+
+
+	/**
+	 * Abstract Test 115 : Validate that resources can be identified and extracted from a Collection with a Corridor query using query parameters.
+	 * Abstract Test 117 : Validate that the coords query parameters are processed correctly.
+	 * Abstract Test 119 : Validate that the corridor-width query parameters are processed correctly.
+	 * Abstract Test 121 : Validate that the corridor-height query parameters are processed correctly.
+	 * Abstract Test 123 :Validate that the width-units query parameters are processed correctly.
+	 * Abstract Test 125 : Validate that the height-units query parameters are processed correctly.
+	 * Abstract Test 127 : Validate that the parameter-name query parameters are processed correctly.
+	 * Abstract Test 129 : Validate that the crs query parameters are processed correctly.
+	 * Abstract Test 131 : Validate that the f query parameters are processed correctly.
+	 *
+	 * @param collectionIdentifiers
+	 */
+	@SuppressWarnings("unchecked")
+	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 115 (/conf/corridor), Abstract Test 117 (/conf/edr/rc-coords-response), Abstract Test 119 (/conf/collections/REQ_rc-corridor-width-response), Abstract Test 121 (/conf/collections/REQ_rc-corridor-height-response), Abstract Test 123 (/conf/collections/REQ_rc-width-units-response), Abstract Test 125 (/conf/collections/rc-height-units-response),  Abstract Test 127 (/conf/edr/rc-parameter-name-response), Abstract Test 129 (/conf/edr/REQ_rc-crs-response), Abstract Test 131 (/conf/collections/rc-f-response)")
+	public void validateCorridorQueryUsingParameters(Object collectionIdentifiers) {
+
+
+
+		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
+
+		CorridorQueryProcessor processor = new CorridorQueryProcessor();
+		String resultMessage = processor.validateCorridorQueryUsingParameters(collectionIds,rootUri.toString(),this.noOfCollections,init());
+		if(resultMessage.contains(processor.queryTypeNotSupported)) {
+			throw new SkipException(processor.queryTypeNotSupported);
+		}
+		assertTrue(resultMessage.length()==0,
+				"Fails Abstract Test 115. Therefore could not verify the implementation passes Abstract Tests 115, 117, 119, 121, 123, 125, 129, 131. Expected information that matches the selection criteria is returned for Corridor query. "
+						+ resultMessage);
+
+
+	}
+
 
 	private String readStringFromURL(String urlString,int limit) throws Exception
 	{

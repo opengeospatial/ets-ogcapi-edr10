@@ -13,7 +13,7 @@ import java.util.*;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 
-public class PositionQueryProcessor {
+public class PositionQueryProcessor extends AbstractProcessor{
 
     public String validatePositionQueryUsingParameters(Set<String> collectionIds, String rootUri, int noOfCollections, RequestSpecification ini){
         StringBuffer sb = new StringBuffer();
@@ -221,28 +221,6 @@ public class PositionQueryProcessor {
     }
 
 
-    private String readStringFromURL(String urlString,int limit) throws Exception
-    {
-        URL requestURL = new URL(urlString);
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(requestURL.openConnection().getInputStream()));
-
-        StringBuilder response = new StringBuilder();
-        String inputLine;
-
-        int i = 0;
-
-
-        while (((inputLine = in.readLine()) != null) && (i < limit))
-        {
-            response.append(inputLine+"\n");
-            i++;
-        }
-
-
-        in.close();
-
-        return response.toString();
-    }
 
 }
