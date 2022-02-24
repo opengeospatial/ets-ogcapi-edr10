@@ -2,6 +2,8 @@ org.opengis.cite.ogcapiedr10
 org.opengis.cite.ogcapiedr10.collections
 org.opengis.cite.ogcapiedr10.conformance
 org.opengis.cite.ogcapiedr10.corecollections
+org.opengis.cite.ogcapiedr10.encodings.edrgeojson
+org.opengis.cite.ogcapiedr10.encodings.geojson
 org.opengis.cite.ogcapiedr10.encodings.json
 org.opengis.cite.ogcapiedr10.landingpage
 org.opengis.cite.ogcapiedr10.openapi3
