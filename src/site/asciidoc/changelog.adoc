@@ -1,5 +1,9 @@
 = Release Notes
 
+== 0.2 (2022-02-24)
+
+The second release.
+
 == 0.1 (2021-11-26)
 
 The initial release.
