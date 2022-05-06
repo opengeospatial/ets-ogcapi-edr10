@@ -60,7 +60,21 @@
                  </label>
                  <input id="apiDefinition" name="apiDefinition" size="128" type="text" value="https://ogcie.iblsoft.com/edr/api" />
                </p> 
-                           
+	            <p>
+	              <h4 style="margin-bottom: 0.5em">Number of tested collections</h4>
+	              <div>
+	                <input type="radio" id="collectionsLimitLimited" name="collectionsLimit" value="limited" checked="checked"
+	                       onchange="document.getElementById('noOfCollections').disabled=document.getElementById('collectionsLimitAll').checked;"/>
+	                <label for="noOfCollectionsAll">Limited number of collections:</label>
+	                <input type="number" id="noOfCollections" name="noOfCollections" value="3" min="1" />
+	              </div>
+	              <div>
+	                <input type="radio" id="collectionsLimitAll" name="collectionsLimit" value="all"
+	                       onchange="document.getElementById('noOfCollections').disabled=document.getElementById('collectionsLimitAll').checked;" />
+	
+	                <label for="noOfCollectionsAll">All collections</label>
+	              </div>
+	            </p>                             
              </fieldset>
              <p>
                <input class="form-button" type="submit" value="Start"/> |
