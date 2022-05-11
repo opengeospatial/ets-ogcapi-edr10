@@ -87,7 +87,10 @@ public class Conformance extends CommonFixture {
 
     	String f = "";
     	if(rootUri.toString().contains("f=json") || rootUri.toString().contains("f=application/json")) {}
-    	else { f = "f=application/json&f=json"; }    	
+    	else { 
+    		//f = "f=application/json&f=json"; 
+    		 f = "f=json"; 
+    		}    	
     	
         String testPointUri = new UriBuilder( testPoint ).buildUrl();
    
