@@ -2,6 +2,7 @@ package org.opengis.cite.ogcapiedr10.encodings.json;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
 import static org.testng.Assert.assertTrue;
 
@@ -72,9 +73,10 @@ public class JSONEncoding extends CommonFixture {
 		assertTrue(isJSONValidPerSchema(response.asString(), "/"),
 				"Fails Abstract Test 19, landing page response not valid JSON");
 
-		response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET, "/api");
+
+		response = init().baseUri(apiDefUri.toString()).accept( OPEN_API_MIME_TYPE ).when().request( GET );
 		assertTrue(response.getStatusCode() == 200,
-				"Fails Abstract Test 18, JSON response not supported for api description");
+				"Fails Abstract Test 18, JSON response not supported for api description \nCODE"+response.getStatusCode()+"\n"+apiDefUri.toString());
 
 		response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET,
 				"/conformance");

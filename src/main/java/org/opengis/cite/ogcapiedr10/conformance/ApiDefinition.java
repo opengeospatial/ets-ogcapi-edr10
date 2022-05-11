@@ -7,7 +7,11 @@ import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+
+import java.io.FileWriter;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Map;
 
@@ -45,6 +49,9 @@ public class ApiDefinition extends CommonFixture {
         this.apiUrl = parseApiUrl( jsonPath );
     }
 
+    
+      
+    
     /**
      * <pre>
      * Abstract Test 4: Test Purpose: Validate that the API Definition document can be retrieved from the expected location.
@@ -52,7 +59,7 @@ public class ApiDefinition extends CommonFixture {
      */
     @Test(description = "Implements Abstract Test 4 (/conf/core/api-definition)", groups = "apidefinition", dependsOnGroups = "landingpage")
     public void openapiDocumentRetrieval() {
-   
+    	
         if ( apiUrl == null || apiUrl.isEmpty() )
             throw new AssertionError( "Path to the API Definition could not be constructed from the landing page" );
         Response request = init().baseUri( apiUrl ).accept( OPEN_API_MIME_TYPE ).when().request( GET );
@@ -79,14 +86,19 @@ public class ApiDefinition extends CommonFixture {
  
 
         OpenApi3 apiModel = null;
+   
         
-     
+        Response response = init().baseUri( apiUrl ).accept( OPEN_API_MIME_TYPE ).when().request( GET );
+        
+        
         try {
-			apiModel = (OpenApi3) parser.parse(new URL( apiUrl ).toURI(), true);
+            	
+        	URL resolutionBase = new URL(apiUrl); //https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/83c47220d21fe7569f46eeacd3f5bdecb58da69a/API-Overview.md#parsing-options
+			apiModel = (OpenApi3) parser.parse(response.asString(), resolutionBase);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			assertTrue( false, "The API definition linked from the Landing Page resulted in "+e.getMessage() );
+			assertTrue( false, "The API definition linked from the Landing Page resulted in "+apiUrl+" \n"+e.getMessage() );
 		}
         
         

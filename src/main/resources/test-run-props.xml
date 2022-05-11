@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
     <comment>Sample test run arguments</comment>
-    <entry key="iut">https://ogcie.iblsoft.com/edr</entry>
+    <entry key="iut">http://kralidis.ca:8001/</entry>
     <entry key="ics">Core</entry>
-    <entry key="apiDefinition">https://ogcie.iblsoft.com/edr/api</entry>
+    <entry key="apiDefinition">http://kralidis.ca:8001/openapi</entry>
 
 </properties>
