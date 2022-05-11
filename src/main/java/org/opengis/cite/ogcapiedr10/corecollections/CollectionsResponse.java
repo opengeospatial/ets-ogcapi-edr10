@@ -187,7 +187,7 @@ public class CollectionsResponse extends CommonFixture {
     			
     		
     			
-    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84")){ 
+    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84") || crsText.contains("www.opengis.net/def/crs/OGC/1.3/CRS84")){ 
     				compliesWithCRS84Requirement = true;
     			} 
     			else{

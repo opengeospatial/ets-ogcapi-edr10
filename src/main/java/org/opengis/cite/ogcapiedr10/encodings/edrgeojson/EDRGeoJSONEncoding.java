@@ -79,7 +79,11 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
                 String supportedCRS = null;
                 for (int f = 0; f < crsList.size(); f++) {
-                    if (crsList.get(f).equals("CRS84")) {
+                    if (crsList.get(f).equals("CRS84") || 
+                    		crsList.get(f).equals("CRS:84") || 
+                    		crsList.get(f).equals("WGS84") || 
+                    		crsList.get(f).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
+                    		crsList.get(f).equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(f);
                     }
                 }          

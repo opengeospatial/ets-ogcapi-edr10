@@ -52,7 +52,11 @@ public class PositionQueryProcessor extends AbstractProcessor{
 
                 String supportedCRS = null;
                 for (int q = 0; q < crsList.size(); q++) {
-                    if (crsList.get(q).equals("CRS:84") || crsList.get(q).equals("CRS84") || crsList.get(q).equals("EPSG:4326") || crsList.get(q).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                    if (crsList.get(q).equals("CRS:84") || 
+                    		crsList.get(q).equals("CRS84") || 
+                    		crsList.get(q).equals("EPSG:4326") || 
+                    		crsList.get(q).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
+                    		crsList.get(q).equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(q);
                     }
                 }
