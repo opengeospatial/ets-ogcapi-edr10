@@ -385,7 +385,7 @@ public class CollectionsResponse extends CommonFixture {
     	  resultMessage.append("Fails Abstract Test 14 because these collections are missing 'id' properties: " + resultMessageForCollectionId.toString()+". ");
     	  
     	  if(!resultMessageForDataOrCollectionLinks.toString().isEmpty())
-    	  resultMessage.append("Fails Abstract Test 15 because these collections are missing 'data' or 'collection' rel links: " + resultMessageForDataOrCollectionLinks.toString()+". ");
+    	  resultMessage.append("Fails Abstract Test 15 because these collections are missing 'collection' rel links: " + resultMessageForDataOrCollectionLinks.toString()+". ");
     	  
     	  if(!resultMessageForSelfAndAlternateLinks.toString().isEmpty())
     	  resultMessage.append("Fails Abstract Test 16 because these collections are missing 'self' or 'alternate' rel links: " + resultMessageForSelfAndAlternateLinks.toString()+". ");
@@ -443,19 +443,20 @@ public class CollectionsResponse extends CommonFixture {
     	private boolean checkDataOrCollectionLinksArePresentInCollectionMetadata(List<Object> linksList)
     	{
     		
-    
+          //check for data link deactivated because of https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/issues/371
     		
-       	  boolean hasDataRel = false;
+       	  //boolean hasDataRel = false;
        	  boolean hasCollectionRel = false;
        	    
     	    for(int w = 0; w < linksList.size(); w++)
     	    {
     			HashMap linksMap = (HashMap) linksList.get(w);
-    	        if (linksMap.get("rel").toString().equals("data")) hasDataRel = true;
+    	        //if (linksMap.get("rel").toString().equals("data")) hasDataRel = true;
     	        if (linksMap.get("rel").toString().equals("collection")) hasCollectionRel = true;
     	    }
     	    
-    	    if (hasDataRel || hasCollectionRel) return true;
+    	    //if (hasDataRel || hasCollectionRel) return true;
+    	    if (hasCollectionRel) return true;
     	    return false;
     	    
     	}   	
