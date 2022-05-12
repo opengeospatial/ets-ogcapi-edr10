@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.io.BufferedReader;
-import java.io.FileWriter;
+
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URI;
