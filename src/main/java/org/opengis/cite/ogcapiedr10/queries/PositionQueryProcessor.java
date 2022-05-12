@@ -5,10 +5,13 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
+
+import org.testng.Assert;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
@@ -19,27 +22,40 @@ public class PositionQueryProcessor extends AbstractProcessor{
         StringBuffer sb = new StringBuffer();
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);
+        
 
         for (int c = 0; c < Math.min(noOfCollections,collectionsList.size()); c++) {
 
-
             String collectionId = collectionsList.get(c);
 
-
+    
+            
             boolean supportsPositionQuery = false;
+            
 
             String url = rootUri.toString() + "/collections/" + collectionId;
 
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
+            
+               
+            if(jsonResponse.getJsonObject("data_queries")==null) {
+            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            }
+            
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsPositionQuery = dataQueries.containsKey("position");
-
-
-
+            
+            if(supportsPositionQuery==false) {
+            	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
+            }
 
 
             if (supportsPositionQuery) {
+            	
+                if(jsonResponse.getJsonObject("parameter_names")==null) {
+                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                }            	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
