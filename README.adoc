@@ -1,4 +1,4 @@
-= Draft OGC API - Environmental Data Retrieval  Conformance Test Suite
+= Executable Test Suite of the OGC API - Environmental Data Retrieval (EDR) Standard
 
 == Scope
 
@@ -41,23 +41,22 @@ include::src/site/asciidoc/how-to-run-the-tests.adoc[]
 
 == How to debug using docker
 
-After running `mvn package`:
+After running `mvn clean install site -Pintegration-tests,docker`:
 
 Navigate to the docker folder.
 
-`cd /docker`
+`cd ./target/docker/ogccite/ets-ogcapi-edr10/build`
 
 Build the docker image.
 
-`docker build -t edr10:local . `
+`docker build -t ets-ogcapi-edr10:local .`
 
 Run the docker image.
 
-`docker run -p 9090:8080/tcp edr10:local`
+`docker run -p 8081:8080 ets-ogcapi-edr10:local`
 
-Now visit http://localhost:9090/teamengine
+Now visit http://localhost:8081/teamengine
 
-Log into teamengine with username *developer* and password *developer*.
 
 == How to contribute
 
