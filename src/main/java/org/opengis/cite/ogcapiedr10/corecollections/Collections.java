@@ -30,7 +30,7 @@ import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import io.restassured.internal.assertion.Assertion;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
