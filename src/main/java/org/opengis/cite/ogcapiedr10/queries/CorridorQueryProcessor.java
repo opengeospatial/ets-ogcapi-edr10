@@ -42,14 +42,14 @@ public class CorridorQueryProcessor extends AbstractProcessor{
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
             
-            if(jsonResponse.getJsonObject("data_queries")==null) {
+            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
             	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
             }            
             
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsCorridorQuery = dataQueries.containsKey("corridor");
 
-            if(supportsCorridorQuery==false) {
+            if(supportsCorridorQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The corridor element is missing from the data_queries element of the collection "+collectionId+" .");
             } 
 
@@ -59,7 +59,7 @@ public class CorridorQueryProcessor extends AbstractProcessor{
             	
             	numberOfCollectionsWithCorridorSupport++;
             	
-                if(jsonResponse.getJsonObject("parameter_names")==null) {
+                if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
                 	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
                 }             	
 
@@ -70,6 +70,10 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                 parameterNamesIterator.hasNext();
                 String sampleParamaterName = parameterNamesIterator.next();
 
+                if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The crs list is missing from the collection "+collectionId+" .");
+                }                 
+                
                 List<String> crsList = jsonResponse.getList("crs");
 
                 String supportedCRS = null;
@@ -165,7 +169,9 @@ public class CorridorQueryProcessor extends AbstractProcessor{
 
 
                 }
-
+                else {  //if spatial extent is missing
+                	sb.append(" The spatial extent element is missing from the collection "+collectionId+" .");
+                }
 
                 String sampleParamaterNameSafe = null;
                 try {
@@ -211,7 +217,9 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                     }
 
                 }
-
+                else { //if temporal extent is missing
+                	sb.append(" The temporal extent element is missing from the collection "+collectionId+" .");
+                }
 
 
 

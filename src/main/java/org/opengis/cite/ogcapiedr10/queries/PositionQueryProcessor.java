@@ -39,21 +39,21 @@ public class PositionQueryProcessor extends AbstractProcessor{
             JsonPath jsonResponse = response.jsonPath();
             
                
-            if(jsonResponse.getJsonObject("data_queries")==null) {
+            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
             	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
             }
             
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsPositionQuery = dataQueries.containsKey("position");
             
-            if(supportsPositionQuery==false) {
+            if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
             }
 
 
             if (supportsPositionQuery) {
             	
-                if(jsonResponse.getJsonObject("parameter_names")==null) {
+                if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
                 	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
                 }            	
 
@@ -64,6 +64,10 @@ public class PositionQueryProcessor extends AbstractProcessor{
                 parameterNamesIterator.hasNext();
                 String sampleParamaterName = parameterNamesIterator.next();
 
+                if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The crs list is missing from the collection "+collectionId+" .");
+                }                 
+                
                 List<String> crsList = jsonResponse.getList("crs");
 
                 String supportedCRS = null;
@@ -147,7 +151,9 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     }
 
                 }
-
+                else {  //if spatial extent is missing
+                	sb.append(" The spatial extent element is missing from the collection "+collectionId+" .");
+                }
 
                 String sampleParamaterNameSafe = null;
                 try {
@@ -194,7 +200,9 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     }
 
                 }
-
+                else { //if temporal extent is missing
+                	sb.append(" The temporal extent element is missing from the collection "+collectionId+" .");
+                }
 
 
 

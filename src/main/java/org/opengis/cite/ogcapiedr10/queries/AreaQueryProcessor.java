@@ -37,21 +37,21 @@ public class AreaQueryProcessor extends AbstractProcessor{
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
             
-            if(jsonResponse.getJsonObject("data_queries")==null) {
+            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
             	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
             }            
             
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsAreaQuery = dataQueries.containsKey("area");
 
-            if(supportsAreaQuery==false) {
+            if(supportsAreaQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The area element is missing from the data_queries element of the collection "+collectionId+" .");
             }
 
 
             if (supportsAreaQuery) {
             	
-                if(jsonResponse.getJsonObject("parameter_names")==null) {
+                if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
                 	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
                 }             	
 
@@ -61,6 +61,10 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
                 parameterNamesIterator.hasNext();
                 String sampleParamaterName = parameterNamesIterator.next();
+                
+                if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The crs list is missing from the collection "+collectionId+" .");
+                } 
 
                 List<String> crsList = jsonResponse.getList("crs");
 
@@ -100,6 +104,11 @@ public class AreaQueryProcessor extends AbstractProcessor{
                 double lmaxx = 0d; //lens
                 double lmaxy = 0d; //lens
 
+                
+                if(jsonResponse.getJsonObject("extent")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The extent element is missing from the collection "+collectionId+" .");
+                }
+                
                 HashMap extent = jsonResponse.getJsonObject("extent");
                 if (extent.containsKey("spatial")) {
 
@@ -157,6 +166,9 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
 
                 }
+                else {  //if spatial extent is missing
+                	sb.append(" The spatial extent element is missing from the collection "+collectionId+" .");
+                }
 
 
                 String sampleParamaterNameSafe = null;
@@ -202,6 +214,9 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
                     }
 
+                }
+                else { //if temporal extent is missing
+                	sb.append(" The temporal extent element is missing from the collection "+collectionId+" .");
                 }
 
 
