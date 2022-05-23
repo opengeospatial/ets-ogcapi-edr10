@@ -78,8 +78,7 @@ public class TrajectoryQueryProcessor extends AbstractProcessor{
                     if (crsList.get(q).equals("CRS:84") || 
                     		crsList.get(q).equals("CRS84") || 
                     		crsList.get(q).equals("EPSG:4326") || 
-                    		crsList.get(q).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
-                    		crsList.get(q).equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                    		crsList.get(q).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(q);
                     }
                 }
