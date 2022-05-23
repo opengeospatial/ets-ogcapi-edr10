@@ -79,7 +79,12 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
                 String supportedCRS = null;
                 for (int f = 0; f < crsList.size(); f++) {
-                    if (crsList.get(f).equals("CRS84")) {
+                    if (crsList.get(f).equals("CRS84") || 
+                    		crsList.get(f).equals("CRS:84") || 
+                    		crsList.get(f).equals("WGS84") || 
+                    		crsList.get(f).equals("EPSG:4326") ||
+                    		crsList.get(f).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
+                    		crsList.get(f).equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(f);
                     }
                 }          
@@ -187,8 +192,25 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 				
                 try {
                     if(supportedFormat!=null && supportedCRS!=null) {
-	                    if(supportedFormat.equals("GeoJSON") && supportedCRS.equals("CRS84")) {
-	                        String locationsURL = link.get("href").toString()+"?f="+supportedFormat+"&crs=CRS84"+"&coords=POINT("+medianx+"+"+mediany+")"+"&parameter-name="+sampleParamaterNameSafe+"&datetime="+sampleDateTime ;
+	                    if(supportedFormat.equals("GeoJSON") && 
+	                    		
+	                    		(supportedCRS.equals("CRS84") || 
+	                    				supportedCRS.equals("CRS:84") || 
+	                    				supportedCRS.equals("WGS84") || 
+	                    				supportedCRS.equals("EPSG:4326") ||
+	                    				supportedCRS.equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
+	                    				supportedCRS.equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84"))	                    		
+	                    		
+	                    		) {
+	                    	
+	                    	String locationsURL = null;
+	                    	
+	                    	if(supportedCRS.equals("EPSG:4326")) {
+		                          locationsURL = link.get("href").toString()+"?f="+supportedFormat+"&crs=EPSG:4326"+"&coords=POINT("+mediany+"+"+medianx+")"+"&parameter-name="+sampleParamaterNameSafe+"&datetime="+sampleDateTime ;	                    		
+	                    	}
+	                    	else  {
+	                          locationsURL = link.get("href").toString()+"?f="+supportedFormat+"&crs=CRS84"+"&coords=POINT("+medianx+"+"+mediany+")"+"&parameter-name="+sampleParamaterNameSafe+"&datetime="+sampleDateTime ;
+	                    	}
 
 	                        GeoJSONValidator validator = new GeoJSONValidator();
 	                        boolean result = validator.isGeoJSONValidPerSchema(locationsURL,GeoJSONValidator.EDRGeoJSON);

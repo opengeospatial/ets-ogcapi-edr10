@@ -5,10 +5,13 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
+
+import org.testng.Assert;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
@@ -19,27 +22,40 @@ public class PositionQueryProcessor extends AbstractProcessor{
         StringBuffer sb = new StringBuffer();
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);
+        
 
         for (int c = 0; c < Math.min(noOfCollections,collectionsList.size()); c++) {
 
-
             String collectionId = collectionsList.get(c);
 
-
+    
+            
             boolean supportsPositionQuery = false;
+            
 
             String url = rootUri.toString() + "/collections/" + collectionId;
 
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
+            
+               
+            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
+            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            }
+            
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsPositionQuery = dataQueries.containsKey("position");
-
-
-
+            
+            if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
+            	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
+            }
 
 
             if (supportsPositionQuery) {
+            	
+                if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                }            	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
@@ -48,11 +64,18 @@ public class PositionQueryProcessor extends AbstractProcessor{
                 parameterNamesIterator.hasNext();
                 String sampleParamaterName = parameterNamesIterator.next();
 
+                if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The crs list is missing from the collection "+collectionId+" .");
+                }                 
+                
                 List<String> crsList = jsonResponse.getList("crs");
 
                 String supportedCRS = null;
                 for (int q = 0; q < crsList.size(); q++) {
-                    if (crsList.get(q).equals("CRS:84") || crsList.get(q).equals("CRS84") || crsList.get(q).equals("EPSG:4326") || crsList.get(q).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                    if (crsList.get(q).equals("CRS:84") || 
+                    		crsList.get(q).equals("CRS84") || 
+                    		crsList.get(q).equals("EPSG:4326") || 
+                    		crsList.get(q).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(q);
                     }
                 }
@@ -127,7 +150,9 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     }
 
                 }
-
+                else {  //if spatial extent is missing
+                	sb.append(" The spatial extent element is missing from the collection "+collectionId+" .");
+                }
 
                 String sampleParamaterNameSafe = null;
                 try {
@@ -174,7 +199,9 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     }
 
                 }
-
+                else { //if temporal extent is missing
+                	sb.append(" The temporal extent element is missing from the collection "+collectionId+" .");
+                }
 
 
 

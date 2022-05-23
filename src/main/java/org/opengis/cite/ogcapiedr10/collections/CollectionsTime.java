@@ -81,9 +81,12 @@ public class CollectionsTime{
 
 				for (Operation op : path.getOperations().values()) {
 					for (Parameter param : op.getParameters()) {
-						if (param.getName().equals(paramName)) {
-							coords = param;
-						}
+						
+						if(hasName(param)) {	
+							if (param.getName().equals(paramName)) {
+								coords = param;
+							}
+					    }
 					}
 				}
 			}
@@ -136,11 +139,17 @@ public class CollectionsTime{
 			if (path.getPathString().endsWith(testPoint.getPath())) {
 
 				for (Operation op : path.getOperations().values()) {
-
+					
 					for (Parameter param : op.getParameters()) {
-						if (param.getName().equals(paramName))
-							datetime = param;
+						
+						if(hasName(param)) {
+							if (param.getName().equals(paramName))
+							{
+								  datetime = param;
+							}
+						}
 					}
+					
 				}
 			}
 		}
@@ -157,6 +166,22 @@ public class CollectionsTime{
 
 		}
 
+	}
+	
+	
+	public boolean hasName(Parameter parameter)
+	{
+		boolean result = true;
+		
+		  try {
+			  parameter.getName();  //we do this to check whether there is a name
+		  }
+		  catch(Exception ee) {
+		      result = false;
+		  }
+		
+		return result;
+		
 	}
 
 	/**
@@ -185,8 +210,14 @@ public class CollectionsTime{
 				for (Operation op : path.getOperations().values()) {
 
 					for (Parameter param : op.getParameters()) {
-						if (param.getName().equals(paramName))
-							parametername = param;
+						
+						if(hasName(param)) {
+						   if (param.getName().equals(paramName))
+							{
+							  parametername = param;
+							}
+						}
+						
 					}
 				}
 			}
@@ -233,8 +264,14 @@ public class CollectionsTime{
 				for (Operation op : path.getOperations().values()) {
 
 					for (Parameter param : op.getParameters()) {
-						if (param.getName().equals(paramName))
-							crs = param;
+						
+						if(hasName(param)) {
+						
+							if (param.getName().equals(paramName))
+							{
+								crs = param;
+							}
+						}
 					}
 				}
 			}
@@ -282,8 +319,13 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            f = param;
+	        	
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  f = param;
+		            }
+	            }
 	        }
 	      }
 	    }
@@ -327,8 +369,13 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            z = param;
+	        	
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  z = param;
+		            }
+	            }
 	        }
 	      }
 	    }
@@ -377,8 +424,13 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            within = param;
+	        	
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  within = param;
+		            }
+	            }
 	        }
 	      }
 	    }
@@ -429,8 +481,12 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            withinUnits = param;
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  withinUnits = param;
+		            }
+	            }
 	        }
 	      }
 	    }
@@ -482,8 +538,13 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            resolutionx = param;
+	        	
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  resolutionx = param;
+		            }
+	            }
 	        }
 	      }
 	    }
@@ -532,9 +593,13 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            resolutiony
- = param;
+	        	
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  resolutiony = param;
+		            }
+	           }
 	        }
 	      }
 	    }
@@ -582,8 +647,12 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            resolutionz = param;
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  resolutionz = param;
+		            }
+	        	}
 	        }
 	      }
 	    }
@@ -630,8 +699,12 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            corridorHeight = param;
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  corridorHeight = param;
+		            }
+	          }
 	        }
 	      }
 	    }
@@ -677,8 +750,12 @@ public class CollectionsTime{
 	      for (Operation op : path.getOperations().values()) {
 
 	        for (Parameter param : op.getParameters()) {
-	          if (param.getName().equals(paramName))
-	            corridorWidth = param;
+	        	if(hasName(param)) {
+		            if (param.getName().equals(paramName))
+		            {
+		        	  corridorWidth = param;
+		            }
+	           }
 	        }
 	      }
 	    }

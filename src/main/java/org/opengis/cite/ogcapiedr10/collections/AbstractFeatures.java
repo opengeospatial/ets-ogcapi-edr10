@@ -4,6 +4,7 @@ import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
 import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberMatched;
 import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberReturned;
@@ -186,12 +187,11 @@ public class AbstractFeatures extends CommonDataFixture {
 	@BeforeClass
 	public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
 
-		try (InputStream in = new URL(rootUri.toString() + "/api?f=JSON").openStream()) {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			apiDef = reader.lines().collect(Collectors.joining(System.lineSeparator()));
-		} catch (Exception ew) {
-			ew.printStackTrace();
-		}
+	
+		    Response response = init().baseUri(this.modelUri.toString()).accept( OPEN_API_MIME_TYPE ).when().request( GET );
+		    apiDef = response.asString();
+			
+		
 	}
 
 	/**

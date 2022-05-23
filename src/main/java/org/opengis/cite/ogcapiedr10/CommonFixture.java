@@ -37,6 +37,8 @@ public class CommonFixture {
 
     protected URI rootUri;
     
+    protected URI apiDefUri;
+    
 	protected String testingWktPOINT = "POINT(-1.054687%2052.498649)";  //TODO change to user inputs
 	protected String geoJSONTestingCollection = "gfs-surface-precip";   //TODO change to user inputs
 
@@ -52,10 +54,13 @@ public class CommonFixture {
         rootUri = (URI) testContext.getSuite().getAttribute( SuiteAttribute.IUT.getName() );
         
 
-        
+        apiDefUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
+	   
         
     }
 
+    
+    
     @BeforeMethod
     public void clearMessages() {
         initLogging();

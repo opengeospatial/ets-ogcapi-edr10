@@ -16,6 +16,7 @@
         <!-- Add baisc conformance test suites -->
         <BasicConformanceClasses>
           <conformanceClass>Core</conformanceClass>
+          <conformanceClass>Collections</conformanceClass>
         </BasicConformanceClasses>        
       </suite>
       <revision>

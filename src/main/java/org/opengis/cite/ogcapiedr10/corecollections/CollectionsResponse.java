@@ -14,7 +14,7 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseTemporalExtent;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.io.FileWriter;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;
@@ -159,7 +159,10 @@ public class CollectionsResponse extends CommonFixture {
     	 * </pre>
     	 *
     	 */
-    	@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
+	    /*
+	     * This method is disactivated because the crs property is optional in collection.yaml and the specification document is unclear about whether the property is mandatory.
+	     */
+    	/*@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
     	public void collectionsCRS84() {
 
     		boolean compliesWithCRS84Requirement = true;
@@ -187,7 +190,7 @@ public class CollectionsResponse extends CommonFixture {
     			
     		
     			
-    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84")){ 
+    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84") || crsText.contains("www.opengis.net/def/crs/OGC/1.3/CRS84")){ 
     				compliesWithCRS84Requirement = true;
     			} 
     			else{
@@ -203,7 +206,7 @@ public class CollectionsResponse extends CommonFixture {
     		org.testng.Assert.assertTrue(compliesWithCRS84Requirement,
     				"Fails Abstract Test 8 because " + resultMessage.toString());
 
-    	}
+    	}*/
     	
     	/*
     	 * We keep code here for future use
@@ -265,15 +268,21 @@ public class CollectionsResponse extends CommonFixture {
     		String testPointUri = new UriBuilder(testPoint).buildUrl();
     		Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
     		JsonPath jsonPath = response.jsonPath();
+    		
 
     		List<Object> collectionsList = jsonPath.getList("collections");
     		
-    		
+    		boolean atLeastOneCollectionIsEDR = false;
 
     		for (int t = 0; t < collectionsList.size(); t++) {
     		
     			HashMap collectionMap = (HashMap) collectionsList.get(t);
 
+    			if(collectionMap.containsKey("itemType")) continue; //skip if this is an OGC API Features or OGC API Records collection
+    			
+    			if(!collectionMap.containsKey("parameter_names")) continue; //skip if this is not an EDR collection
+    			else atLeastOneCollectionIsEDR = true;
+    			
     			String parameterNameText = collectionMap.get("parameter_names").toString();
     			HashMap parameterNameMap = (HashMap) collectionMap.get("parameter_names");
     			
@@ -345,7 +354,7 @@ public class CollectionsResponse extends CommonFixture {
     	
     	    HashMap collectionMap = (HashMap) collectionsList.get(t);
     	    
-    	    
+    	    if(collectionMap.containsKey("itemType")) continue;
 
     	    //Test Method 2 of Abstract Test 14: Verify that each collection entry includes an identifier.
     	    if(collectionMap.containsKey("id")==false) resultMessageForCollectionId.append(collectionMap.get("id").toString()+" , ");
@@ -434,7 +443,7 @@ public class CollectionsResponse extends CommonFixture {
     	private boolean checkDataOrCollectionLinksArePresentInCollectionMetadata(List<Object> linksList)
     	{
     		
-    
+          //check for data link deactivated because of https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/issues/371
     		
        	  boolean hasDataRel = false;
        	  boolean hasCollectionRel = false;

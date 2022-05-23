@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -35,14 +36,24 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
+            
+            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
+            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            }            
+            
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsAreaQuery = dataQueries.containsKey("area");
 
-
-
+            if(supportsAreaQuery==false) { //Avoids Nullpointer Exception
+            	sb.append(" The area element is missing from the data_queries element of the collection "+collectionId+" .");
+            }
 
 
             if (supportsAreaQuery) {
+            	
+                if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                }             	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
@@ -50,12 +61,19 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
                 parameterNamesIterator.hasNext();
                 String sampleParamaterName = parameterNamesIterator.next();
+                
+                if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The crs list is missing from the collection "+collectionId+" .");
+                } 
 
                 List<String> crsList = jsonResponse.getList("crs");
 
                 String supportedCRS = null;
                 for (int q = 0; q < crsList.size(); q++) {
-                    if (crsList.get(q).equals("CRS:84") || crsList.get(q).equals("CRS84") || crsList.get(q).equals("EPSG:4326") || crsList.get(q).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                    if (crsList.get(q).equals("CRS:84") || 
+                    		crsList.get(q).equals("CRS84") || 
+                    		crsList.get(q).equals("EPSG:4326") || 
+                    		crsList.get(q).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(q);
                     }
                 }
@@ -85,6 +103,11 @@ public class AreaQueryProcessor extends AbstractProcessor{
                 double lmaxx = 0d; //lens
                 double lmaxy = 0d; //lens
 
+                
+                if(jsonResponse.getJsonObject("extent")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The extent element is missing from the collection "+collectionId+" .");
+                }
+                
                 HashMap extent = jsonResponse.getJsonObject("extent");
                 if (extent.containsKey("spatial")) {
 
@@ -142,6 +165,9 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
 
                 }
+                else {  //if spatial extent is missing
+                	sb.append(" The spatial extent element is missing from the collection "+collectionId+" .");
+                }
 
 
                 String sampleParamaterNameSafe = null;
@@ -187,6 +213,9 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
                     }
 
+                }
+                else { //if temporal extent is missing
+                	sb.append(" The temporal extent element is missing from the collection "+collectionId+" .");
                 }
 
 

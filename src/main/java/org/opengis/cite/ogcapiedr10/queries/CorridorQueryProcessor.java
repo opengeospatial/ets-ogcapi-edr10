@@ -41,16 +41,27 @@ public class CorridorQueryProcessor extends AbstractProcessor{
 
             Response response = ini.baseUri(url).accept(JSON).when().request(GET);
             JsonPath jsonResponse = response.jsonPath();
+            
+            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
+            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            }            
+            
             HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
             supportsCorridorQuery = dataQueries.containsKey("corridor");
 
-
+            if(supportsCorridorQuery==false) { //Avoids Nullpointer Exception
+            	sb.append(" The corridor element is missing from the data_queries element of the collection "+collectionId+" .");
+            } 
 
 
 
             if (supportsCorridorQuery) {
             	
             	numberOfCollectionsWithCorridorSupport++;
+            	
+                if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                }             	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
@@ -59,11 +70,18 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                 parameterNamesIterator.hasNext();
                 String sampleParamaterName = parameterNamesIterator.next();
 
+                if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
+                	sb.append(" The crs list is missing from the collection "+collectionId+" .");
+                }                 
+                
                 List<String> crsList = jsonResponse.getList("crs");
 
                 String supportedCRS = null;
                 for (int q = 0; q < crsList.size(); q++) {
-                    if (crsList.get(q).equals("CRS:84") || crsList.get(q).equals("CRS84") || crsList.get(q).equals("EPSG:4326") || crsList.get(q).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                    if (crsList.get(q).equals("CRS:84") || 
+                    		crsList.get(q).equals("CRS84") || 
+                    		crsList.get(q).equals("EPSG:4326") || 
+                    		crsList.get(q).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(q);
                     }
                 }
@@ -150,7 +168,9 @@ public class CorridorQueryProcessor extends AbstractProcessor{
 
 
                 }
-
+                else {  //if spatial extent is missing
+                	sb.append(" The spatial extent element is missing from the collection "+collectionId+" .");
+                }
 
                 String sampleParamaterNameSafe = null;
                 try {
@@ -196,7 +216,9 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                     }
 
                 }
-
+                else { //if temporal extent is missing
+                	sb.append(" The temporal extent element is missing from the collection "+collectionId+" .");
+                }
 
 
 

@@ -32,14 +32,16 @@
              <div style="background:#F0F8FF" bgcolor="#F0F8FF">
                <p>The implementation under test (IUT) is checked against the following specifications:</p>
                <ul>
-                 <li><a href="http://www.w3.org/TR/xml/">Extensible Markup Language (XML) 1.0</a>,
-				 Fifth Edition</li>
-				 <li><a href="http://www.w3.org/TR/xmlbase/">XML Base</a>, Second Edition</li>
+                 <li><a href="https://ogcapi.ogc.org/edr">OGC API - Environmental Data Retrieval standard 1.0.0</a></li>
                </ul>
-               <p>Two conformance levels are defined:</p>
+               <p>Several conformance classes are defined in the principal specifications. The ones listed below are covered by this test suite:</p>
                <ul>
-                 <li>Level 1</li>
-                 <li>Level 2</li>
+                 <li>Core</li>
+                 <li>Collections</li>
+                 <li>JSON</li>
+                 <li>GeoJSON</li>
+                 <li>EDR GeoJSON</li>
+                 <li>Queries</li>                                  
                </ul>
              </div>
              <fieldset style="background:#ccffff">
@@ -57,14 +59,22 @@
                    <h4 style="margin-bottom: 0.5em">Location of OpenAPI definition document</h4>
                  </label>
                  <input id="apiDefinition" name="apiDefinition" size="128" type="text" value="https://ogcie.iblsoft.com/edr/api" />
-               </p>               
-               <p>
-                 <label for="level">Conformance class: </label>
-                 <input id="level-1" type="radio" name="level" value="1" checked="checked" />
-                 <label for="level-1"> Level 1 | </label>
-                 <input id="level-2" type="radio" name="level" value="2" />
-                 <label class="form-label" for="level-2"> Level 2</label>
-               </p>
+               </p> 
+	            <p>
+	              <h4 style="margin-bottom: 0.5em">Number of tested collections</h4>
+	              <div>
+	                <input type="radio" id="collectionsLimitLimited" name="collectionsLimit" value="limited" checked="checked"
+	                       onchange="document.getElementById('noOfCollections').disabled=document.getElementById('collectionsLimitAll').checked;"/>
+	                <label for="noOfCollectionsAll">Limited number of collections:</label>
+	                <input type="number" id="noOfCollections" name="noOfCollections" value="3" min="1" />
+	              </div>
+	              <div>
+	                <input type="radio" id="collectionsLimitAll" name="collectionsLimit" value="all"
+	                       onchange="document.getElementById('noOfCollections').disabled=document.getElementById('collectionsLimitAll').checked;" />
+	
+	                <label for="noOfCollectionsAll">All collections</label>
+	              </div>
+	            </p>                             
              </fieldset>
              <p>
                <input class="form-button" type="submit" value="Start"/> |
