@@ -156,13 +156,14 @@ public class CollectionsResponse extends CommonFixture {
     	/**
     	 * <pre>
     	 * Abstract Test 8: Validate that all spatial geometries provided through the API are in the CRS84 spatial reference system unless otherwise requested by the client.
+    	 * 
+    	 * Requirement A.46 G, which is in the Collections Requirements Class, states that "Every Collection within a collections array MUST have a 'crs' parameter which must comply with the requirement '/req/edr/rc-crs'."
+    	 * Therefore we can expect that there be a declaration of support for CRS84
     	 * </pre>
     	 *
     	 */
-	    /*
-	     * This method is disactivated because the crs property is optional in collection.yaml and the specification document is unclear about whether the property is mandatory.
-	     */
-    	/*@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
+
+    	@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
     	public void collectionsCRS84() {
 
     		boolean compliesWithCRS84Requirement = true;
@@ -175,7 +176,7 @@ public class CollectionsResponse extends CommonFixture {
 
     		List<Object> collectionsList = jsonPath.getList("collections");
 
-    		FileWriter fw = null;
+    		
 
     		
     		
@@ -190,7 +191,7 @@ public class CollectionsResponse extends CommonFixture {
     			
     		
     			
-    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("WGS84") || crsText.contains("www.opengis.net/def/crs/OGC/1.3/CRS84")){ 
+    			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("EPSG:4326") || crsText.contains("WGS84") || crsText.contains("www.opengis.net/def/crs/OGC/1.3/CRS84")){ 
     				compliesWithCRS84Requirement = true;
     			} 
     			else{
@@ -206,7 +207,7 @@ public class CollectionsResponse extends CommonFixture {
     		org.testng.Assert.assertTrue(compliesWithCRS84Requirement,
     				"Fails Abstract Test 8 because " + resultMessage.toString());
 
-    	}*/
+    	}
     	
     	/*
     	 * We keep code here for future use
