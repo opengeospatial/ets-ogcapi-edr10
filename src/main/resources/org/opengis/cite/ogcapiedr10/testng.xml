@@ -49,16 +49,6 @@
       <package name="org.opengis.cite.ogcapiedr10.encodings.edrgeojson" />      
     </packages>
   </test>  
-  
-<test name="CoverageJSON">
-    <packages>
-      <package name="org.opengis.cite.ogcapiedr10.encodings.coveragejson" />      
-    </packages>
-</test>
-<test name="HTML">
-    <packages>
-      <package name="org.opengis.cite.ogcapiedr10.encodings.html" />      
-    </packages>
-</test>
+
   <!-- Add test sets for other conformance classes/levels -->
 </suite>
