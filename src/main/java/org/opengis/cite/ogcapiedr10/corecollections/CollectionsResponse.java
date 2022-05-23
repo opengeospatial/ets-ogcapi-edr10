@@ -278,9 +278,9 @@ public class CollectionsResponse extends CommonFixture {
     		
     			HashMap collectionMap = (HashMap) collectionsList.get(t);
 
-    			if(collectionMap.containsKey("itemType")) continue;
+    			if(collectionMap.containsKey("itemType")) continue; //skip if this is an OGC API Features or OGC API Records collection
     			
-    			if(!collectionMap.containsKey("parameter_names")) continue;
+    			if(!collectionMap.containsKey("parameter_names")) continue; //skip if this is not an EDR collection
     			else atLeastOneCollectionIsEDR = true;
     			
     			String parameterNameText = collectionMap.get("parameter_names").toString();
