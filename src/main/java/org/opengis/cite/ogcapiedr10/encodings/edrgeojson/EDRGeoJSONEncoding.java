@@ -236,8 +236,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 	                    				supportedCRS.equals("CRS:84") || 
 	                    				supportedCRS.equals("WGS84") || 
 	                    				supportedCRS.equals("EPSG:4326") ||
-	                    				supportedCRS.equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
-	                    				supportedCRS.equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84"))	                    		
+	                    				supportedCRS.contains("www.opengis.net/def/crs/OGC/1.3/CRS84"))	                    		
 	                    		
 	                    		) {
 	                    	
@@ -256,19 +255,19 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 	                        atLeastOneCollectionTested = true;
 	                        if(result==false) {
 	                    		String msg = " GeoJSON returned by Collection "+collectionId+" failed the schema validation test.\n";
-	                    		System.out.println(msg);
+	                    		
 	                            sb.append(msg);	                        
 	                            }
 	                     }
                     	else {
                     		String msg = " Collection "+collectionId+" was found not to offer GeoJSON encoded responses that are referenced to CRS84.\n";
-                    		System.out.println(msg);
+                    		
                             sb.append(msg);
                         }
                     }
                     else {
                  		String msg = " Collection "+collectionId+" was found not to offer GeoJSON encoded responses that are referenced to CRS84.\n";
-                		System.out.println(msg);
+                	
                         sb.append(msg);
                     }
                 }
