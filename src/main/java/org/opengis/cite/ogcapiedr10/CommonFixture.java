@@ -8,7 +8,7 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
-
+import java.lang.reflect.Method;
 
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
 
@@ -59,7 +59,19 @@ public class CommonFixture {
         
     }
 
-    
+    /*@BeforeMethod
+    public void trackProgress(Method method) {
+        java.io.FileWriter fw  = null;
+        try {
+        	fw = new java.io.FileWriter("/ets/mylog.txt",true);
+        	fw.write(this.getClass().getName()+"-"+method.getName()+"\n");
+        	fw.close();
+        }
+        catch(Exception er)
+        {
+        	er.printStackTrace();
+        }
+    }*/
     
     @BeforeMethod
     public void clearMessages() {
