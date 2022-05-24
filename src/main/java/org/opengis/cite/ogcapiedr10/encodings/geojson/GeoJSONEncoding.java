@@ -60,6 +60,10 @@ public class GeoJSONEncoding extends CommonFixture {
         for(int i=0; (i< collectionsList.size()) && (atLeastOneCollectionTested==false); i++)
         {
             HashMap collectionItem = (HashMap) collectionsList.get(i);
+            
+            if(!collectionItem.containsKey("data_queries")) {
+            	continue; //we loop until we find a collection that supports data_queries
+            }            
 
             HashMap dataQueries = (HashMap) collectionItem.get("data_queries");
             boolean supportsLocationsQuery = dataQueries.containsKey("locations");
@@ -88,7 +92,7 @@ public class GeoJSONEncoding extends CommonFixture {
                         }
                     }
                     else {
-                        sb.append(" None of the collections with locations resources were found to offer GeoJSON encoded responses.\n");
+                        continue; // We loop until we find a collection that supports GeoJSON.
                     }
                 }
                 catch(Exception ex) {
@@ -99,18 +103,16 @@ public class GeoJSONEncoding extends CommonFixture {
 
             }
             else {
-                sb.append(" None of the collections were found to offer locations resources.\n");
+                continue; //we loop until we find a collection that supports the Locations query
             }
 
         }
 
 
-        String resultMessage = sb.toString();
-        EtsAssert.assertTrue(resultMessage.length()==0,
-                "Fails Abstract Test 21. "
-                        + resultMessage);
+        //String resultMessage = sb.toString(); //verbose error message
+        //EtsAssert.assertTrue(resultMessage.length()==0,  "Fails Abstract Test 21. "              + resultMessage);
 
-
+        EtsAssert.assertTrue(atLeastOneCollectionTested, "Fails Abstract Test 21. None of the collections were found to offer Locations resources that return valid GeoJSON\n");
 
     }
 

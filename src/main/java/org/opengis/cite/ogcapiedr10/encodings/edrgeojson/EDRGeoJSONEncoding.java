@@ -9,6 +9,7 @@ import org.json.JSONTokener;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.EtsAssert;
 import org.opengis.cite.ogcapiedr10.encodings.geojson.GeoJSONValidator;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
@@ -65,6 +66,11 @@ public class EDRGeoJSONEncoding extends CommonFixture {
             
             String collectionId = collectionItem.get("id").toString();
 
+            if(!collectionItem.containsKey("data_queries")) {
+            	continue; //we loop until we find a collection that supports data_queries
+            }
+            
+            
             HashMap dataQueries = (HashMap) collectionItem.get("data_queries");
             boolean supportsPositionQuery = dataQueries.containsKey("position");
 
@@ -260,15 +266,11 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 	                            }
 	                     }
                     	else {
-                    		String msg = " Collection "+collectionId+" was found not to offer GeoJSON encoded responses that are referenced to CRS84.\n";
-                    		
-                            sb.append(msg);
+                    		continue; //loop until we find a collection that supports GeoJSON encoded responses that are referenced to CRS84.
                         }
                     }
                     else {
-                 		String msg = " Collection "+collectionId+" was found not to offer GeoJSON encoded responses that are referenced to CRS84.\n";
-                	
-                        sb.append(msg);
+                    	continue; //loop until we find a collection that supports GeoJSON encoded responses that are referenced to CRS84.
                     }
                 }
                 catch(Exception ex) {
@@ -279,10 +281,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
             }
             else {
-            	if(!sb.toString().contains(" None of the collections were found to offer Position resources that return GeoJSON.\n"))
-                {
-            		sb.append(" None of the collections were found to offer Position resources that return GeoJSON.\n");
-                }
+            	continue; //we loop until we find a collection that supports position data queries
             }
 
         }
