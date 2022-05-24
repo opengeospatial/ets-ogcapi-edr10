@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.Map;
 
 import org.opengis.cite.ogcapiedr10.CommonFixture;
+import org.opengis.cite.ogcapiedr10.util.Link;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
@@ -39,7 +40,7 @@ public class ApiDefinition extends CommonFixture {
 
     private String response;
 
-    private String apiUrl;
+    private Link apiUrl = null;
 
     @BeforeClass(dependsOnMethods = "initCommonFixture")
     public void retrieveApiUrl() {
@@ -60,9 +61,9 @@ public class ApiDefinition extends CommonFixture {
     @Test(description = "Implements Abstract Test 4 (/conf/core/api-definition)", groups = "apidefinition", dependsOnGroups = "landingpage")
     public void openapiDocumentRetrieval() {
     	
-        if ( apiUrl == null || apiUrl.isEmpty() )
+        if ( apiUrl == null || apiUrl.getHref().isEmpty() )
             throw new AssertionError( "Path to the API Definition could not be constructed from the landing page" );
-        Response request = init().baseUri( apiUrl ).accept( OPEN_API_MIME_TYPE ).when().request( GET );
+        Response request = init().baseUri( apiUrl.getHref() ).accept( apiUrl.getType() ).when().request( GET );
         request.then().statusCode( 200 );
         response = request.asString();
     }
@@ -88,39 +89,56 @@ public class ApiDefinition extends CommonFixture {
         OpenApi3 apiModel = null;
    
         
-        Response response = init().baseUri( apiUrl ).accept( OPEN_API_MIME_TYPE ).when().request( GET );
+        Response response = init().baseUri( apiUrl.getHref() ).accept( apiUrl.getType() ).when().request( GET );
         
         
         try {
             	
-        	URL resolutionBase = new URL(apiUrl); //https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/83c47220d21fe7569f46eeacd3f5bdecb58da69a/API-Overview.md#parsing-options
+        	URL resolutionBase = new URL(apiUrl.getHref()); //https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/83c47220d21fe7569f46eeacd3f5bdecb58da69a/API-Overview.md#parsing-options
 			apiModel = (OpenApi3) parser.parse(response.asString(), resolutionBase);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 			assertTrue( false, "The API definition linked from the Landing Page resulted in "+apiUrl+" \n"+e.getMessage() );
 		}
+
+        if(apiModel.isValid() )
+        {
+        	testContext.getSuite().setAttribute( API_MODEL.getName(), apiModel );
+        }
         
-        
+        if(apiModel.isValid() 	&&	(!apiUrl.getType().equals(OPEN_API_MIME_TYPE)))
+        {
+        	throw new SkipException("The API Definition was found to be valid. However, the Media Type identified by the Link to the API Definition document was not "+OPEN_API_MIME_TYPE);
+        }
    
         assertTrue( apiModel.isValid(), createValidationMsg( apiModel ) );
  
-        testContext.getSuite().setAttribute( API_MODEL.getName(), apiModel );
     }
 
-    private String parseApiUrl( JsonPath jsonPath ) {
+    private Link parseApiUrl( JsonPath jsonPath ) {
+    	
+    	
     	
         for ( Object link : jsonPath.getList( "links" ) ) {
             Map<String, Object> linkMap = (Map<String, Object>) link;
             Object rel = linkMap.get( "rel" );
             Object type = linkMap.get( "type" );
-            if ( ("service-doc".equals( rel ) || "service-desc".equals( rel ))  )  //TODO should only be service-desc
+            if ("service-desc".equals( rel ))  //Check service-desc first
             {
-            	//if(OPEN_API_MIME_TYPE.equals( type ))    //TODO This should be enabled
-            	  {
+            	return new Link((String) linkMap.get( "href" ),
+            			(String)rel,
+            			(String)type);
+            	
+            	  
+            }
+            else if ("service-doc".equals( rel )) 
+            {
 
-            		return (String) linkMap.get( "href" );
-            	  }
+            	return new Link((String) linkMap.get( "href" ),
+            			(String)rel,
+            			(String)type);
+            	  
             }
         }
         return null;
