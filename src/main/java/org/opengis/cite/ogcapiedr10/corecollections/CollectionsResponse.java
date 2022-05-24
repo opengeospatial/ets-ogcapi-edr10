@@ -368,7 +368,7 @@ public class CollectionsResponse extends CommonFixture {
     	    if(checkExtentInCollection(jsonPathCol)==false) resultMessageForCollectionExtent.append(collectionMap.get("id").toString()+" , ");
     	    
     	  
-    	  //Abstract Test 15
+    	    //Abstract Test 15
     	    ArrayList linksList1 = (ArrayList) collectionMap.get("links");
     	    
     	    collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList1);
@@ -446,7 +446,7 @@ public class CollectionsResponse extends CommonFixture {
     	        if (linksMap.get("rel").toString().equals("alternate")) hasAlternateRel = true;
     	    }
     	    
-    	    if (hasSelfRel && hasAlternateRel) return true;
+    	    if (hasSelfRel || hasAlternateRel) return true;
     	    return false;
     	    
     	}
