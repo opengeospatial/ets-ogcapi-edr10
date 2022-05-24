@@ -368,30 +368,18 @@ public class CollectionsResponse extends CommonFixture {
     	    if(checkExtentInCollection(jsonPathCol)==false) resultMessageForCollectionExtent.append(collectionMap.get("id").toString()+" , ");
     	    
     	  
+    	  //Abstract Test 15
     	    ArrayList linksList1 = (ArrayList) collectionMap.get("links");
     	    
     	    collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList1);
     	    
-    	    //try {
-    	    //FileWriter fw = new FileWriter("/Users/gobehobona/Downloads/0output2.txt",true);
-    	    //fw.write(collectionMap.get("id").toString()+" "+collectionHasDataOrCollectionLinks+" "+linksList1.size()+"\n");
-    	    //fw.close();
-    	    //}
-    	    //catch(Exception er) {er.printStackTrace();}
+    
     	    
     	    
     	    //Abstract Test 16
     	    List<Object> linksList = jsonPathCol.getList("links");    	    
     	    collectionHasSelfAndAlternateLinks = checkSelfAndAlternateLinksArePresentInCollectionMetadata(linksList);
-    	    //Abstract Test 15
-    	    //collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList);
     	    
-    	    //try {
-    	    //FileWriter fw = new FileWriter("/Users/gobehobona/Downloads/0output1.txt",true);
-    	    //fw.write(collectionMap.get("id").toString()+" "+collectionHasDataOrCollectionLinks+" "+linksList.size()+"\n");
-    	    //fw.close();
-    	    //}
-    	    //catch(Exception er) {er.printStackTrace();}
     	    
     	    if(collectionHasSelfAndAlternateLinks==false) resultMessageForSelfAndAlternateLinks.append(collectionMap.get("id").toString()+" , ");
     	    if(collectionHasDataOrCollectionLinks==false) resultMessageForDataOrCollectionLinks.append(collectionMap.get("id").toString()+" , ");
