@@ -14,7 +14,7 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseTemporalExtent;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-
+import java.io.FileWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;
@@ -360,17 +360,38 @@ public class CollectionsResponse extends CommonFixture {
     	    //Test Method 2 of Abstract Test 14: Verify that each collection entry includes an identifier.
     	    if(collectionMap.containsKey("id")==false) resultMessageForCollectionId.append(collectionMap.get("id").toString()+" , ");
     	    
-    	    //Test Method 1 of Abstract Test 14: Verify that all collections listed in the collections array of the Collections Metadata exist.    	    
+    	    //Test Method 1 of Abstract Test 14: Verify that all collections listed in the collections array of the Collections Metadata exist.
+    	    
     	    JsonPath jsonPathCol = getCollectionMetadata(collectionMap.get("id").toString());
         
     	    //Abstract Test 13
     	    if(checkExtentInCollection(jsonPathCol)==false) resultMessageForCollectionExtent.append(collectionMap.get("id").toString()+" , ");
     	    
+    	  
+    	    ArrayList linksList1 = (ArrayList) collectionMap.get("links");
+    	    
+    	    collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList1);
+    	    
+    	    //try {
+    	    //FileWriter fw = new FileWriter("/Users/gobehobona/Downloads/0output2.txt",true);
+    	    //fw.write(collectionMap.get("id").toString()+" "+collectionHasDataOrCollectionLinks+" "+linksList1.size()+"\n");
+    	    //fw.close();
+    	    //}
+    	    //catch(Exception er) {er.printStackTrace();}
+    	    
+    	    
     	    //Abstract Test 16
     	    List<Object> linksList = jsonPathCol.getList("links");    	    
     	    collectionHasSelfAndAlternateLinks = checkSelfAndAlternateLinksArePresentInCollectionMetadata(linksList);
     	    //Abstract Test 15
-    	    collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList);
+    	    //collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList);
+    	    
+    	    //try {
+    	    //FileWriter fw = new FileWriter("/Users/gobehobona/Downloads/0output1.txt",true);
+    	    //fw.write(collectionMap.get("id").toString()+" "+collectionHasDataOrCollectionLinks+" "+linksList.size()+"\n");
+    	    //fw.close();
+    	    //}
+    	    //catch(Exception er) {er.printStackTrace();}
     	    
     	    if(collectionHasSelfAndAlternateLinks==false) resultMessageForSelfAndAlternateLinks.append(collectionMap.get("id").toString()+" , ");
     	    if(collectionHasDataOrCollectionLinks==false) resultMessageForDataOrCollectionLinks.append(collectionMap.get("id").toString()+" , ");
@@ -448,13 +469,20 @@ public class CollectionsResponse extends CommonFixture {
     		
        	  boolean hasDataRel = false;
        	  boolean hasCollectionRel = false;
+       	  
+
        	    
     	    for(int w = 0; w < linksList.size(); w++)
     	    {
     			HashMap linksMap = (HashMap) linksList.get(w);
+
+
     	        if (linksMap.get("rel").toString().equals("data")) hasDataRel = true;
     	        if (linksMap.get("rel").toString().equals("collection")) hasCollectionRel = true;
     	    }
+        	    
+
+			
     	    
     	    if (hasDataRel || hasCollectionRel) return true;
     	    return false;
