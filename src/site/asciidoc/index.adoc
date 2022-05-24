@@ -25,14 +25,17 @@ conforming implementation.
 
 There are some requirements the test suite expects to be satisfied by the service under test:
 
-* General:
+* Pre-requisites for the Core and Collections conformance classes tests:
     - The API landing page response must be available in JSON.
-    - The API definition response must be available in OpenAPI 3.0.
-    - The conformance classes response must be available in JSON.
+    - The API definition response must be available in the JSON-encoded of OpenAPI 3.0.
+    - The conformance declaration response must be available in JSON.
     - The collections metadata response and feature collection metadata responses must be available in JSON.
-    - The collection metadata must declared the supported data_queries, parameter_names, output_formats, spatial extent, and temporal extent
+    - The collection metadata must declare support for data_queries, parameter_names, output_formats, spatial extent, and temporal extent
     - Collections and query responses must be available in either CoverageJSON or GeoJSON.
     - The CRS84 (http://www.opengis.net/def/crs/OGC/1.3/CRS84) coordinate reference system must be supported.
+
+* Pre-requisites for the EDR GeoJSON conformance classes tests:
+    - At least one collection must offer a Position query that returns content encoded as EDR GeoJSON.
 
 == Test suite structure
 
