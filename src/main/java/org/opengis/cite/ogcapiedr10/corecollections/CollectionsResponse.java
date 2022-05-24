@@ -14,7 +14,7 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseTemporalExtent;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.io.FileWriter;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;

@@ -8,7 +8,7 @@ import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
-import java.io.FileWriter;
+
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
