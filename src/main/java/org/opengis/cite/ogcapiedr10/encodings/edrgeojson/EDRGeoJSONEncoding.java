@@ -11,6 +11,7 @@ import org.opengis.cite.ogcapiedr10.EtsAssert;
 import org.opengis.cite.ogcapiedr10.encodings.geojson.GeoJSONValidator;
 import org.testng.annotations.Test;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -43,13 +44,21 @@ public class EDRGeoJSONEncoding extends CommonFixture {
      */
     @Test(description = "Implements Abstract Test 22 (/conf/edr-geojson/definition), Abstract Test 23 (/conf/edr-geojson/content)")
     public void validateResponseForEDRGeoJSON() {
+    	
+
 
         StringBuffer sb = new StringBuffer();
         boolean atLeastOneCollectionTested = false; //we test the first locations resource we find
         Response response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET ,"/collections");
         JsonPath jsonResponse = response.jsonPath();
+
+  
+        
         ArrayList collectionsList = (ArrayList) jsonResponse.getList("collections");
 
+        
+    
+        
         for(int i=0; (i< collectionsList.size()) && (atLeastOneCollectionTested==false); i++)
         {
             HashMap collectionItem = (HashMap) collectionsList.get(i);
@@ -64,6 +73,10 @@ public class EDRGeoJSONEncoding extends CommonFixture {
                 HashMap link = (HashMap) positionQuery.get("link");
                 HashMap variables = (HashMap) link.get("variables");
                 
+                
+      
+                
+                
                 ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
                 String supportedFormat = null;
 
@@ -73,7 +86,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
                     }
                 }
        
-
+           
                 
                 ArrayList<String> crsList = (ArrayList<String>) collectionItem.get("crs");
 
@@ -83,8 +96,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
                     		crsList.get(f).equals("CRS:84") || 
                     		crsList.get(f).equals("WGS84") || 
                     		crsList.get(f).equals("EPSG:4326") ||
-                    		crsList.get(f).equals("http://www.opengis.net/def/crs/OGC/1.3/CRS84") || 
-                    		crsList.get(f).equals("https://www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                    		crsList.get(f).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
                         supportedCRS = crsList.get(f);
                     }
                 }          
@@ -109,12 +121,24 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 						 }
 
 
-					ArrayList bboxEnv = (ArrayList) spatial.get("bbox"); // for some unknown reason the library returns
+	          				
+
+	            	  ArrayList bboxEnv = (ArrayList) spatial.get("bbox"); // for some unknown reason the library returns JSON types as Integers only
 
 
-					ArrayList bbox = (ArrayList) bboxEnv.get(0);
+	                    ArrayList bbox = null;
 
+	                    if(bboxEnv.get(0).getClass().toString().contains("java.lang.Integer") ||
+	                            bboxEnv.get(0).getClass().toString().contains("java.lang.Double")||
+	                            bboxEnv.get(0).getClass().toString().contains("java.lang.Float")) {	//for EDR API V1.0.0
+	                        bbox = bboxEnv;
 
+	                    }
+	                    else if(bboxEnv.get(0).getClass().toString().contains("java.util.ArrayList")) {  //for EDR API V1.0.1
+	                        bbox = (ArrayList) bboxEnv.get(0);
+	                    }
+
+	  	
 					
 					if (bbox.size() > 3) {
 						
@@ -131,8 +155,9 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 							medianx = minx + ((maxx - minx) / 2d);
 							mediany = miny + ((maxy - miny) / 2d);
 							
-
-
+	
+							
+							
 						}
 
 					} else {
@@ -142,6 +167,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
 				}           
 
+           
 
 				HashMap parameterNames = (HashMap) collectionItem.get("parameter_names");
 				Set parameterNamesSet = parameterNames.keySet();
@@ -172,12 +198,24 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 						  continue;
 						 }
 
+					
+	         				
 
 					ArrayList intervalEnv = (ArrayList) temporal.get("interval"); // for some unknown reason the library returns
 
+								
 
-					ArrayList interval = (ArrayList) intervalEnv.get(0);
-
+	            	ArrayList interval = null;
+					
+	   
+	            	if(intervalEnv.get(0).getClass().toString().contains("java.lang.String")) { //EDR API v1.0.0	            		
+	            		interval = intervalEnv;
+	            	}
+	            	else { //EDR API v1.0.1
+	            		interval = (ArrayList) intervalEnv.get(0);
+	            	}
+	            	
+	          
 
 					
 					if (interval.size() > 1) {
@@ -217,9 +255,10 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
 	                        atLeastOneCollectionTested = true;
 	                        if(result==false) {
-	                    		String msg = " Collection "+collectionId+" was found not to offer GeoJSON encoded responses that are referenced to CRS84.\n";
+	                    		String msg = " GeoJSON returned by Collection "+collectionId+" failed the schema validation test.\n";
 	                    		System.out.println(msg);
-	                            sb.append(msg);	                        }
+	                            sb.append(msg);	                        
+	                            }
 	                     }
                     	else {
                     		String msg = " Collection "+collectionId+" was found not to offer GeoJSON encoded responses that are referenced to CRS84.\n";
@@ -241,17 +280,21 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
             }
             else {
-                sb.append(" None of the collections were found to offer locations resources.\n");
+            	if(!sb.toString().contains(" None of the collections were found to offer Position resources that return GeoJSON.\n"))
+                {
+            		sb.append(" None of the collections were found to offer Position resources that return GeoJSON.\n");
+                }
             }
 
         }
+        
+         
 
 
-        String resultMessage = sb.toString();
-        EtsAssert.assertTrue(resultMessage.length()==0,
-                "Fails Abstract Test 23. "
-                        + resultMessage);
+        //String resultMessage = sb.toString(); //verbose error message
+        //EtsAssert.assertTrue(atLeastOneCollectionTested, "Fails Abstract Test 23. "   + resultMessage);
 
+        EtsAssert.assertTrue(atLeastOneCollectionTested, "Fails Abstract Test 23. None of the collections were found to offer Position resources that return GeoJSON conforming to EDR GeoJSON.\n");
 
 
     }
