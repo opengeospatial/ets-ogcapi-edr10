@@ -365,15 +365,7 @@ public class QueryCollections extends CommonFixture {
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 53 (/conf/area), Abstract Test 55 (/conf/edr/rc-coords-response), Abstract Test 57 (/conf/edr/rc-z-response),  Abstract Test 59 (/conf/core/datetime-response),  Abstract Test 61 (/conf/edr/rc-parameter-name-response), Abstract Test 63 (/conf/edr/REQ_rc-crs-response), Abstract Test 65 (/conf/collections/rc-f-response)")
 	public void validateAreaQueryUsingParameters(Object collectionIdentifiers) {
 
-		/*try {
-		 * docker build -t ets-ogcapi-edr10:local .
-		 * docker run -p 8081:8080 -v "$(pwd)":/ets ets-ogcapi-edr10:local
-		FileWriter fw = new FileWriter("/ets/output.txt");
-		fw.write("CHK noOfCollections in QueryCollections.validateAreaQueryUsingParameters()="+this.noOfCollections+"\n");
-		fw.close();
-		}
-		catch(Exception ee) {ee.printStackTrace();}
-		*/
+	
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 
