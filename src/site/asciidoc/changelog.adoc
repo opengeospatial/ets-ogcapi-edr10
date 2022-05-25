@@ -4,6 +4,7 @@
 
 The third release.
 
+* https://github.com/opengeospatial/ets-ogcapi-edr10/commit/d309ced1863c174e706ed40d33480c8e5421cdfe[Added integration test - VerifyTestNGController]
 * https://api.github.com/repos/opengeospatial/ets-ogcapi-edr10/git/commits/76be50942892a20baa0d0547495ea077c8a0c490[Updated QueryCollections.java]
 * https://api.github.com/repos/opengeospatial/ets-ogcapi-edr10/git/commits/49642d651dca4e31b606b2c51284977d75670513[Fix apimodel references - plus gc]
 * https://api.github.com/repos/opengeospatial/ets-ogcapi-edr10/git/commits/61673142d470c947d182fa8e9229d67b2055ac5c[clean up file writers]
