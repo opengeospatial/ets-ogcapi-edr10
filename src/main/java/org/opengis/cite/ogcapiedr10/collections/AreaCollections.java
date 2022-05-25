@@ -45,6 +45,7 @@ import io.restassured.response.Response;
  */
 public class AreaCollections extends AbstractFeatures {
 
+	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
 	 * Abstract Test 54: Validate that the coords query parameters are constructed correctly. (area)
@@ -55,11 +56,11 @@ public class AreaCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 54 (/conf/edr/rc-coords-definition)", dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaCoordsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.coordsParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
 	
-
+		
 	}
 
 	/**
@@ -72,9 +73,9 @@ public class AreaCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 58 (/conf/core/datetime-definition)", dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaDateTimeParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.dateTimeParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.dateTimeParameterDefinition(testPoint,this.getModel()); System.gc();
 		
 
 	}
@@ -87,9 +88,9 @@ public class AreaCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 60 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaParameternameParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.parameternameParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.parameternameParameterDefinition(testPoint,this.getModel()); System.gc();	
 	}
 
 	/**
@@ -100,9 +101,9 @@ public class AreaCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 62 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaCrsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.crsParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.crsParameterDefinition(testPoint,this.getModel()); System.gc();	
 
 	}
 	
@@ -117,9 +118,9 @@ public class AreaCollections extends AbstractFeatures {
 	public void areaFParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.fParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.fParameterDefinition(testPoint,this.getModel()); System.gc();
 	}	
 
 	/**
@@ -131,9 +132,9 @@ public class AreaCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 56 (/conf/edr/rc-z-definition)", dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaZParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.zParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.zParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}	
 

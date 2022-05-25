@@ -45,6 +45,7 @@ import io.restassured.response.Response;
  */
 public class PositionCollections extends AbstractFeatures {
 
+	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
 	 * Abstract Test 38: Validate that the coords query parameters are constructed correctly. (position)
@@ -55,9 +56,9 @@ public class PositionCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 36 (/conf/edr/rc-coords-definition)", dataProvider = "positionCollectionPaths", alwaysRun = true)
 	public void positionCoordsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.coordsParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
 	
 
 	}
@@ -72,9 +73,9 @@ public class PositionCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 42 (/conf/core/datetime-definition)", dataProvider = "positionCollectionPaths", alwaysRun = true)
 	public void positionDateTimeParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.dateTimeParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.dateTimeParameterDefinition(testPoint,this.getModel()); System.gc();
 		
 
 	}
@@ -87,9 +88,9 @@ public class PositionCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 44 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "positionCollectionPaths", alwaysRun = true)
 	public void positionParameternameParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.parameternameParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.parameternameParameterDefinition(testPoint,this.getModel()); System.gc();	
 	}
 
 	/**
@@ -100,9 +101,9 @@ public class PositionCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 46 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "positionCollectionPaths", alwaysRun = true)
 	public void positionCrsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.crsParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.crsParameterDefinition(testPoint,this.getModel()); System.gc();	
 
 	}
 	
@@ -117,9 +118,9 @@ public class PositionCollections extends AbstractFeatures {
 	public void positionFParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.fParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.fParameterDefinition(testPoint,this.getModel()); System.gc();
 	}	
 
 	/**
@@ -131,9 +132,9 @@ public class PositionCollections extends AbstractFeatures {
 	@Test(description = "Abstract Test 40 (/conf/edr/rc-z-definition)", dataProvider = "positionCollectionPaths", alwaysRun = true)
 	public void positionZParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.zParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.zParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}	
 

@@ -45,6 +45,7 @@ import io.restassured.response.Response;
  */
 public class CubeCollections extends AbstractFeatures {
 
+	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
 	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
@@ -55,9 +56,9 @@ public class CubeCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 70 (/conf/edr/rc-coords-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeCoordsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.coordsParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
 	
 
 	}
@@ -72,9 +73,9 @@ public class CubeCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 74 (/conf/core/datetime-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeDateTimeParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.dateTimeParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.dateTimeParameterDefinition(testPoint,this.getModel()); System.gc();
 		
 
 	}
@@ -87,9 +88,9 @@ public class CubeCollections extends AbstractFeatures {
 	@Test(description = "Implements 76 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeParameternameParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.parameternameParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.parameternameParameterDefinition(testPoint,this.getModel()); System.gc();	
 	}
 
 	/**
@@ -100,9 +101,9 @@ public class CubeCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 78 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeCrsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.crsParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.crsParameterDefinition(testPoint,this.getModel()); System.gc();	
 
 	}
 	
@@ -117,9 +118,9 @@ public class CubeCollections extends AbstractFeatures {
 	public void cubeFParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.fParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.fParameterDefinition(testPoint,this.getModel()); System.gc();
 	}	
 
 	/**
@@ -131,9 +132,9 @@ public class CubeCollections extends AbstractFeatures {
 	@Test(description = "Implements VerticalLevel check of Abstract Test 69 (/conf/cube)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
 	public void cubeZParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.zParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.zParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}	
 

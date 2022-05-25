@@ -45,6 +45,7 @@ import io.restassured.response.Response;
  */
 public class CorridorCollections extends AbstractFeatures {
 
+	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
 	 * Abstract Test 38: Validate that the coords query parameters are constructed correctly. (position)
@@ -60,9 +61,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorCoordsParameterDefinition(TestPoint testPoint) {
 		
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.coordsParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
 	
 
 	}
@@ -83,9 +84,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorDateTimeParameterDefinition(TestPoint testPoint) {
 	
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.dateTimeParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.dateTimeParameterDefinition(testPoint,this.getModel()); System.gc();
 		
 
 	}
@@ -104,9 +105,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorParameternameParameterDefinition(TestPoint testPoint) {
 	
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.parameternameParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.parameternameParameterDefinition(testPoint,this.getModel()); System.gc();	
 	}
 
 	/**
@@ -123,9 +124,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorCrsParameterDefinition(TestPoint testPoint) {
 	
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.crsParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.crsParameterDefinition(testPoint,this.getModel()); System.gc();	
 
 	}
 	
@@ -146,9 +147,9 @@ public class CorridorCollections extends AbstractFeatures {
 	
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.fParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.fParameterDefinition(testPoint,this.getModel()); System.gc();
 	}	
 
 	/**
@@ -162,9 +163,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorZParameterDefinition(TestPoint testPoint) {
 		
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.zParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.zParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}	
 
@@ -181,9 +182,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorWithinParameterDefinition(TestPoint testPoint) {
 	
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.withinParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.withinParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}	
 	
@@ -200,9 +201,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorWithinUnitsParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.withinUnitsParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.withinUnitsParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}
 
@@ -223,9 +224,9 @@ public class CorridorCollections extends AbstractFeatures {
 	public void corridorCorridorHeightParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.corridorHeightParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.corridorHeightParameterDefinition(testPoint,this.getModel()); System.gc();
 	}
 
 	/**
@@ -240,9 +241,9 @@ public class CorridorCollections extends AbstractFeatures {
 		
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.corridorWidthParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.corridorWidthParameterDefinition(testPoint,this.getModel()); System.gc();
 	}
 	
 	

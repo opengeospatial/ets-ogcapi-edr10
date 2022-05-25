@@ -45,6 +45,7 @@ import io.restassured.response.Response;
  */
 public class TrajectoryCollections extends AbstractFeatures {
 
+	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
 	 * Abstract Test 92: Validate that the coords query parameters are constructed correctly. (trajectory)
@@ -55,9 +56,9 @@ public class TrajectoryCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 92 (/conf/edr/rc-coords-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryCoordsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.coordsParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
 	
 
 	}
@@ -72,9 +73,9 @@ public class TrajectoryCollections extends AbstractFeatures {
 	@Test(description = "Implements datetime parameter part of Abstract Test 91 (/conf/trajectory)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryDateTimeParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.dateTimeParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.dateTimeParameterDefinition(testPoint,this.getModel()); System.gc();
 		
 
 	}
@@ -87,9 +88,9 @@ public class TrajectoryCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 94 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryParameternameParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.parameternameParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.parameternameParameterDefinition(testPoint,this.getModel()); System.gc();	
 	}
 
 	/**
@@ -100,9 +101,9 @@ public class TrajectoryCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 96 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryCrsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.crsParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.crsParameterDefinition(testPoint,this.getModel()); System.gc();	
 
 	}
 	
@@ -117,9 +118,9 @@ public class TrajectoryCollections extends AbstractFeatures {
 	public void trajectoryFParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.fParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.fParameterDefinition(testPoint,this.getModel()); System.gc();
 	}	
 
 	/**
@@ -130,10 +131,8 @@ public class TrajectoryCollections extends AbstractFeatures {
 	 */
 	@Test(description = "Implements VerticalLevel part of Abstract Test 91 (/conf/trajectory)", dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryZParameterDefinition(TestPoint testPoint) {
-
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.zParameterDefinition(testPoint,apiModel);
+		
+		ct.zParameterDefinition(testPoint,this.getModel()); System.gc();
 
 	}	
 

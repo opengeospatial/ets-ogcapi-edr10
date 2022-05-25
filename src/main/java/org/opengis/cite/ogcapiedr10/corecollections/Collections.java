@@ -46,7 +46,7 @@ public class Collections extends CommonDataFixture {
     public Object[][] collectionsUris(ITestContext testContext) {
         if (this.testPointsData == null) {
             URI iut = (URI) testContext.getSuite().getAttribute(IUT.getName());
-            List<TestPoint> testPoints = retrieveTestPointsForCollectionsMetadata(getApiModel(), iut);
+            List<TestPoint> testPoints = retrieveTestPointsForCollectionsMetadata(this.getModel(), iut);
             this.testPointsData = new Object[testPoints.size()][];
             int i = 0;
             for (TestPoint testPoint : testPoints) {

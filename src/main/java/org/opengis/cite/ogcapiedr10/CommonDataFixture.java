@@ -27,13 +27,25 @@ public class CommonDataFixture extends CommonFixture {
 
 	private static final int DEFAULT_NUMBER_OF_COLLECTIONS = 3;
 
-	public OpenApi3 apiModel = null;
+	private OpenApi3 apiModel = null;
 	
 	public URI modelUri = null;
 
 	private List<RequirementClass> requirementClasses;
 
 	protected int noOfCollections = DEFAULT_NUMBER_OF_COLLECTIONS;
+	
+	
+	
+	public OpenApi3 getModel()
+	{
+		if(this.apiModel==null) {
+			String msg = "apiModel is null in CommonDataFixture";
+			System.out.println(msg);
+			throw new NullPointerException(msg);
+		}
+		return this.apiModel;
+	}	
 
 	@BeforeClass
 	public void requirementClasses(ITestContext testContext) {
@@ -89,12 +101,7 @@ public class CommonDataFixture extends CommonFixture {
 
 	}
 
-	public OpenApi3 getApiModel() {
 
-		if (apiModel == null)
-			throw new SkipException("ApiModel is not available.");
-		return apiModel;
-	}
 
 	protected List<String> createListOfMediaTypesToSupportForOtherResources(Map<String, Object> linkToSelf) {
 		if (this.requirementClasses == null)

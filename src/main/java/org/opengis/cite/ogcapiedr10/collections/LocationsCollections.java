@@ -45,7 +45,7 @@ import io.restassured.response.Response;
  */
 public class LocationsCollections extends AbstractFeatures {
 
-
+	CollectionsTime ct= new CollectionsTime();
 
 	/**
 	 * <pre>
@@ -57,9 +57,9 @@ public class LocationsCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 139 (/conf/core/datetime-definition)", dataProvider = "locationsCollectionPaths", alwaysRun = true)
 	public void locationsDateTimeParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.dateTimeParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.dateTimeParameterDefinition(testPoint,this.getModel()); System.gc();
 		
 
 	}
@@ -72,9 +72,9 @@ public class LocationsCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 141 (/conf/collections/REQ_rc-parameter-name-definition)", dataProvider = "locationsCollectionPaths", alwaysRun = true)
 	public void locationsParameternameParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.parameternameParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.parameternameParameterDefinition(testPoint,this.getModel()); System.gc();	
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class LocationsCollections extends AbstractFeatures {
 	@Test(description = "Implements Abstract Test 143 (/conf/edr/REQ_rc-crs-definition)", dataProvider = "locationsCollectionPaths", alwaysRun = true)
 	public void locationsCrsParameterDefinition(TestPoint testPoint) {
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.crsParameterDefinition(testPoint,apiModel);	
+		
+		
+		ct.crsParameterDefinition(testPoint,this.getModel()); System.gc();	
 
 	}
 	
@@ -102,9 +102,9 @@ public class LocationsCollections extends AbstractFeatures {
 	public void locationsFParameterDefinition(TestPoint testPoint) {
 
 
-		OpenApi3 model = apiModel;
-		CollectionsTime ct= new CollectionsTime();
-		ct.fParameterDefinition(testPoint,apiModel);
+		
+		
+		ct.fParameterDefinition(testPoint,this.getModel()); System.gc();
 	}	
 
 	

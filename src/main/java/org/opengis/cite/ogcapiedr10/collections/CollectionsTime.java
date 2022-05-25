@@ -44,6 +44,8 @@ import io.restassured.response.Response;
  *
  */
 public class CollectionsTime{
+	
+	
 
     protected boolean isRequired( Parameter param ) {
         return param.getRequired() != null && param.getRequired();
@@ -447,6 +449,8 @@ public class CollectionsTime{
 	  assertEquals( within.getStyle(), "form", String.format( msg, "style","form", within.getStyle() ) );
 	  assertFalse(isExplode(within), String.format(msg, "explode", "false", within.getExplode()));		
 	  }	
+	  
+	  
 
 	}	
 	
@@ -502,7 +506,9 @@ public class CollectionsTime{
 	  assertFalse(isRequired(withinUnits), String.format(msg, "required", "false", withinUnits.getRequired()));
 	  assertEquals( withinUnits.getStyle(), "form", String.format( msg, "style","form", withinUnits.getStyle() ) );
 	  assertFalse(isExplode(withinUnits), String.format(msg, "explode", "false", withinUnits.getExplode()));		
-	  }	
+	  }
+	  
+	  
 
 	}
 
@@ -561,6 +567,8 @@ public class CollectionsTime{
 	  assertEquals( resolutionx.getStyle(), "form", String.format( msg, "style","form", resolutionx.getStyle() ) );
 	  assertFalse(isExplode(resolutionx), String.format(msg, "explode", "false", resolutionx.getExplode()));		
 	  }
+	  
+	  
 
 	}
 
@@ -617,6 +625,7 @@ public class CollectionsTime{
 	  assertFalse(isExplode(resolutiony), String.format(msg, "explode", "false", resolutiony.getExplode()));		
 	  }
 
+	  
 	}
 
 	/**
@@ -670,6 +679,8 @@ public class CollectionsTime{
 	  assertEquals( resolutionz.getStyle(), "form", String.format( msg, "style","form", resolutionz.getStyle() ) );
 	  assertFalse(isExplode(resolutionz), String.format(msg, "explode", "false", resolutionz.getExplode()));		
 	  }
+	  
+	  
 	}
 
 	/**
@@ -722,6 +733,8 @@ public class CollectionsTime{
 	  assertEquals( corridorHeight.getStyle(), "form", String.format( msg, "style","form", corridorHeight.getStyle() ) );
 	  assertFalse(isExplode(corridorHeight), String.format(msg, "explode", "false", corridorHeight.getExplode()));		
 	  }	
+	  
+	  
 	}
 
 	/**
@@ -773,6 +786,8 @@ public class CollectionsTime{
 	  assertEquals( corridorWidth.getStyle(), "form", String.format( msg, "style","form", corridorWidth.getStyle() ) );
 	  assertFalse(isExplode(corridorWidth), String.format(msg, "explode", "false", corridorWidth.getExplode()));		
 	  }	
+	  
+	  
 	}
 	
 	
