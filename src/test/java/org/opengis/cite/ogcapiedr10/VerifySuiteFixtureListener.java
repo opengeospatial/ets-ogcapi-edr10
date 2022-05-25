@@ -10,6 +10,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Source;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,6 +22,7 @@ import org.junit.Test;
 import org.mockito.Matchers;
 import org.testng.ISuite;
 import org.testng.xml.XmlSuite;
+import org.w3c.dom.Document;
 
 public class VerifySuiteFixtureListener {
 
@@ -54,17 +59,6 @@ public class VerifySuiteFixtureListener {
         iut.onStart(suite);
     }
 
-    /*@Test
-    public void processIUTParameter() throws URISyntaxException {
-        URL url = this.getClass().getResource("/atom-feed.xml");
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(TestRunArg.IUT.toString(), url.toURI().toString());
-        when(xmlSuite.getParameters()).thenReturn(params);
-        SuiteFixtureListener iut = new SuiteFixtureListener();
-        iut.onStart(suite);
-        verify(suite).setAttribute(
-                Matchers.eq(SuiteAttribute.TEST_SUBJ_FILE.getName()),
-                Matchers.isA(File.class));
-    }*/
+
 
 }
