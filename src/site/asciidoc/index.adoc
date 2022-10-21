@@ -23,6 +23,8 @@ The documents listed below stipulate requirements that the Executable Test Suite
 1. https://docs.ogc.org/is/19-086r5/19-086r5.html[OGC API - Environmental Data Retrieval, version 1.0.1, specified in OGC 19-086r5]
 2. https://docs.ogc.org/is/19-086r4/19-086r4.html[OGC API - Environmental Data Retrieval, version 1.0.0, specified in OGC 19-086r4]
 
+NOTE: It is recommended that developers implement *OGC API - Environmental Data Retrieval, version 1.0.1 (OGC 19-086r5)*.
+
 There are some requirements the test suite expects to be satisfied by the service under test:
 
 * Pre-requisites for the Core and Collections conformance classes tests:
