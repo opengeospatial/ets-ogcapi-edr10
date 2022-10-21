@@ -32,8 +32,10 @@
              <div style="background:#F0F8FF" bgcolor="#F0F8FF">
                <p>The implementation under test (IUT) is checked against the following specifications:</p>
                <ul>
-                 <li><a href="https://ogcapi.ogc.org/edr">OGC API - Environmental Data Retrieval standard 1.0.0</a></li>
+                 <li><a href="https://docs.ogc.org/is/19-086r5/19-086r5.html">OGC API - Environmental Data Retrieval standard 1.0.1 (OGC 19-086r5)</a></li>
+                 <li><a href="https://docs.ogc.org/is/19-086r4/19-086r4.html">OGC API - Environmental Data Retrieval standard 1.0.0 (OGC 19-086r4)</a></li>                 
                </ul>
+               <p>Only one of the above listed standards needs to be implemented by a product. OGC recommends implementing the latest version (1.0.1) of the standard.</p>
                <p>Several conformance classes are defined in the principal specifications. The ones listed below are covered by this test suite:</p>
                <ul>
                  <li>Core</li>
