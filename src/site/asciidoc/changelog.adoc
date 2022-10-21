@@ -1,5 +1,11 @@
 = Release Notes
 
+== 0.4 (2022-10-21)
+
+* https://github.com/opengeospatial/ets-ogcapi-edr10/commit/5d6af84fbd9d92bb654217d1106d11b65773109e[Updated index.adoc to list OGC API EDR v1.0.1]
+* https://github.com/opengeospatial/ets-ogcapi-edr10/commit/29ddf005f6d71ea8ea497ea73de0bdc8228ab1ca[Updated ogcapi-edr10-suite.ctl to list OGC API EDR v1.0.1]
+* https://github.com/opengeospatial/ets-ogcapi-edr10/commit/67d8e30dfa2e489ed76881bf6086f296f93438ae[Expanded scope of checkExtentInCollection method]
+
 == 0.3 (2022-05-30)
 
 The third release.
