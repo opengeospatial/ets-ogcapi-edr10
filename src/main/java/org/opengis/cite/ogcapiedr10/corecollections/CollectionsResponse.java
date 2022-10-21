@@ -409,11 +409,13 @@ public class CollectionsResponse extends CommonFixture {
     	private boolean checkExtentInCollection(JsonPath jsonPathCol)
     	{
     
-      	  HashMap extentMap = (HashMap) jsonPathCol.get("extent");
- 
-      	  HashMap spatialMap = (HashMap) extentMap.get("spatial");
-      	  
-      	  return spatialMap.containsKey("bbox");
+    	    HashMap extentMap = (HashMap) jsonPathCol.get("extent");
+
+    	    return extentMap.containsKey("spatial");
+    	    
+    	    // Deactivated because of changes between v1.0.0 and v1.0.1               	  
+    	    //HashMap spatialMap = (HashMap) extentMap.get("spatial"); 	  
+    	    //return spatialMap.containsKey("bbox");
        	
     	}    	
     	/*
