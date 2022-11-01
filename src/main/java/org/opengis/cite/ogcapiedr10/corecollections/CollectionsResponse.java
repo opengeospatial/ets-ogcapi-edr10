@@ -165,7 +165,7 @@ public class CollectionsResponse extends CommonFixture {
 
     	@Test(description = "Implements Abstract Test 8 (/conf/core/crs84)")
     	public void collectionsCRS84() {
-
+    		
     		boolean compliesWithCRS84Requirement = true;
     		StringBuffer resultMessage = new StringBuffer();
 
@@ -175,21 +175,33 @@ public class CollectionsResponse extends CommonFixture {
     		JsonPath jsonPath = response.jsonPath();
 
     		List<Object> collectionsList = jsonPath.getList("collections");
-
-    		
-
     		
     		
     		for (int t = 0; t < collectionsList.size(); t++) {
     			boolean supportsCRS84 = false;
     			
-    		
-    			
     			HashMap collectionMap = (HashMap) collectionsList.get(t);
 
-    			String crsText = collectionMap.get("crs").toString();
+    			String crsText = null;
     			
+    			if(collectionMap.containsKey("crs")) {
+    			  crsText = collectionMap.get("crs").toString();
+    			}
+    			else {
+    				
+    				if(collectionMap.containsKey("extent")) {
+    	  
+	    			    HashMap extentMap = (HashMap) collectionMap.get("extent");
+
+    				    HashMap spatialMap = (HashMap) extentMap.get("spatial");
+
+	            		crsText = spatialMap.get("crs").toString();
+	            		
+	            	
+    				}
     		
+    			}
+
     			
     			if (crsText.contains("CRS:84") || crsText.contains("CRS84") || crsText.contains("EPSG:4326") || crsText.contains("WGS84") || crsText.contains("www.opengis.net/def/crs/OGC/1.3/CRS84")){ 
     				compliesWithCRS84Requirement = true;
@@ -200,8 +212,7 @@ public class CollectionsResponse extends CommonFixture {
     			}
 
     		}
-    		
-    	
+   
   
 
     		org.testng.Assert.assertTrue(compliesWithCRS84Requirement,
@@ -369,16 +380,16 @@ public class CollectionsResponse extends CommonFixture {
     	    
     	  
     	    //Abstract Test 15
-    	    ArrayList linksList1 = (ArrayList) collectionMap.get("links");
+    	    List<Object> linksList1 = jsonPathCol.getList("links"); 
+    	    linksList1.addAll((ArrayList) collectionMap.get("links"));  //in some cases, the links shown for the collection at /collections are a subset of those shown in /collections/collectionid
     	    
     	    collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList1);
     	    
     
     	    
     	    
-    	    //Abstract Test 16
-    	    List<Object> linksList = jsonPathCol.getList("links");    	    
-    	    collectionHasSelfAndAlternateLinks = checkSelfAndAlternateLinksArePresentInCollectionMetadata(linksList);
+    	    //Abstract Test 16    	    
+    	    collectionHasSelfAndAlternateLinks = checkSelfAndAlternateLinksArePresentInCollectionMetadata(linksList1);
     	    
     	    
     	    if(collectionHasSelfAndAlternateLinks==false) resultMessageForSelfAndAlternateLinks.append(collectionMap.get("id").toString()+" , ");
