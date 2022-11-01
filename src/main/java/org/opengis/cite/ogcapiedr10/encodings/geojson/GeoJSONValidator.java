@@ -3,7 +3,7 @@ package org.opengis.cite.ogcapiedr10.encodings.geojson;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
-import org.json.JSONTokener;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
