@@ -1,13 +1,7 @@
-position,34,49
-area,50,64
-cube,66,81
-trajectory,82,99
-corridor,100,131
-instances,132,135
-locations,136,146
-==================
-curl -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/opengeospatial/ets-ogcapi-edr10/commits?until=2021-11-29T23:59:59Z" > commits_r1.json
+_ttps://demo.pygeoapi.io/master
 
-curl -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/opengeospatial/ets-ogcapi-edr10/commits?since=2021-11-29T23:59:59Z&until=2022-03-01T23:59:59Z" > commits_r2.json
+_ttps://demo.pygeoapi.io/master/openapi
 
-curl -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/opengeospatial/ets-ogcapi-edr10/commits?since=2022-03-01T23:59:59Z" > commits_r3.json
+_ttp://labs.metoffice.gov.uk/edr
+
+_ttp://labs.metoffice.gov.uk/edr/api

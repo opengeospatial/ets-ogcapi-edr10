@@ -7,8 +7,11 @@ import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
 import static org.testng.Assert.assertTrue;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
 import java.net.URL;
@@ -29,7 +32,6 @@ import java.util.TimeZone;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
@@ -50,6 +52,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 public class JSONEncoding extends CommonFixture {
+	
+	
 
 	protected URI iut;
 	
@@ -96,7 +100,8 @@ public class JSONEncoding extends CommonFixture {
 		if (path.equals("/")) {
 			try (InputStream inputStream = getClass()
 					.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/landingPage.json")) {
-				JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
+			
+				JSONObject rawSchema = new JSONObject(convertInputStreamToString(inputStream));
 				Schema schema = SchemaLoader.load(rawSchema);
 				schema.validate(new JSONObject(doc)); // throws a ValidationException if this object is invalid
 				valid = true;
@@ -106,7 +111,7 @@ public class JSONEncoding extends CommonFixture {
 		} else if (path.equals("/conformance")) {
 			try (InputStream inputStream = getClass()
 					.getResourceAsStream("/org/opengis/cite/ogcapiedr10/jsonschema/confClasses.json")) {
-				JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
+				JSONObject rawSchema = new JSONObject(convertInputStreamToString(inputStream));
 				Schema schema = SchemaLoader.load(rawSchema);
 				schema.validate(new JSONObject(doc)); // throws a ValidationException if this object is invalid
 				valid = true;
@@ -121,5 +126,5 @@ public class JSONEncoding extends CommonFixture {
 
 	}
 
-	
+
 }

@@ -5,8 +5,10 @@ import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -15,6 +17,7 @@ import java.util.Scanner;
 public class GeoJSONValidator {
     public static final int GeoJSON = -1;
     public static final int EDRGeoJSON = -2;
+    protected final int DEFAULT_BUFFER_SIZE = 8192;
     public boolean isGeoJSONValidPerSchema(String docURL, int schemaFlag) throws Exception {
         String schemaToApply = "/org/opengis/cite/ogcapiedr10/jsonschema/geojson.json";
 
@@ -26,7 +29,7 @@ public class GeoJSONValidator {
 
         InputStream inputStream = getClass()
                 .getResourceAsStream(schemaToApply);
-        JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
+        JSONObject rawSchema = new JSONObject(otherConvertInputStreamToString(inputStream));
         Schema schema = SchemaLoader.load(rawSchema);
         schema.validate(readJSONObjectFromURL(new URL(docURL))); // throws a ValidationException if this object is invalid
         valid = true;
@@ -49,4 +52,21 @@ public class GeoJSONValidator {
         }
 
     }
+    
+    // from https://mkyong.com/java/how-to-convert-inputstream-to-string-in-java/
+    public String otherConvertInputStreamToString(InputStream is) throws IOException {
+
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+        int length;
+        while ((length = is.read(buffer)) != -1) {
+            result.write(buffer, 0, length);
+        }
+
+
+
+        return result.toString("UTF-8");
+
+
+    }	    
 }

@@ -3,6 +3,8 @@ package org.opengis.cite.ogcapiedr10;
 import static io.restassured.RestAssured.given;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URI;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,8 @@ import io.restassured.specification.RequestSpecification;
  * defined in a subclass.
  */
 public class CommonFixture {
+	
+	
 
     private ByteArrayOutputStream requestOutputStream = new ByteArrayOutputStream();
 
@@ -42,6 +46,9 @@ public class CommonFixture {
 	protected String testingWktPOINT = "POINT(-1.054687%2052.498649)";  //TODO change to user inputs
 	protected String geoJSONTestingCollection = "gfs-surface-precip";   //TODO change to user inputs
 
+	
+	protected final int DEFAULT_BUFFER_SIZE = 8192;
+	
     /**
      * Initializes the common test fixture with a client component for interacting with HTTP endpoints.
      *
@@ -155,4 +162,21 @@ public class CommonFixture {
 
 		return startDateOfInterval + "/" + endDateOfInterval;
 	}
+	
+    // from https://mkyong.com/java/how-to-convert-inputstream-to-string-in-java/
+    public String convertInputStreamToString(InputStream is) throws IOException {
+
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+        int length;
+        while ((length = is.read(buffer)) != -1) {
+            result.write(buffer, 0, length);
+        }
+
+
+
+        return result.toString("UTF-8");
+
+
+    }		
 }
