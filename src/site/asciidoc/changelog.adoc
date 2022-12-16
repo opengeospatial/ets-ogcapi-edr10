@@ -1,10 +1,13 @@
 = Release Notes
 
+== 1.0 (2022-12-16)
+
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/107[Prepare release 1.0]
+
 == 0.5 (2022-11-01)
 
 * https://github.com/opengeospatial/ets-ogcapi-edr10/commit/89b1a15ac1969e88da9e867570928f630e984896[Handling on NullPointer exception resulting from crs element]
 * https://github.com/opengeospatial/ets-ogcapi-edr10/commit/e11fd2ae00925bb6e5127b1236b9d59e9f8caec2[Removed uses of Removed uses of org.json.JSONTokener to fix NoSubMethod error]
-
 
 == 0.4 (2022-10-21)
 
