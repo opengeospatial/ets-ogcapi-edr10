@@ -69,21 +69,22 @@ public class LandingPage extends CommonFixture {
     public void edrLandingPageValidation() {
 
     	String f = "";
-    	
-    	if(rootUri.toString().contains("f=json") || rootUri.toString().contains("f=application/json")) {}
+
+        String landingPageUrl = rootUri.toString()+"/";
+        if(landingPageUrl.contains("f=json") || landingPageUrl.contains("f=application/json")) {}
     	else { f = "f=application/json"; }
     	
     	Response response = null;
     	
-    	if(is200Response(URI.create(rootUri.toString()+"?f=application/json")))
+        if(is200Response(URI.create(landingPageUrl +"?f=application/json")))
     	{
-    		response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "?f=application/json");
+    		response = init().baseUri(landingPageUrl).accept( JSON ).when().request( GET, "?f=application/json");
     		response.then().statusCode( 200 );
     	}
-    	else if(is200Response(URI.create(rootUri.toString()+"?f=json")))
+        else if(is200Response(URI.create(landingPageUrl +"?f=json")))
     	{
-    		response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "?f=json");
-    		response.then().statusCode( 200 );		
+    		response = init().baseUri(landingPageUrl).accept( JSON ).when().request( GET, "?f=json");
+    		response.then().statusCode( 200 );
     	}
     	
     	

@@ -44,7 +44,7 @@ public class ApiDefinition extends CommonFixture {
 
     @BeforeClass(dependsOnMethods = "initCommonFixture")
     public void retrieveApiUrl() {
-        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET );
+        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/" );
         JsonPath jsonPath = request.jsonPath();
 
         this.apiUrl = parseApiUrl( jsonPath );
