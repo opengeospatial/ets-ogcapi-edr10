@@ -67,7 +67,7 @@ public class JSONEncoding extends CommonFixture {
 	@Test(description = "Implements Abstract Test 18 (/conf/json/definition), Abstract Test 19 (/conf/json/content)")
 	public void validateResponseForJSON() {
 
-		Response response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET);
+		Response response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET, "/");
 		assertTrue(response.getStatusCode() == 200,
 				"Fails Abstract Test 18, JSON response not supported for landing page");
 		assertTrue(isJSONValidPerSchema(response.asString(), "/"),
