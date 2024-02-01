@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 import org.opengis.cite.ogcapiedr10.CommonFixture;
@@ -27,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reprezen.kaizen.oasparser.OpenApi3Parser;
 
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
+import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -102,17 +105,35 @@ public class ApiDefinition extends CommonFixture {
 			assertTrue( false, "The API definition linked from the Landing Page resulted in "+apiUrl+" \n"+e.getMessage() );
 		}
 
-        if(apiModel.isValid() )
+        boolean apiModelValid = apiModel.isValid();
+        
+        if(apiModelValid )
         {
         	testContext.getSuite().setAttribute( API_MODEL.getName(), apiModel );
         }
         
-        if(apiModel.isValid() 	&&	(!apiUrl.getType().equals(OPEN_API_MIME_TYPE)))
+        if(apiModelValid 	&&	(!apiUrl.getType().equals(OPEN_API_MIME_TYPE)))
         {
         	throw new SkipException("The API Definition was found to be valid. However, the Media Type identified by the Link to the API Definition document was not "+OPEN_API_MIME_TYPE);
         }
-   
-        assertTrue( apiModel.isValid(), createValidationMsg( apiModel ) );
+
+        Collection<ValidationItem> validationItems = new ArrayList<ValidationResults.ValidationItem>();
+        
+        // https://github.com/opengeospatial/ets-ogcapi-edr10/issues/113
+        // Check if validation only found errors regarding null values
+        // Remove them from the list of validation items
+        if (!apiModelValid) {
+            boolean onlyNullErrors = true;
+            for (ValidationResults.ValidationItem item : apiModel.getValidationItems()) {
+                if (!item.getMsg().contains("Value 'null' does not match required pattern")) {
+                    onlyNullErrors = false;
+                    validationItems.add(item);
+                }
+            }
+            apiModelValid = onlyNullErrors;
+        }
+        
+        assertTrue(apiModelValid, createValidationMsg( validationItems ) );
  
     }
 
@@ -144,14 +165,12 @@ public class ApiDefinition extends CommonFixture {
         return null;
     }
 
-    private String createValidationMsg( OpenApi3 model ) {
+    private String createValidationMsg(Collection<ValidationItem> validationItems) {
         StringBuilder sb = new StringBuilder();
-        sb.append( "API definition is not valid. Found following validation items:" );
-        if ( !model.isValid() ) {
-            for ( ValidationResults.ValidationItem item : model.getValidationItems() ) {            	
-            	sb.append( "  @ " ).append( item.getPositionInfo() ).append( "  - " ).append( item.getSeverity() ).append( ": " ).append( item.getMsg() );
-
-            }
+        sb.append("API definition is not valid. Found following validation items:");
+        for (ValidationResults.ValidationItem item : validationItems) {
+            sb.append("  @ ").append(item.getPositionInfo()).append("  - ").append(item.getSeverity()).append(": ")
+                    .append(item.getMsg());
         }
         return sb.toString();
     }
