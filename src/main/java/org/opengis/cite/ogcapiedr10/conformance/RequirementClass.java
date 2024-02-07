@@ -9,7 +9,9 @@ package org.opengis.cite.ogcapiedr10.conformance;
  */
 public enum RequirementClass {
 
-    CORE( "http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/core" );
+    CORE( "http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/core" ),
+    GEOJSON("http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/geojson"),
+    EDRGEOJSON("http://www.opengis.net/spec/ogcapi-edr-1/1.0/req/edr-geojson");
 
 
     private final String conformanceClass;
@@ -56,6 +58,10 @@ public enum RequirementClass {
      */
     public String getMediaTypeOtherResources() {
         return mediaTypeOtherResources;
+    }
+
+    public String getConformanceClass() {
+        return conformanceClass;
     }
 
     /**
