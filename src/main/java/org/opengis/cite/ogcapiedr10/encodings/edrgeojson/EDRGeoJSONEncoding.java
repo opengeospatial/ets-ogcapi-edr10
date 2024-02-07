@@ -8,8 +8,11 @@ import org.json.JSONObject;
 
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.EtsAssert;
+import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.opengis.cite.ogcapiedr10.encodings.geojson.GeoJSONValidator;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 
@@ -22,11 +25,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
 
 public class EDRGeoJSONEncoding extends CommonFixture {
 
@@ -44,9 +49,13 @@ public class EDRGeoJSONEncoding extends CommonFixture {
      * </pre>
      */
     @Test(description = "Implements Abstract Test 22 (/conf/edr-geojson/definition), Abstract Test 23 (/conf/edr-geojson/content)")
-    public void validateResponseForEDRGeoJSON() {
-    	
+    public void validateResponseForEDRGeoJSON(ITestContext testContext) {    	
 
+        List<?> requirementClasses = (List<?>) testContext.getSuite().getAttribute( REQUIREMENTCLASSES.getName());
+
+        if(!requirementClasses.contains(RequirementClass.EDRGEOJSON)) {
+            throw new SkipException(String.format("Requirements class %s not implemented.", RequirementClass.EDRGEOJSON.getConformanceClass()));
+        }
 
         StringBuffer sb = new StringBuffer();
         boolean atLeastOneCollectionTested = false; //we test the first locations resource we find
