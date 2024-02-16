@@ -48,17 +48,17 @@ public class CubeCollections extends AbstractFeatures {
 	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
-	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
+	 * Abstract Test 70: Validate that the bbox query parameters are constructed correctly. (cube)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	@Test(description = "Implements Abstract Test 70 (/conf/edr/rc-coords-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
-	public void cubeCoordsParameterDefinition(TestPoint testPoint) {
+	public void cubeBboxParameterDefinition(TestPoint testPoint) {
 
 		
 		
-		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
+		ct.bboxParameterDefinition(testPoint,this.getModel()); System.gc();
 	
 
 	}

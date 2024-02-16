@@ -59,7 +59,6 @@ public class CollectionsTime{
 	 * <pre>
 	 * Abstract Test 38: Validate that the coords query parameters are constructed correctly. (position)
 	 * Abstract Test 54: Validate that the coords query parameters are constructed correctly. (area)
-	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
 	 * Abstract Test 92: Validate that the coords query parameters are constructed correctly. (trajectory)
 	 * Abstract Test 116: Validate that the coords query parameters are constructed correctly. (corridor)
 	 * </pre>
@@ -115,7 +114,62 @@ public class CollectionsTime{
 
 		} 
 
-	}
+	}      
+        
+        /**
+         * <pre>
+         * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
+         * </pre>
+         *
+         * @param testPoint
+         *            the testPoint under test, never <code>null</code>
+         * @param model
+         *            api definition, never <code>null</code>
+         */
+
+        public void bboxParameterDefinition(TestPoint testPoint,
+                OpenApi3 model) {
+
+            Parameter bbox = null;
+            String paramName = "bbox";
+
+            for (Path path : model.getPaths().values()) {
+
+                if (path.getPathString().endsWith(testPoint.getPath())) {
+
+                    for (Operation op : path.getOperations().values()) {
+                        for (Parameter param : op.getParameters()) {
+
+                            if (hasName(param)) {
+                                if (param.getName().equals(paramName)) {
+                                    bbox = param;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // ----------------
+
+            if (!testPoint.getPath().endsWith("/locations")) {
+                assertNotNull(bbox, "Required " + paramName + " parameter for collections with path '"
+                        + testPoint.getPath() + "'  in OpenAPI document is missing");
+
+                if (bbox != null) {
+                    String msg = "Expected property '%s' with value '%s' but was '%s'";
+                    assertEquals(bbox.getName(), paramName, String.format(msg, "name", paramName, bbox.getName()));
+                    assertEquals(bbox.getIn(), "query", String.format(msg, "in", "query", bbox.getIn()));
+                    assertTrue(isRequired(bbox), String.format(msg, "required", "true", bbox.getRequired()));
+                    assertFalse(isExplode(bbox), String.format(msg, "explode", "false", bbox.getExplode()));
+                    Schema schema = bbox.getSchema();
+                    assertEquals(schema.getType(), "string",
+                            String.format(msg, "schema -> type", "string", schema.getType()));
+                }
+
+            }
+
+        }
 
 	/**
 	 * <pre>
