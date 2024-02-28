@@ -29,13 +29,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.geotoolkit.referencing.CRS;
-import org.geotoolkit.referencing.crs.DefaultGeographicCRS;
+import org.apache.sis.referencing.CRS;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
 import org.opengis.cite.ogcapiedr10.util.TemporalExtent;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.opengis.referencing.crs.GeographicCRS;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
@@ -240,13 +240,13 @@ public class CollectionsResponse extends CommonFixture {
 
 			try {
 
-				source = CRS.parseWKT(crsMap.get("wkt").toString());
+				source = CRS.fromWKT(crsMap.get("wkt").toString());
 			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
 
-			DefaultGeographicCRS crs = (DefaultGeographicCRS) source;
+			GeographicCRS crs = (GeographicCRS) source;
 
 			if (crs.getDatum().getEllipsoid().getName().toString().equals("WGS 84")
 					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS_1984")
