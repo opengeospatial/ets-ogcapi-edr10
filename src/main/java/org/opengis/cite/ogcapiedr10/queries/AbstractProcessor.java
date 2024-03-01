@@ -4,8 +4,19 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import io.restassured.response.Response;
+
 public abstract class AbstractProcessor {
 	
+//    protected Response response;
+    
+//    protected AbstractProcessor() {
+//    }
+//    
+//    protected AbstractProcessor(Response response) {
+//        this.response = response;
+//    }
+    
 	   public String readStringFromURL(String urlString,int limit) throws Exception
 	    {
 	        URL requestURL = new URL(urlString);

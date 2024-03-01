@@ -9,6 +9,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 
@@ -36,17 +38,17 @@ public class CorridorQueryProcessor extends AbstractProcessor{
 
             boolean supportsCorridorQuery = false;
 
-            String url = rootUri.toString() + "/collections/" + collectionId;
+            String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
-            Response response = ini.baseUri(url).accept(JSON).when().request(GET);
+            Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
             JsonPath jsonResponse = response.jsonPath();
             
-            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
-            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
-            }            
+            HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
             
-            HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
-            supportsCorridorQuery = dataQueries.containsKey("corridor");
+            if(dataQueries==null) { //Avoids Nullpointer Exception
+                sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            }
+            supportsCorridorQuery = dataQueries != null && dataQueries.containsKey("corridor");
 
             if(supportsCorridorQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The corridor element is missing from the data_queries element of the collection "+collectionId+" .");

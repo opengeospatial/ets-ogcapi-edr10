@@ -1,6 +1,7 @@
 package org.opengis.cite.ogcapiedr10.util;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
 
@@ -323,6 +324,20 @@ public class JsonUtils {
             }
         }
         return numberOfAllReturnedFeatures;
+    }
+    
+    public static Response getCollectionResponse(String serverUrl, String collectionId, RequestSpecification init) {        
+        return init.baseUri( getCollectionURL(serverUrl, collectionId) ).accept( JSON ).when().request(GET);
+    }
+    
+    public static String getCollectionURL(String serverUrl, String collectionId) {
+        //https://github.com/opengeospatial/ets-ogcapi-edr10/issues/110
+        //check for trailing forward slash
+        serverUrl = serverUrl.endsWith("/") ? serverUrl.substring(0, serverUrl.length() - 1) : serverUrl;
+        
+        String path = "/collections"; 
+        path = collectionId != null ? path.concat("/" + collectionId) : path;
+        return serverUrl + path;
     }
 
     private static boolean isSameMediaType( String mediaType1, String mediaType2 ) {

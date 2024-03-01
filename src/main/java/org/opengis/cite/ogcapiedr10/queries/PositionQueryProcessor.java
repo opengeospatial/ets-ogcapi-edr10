@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
 import org.testng.Assert;
 
 import static io.restassured.http.ContentType.JSON;
@@ -25,24 +26,21 @@ public class PositionQueryProcessor extends AbstractProcessor{
         for (int c = 0; c < Math.min(noOfCollections,collectionsList.size()); c++) {
 
             String collectionId = collectionsList.get(c);
-
-    
             
-            boolean supportsPositionQuery = false;
-            
+            boolean supportsPositionQuery = false;            
 
-            String url = rootUri.toString() + "/collections/" + collectionId;
+            String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
-            Response response = ini.baseUri(url).accept(JSON).when().request(GET);
+            Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
             JsonPath jsonResponse = response.jsonPath();
             
-               
-            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
-            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
+            
+            if(dataQueries==null) { //Avoids Nullpointer Exception
+                sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
             }
             
-            HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
-            supportsPositionQuery = dataQueries.containsKey("position");
+            supportsPositionQuery = dataQueries != null && dataQueries.containsKey("position");
             
             if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");

@@ -53,7 +53,7 @@ public class GeoJSONEncoding extends CommonFixture {
 
         StringBuffer sb = new StringBuffer();
         boolean atLeastOneCollectionTested = false; //we test the first locations resource we find
-        Response response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET ,"/collections");
+        Response response = getCollectionResponse(null);
         JsonPath jsonResponse = response.jsonPath();
         ArrayList collectionsList = (ArrayList) jsonResponse.getList("collections");
 

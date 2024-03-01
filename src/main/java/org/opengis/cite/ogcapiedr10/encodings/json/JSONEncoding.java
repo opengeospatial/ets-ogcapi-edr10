@@ -85,8 +85,7 @@ public class JSONEncoding extends CommonFixture {
 		assertTrue(isJSONValidPerSchema(response.asString(), "/conformance"),
 				"Fails Abstract Test 19, conformance declaration response not valid JSON");
 
-		response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET,
-				"/collections");
+		response = getCollectionResponse(null);
 		assertTrue(response.getStatusCode() == 200,
 				"Fails Abstract Test 18, JSON response not supported for collections metadata");
 		// TODO add JSON Schema Validation for /collections
