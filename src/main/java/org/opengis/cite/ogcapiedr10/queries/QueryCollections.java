@@ -213,8 +213,8 @@ public class QueryCollections extends CommonFixture {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
-		collectionsList.addAll(collectionIds);		
-		
+		collectionsList.addAll(collectionIds);
+                boolean foundDataQueries = false;
 		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
 			
 			String collectionId = collectionsList.get(c);
@@ -229,6 +229,9 @@ public class QueryCollections extends CommonFixture {
 			Response response = init().baseUri(url).accept(JSON).when().request(GET);
 			JsonPath jsonResponse = response.jsonPath();
 			HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
+                        if(dataQueries == null) {
+                            continue;
+                        }
 			supportsPositionQuery = dataQueries.containsKey("position");
 			supportsAreaQuery = dataQueries.containsKey("area");
 			supportsTrajectoryQuery = dataQueries.containsKey("trajectory");
@@ -308,6 +311,9 @@ public class QueryCollections extends CommonFixture {
 			}
 
 		}
+                if(!foundDataQueries) {
+                    throw new SkipException("No data_queries element was present in tested collections.");
+                }
 	}
 
 
