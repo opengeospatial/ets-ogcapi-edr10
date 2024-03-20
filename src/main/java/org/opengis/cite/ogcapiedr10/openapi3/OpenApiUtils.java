@@ -131,7 +131,7 @@ public class OpenApiUtils {
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	public static List<TestPoint> retrieveTestPointsForCollectionsMetadata(OpenApi3 apiModel, URI iut) {
-		return retrieveTestPoints(apiModel, iut, COLLECTIONS, false);
+		return retrieveTestPoints(apiModel, iut, "/" + COLLECTIONS.getPathItem(), false);
 	}
 
 	/**

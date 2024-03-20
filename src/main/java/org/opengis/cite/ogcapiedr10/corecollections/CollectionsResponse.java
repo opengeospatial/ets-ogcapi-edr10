@@ -77,7 +77,7 @@ public class CollectionsResponse extends CommonFixture {
     private Set<String> extractCollectionIDs(URI rootUri)
     {
     	JsonPath response;
-        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/collections" );
+        Response request = getCollectionResponse(null);
         
         request.then().statusCode( 200 );
         response = request.jsonPath();
@@ -134,7 +134,7 @@ public class CollectionsResponse extends CommonFixture {
 			{
 				System.out.println(collection);
 		    	JsonPath response;
-		        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "/collections/"+collection );
+		        Response request = getCollectionResponse(collection);
 		        
 		        request.then().statusCode( 200 );
 		        response = request.jsonPath();
@@ -169,9 +169,7 @@ public class CollectionsResponse extends CommonFixture {
     		boolean compliesWithCRS84Requirement = true;
     		StringBuffer resultMessage = new StringBuffer();
 
-    		TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections", null);
-    		String testPointUri = new UriBuilder(testPoint).buildUrl();
-    		Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    		Response response = getCollectionResponse(null);
     		JsonPath jsonPath = response.jsonPath();
 
     		List<Object> collectionsList = jsonPath.getList("collections");
@@ -276,9 +274,7 @@ public class CollectionsResponse extends CommonFixture {
     		boolean compliesWithCollectionParametersRequirement = true;
     		StringBuffer resultMessage = new StringBuffer();
 
-    		TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections", null);
-    		String testPointUri = new UriBuilder(testPoint).buildUrl();
-    		Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    		Response response = getCollectionResponse(null);
     		JsonPath jsonPath = response.jsonPath();
     		
 
@@ -349,9 +345,7 @@ public class CollectionsResponse extends CommonFixture {
     	  StringBuffer resultMessageForCollectionId = new StringBuffer();
     	  StringBuffer resultMessageForCollectionExtent = new StringBuffer();
 
-    	  TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections", null);
-    	  String testPointUri = new UriBuilder(testPoint).buildUrl();
-    	  Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    	  Response response = getCollectionResponse(null);
     	  JsonPath jsonPath = response.jsonPath();
 
     	  List<Object> collectionsList = jsonPath.getList("collections");
@@ -433,11 +427,8 @@ public class CollectionsResponse extends CommonFixture {
     	 * check that the collection exists and get links from it
     	 */
     	private JsonPath getCollectionMetadata(String collectionId)
-    	{
-    		
-      	  TestPoint testPoint = new TestPoint(rootUri.toString(), "/collections/"+collectionId, null);
-      	  String testPointUri = new UriBuilder(testPoint).buildUrl();
-      	  Response response = init().baseUri(testPointUri).accept(JSON).when().request(GET);
+    	{    	
+      	  Response response = getCollectionResponse(collectionId);
       	  JsonPath jsonPath = response.jsonPath();    	
       
        	  return jsonPath;
