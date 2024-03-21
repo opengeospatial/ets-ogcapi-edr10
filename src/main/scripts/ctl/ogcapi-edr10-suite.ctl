@@ -97,6 +97,14 @@
               </xsl:otherwise>
             </xsl:choose>
           </entry>
+          <entry key="noofcollections">
+            <xsl:choose>
+              <xsl:when test="$form-data/values/value[@key='collectionsLimit'] = 'all'">-1</xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$form-data/values/value[@key='noOfCollections']" />
+              </xsl:otherwise>
+            </xsl:choose>
+          </entry>
           <entry key="ics"><xsl:value-of select="$form-data/values/value[@key='level']"/></entry>
           <entry key="apiDefinition"><xsl:value-of select="$form-data/values/value[@key='apiDefinition']"/></entry>
 		    </properties>
