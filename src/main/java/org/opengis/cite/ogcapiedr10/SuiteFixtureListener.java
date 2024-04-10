@@ -71,10 +71,14 @@ public class SuiteFixtureListener implements ISuiteListener {
 
         String noOfCollections = params.get( TestRunArg.NOOFCOLLECTIONS.toString() );
         try {
+            int noOfCollectionsInt = -1;
             if ( noOfCollections != null ) {
-                int noOfCollectionsInt = Integer.parseInt( noOfCollections );
-                suite.setAttribute( SuiteAttribute.NO_OF_COLLECTIONS.getName(), noOfCollectionsInt );
+                noOfCollectionsInt = Integer.parseInt( noOfCollections );
             }
+            if(noOfCollectionsInt == -1) {
+                noOfCollectionsInt = Integer.MAX_VALUE;
+            }
+            suite.setAttribute( SuiteAttribute.NO_OF_COLLECTIONS.getName(), noOfCollectionsInt );
         } catch ( NumberFormatException e ) {
             TestSuiteLogger.log( Level.WARNING,
                                  String.format( "Could not parse parameter %s: %s. Expected is a valid integer",
