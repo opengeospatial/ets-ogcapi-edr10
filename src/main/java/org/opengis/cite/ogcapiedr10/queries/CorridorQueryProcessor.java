@@ -27,8 +27,12 @@ public class CorridorQueryProcessor extends AbstractProcessor{
         collectionsList.addAll(collectionIds);
         
         int numberOfCollectionsWithCorridorSupport = 0;
-
-        for (int c = 0; c < Math.min(noOfCollections,collectionsList.size()); c++) {
+        
+        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+        //use all collections. Otherwise use the specified noOfCollections
+        int maximum = noOfCollections == -1 ? collectionsList.size() : noOfCollections;
+        
+        for (int c = 0; c < maximum; c++) {
 
             String collectionId = collectionsList.get(c);
 

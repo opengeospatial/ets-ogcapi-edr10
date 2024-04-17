@@ -128,7 +128,11 @@ public class QueryCollections extends CommonFixture {
 		ArrayList<String> collectionsList = new ArrayList<String>();
 		collectionsList.addAll(collectionIds);		
 		
-		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
+		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+		//use all collections. Otherwise use the specified noOfCollections
+		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+		
+		for (int c = 0; c < maximum; c++) {
 			
 			String collectionId = collectionsList.get(c);
 			
@@ -208,9 +212,13 @@ public class QueryCollections extends CommonFixture {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
-		collectionsList.addAll(collectionIds);		
+		collectionsList.addAll(collectionIds);	
 		
-		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
+	        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+	        //use all collections. Otherwise use the specified noOfCollections
+	        int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+	        
+	        for (int c = 0; c <maximum; c++) {
 			
 			String collectionId = collectionsList.get(c);
 			
