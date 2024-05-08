@@ -48,7 +48,8 @@ public class CubeCollections extends AbstractFeatures {
 	CollectionsTime ct= new CollectionsTime();
 	/**
 	 * <pre>
-	 * Abstract Test 70: Validate that the bbox query parameters are constructed correctly. (cube)
+	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
+	 * Note that the test actually tests for the bbox parameter (see https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/issues/423)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
