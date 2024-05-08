@@ -232,6 +232,7 @@ public class QueryCollections extends CommonFixture {
                         if(dataQueries == null) {
                             continue;
                         }
+                        foundDataQueries = true;
 			supportsPositionQuery = dataQueries.containsKey("position");
 			supportsAreaQuery = dataQueries.containsKey("area");
 			supportsTrajectoryQuery = dataQueries.containsKey("trajectory");
