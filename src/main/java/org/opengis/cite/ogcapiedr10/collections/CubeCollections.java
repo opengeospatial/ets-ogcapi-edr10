@@ -49,16 +49,17 @@ public class CubeCollections extends AbstractFeatures {
 	/**
 	 * <pre>
 	 * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
+	 * Note that the test actually tests for the bbox parameter (see https://github.com/opengeospatial/ogcapi-environmental-data-retrieval/issues/423)
 	 * </pre>
 	 *
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
 	@Test(description = "Implements Abstract Test 70 (/conf/edr/rc-coords-definition)", dataProvider = "cubeCollectionPaths", alwaysRun = true)
-	public void cubeCoordsParameterDefinition(TestPoint testPoint) {
+	public void cubeBboxParameterDefinition(TestPoint testPoint) {
 
 		
 		
-		ct.coordsParameterDefinition(testPoint,this.getModel()); System.gc();
+		ct.bboxParameterDefinition(testPoint,this.getModel()); System.gc();
 	
 
 	}
