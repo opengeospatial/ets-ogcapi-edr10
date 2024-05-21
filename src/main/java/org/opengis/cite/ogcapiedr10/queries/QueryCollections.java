@@ -127,9 +127,9 @@ public class QueryCollections extends CommonFixture {
 		collectionsList.addAll(collectionIds);
 		boolean foundDataQueries = false;
 		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-		//use all collections. Otherwise use the specified noOfCollections
+		//use all collections. Otherwise, use the specified noOfCollections
 		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
-		
+
 		for (int c = 0; c < maximum; c++) {
 			
 			String collectionId = collectionsList.get(c);
@@ -214,15 +214,15 @@ public class QueryCollections extends CommonFixture {
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
 		collectionsList.addAll(collectionIds);
-    boolean foundDataQueries = false;
-	  //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-	  //use all collections. Otherwise use the specified noOfCollections
-	  int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
-	        
-	  for (int c = 0; c <maximum; c++) {
-			
+		boolean foundDataQueries = false;
+		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+		//use all collections. Otherwise, use the specified noOfCollections
+		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+
+		for (int c = 0; c < maximum; c++) {
+
 			String collectionId = collectionsList.get(c);
-			
+
 			boolean supportsPositionQuery = false;
 			boolean supportsAreaQuery = false;
 			boolean supportsTrajectoryQuery = false;
