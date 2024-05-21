@@ -1,18 +1,13 @@
 package org.opengis.cite.ogcapiedr10.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
-import java.util.logging.Level;
-
-import javax.ws.rs.core.HttpHeaders;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+
+import javax.ws.rs.core.HttpHeaders;
+import java.io.*;
+import java.net.URI;
+import java.util.logging.Level;
 
 /**
  * Provides a collection of utility methods for manipulating or resolving URI references.

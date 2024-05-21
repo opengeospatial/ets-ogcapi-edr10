@@ -1,9 +1,8 @@
 package org.opengis.cite.ogcapiedr10.util;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,9 +12,10 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>

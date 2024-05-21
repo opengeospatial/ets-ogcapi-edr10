@@ -1,24 +1,19 @@
 package org.opengis.cite.ogcapiedr10;
 
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
-
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-
 import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>

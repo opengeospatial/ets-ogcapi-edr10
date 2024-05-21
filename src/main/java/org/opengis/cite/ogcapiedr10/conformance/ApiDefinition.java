@@ -1,20 +1,10 @@
 package org.opengis.cite.ogcapiedr10.conformance;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-
-
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.util.Map;
-
+import com.reprezen.kaizen.oasparser.val.ValidationResults;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.util.Link;
 import org.testng.ITestContext;
@@ -22,14 +12,15 @@ import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.reprezen.kaizen.oasparser.OpenApi3Parser;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Map;
 
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
 
 /**
  * A.2.3. API Definition Path {root}/api (link)

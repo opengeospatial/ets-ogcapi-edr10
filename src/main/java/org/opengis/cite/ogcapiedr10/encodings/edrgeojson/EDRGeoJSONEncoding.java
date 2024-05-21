@@ -2,35 +2,18 @@ package org.opengis.cite.ogcapiedr10.encodings.edrgeojson;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.everit.json.schema.Schema;
-import org.everit.json.schema.loader.SchemaLoader;
-import org.json.JSONObject;
-
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.EtsAssert;
 import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.opengis.cite.ogcapiedr10.encodings.geojson.GeoJSONValidator;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
 
 public class EDRGeoJSONEncoding extends CommonFixture {
