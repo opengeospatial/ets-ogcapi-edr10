@@ -45,8 +45,13 @@ public class Conformance extends CommonFixture {
     public Object[][] conformanceUris( ITestContext testContext ) {
         OpenApi3 apiModel = (OpenApi3) testContext.getSuite().getAttribute( API_MODEL.getName() );
         URI iut = (URI) testContext.getSuite().getAttribute( IUT.getName() );
-
-        TestPoint tp = new TestPoint(rootUri.toString(),"/conformance",null);
+        
+        //https://github.com/opengeospatial/ets-ogcapi-edr10/issues/110
+        //check for trailing forward slash
+        String serverUrl = rootUri.toString();
+        serverUrl = serverUrl.endsWith("/") ? serverUrl.substring(0, serverUrl.length() - 1) : serverUrl;
+        
+        TestPoint tp = new TestPoint(serverUrl, "/conformance" ,null);
 
 
         List<TestPoint> testPoints = new ArrayList<TestPoint>();

@@ -10,17 +10,16 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
-import java.lang.reflect.Method;
 
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
-
-import org.opengis.util.FactoryException;
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 /**
@@ -178,5 +177,9 @@ public class CommonFixture {
         return result.toString("UTF-8");
 
 
-    }		
+    }
+    
+    protected Response getCollectionResponse(String collectionId) {
+        return JsonUtils.getCollectionResponse(rootUri.toString(), collectionId, init());
+    }
 }

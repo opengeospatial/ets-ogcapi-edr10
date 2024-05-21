@@ -124,9 +124,13 @@ public class QueryCollections extends CommonFixture {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
-		collectionsList.addAll(collectionIds);		
+		collectionsList.addAll(collectionIds);
 		boolean foundDataQueries = false;
-		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
+		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+		//use all collections. Otherwise use the specified noOfCollections
+		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+		
+		for (int c = 0; c < maximum; c++) {
 			
 			String collectionId = collectionsList.get(c);
 			
@@ -135,9 +139,7 @@ public class QueryCollections extends CommonFixture {
 			boolean supportsTrajectoryQuery = false;
 			boolean supportsLocationsQuery = false;
 
-			String url = rootUri.toString() + "/collections/" + collectionId;
-
-			Response response = init().baseUri(url).accept(JSON).when().request(GET);
+			Response response = getCollectionResponse(collectionId);
 			JsonPath jsonResponse = response.jsonPath();
 			HashMap<?, ?> dataQueries = jsonResponse.getJsonObject("data_queries");
 			if(dataQueries == null) {
@@ -154,7 +156,7 @@ public class QueryCollections extends CommonFixture {
 
 				if (supportsPositionQuery) {
 				
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/position");
+					response = getCollectionResponse(collectionId + "/position");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 34. Expected status code 400 when a Position query with no query parameters are specified for collection "
 									+ collectionId);
@@ -162,21 +164,21 @@ public class QueryCollections extends CommonFixture {
 				}
 				if (supportsAreaQuery) {
 				
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/area");
+					response = getCollectionResponse(collectionId + "/area");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 50. Expected status code 400 when a Area query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 				if (supportsTrajectoryQuery) {
 				
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory");
+					response = getCollectionResponse(collectionId + "/trajectory");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 82. Expected status code 400 when a Trajectory query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 				if (supportsLocationsQuery) {
 					
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/locations");
+					response = getCollectionResponse(collectionId + "/locations");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 136. Expected status code 400 when a Locations query with no query parameters are specified for collection "
 									+ collectionId);
@@ -209,13 +211,15 @@ public class QueryCollections extends CommonFixture {
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position),Abstract Test 36 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 52 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
 	public void validateCoordsQueryParameters(Object collectionIdentifiers) {
 
-
-
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
 		collectionsList.addAll(collectionIds);
-                boolean foundDataQueries = false;
-		for (int c = 0; c < Math.min(this.noOfCollections,collectionsList.size()); c++) {
+    boolean foundDataQueries = false;
+	  //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+	  //use all collections. Otherwise use the specified noOfCollections
+	  int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+	        
+	  for (int c = 0; c <maximum; c++) {
 			
 			String collectionId = collectionsList.get(c);
 			
@@ -224,9 +228,7 @@ public class QueryCollections extends CommonFixture {
 			boolean supportsTrajectoryQuery = false;
 			boolean supportsCorridorQuery = false;
 
-			String url = rootUri.toString() + "/collections/" + collectionId;
-
-			Response response = init().baseUri(url).accept(JSON).when().request(GET);
+			Response response = getCollectionResponse(collectionId);
 			JsonPath jsonResponse = response.jsonPath();
 			HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
                         if(dataQueries == null) {
@@ -243,12 +245,12 @@ public class QueryCollections extends CommonFixture {
 
 				if (supportsPositionQuery) {
 				
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/position?coords=");
+					response = getCollectionResponse(collectionId + "/position?coords=");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 35. Expected status code 400 when a Position query with coords query parameter is not specified for collection "
 									+ collectionId);
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/position?coords=POINT()");
+					response = getCollectionResponse(collectionId + "/position?coords=POINT()");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 36. Expected status code 400 when a Position coords query parameter does not contain a valid POINT Well Known Text value for collection "
 									+ collectionId);
@@ -256,39 +258,39 @@ public class QueryCollections extends CommonFixture {
 				}
 				if (supportsAreaQuery) {
 				
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/area?coords=");
+					response = getCollectionResponse(collectionId + "/area?coords=");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 51. Expected status code 400 when an Area query with coords query parameter is not specified for collection "
 									+ collectionId);
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/area?coords=POLYGON()");
+					response = getCollectionResponse(collectionId + "/area?coords=POLYGON()");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 52. Expected status code 400 when an Area query with coords query parameter does not contain a valid POLYGON Well Known Text value for collection "
 									+ collectionId);
 				}
 				if (supportsTrajectoryQuery) {
 			
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=");
+					response = getCollectionResponse(collectionId + "/trajectory?coords=");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 83. Expected status code 400 when a Trajectory query with coords query parameter is not specified for collection "
 									+ collectionId);
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=LINESTRING()");
+					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRING()");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 84. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=LINESTRINGM()");
+					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRINGM()");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 85. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=LINESTRINGZM()");
+					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRINGZM()");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 88. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/trajectory?coords=LINESTRINGZ()");
+					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRINGZ()");
 					assertTrue(response.getStatusCode() == 400,
 							"Fails Abstract Test 89. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
@@ -296,13 +298,13 @@ public class QueryCollections extends CommonFixture {
 				}
 				if (supportsCorridorQuery) {
 				
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/corridor?coords=");
+					response = getCollectionResponse(collectionId + "/corridor?coords=");
 					assertTrue(response.getStatusCode() == 400,
 							"Expected status code 400 when a Corridor query with coords query parameter is not specified for collection "
 									+ collectionId);
 
 
-					response = init().baseUri(url).accept(JSON).when().request(GET, "/corridor?coords=LINESTRING()");
+					response = getCollectionResponse(collectionId + "/corridor?coords=LINESTRING()");
 					assertTrue(response.getStatusCode() == 400,
 							"Expected status code 400 when a Corridor query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);

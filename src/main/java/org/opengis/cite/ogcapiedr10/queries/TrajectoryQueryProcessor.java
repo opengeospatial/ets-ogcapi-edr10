@@ -9,6 +9,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 
@@ -25,25 +27,27 @@ public class TrajectoryQueryProcessor extends AbstractProcessor{
         
         int numberOfCollectionsWithTrajectorySupport = 0;
 
-        for (int c = 0; c < Math.min(noOfCollections,collectionsList.size()); c++) {
+        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+        //use all collections. Otherwise use the specified noOfCollections
+        int maximum = noOfCollections == -1 ? collectionsList.size() : noOfCollections;
+        
+        for (int c = 0; c <maximum; c++) {
 
             String collectionId = collectionsList.get(c);
 
-
-
             boolean supportsTrajectoryQuery = false;
 
-            String url = rootUri.toString() + "/collections/" + collectionId;
+            String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
-            Response response = ini.baseUri(url).accept(JSON).when().request(GET);
+            Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
             JsonPath jsonResponse = response.jsonPath();
             
-            if(jsonResponse.getJsonObject("data_queries")==null) { //Avoids Nullpointer Exception
-            	sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
-            }            
+            HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
             
-            HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
-            supportsTrajectoryQuery = dataQueries.containsKey("trajectory");
+            if(dataQueries==null) { //Avoids Nullpointer Exception
+                sb.append(" The data_queries element is missing from the collection "+collectionId+" .");
+            }
+            supportsTrajectoryQuery = dataQueries != null && dataQueries.containsKey("trajectory");
 
             if(supportsTrajectoryQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The trajectory element is missing from the data_queries element of the collection "+collectionId+" .");

@@ -10,7 +10,9 @@ import org.json.JSONObject;
 
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.EtsAssert;
+import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.testng.ITestContext;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -29,6 +31,7 @@ import static io.restassured.http.ContentType.JSON;
 import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
 import static org.testng.Assert.assertTrue;
 
 public class GeoJSONEncoding extends CommonFixture {
@@ -47,13 +50,17 @@ public class GeoJSONEncoding extends CommonFixture {
      * </pre>
      */
     @Test(description = "Implements Abstract Test 20 (/conf/geojson/definition), Abstract Test 21 (/conf/geojson/content)")
-    public void validateResponseForGeoJSON() {
+    public void validateResponseForGeoJSON(ITestContext testContext) {
 
+        List<?> requirementClasses = (List<?>) testContext.getSuite().getAttribute( REQUIREMENTCLASSES.getName());
 
-
+        if(!requirementClasses.contains(RequirementClass.GEOJSON)) {
+            throw new SkipException(String.format("Requirements class %s not implemented.", RequirementClass.GEOJSON.getConformanceClass()));
+        }
+        
         StringBuffer sb = new StringBuffer();
         boolean atLeastOneCollectionTested = false; //we test the first locations resource we find
-        Response response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET ,"/collections");
+        Response response = getCollectionResponse(null);
         JsonPath jsonResponse = response.jsonPath();
         ArrayList collectionsList = (ArrayList) jsonResponse.getList("collections");
 
