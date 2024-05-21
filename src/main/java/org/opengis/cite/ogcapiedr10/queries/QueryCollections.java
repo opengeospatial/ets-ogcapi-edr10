@@ -122,16 +122,14 @@ public class QueryCollections extends CommonFixture {
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 34 (/conf/position), Abstract Test 50 (/conf/area), Abstract Test 66 (/conf/cube), Abstract Test 82 (/conf/trajectory), Abstract Test 100 (/conf/corridor), Abstract Test 136 (/conf/locations) ")
 	public void validateNoQueryParameters(Object collectionIdentifiers) {
 
-
-
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
-		collectionsList.addAll(collectionIds);		
-		
+		collectionsList.addAll(collectionIds);
+		boolean foundDataQueries = false;
 		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-		//use all collections. Otherwise use the specified noOfCollections
+		//use all collections. Otherwise, use the specified noOfCollections
 		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
-		
+
 		for (int c = 0; c < maximum; c++) {
 			
 			String collectionId = collectionsList.get(c);
@@ -143,7 +141,11 @@ public class QueryCollections extends CommonFixture {
 
 			Response response = getCollectionResponse(collectionId);
 			JsonPath jsonResponse = response.jsonPath();
-			HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
+			HashMap<?, ?> dataQueries = jsonResponse.getJsonObject("data_queries");
+			if(dataQueries == null) {
+			    continue;
+			}
+			foundDataQueries = true;
 			supportsPositionQuery = dataQueries.containsKey("position");
 			supportsAreaQuery = dataQueries.containsKey("area");
 			supportsTrajectoryQuery = dataQueries.containsKey("trajectory");
@@ -185,6 +187,9 @@ public class QueryCollections extends CommonFixture {
 			} catch (Exception ex) {
 			}
 		}
+		if(!foundDataQueries) {
+		    throw new SkipException("No data_queries element was present in tested collections.");
+		}
 	}
 
 	/**
@@ -206,20 +211,18 @@ public class QueryCollections extends CommonFixture {
 	@Test(dataProvider = "collectionIDs", description = "Implements Abstract Test 35 (/conf/position),Abstract Test 36 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 52 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
 	public void validateCoordsQueryParameters(Object collectionIdentifiers) {
 
-
-
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
 		ArrayList<String> collectionsList = new ArrayList<String>();
-		collectionsList.addAll(collectionIds);	
-		
-	        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-	        //use all collections. Otherwise use the specified noOfCollections
-	        int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
-	        
-	        for (int c = 0; c <maximum; c++) {
-			
+		collectionsList.addAll(collectionIds);
+		boolean foundDataQueries = false;
+		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+		//use all collections. Otherwise, use the specified noOfCollections
+		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+
+		for (int c = 0; c < maximum; c++) {
+
 			String collectionId = collectionsList.get(c);
-			
+
 			boolean supportsPositionQuery = false;
 			boolean supportsAreaQuery = false;
 			boolean supportsTrajectoryQuery = false;
@@ -228,6 +231,10 @@ public class QueryCollections extends CommonFixture {
 			Response response = getCollectionResponse(collectionId);
 			JsonPath jsonResponse = response.jsonPath();
 			HashMap dataQueries = jsonResponse.getJsonObject("data_queries");
+                        if(dataQueries == null) {
+                            continue;
+                        }
+                        foundDataQueries = true;
 			supportsPositionQuery = dataQueries.containsKey("position");
 			supportsAreaQuery = dataQueries.containsKey("area");
 			supportsTrajectoryQuery = dataQueries.containsKey("trajectory");
@@ -307,6 +314,9 @@ public class QueryCollections extends CommonFixture {
 			}
 
 		}
+                if(!foundDataQueries) {
+                    throw new SkipException("No data_queries element was present in tested collections.");
+                }
 	}
 
 
