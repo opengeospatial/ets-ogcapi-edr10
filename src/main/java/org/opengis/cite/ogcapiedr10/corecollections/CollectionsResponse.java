@@ -1,51 +1,24 @@
 package org.opengis.cite.ogcapiedr10.corecollections;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertFalse;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveParameterByName;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDate;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDateRange;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDateRangeWithDuration;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseTemporalExtent;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
-import org.geotoolkit.referencing.CRS;
-import org.geotoolkit.referencing.crs.DefaultGeographicCRS;
+import org.apache.sis.referencing.CRS;
+import org.apache.sis.referencing.crs.DefaultGeographicCRS;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
-import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
-import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
-import org.opengis.cite.ogcapiedr10.util.TemporalExtent;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.testng.ITestContext;
-import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Operation;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.model3.Path;
-import com.reprezen.kaizen.oasparser.model3.Schema;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -237,8 +210,7 @@ public class CollectionsResponse extends CommonFixture {
 			CoordinateReferenceSystem source = null;
 
 			try {
-
-				source = CRS.parseWKT(crsMap.get("wkt").toString());
+				source = CRS.fromWKT(crsMap.get("wkt").toString());
 			} catch (Exception e) {
 
 				e.printStackTrace();

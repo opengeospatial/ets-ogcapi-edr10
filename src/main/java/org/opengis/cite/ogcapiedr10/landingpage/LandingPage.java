@@ -7,18 +7,12 @@ import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 import org.opengis.cite.ogcapiedr10.CommonFixture;
-import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
-import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
-import org.opengis.util.FactoryException;
 import org.testng.annotations.Test;
 
 import io.restassured.path.json.JsonPath;

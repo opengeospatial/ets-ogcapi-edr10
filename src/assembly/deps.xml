@@ -23,7 +23,8 @@
     <dependencySet>
       <excludes>
         <exclude>org.opengis.cite.teamengine:teamengine-spi</exclude>
-        <exclude>com.sun.jersey:jersey-client</exclude>
+        <exclude>org.glassfish.jersey.*:*</exclude>
+        <exclude>jakarta.ws.rs:jakarta.ws.rs-api</exclude>
         <exclude>org.opengis.cite:schema-utils</exclude>
       </excludes>
       <outputDirectory>/</outputDirectory>

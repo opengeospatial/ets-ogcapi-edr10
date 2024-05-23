@@ -1,32 +1,24 @@
 package org.opengis.cite.ogcapiedr10.util;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
-import java.net.URL;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientRequest;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.client.filter.LoggingFilter;
-import com.sun.jersey.client.urlconnection.HttpURLConnectionFactory;
-import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
-import java.net.URI;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.HttpMethod;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
+
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 
-import org.opengis.cite.ogcapiedr10.ReusableEntityFilter;
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.ClientResponse;
 import org.w3c.dom.Document;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.MediaType;
 
 /**
  * Provides various utility methods for creating and configuring HTTP client
@@ -43,14 +35,11 @@ public class ClientUtils {
      * @return A Client component.
      */
     public static Client buildClient() {
-        ClientConfig config = new DefaultClientConfig();
-        config.getProperties().put(
-                ClientConfig.PROPERTY_FOLLOW_REDIRECTS, true);
-        config.getProperties().put(
-                ClientConfig.PROPERTY_CONNECT_TIMEOUT, 10000);
-        Client client = Client.create(config);
-        client.addFilter(new ReusableEntityFilter());
-        client.addFilter(new LoggingFilter());
+        ClientConfig config = new ClientConfig();
+        config.property(ClientProperties.FOLLOW_REDIRECTS, true);
+        config.property(ClientProperties.CONNECT_TIMEOUT, 10000);
+        Client client = ClientBuilder.newClient(config);
+        client.register(new LoggingFilter());
         return client;
     }
 
@@ -66,51 +55,47 @@ public class ClientUtils {
      */
     public static Client buildClientWithProxy(final String proxyHost,
             final int proxyPort) {
-        ClientConfig config = new DefaultClientConfig();
-        config.getProperties().put(
-                ClientConfig.PROPERTY_FOLLOW_REDIRECTS, true);
-        Client client = new Client(new URLConnectionClientHandler(
-                new HttpURLConnectionFactory() {
-                    SocketAddress addr = new InetSocketAddress(proxyHost, proxyPort);
-                    Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
-
-                    @Override
-                    public HttpURLConnection getHttpURLConnection(URL url) throws IOException {
-                        return (HttpURLConnection) url.openConnection(proxy);
-                    }
-                }), config);
-        client.addFilter(new LoggingFilter());
+        ClientConfig config = new ClientConfig();
+        config.connectorProvider(new ApacheConnectorProvider());
+        SocketAddress addr = new InetSocketAddress(proxyHost, proxyPort);
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
+        config.property(ClientProperties.PROXY_URI, proxy);
+        config.property(ClientProperties.FOLLOW_REDIRECTS, true);
+        Client client = ClientBuilder.newClient(config);
+        client.register(new LoggingFilter());
         return client;
     }
 
-    /**
-     * Builds an HTTP request message that uses the GET method.
-     *
-     * @param endpoint A URI indicating the target resource.
-     * @param qryParams A Map containing query parameters (may be null);
-     * @param mediaTypes A list of acceptable media types; if not specified,
-     * generic XML ("application/xml") is preferred.
-     *
-     * @return A ClientRequest object.
-     */
-    public static ClientRequest buildGetRequest(URI endpoint,
-            Map<String, String> qryParams, MediaType... mediaTypes) {
-        UriBuilder uriBuilder = UriBuilder.fromUri(endpoint);
-        if (null != qryParams) {
-            for (Map.Entry<String, String> param : qryParams.entrySet()) {
-                uriBuilder.queryParam(param.getKey(), param.getValue());
-            }
-        }
-        URI uri = uriBuilder.build();
-        ClientRequest.Builder reqBuilder = ClientRequest.create();
-        if (null == mediaTypes || mediaTypes.length == 0) {
-            reqBuilder = reqBuilder.accept(MediaType.APPLICATION_XML_TYPE);
-        } else {
-            reqBuilder = reqBuilder.accept(mediaTypes);
-        }
-        ClientRequest req = reqBuilder.build(uri, HttpMethod.GET);
-        return req;
-    }
+//    /**
+//     * Builds an HTTP request message that uses the GET method.
+//     *
+//     * @param endpoint A URI indicating the target resource.
+//     * @param qryParams A Map containing query parameters (may be null);
+//     * @param mediaTypes A list of acceptable media types; if not specified,
+//     * generic XML ("application/xml") is preferred.
+//     *
+//     * @return A ClientRequest object.
+//     */
+//    public static ClientRequest buildGetRequest(URI endpoint,
+//            Map<String, String> qryParams, MediaType... mediaTypes) {
+//        UriBuilder uriBuilder = UriBuilder.fromUri(endpoint);
+//        if (null != qryParams) {
+//            for (Map.Entry<String, String> param : qryParams.entrySet()) {
+//                uriBuilder.queryParam(param.getKey(), param.getValue());
+//            }
+//        }
+//        URI uri = uriBuilder.build();
+//        WebTarget target = buildClient().target(endpoint);
+//        Builder builder = target.request();
+//        if (null == mediaTypes || mediaTypes.length == 0) {
+//            builder = builder.accept(MediaType.APPLICATION_XML_TYPE);
+//        } else {
+//            builder = builder.accept(mediaTypes);
+//        }
+//        Invocation invocation = builder.buildGet();
+//        ClientRequest req = invocation.invoke()
+//        return req;
+//    }
 
     /**
      * Creates a copy of the given MediaType object but without any parameters.
@@ -136,14 +121,14 @@ public class ClientUtils {
      */
     public static Source getResponseEntityAsSource(ClientResponse response,
             String targetURI) {
-        Source source = response.getEntity(DOMSource.class);
+        Source source = response.readEntity(DOMSource.class);
         if (null != targetURI && !targetURI.isEmpty()) {
             source.setSystemId(targetURI);
         }
-        if (response.getEntityInputStream().markSupported()) {
+        if (response.getEntityStream().markSupported()) {
             try {
                 // NOTE: entity was buffered by client filter
-                response.getEntityInputStream().reset();
+                response.getEntityStream().reset();
             } catch (IOException ex) {
                 Logger.getLogger(ClientUtils.class.getName()).log(Level.WARNING,
                         "Failed to reset response entity.", ex);

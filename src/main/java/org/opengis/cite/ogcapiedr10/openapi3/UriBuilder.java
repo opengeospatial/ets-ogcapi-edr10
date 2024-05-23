@@ -3,8 +3,10 @@ package org.opengis.cite.ogcapiedr10.openapi3;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sun.jersey.api.uri.UriTemplate;
-import com.sun.jersey.api.uri.UriTemplateParser;
+import org.glassfish.jersey.uri.UriTemplate;
+import org.glassfish.jersey.uri.internal.UriPart;
+import org.glassfish.jersey.uri.internal.UriTemplateParser;
+
 
 /**
  * Builds a URL out of a TestPoint.
@@ -68,7 +70,8 @@ public class UriBuilder {
     private String retrieveCollectionNameTemplateName() {
         String path = testPoint.getPath();
         UriTemplateParser uriTemplateParser = new UriTemplateParser( path );
-        for ( String templateName : uriTemplateParser.getNames() ) {
+        for ( UriPart uriPart : uriTemplateParser.getNames() ) {
+            String templateName = uriPart.getPart();
             if ( path.startsWith( "/collections/{" + templateName + "}" ) )
                 return templateName;
         }
@@ -78,7 +81,8 @@ public class UriBuilder {
     private String retrieveFeatureIdTemplateName() {
         String path = testPoint.getPath();
         UriTemplateParser uriTemplateParser = new UriTemplateParser( path );
-        for ( String templateName : uriTemplateParser.getNames() ) {
+        for ( UriPart uriPart : uriTemplateParser.getNames() ) {
+            String templateName = uriPart.getPart();
             if ( path.endsWith( "items/{" + templateName + "}" ) )
                 return templateName;
         }
