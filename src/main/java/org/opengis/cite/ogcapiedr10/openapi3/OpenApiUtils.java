@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.COLLECTIONS;
 import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.CONFORMANCE;
+import org.opengis.cite.ogcapiedr10.util.Link;
 
 import io.restassured.path.json.JsonPath;
 

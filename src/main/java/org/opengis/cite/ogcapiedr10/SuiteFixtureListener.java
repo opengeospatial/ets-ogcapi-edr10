@@ -1,5 +1,7 @@
 package org.opengis.cite.ogcapiedr10;
 
+import com.reprezen.kaizen.oasparser.OpenApiParser;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.sun.jersey.api.client.Client;
 import org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils;
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
@@ -12,9 +14,13 @@ import org.testng.ISuiteListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Map;
 import java.util.logging.Level;
 
+import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -127,7 +133,7 @@ public class SuiteFixtureListener implements ISuiteListener {
             TestSuiteLogger.log(Level.SEVERE, "The API definition linked from the Landing Page resulted in an exception.", e);
         }
 
-        suite.setAttribute(API_MODEL.getName(), apiModel);
+        suite.setAttribute(SuiteAttribute.API_MODEL.getName(), apiModel);
         
     }
 

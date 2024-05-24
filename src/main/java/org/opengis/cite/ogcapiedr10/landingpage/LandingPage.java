@@ -3,6 +3,8 @@ package org.opengis.cite.ogcapiedr10.landingpage;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
+import org.opengis.cite.ogcapiedr10.SuiteAttribute;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 import java.net.HttpURLConnection;

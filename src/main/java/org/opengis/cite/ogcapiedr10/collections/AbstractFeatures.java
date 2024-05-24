@@ -1,9 +1,11 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
+import org.opengis.cite.ogcapiedr10.SuiteAttribute;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.testng.ITestContext;
 import org.testng.SkipException;
