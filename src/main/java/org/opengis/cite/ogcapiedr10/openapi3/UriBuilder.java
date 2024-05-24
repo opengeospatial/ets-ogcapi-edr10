@@ -1,10 +1,10 @@
 package org.opengis.cite.ogcapiedr10.openapi3;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.sun.jersey.api.uri.UriTemplate;
 import com.sun.jersey.api.uri.UriTemplateParser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Builds a URL out of a TestPoint.

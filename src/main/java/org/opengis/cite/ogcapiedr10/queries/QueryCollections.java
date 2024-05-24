@@ -1,62 +1,25 @@
 package org.opengis.cite.ogcapiedr10.queries;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertFalse;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveParameterByName;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDate;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDateRange;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDateRangeWithDuration;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseTemporalExtent;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
-import java.io.BufferedReader;
-
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Set;
-
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
-import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
-import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
-import org.opengis.cite.ogcapiedr10.util.TemporalExtent;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Operation;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.model3.Path;
-import com.reprezen.kaizen.oasparser.model3.Schema;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
 
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
 
 /**
  * /collections/{collectionId}/

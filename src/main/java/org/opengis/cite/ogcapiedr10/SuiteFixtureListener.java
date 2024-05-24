@@ -1,20 +1,6 @@
 package org.opengis.cite.ogcapiedr10;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
-import static io.restassured.RestAssured.given;
-
-
-import java.io.File;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
-import java.util.Map;
-import java.util.logging.Level;
-
+import com.sun.jersey.api.client.Client;
 import org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils;
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
 import org.opengis.cite.ogcapiedr10.util.Link;
@@ -23,9 +9,11 @@ import org.opengis.cite.ogcapiedr10.util.URIUtils;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 
-import com.reprezen.kaizen.oasparser.OpenApiParser;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.sun.jersey.api.client.Client;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Map;
+import java.util.logging.Level;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

@@ -3,17 +3,10 @@ package org.opengis.cite.ogcapiedr10.queries;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
 
-
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
-
-import org.opengis.cite.ogcapiedr10.util.JsonUtils;
-import org.testng.Assert;
-
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
 
 public class PositionQueryProcessor extends AbstractProcessor{
 

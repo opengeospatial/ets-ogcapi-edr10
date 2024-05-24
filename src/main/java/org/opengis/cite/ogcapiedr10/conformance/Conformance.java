@@ -1,23 +1,8 @@
 package org.opengis.cite.ogcapiedr10.conformance;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
-import static org.opengis.cite.ogcapiedr10.conformance.RequirementClass.CORE;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForConformance;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-import static org.hamcrest.CoreMatchers.containsString;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
@@ -26,11 +11,17 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.*;
+import static org.opengis.cite.ogcapiedr10.conformance.RequirementClass.CORE;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Conformance Path {root}/conformance

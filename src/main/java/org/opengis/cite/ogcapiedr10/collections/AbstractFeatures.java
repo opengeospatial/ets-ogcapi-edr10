@@ -1,46 +1,28 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberMatched;
-import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberReturned;
-import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertTimeStamp;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollections;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinkByRel;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithSupportedMediaTypeByRel;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithoutRelOrType;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findUnsupportedTypes;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.time.ZonedDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
-
+import com.reprezen.kaizen.oasparser.model3.Parameter;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
-import org.opengis.cite.ogcapiedr10.SuiteAttribute;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
-import com.reprezen.kaizen.oasparser.OpenApiParser;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
+import java.net.URI;
+import java.time.ZonedDateTime;
+import java.util.*;
 
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
+import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberReturned;
+import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertTimeStamp;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>

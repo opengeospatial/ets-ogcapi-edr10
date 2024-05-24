@@ -1,10 +1,10 @@
 package org.opengis.cite.ogcapiedr10.openapi3;
 
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
-
-import com.reprezen.kaizen.oasparser.model3.MediaType;
 
 /**
  * Encapsulates a Test Point with the UriTemplate and predefined replacements.

@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import io.restassured.response.Response;
-
 public abstract class AbstractProcessor {
     
 	   public String readStringFromURL(String urlString,int limit) throws Exception
