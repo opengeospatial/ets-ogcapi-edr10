@@ -83,22 +83,7 @@ public class CommonDataFixture extends CommonFixture {
 
 		modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
 		
-		modelUri = appendFormatToURI(modelUri);
-
-		boolean validate = false;
-		
-
-		try {
-			this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-		} catch (Exception ed) {
-			try {
-				modelUri = new URI(modelUri.toString().replace("application/json", "json"));
-
-				this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-			} catch (Exception ignored) {
-			}
-		}
-
+		this.apiModel = (OpenApi3) testContext.getSuite().getAttribute( API_MODEL.getName() );
 	}
 
 

@@ -8,6 +8,8 @@ import java.util.Map;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.sun.jersey.api.client.Client;
 
+import io.restassured.path.json.JsonPath;
+
 /**
  * An enumerated type defining ISuite attributes that may be set to constitute a shared test fixture.
  */
@@ -53,6 +55,11 @@ public enum SuiteAttribute {
      * Parsed collections from resource /collections; Added during execution.
      */
     COLLECTIONS( "collections", List.class ),
+
+    /**
+     * LandingPage as JSONPath object
+     */
+    LANDINGPAGEJSONPATH( "landingpagejsonpath", JsonPath.class ),
 
     /**
      * Collection names assigned to a feature id parsed from resource /collections/{name}/items; Added during execution.

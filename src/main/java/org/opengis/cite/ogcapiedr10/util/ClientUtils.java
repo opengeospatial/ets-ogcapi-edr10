@@ -171,4 +171,29 @@ public class ClientUtils {
         entityDoc.setDocumentURI(domSource.getSystemId());
         return entityDoc;
     }
+
+    /**
+     * Checks if a GET request to a given URI returns HTTP 200 - OK
+     * 
+     * @param uri The URI to check
+     * @return true, if HTTP 200 - OK was returned after a GET request, false otherwise 
+     */
+    public static boolean is200Response(URI uri) {
+        URL url = null;
+        int code = 0;
+
+        try {
+            url = uri.toURL();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+
+            code = connection.getResponseCode();
+
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        }
+
+        return (code == 200);
+    }
 }

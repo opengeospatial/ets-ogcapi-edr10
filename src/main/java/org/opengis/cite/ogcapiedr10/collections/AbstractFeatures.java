@@ -184,15 +184,11 @@ public class AbstractFeatures extends CommonDataFixture {
 		return collectionsData.iterator();
 	}
 
-	@BeforeClass
-	public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
-
-	
-		    Response response = init().baseUri(this.modelUri.toString()).accept( OPEN_API_MIME_TYPE ).when().request( GET );
-		    apiDef = response.asString();
-			
-		
-	}
+        @BeforeClass
+        public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
+            OpenApi3 openApiDef = (OpenApi3) testContext.getSuite().getAttribute(SuiteAttribute.API_MODEL.getName());
+            apiDef = openApiDef.getOpenApi();
+        }
 
 	/**
 	 * Abstract Test 22, Test Method 1

@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.opengis.cite.ogcapiedr10.util.Link;
+
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Operation;
@@ -27,6 +29,8 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.sun.jersey.api.uri.UriTemplate;
 import com.sun.jersey.api.uri.UriTemplateParser;
+
+import io.restassured.path.json.JsonPath;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>
@@ -292,6 +296,34 @@ public class OpenApiUtils {
 		}
 		return false;
 	}
+
+	public static Link parseApiUrl( JsonPath jsonPath ) {
+	        
+	        
+	        
+	        for ( Object link : jsonPath.getList( "links" ) ) {
+	            Map<String, Object> linkMap = (Map<String, Object>) link;
+	            Object rel = linkMap.get( "rel" );
+	            Object type = linkMap.get( "type" );
+	            if ("service-desc".equals( rel ))  //Check service-desc first
+	            {
+	                return new Link((String) linkMap.get( "href" ),
+	                                (String)rel,
+	                                (String)type);
+	                
+	                  
+	            }
+	            else if ("service-doc".equals( rel )) 
+	            {
+
+	                return new Link((String) linkMap.get( "href" ),
+	                                (String)rel,
+	                                (String)type);
+	                  
+	            }
+	        }
+	        return null;
+	    }
 
 	private static String createCollectionPath(String collectionName) {
 		StringBuilder requestedPath = new StringBuilder();
