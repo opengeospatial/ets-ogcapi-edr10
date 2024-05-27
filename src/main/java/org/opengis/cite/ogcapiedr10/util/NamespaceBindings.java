@@ -1,13 +1,9 @@
 package org.opengis.cite.ogcapiedr10.util;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import javax.xml.namespace.NamespaceContext;
-
 import org.opengis.cite.ogcapiedr10.Namespaces;
+
+import javax.xml.namespace.NamespaceContext;
+import java.util.*;
 
 /**
  * Provides namespace bindings for evaluating XPath 1.0 expressions using the

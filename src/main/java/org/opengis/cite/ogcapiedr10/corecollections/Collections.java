@@ -1,27 +1,7 @@
 package org.opengis.cite.ogcapiedr10.corecollections;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollectionsMetadata;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinkByRel;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithSupportedMediaTypeByRel;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithoutRelOrType;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findUnsupportedTypes;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.linkIncludesRelAndType;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
@@ -30,9 +10,16 @@ import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.net.URI;
+import java.util.*;
 
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
+import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollectionsMetadata;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.*;
+import static org.testng.Assert.assertNotNull;
 
 /**
  *

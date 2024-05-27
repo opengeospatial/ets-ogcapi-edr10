@@ -1,10 +1,10 @@
 package org.opengis.cite.ogcapiedr10;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeSuite;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Checks that various preconditions are satisfied before the test suite is run.

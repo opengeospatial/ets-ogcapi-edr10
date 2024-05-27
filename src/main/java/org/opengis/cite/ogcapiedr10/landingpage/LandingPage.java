@@ -1,28 +1,21 @@
 package org.opengis.cite.ogcapiedr10.landingpage;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import org.opengis.cite.ogcapiedr10.CommonFixture;
+import org.testng.annotations.Test;
 
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-import org.opengis.cite.ogcapiedr10.CommonFixture;
-import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
-import org.opengis.cite.ogcapiedr10.openapi3.UriBuilder;
-import org.opengis.util.FactoryException;
-import org.testng.annotations.Test;
-
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static io.restassured.http.ContentType.JSON;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 
 /**
  * Updated at the OGC API - EDR Sprint 2020 by ghobona

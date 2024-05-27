@@ -1,32 +1,18 @@
 package org.opengis.cite.ogcapiedr10.openapi3;
 
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.COLLECTIONS;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.CONFORMANCE;
+import com.reprezen.kaizen.oasparser.model3.*;
+import com.sun.jersey.api.uri.UriTemplate;
+import com.sun.jersey.api.uri.UriTemplateParser;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Operation;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.model3.Path;
-import com.reprezen.kaizen.oasparser.model3.Response;
-import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.model3.Server;
-import com.sun.jersey.api.uri.UriTemplate;
-import com.sun.jersey.api.uri.UriTemplateParser;
+import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.COLLECTIONS;
+import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.CONFORMANCE;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>

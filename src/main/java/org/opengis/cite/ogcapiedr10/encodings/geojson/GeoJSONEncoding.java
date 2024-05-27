@@ -1,38 +1,20 @@
 package org.opengis.cite.ogcapiedr10.encodings.geojson;
 
-import io.restassured.http.ContentType;
-import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.everit.json.schema.Schema;
-import org.everit.json.schema.loader.SchemaLoader;
-import org.json.JSONObject;
-
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.cite.ogcapiedr10.EtsAssert;
 import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.testng.ITestContext;
 import org.testng.SkipException;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
-import static org.testng.Assert.assertTrue;
 
 public class GeoJSONEncoding extends CommonFixture {
 

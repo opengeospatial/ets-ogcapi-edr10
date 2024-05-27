@@ -1,28 +1,22 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollection;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.collectNumberOfAllReturnedFeatures;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDate;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.hasProperty;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseAsDate;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
+import io.restassured.path.json.JsonPath;
+import org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils;
+import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
+import org.testng.SkipException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils;
-import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
-import org.testng.SkipException;
-
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
-
-import io.restassured.path.json.JsonPath;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollection;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>

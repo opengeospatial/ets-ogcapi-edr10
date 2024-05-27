@@ -2,14 +2,14 @@ package org.opengis.cite.ogcapiedr10;
 
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
-import java.nio.charset.StandardCharsets;
-import javax.ws.rs.core.MediaType;
-
 import org.opengis.cite.ogcapiedr10.util.ClientUtils;
 import org.opengis.cite.ogcapiedr10.util.XMLUtils;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import org.w3c.dom.Document;
+
+import javax.ws.rs.core.MediaType;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A listener that augments a test result with diagnostic information in the
