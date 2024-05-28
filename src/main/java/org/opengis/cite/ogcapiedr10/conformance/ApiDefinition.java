@@ -6,6 +6,8 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
+import org.opengis.cite.ogcapiedr10.SuiteAttribute;
+import org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils;
 import org.opengis.cite.ogcapiedr10.util.Link;
 import org.testng.ITestContext;
 import org.testng.SkipException;
@@ -13,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Map;
 
@@ -38,7 +41,7 @@ public class ApiDefinition extends CommonFixture {
         Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET );
         JsonPath jsonPath = request.jsonPath();
 
-        this.apiUrl = parseApiUrl( jsonPath );
+        this.apiUrl = OpenApiUtils.parseApiUrl( jsonPath );
     }
 
     
@@ -72,31 +75,13 @@ public class ApiDefinition extends CommonFixture {
     @Test(description = "Implements Abstract Test 5 (/conf/core/api-definition-success)", groups = "apidefinition", dependsOnMethods = "openapiDocumentRetrieval")
     public void apiDefinitionValidation( ITestContext testContext )
                             throws MalformedURLException {
-    	
-    
-        OpenApiParser parser = new OpenApiParser();
- 
-
-        OpenApi3 apiModel = null;
-   
         
-        Response response = init().baseUri( apiUrl.getHref() ).accept( apiUrl.getType() ).when().request( GET );
+        OpenApi3 apiModel = (OpenApi3) testContext.getSuite().getAttribute( API_MODEL.getName());
         
-        
-        try {
-            	
-        	URL resolutionBase = new URL(apiUrl.getHref()); //https://github.com/RepreZen/KaiZen-OpenApi-Parser/blob/83c47220d21fe7569f46eeacd3f5bdecb58da69a/API-Overview.md#parsing-options
-			apiModel = (OpenApi3) parser.parse(response.asString(), resolutionBase);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-			assertTrue( false, "The API definition linked from the Landing Page resulted in "+apiUrl+" \n"+e.getMessage() );
-		}
-
-        if(apiModel.isValid() )
-        {
-        	testContext.getSuite().setAttribute( API_MODEL.getName(), apiModel );
-        }
+        if(apiModel == null) {
+            URI apiDefinitionLocation = (URI) testContext.getSuite().getAttribute( SuiteAttribute.API_DEFINITION.getName());
+            throw new AssertionError("Could not create API model from URI: " + apiDefinitionLocation);
+        }        
         
         if(apiModel.isValid() 	&&	(!apiUrl.getType().equals(OPEN_API_MIME_TYPE)))
         {
@@ -105,34 +90,6 @@ public class ApiDefinition extends CommonFixture {
    
         assertTrue( apiModel.isValid(), createValidationMsg( apiModel ) );
  
-    }
-
-    private Link parseApiUrl( JsonPath jsonPath ) {
-    	
-    	
-    	
-        for ( Object link : jsonPath.getList( "links" ) ) {
-            Map<String, Object> linkMap = (Map<String, Object>) link;
-            Object rel = linkMap.get( "rel" );
-            Object type = linkMap.get( "type" );
-            if ("service-desc".equals( rel ))  //Check service-desc first
-            {
-            	return new Link((String) linkMap.get( "href" ),
-            			(String)rel,
-            			(String)type);
-            	
-            	  
-            }
-            else if ("service-doc".equals( rel )) 
-            {
-
-            	return new Link((String) linkMap.get( "href" ),
-            			(String)rel,
-            			(String)type);
-            	  
-            }
-        }
-        return null;
     }
 
     private String createValidationMsg( OpenApi3 model ) {

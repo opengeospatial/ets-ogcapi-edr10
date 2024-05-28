@@ -3,6 +3,8 @@ package org.opengis.cite.ogcapiedr10.landingpage;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
+import org.opengis.cite.ogcapiedr10.SuiteAttribute;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 import java.net.HttpURLConnection;
@@ -28,29 +30,6 @@ public class LandingPage extends CommonFixture {
 
     private JsonPath jsonPath;
 
-   private boolean is200Response(URI uri)
-   {
-	   URL url  = null;
-	   int code = 0;
-	   
-	   try {
-	   url = uri.toURL();
-	   HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-	   connection.setRequestMethod("GET");
-	   connection.connect();
-
-	   code = connection.getResponseCode();
-	   
-	   
-	   }
-	   catch(Exception ee)
-	   {
-		   ee.printStackTrace();
-	   }
-
-	   return (code==200);
-   }
-
 
     /**
      * <pre>
@@ -59,32 +38,10 @@ public class LandingPage extends CommonFixture {
      * </pre>
      */
     @Test(description = "Implements Abstract Test 2 (/conf/core/root-op) and Abstract Test 3 (/conf/core/root-success) - Landing Page validation", groups = "landingpage")
-    public void edrLandingPageValidation() {
-
-    	String f = "";
-    	
-    	if(rootUri.toString().contains("f=json") || rootUri.toString().contains("f=application/json")) {}
-    	else { f = "f=application/json"; }
-    	
-    	Response response = null;
-    	
-    	if(is200Response(URI.create(rootUri.toString()+"?f=application/json")))
-    	{
-    		response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "?f=application/json");
-    		response.then().statusCode( 200 );
-    	}
-    	else if(is200Response(URI.create(rootUri.toString()+"?f=json")))
-    	{
-    		response = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET, "?f=json");
-    		response.then().statusCode( 200 );		
-    	}
-    	
-    	
-    	
-    
-    
-    	
-        jsonPath = response.jsonPath();
+    public void edrLandingPageValidation(ITestContext testContext) {
+        
+        jsonPath = (JsonPath) testContext.getSuite().getAttribute(SuiteAttribute.LANDINGPAGEJSONPATH.getName());
+        
         List<Object> links = jsonPath.getList( "links" );
         Set<String> linkTypes = collectLinkTypes( links );
         boolean expectedLinkTypesExists = ( linkTypes.contains( "service-desc" )

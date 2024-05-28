@@ -1,6 +1,5 @@
 package org.opengis.cite.ogcapiedr10;
 
-import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.testng.ITestContext;
@@ -78,22 +77,7 @@ public class CommonDataFixture extends CommonFixture {
 
 		modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
 		
-		modelUri = appendFormatToURI(modelUri);
-
-		boolean validate = false;
-		
-
-		try {
-			this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-		} catch (Exception ed) {
-			try {
-				modelUri = new URI(modelUri.toString().replace("application/json", "json"));
-
-				this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-			} catch (Exception ignored) {
-			}
-		}
-
+		this.apiModel = (OpenApi3) testContext.getSuite().getAttribute( SuiteAttribute.API_MODEL.getName() );
 	}
 
 

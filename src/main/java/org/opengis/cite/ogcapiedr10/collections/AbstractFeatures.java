@@ -1,9 +1,11 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
+import org.opengis.cite.ogcapiedr10.SuiteAttribute;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
 import org.testng.ITestContext;
 import org.testng.SkipException;
@@ -166,15 +168,11 @@ public class AbstractFeatures extends CommonDataFixture {
 		return collectionsData.iterator();
 	}
 
-	@BeforeClass
-	public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
-
-	
-		    Response response = init().baseUri(this.modelUri.toString()).accept( OPEN_API_MIME_TYPE ).when().request( GET );
-		    apiDef = response.asString();
-			
-		
-	}
+        @BeforeClass
+        public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
+            OpenApi3 openApiDef = (OpenApi3) testContext.getSuite().getAttribute(SuiteAttribute.API_MODEL.getName());
+            apiDef = openApiDef.toString();
+        }
 
 	/**
 	 * Abstract Test 22, Test Method 1
