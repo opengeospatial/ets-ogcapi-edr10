@@ -171,7 +171,7 @@ public class AbstractFeatures extends CommonDataFixture {
         @BeforeClass
         public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
             OpenApi3 openApiDef = (OpenApi3) testContext.getSuite().getAttribute(SuiteAttribute.API_MODEL.getName());
-            apiDef = openApiDef.getOpenApi();
+            apiDef = openApiDef.toString();
         }
 
 	/**
