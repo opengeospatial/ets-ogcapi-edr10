@@ -1,5 +1,15 @@
 = Release Notes
 
+== 1.1 (2024-05-28)
+
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/110[#110]: Landing page retrieval does not work when using path
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/120[#120]: noofcollections parameter is not recognized
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/114[#114]: Testing for GeoJSON even though API doesn't claim to support GeoJSON
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/112[#112]: OGC API - EDR ETS: Testing for "coords" within Cube Query, Should be bbox
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/121[#121]: Possible NPE for validateNoQueryParameters and validateCoordsQueryParameters tests
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/109[#109]: Retrieving api doc differs from spec
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/125[#125]: Clean up and upgrade dependencies and optimize imports
+
 == 1.0 (2022-12-16)
 
 * https://github.com/opengeospatial/ets-ogcapi-edr10/issues/107[Prepare release 1.0]
