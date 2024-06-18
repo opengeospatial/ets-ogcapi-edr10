@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
+import io.restassured.path.json.JsonPath;
 import jakarta.ws.rs.client.Client;
 
 /**
@@ -54,6 +55,11 @@ public enum SuiteAttribute {
      * Parsed collections from resource /collections; Added during execution.
      */
     COLLECTIONS( "collections", List.class ),
+
+    /**
+     * LandingPage as JSONPath object
+     */
+    LANDINGPAGEJSONPATH( "landingpagejsonpath", JsonPath.class ),
 
     /**
      * Collection names assigned to a feature id parsed from resource /collections/{name}/items; Added during execution.

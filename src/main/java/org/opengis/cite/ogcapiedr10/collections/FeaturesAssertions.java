@@ -1,10 +1,8 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollection;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.collectNumberOfAllReturnedFeatures;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.formatDate;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.hasProperty;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.parseAsDate;
 import static org.testng.Assert.assertEquals;

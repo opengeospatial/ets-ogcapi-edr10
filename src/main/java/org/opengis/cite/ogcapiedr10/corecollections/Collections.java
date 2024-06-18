@@ -10,14 +10,11 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithSupported
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithoutRelOrType;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findUnsupportedTypes;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.linkIncludesRelAndType;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +26,6 @@ import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

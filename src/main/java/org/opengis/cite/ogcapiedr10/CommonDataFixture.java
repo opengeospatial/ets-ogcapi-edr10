@@ -1,24 +1,19 @@
 package org.opengis.cite.ogcapiedr10;
 
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.API_MODEL;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.NO_OF_COLLECTIONS;
 import static org.opengis.cite.ogcapiedr10.SuiteAttribute.REQUIREMENTCLASSES;
 
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.reprezen.kaizen.oasparser.OpenApiParser;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
 import org.opengis.cite.ogcapiedr10.conformance.RequirementClass;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
+
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>
@@ -83,22 +78,7 @@ public class CommonDataFixture extends CommonFixture {
 
 		modelUri = (URI) testContext.getSuite().getAttribute(SuiteAttribute.API_DEFINITION.getName());
 		
-		modelUri = appendFormatToURI(modelUri);
-
-		boolean validate = false;
-		
-
-		try {
-			this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-		} catch (Exception ed) {
-			try {
-				modelUri = new URI(modelUri.toString().replace("application/json", "json"));
-
-				this.apiModel = (OpenApi3) new OpenApiParser().parse(modelUri.toURL(), validate);
-			} catch (Exception ignored) {
-			}
-		}
-
+		this.apiModel = (OpenApi3) testContext.getSuite().getAttribute( SuiteAttribute.API_MODEL.getName() );
 	}
 
 

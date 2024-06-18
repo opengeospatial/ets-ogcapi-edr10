@@ -1,15 +1,9 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
-import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.Method.GET;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.SuiteAttribute.IUT;
-import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberMatched;
 import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberReturned;
 import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertTimeStamp;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.retrieveTestPointsForCollections;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinkByRel;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithSupportedMediaTypeByRel;
 import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithoutRelOrType;
@@ -17,15 +11,16 @@ import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findUnsupportedTypes;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.time.ZonedDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
 import org.opengis.cite.ogcapiedr10.SuiteAttribute;
@@ -35,7 +30,6 @@ import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
-import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 
@@ -184,15 +178,11 @@ public class AbstractFeatures extends CommonDataFixture {
 		return collectionsData.iterator();
 	}
 
-	@BeforeClass
-	public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
-
-	
-		    Response response = init().baseUri(this.modelUri.toString()).accept( OPEN_API_MIME_TYPE ).when().request( GET );
-		    apiDef = response.asString();
-			
-		
-	}
+        @BeforeClass
+        public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
+            OpenApi3 openApiDef = (OpenApi3) testContext.getSuite().getAttribute(SuiteAttribute.API_MODEL.getName());
+            apiDef = openApiDef.toString();
+        }
 
 	/**
 	 * Abstract Test 22, Test Method 1
