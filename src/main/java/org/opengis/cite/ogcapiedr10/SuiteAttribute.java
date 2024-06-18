@@ -1,14 +1,14 @@
 package org.opengis.cite.ogcapiedr10;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.sun.jersey.api.client.Client;
-
 import java.io.File;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+
 import io.restassured.path.json.JsonPath;
+import jakarta.ws.rs.client.Client;
 
 /**
  * An enumerated type defining ISuite attributes that may be set to constitute a shared test fixture.

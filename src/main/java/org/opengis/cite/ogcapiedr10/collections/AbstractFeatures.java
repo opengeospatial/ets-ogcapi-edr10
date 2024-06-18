@@ -1,9 +1,27 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
+import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberReturned;
+import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertTimeStamp;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinkByRel;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithSupportedMediaTypeByRel;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findLinksWithoutRelOrType;
+import static org.opengis.cite.ogcapiedr10.util.JsonUtils.findUnsupportedTypes;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
+import java.net.URI;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 import org.opengis.cite.ogcapiedr10.CommonDataFixture;
 import org.opengis.cite.ogcapiedr10.SuiteAttribute;
 import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
@@ -12,19 +30,11 @@ import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
-import java.net.URI;
-import java.time.ZonedDateTime;
-import java.util.*;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
 
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.GEOJSON_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
-import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertNumberReturned;
-import static org.opengis.cite.ogcapiedr10.collections.FeaturesAssertions.assertTimeStamp;
-import static org.opengis.cite.ogcapiedr10.util.JsonUtils.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 
 /**
  * @author <a href="mailto:goltz@lat-lon.de">Lyn Goltz </a>

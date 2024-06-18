@@ -1,20 +1,21 @@
 package org.opengis.cite.ogcapiedr10.encodings.json;
 
-import io.restassured.http.ContentType;
-import io.restassured.http.Method;
-import io.restassured.response.Response;
+import static io.restassured.http.Method.GET;
+import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
+import static org.testng.Assert.assertTrue;
+
+import java.io.InputStream;
+import java.net.URI;
+
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.testng.annotations.Test;
 
-import java.io.InputStream;
-import java.net.URI;
-
-import static io.restassured.http.Method.GET;
-import static org.opengis.cite.ogcapiedr10.OgcApiEdr10.OPEN_API_MIME_TYPE;
-import static org.testng.Assert.assertTrue;
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
 
 public class JSONEncoding extends CommonFixture {
 	

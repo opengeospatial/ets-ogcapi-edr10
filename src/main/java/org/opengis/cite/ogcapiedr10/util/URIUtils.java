@@ -1,13 +1,19 @@
 package org.opengis.cite.ogcapiedr10.util;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
-import javax.ws.rs.core.HttpHeaders;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.logging.Level;
+
+import javax.ws.rs.core.HttpHeaders;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.Invocation.Builder;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
 
 /**
  * Provides a collection of utility methods for manipulating or resolving URI references.
@@ -32,16 +38,21 @@ public class URIUtils {
         if ( uriRef.getScheme().equalsIgnoreCase( "file" ) ) {
             return new File( uriRef );
         }
-        Client client = Client.create();
-        WebResource webRes = client.resource( uriRef );
-        ClientResponse rsp = webRes.get( ClientResponse.class );
+        Client client = ClientUtils.buildClient();
+        WebTarget target = client.target(uriRef);
+        Builder builder = target.request();
+        Response rsp = builder.buildGet().invoke();
         String suffix = null;
-        if ( rsp.getHeaders().getFirst( HttpHeaders.CONTENT_TYPE ).endsWith( "xml" ) ) {
+        if ( rsp.getHeaders().getFirst( HttpHeaders.CONTENT_TYPE ).toString().endsWith( "xml" ) ) {
             suffix = ".xml";
         }
         File destFile = File.createTempFile( "entity-", suffix );
         if ( rsp.hasEntity() ) {
-            InputStream is = rsp.getEntityInputStream();
+            Object entity = rsp.getEntity();
+            if(!(entity instanceof InputStream)) {
+                return null;
+            }
+            InputStream is = (InputStream)entity;
             OutputStream os = new FileOutputStream( destFile );
             byte[] buffer = new byte[8 * 1024];
             int bytesRead;

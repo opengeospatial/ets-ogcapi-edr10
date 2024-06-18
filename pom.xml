@@ -3,11 +3,10 @@
   <parent>
     <groupId>org.opengis.cite</groupId>
     <artifactId>ets-common</artifactId>
-    <version>9</version>
+    <version>10-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.opengis.cite</groupId>
   <artifactId>ets-ogcapi-edr10</artifactId>
   <version>1.2-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -48,29 +47,19 @@
     <ets-code>ogcapi-edr10</ets-code>
     <spec-version>1.0</spec-version>
     <geotk.version>3.21</geotk.version>
-    <docker.teamengine.version>5.7</docker.teamengine.version>
+    <docker.teamengine.version>6.0-SNAPSHOT</docker.teamengine.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.opengis.cite.teamengine</groupId>
       <artifactId>teamengine-spi</artifactId>
-      <version>5.7</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>xercesImpl</artifactId>
-          <groupId>xerces</groupId>
-        </exclusion>
-      </exclusions>
+      <version>6.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>4.5.1</version>
+      <groupId>org.opengis.cite</groupId>
+      <artifactId>geomatics-geotk</artifactId>
+      <version>1.18-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.reprezen.kaizen</groupId>
@@ -81,11 +70,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.opengis/geoapi -->
     <dependency>
       <groupId>org.opengis</groupId>
       <artifactId>geoapi-pending</artifactId>
@@ -103,14 +87,9 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.geotoolkit</groupId>
-      <artifactId>geotk-referencing</artifactId>
-      <version>3.21</version>
-    </dependency>
-    <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>6.9.10</version>
+      <version>7.9.0</version>
       <exclusions>
         <exclusion>
           <artifactId>jcommander</artifactId>
@@ -124,15 +103,15 @@
       <version>20231013</version>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-core</artifactId>
-      <version>1.19</version>
+	  <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-server</artifactId>
+      <version>3.1.6</version>
     </dependency>
     <dependency>
-      <groupId>xml-apis</groupId>
-      <artifactId>xml-apis</artifactId>
-      <version>1.4.01</version>
-    </dependency>
+	  <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>3.1.6</version>
+	</dependency>
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>json-path</artifactId>
@@ -152,31 +131,32 @@
       <groupId>xerces</groupId>
       <artifactId>xercesImpl</artifactId>
       <version>2.12.2</version>
+      <exclusions>
+      	<exclusion>
+      		<groupId>xml-apis</groupId>
+      		<artifactId>xml-apis</artifactId>
+      	</exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+	  <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.4.0</version>
+	</dependency>
+	<dependency>
+      <groupId>org.glassfish.jersey.connectors</groupId>
+      <artifactId>jersey-apache-connector</artifactId>
+      <version>2.30.1</version>
+	</dependency>
+	<dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.11.0</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
-        <configuration>
-          <source>8</source>
-          <docfilessubdirs>true</docfilessubdirs>
-          <show>package</show>
-          <links>
-            <link>http://testng.org/javadocs/</link>
-          </links>
-        </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
@@ -211,7 +191,6 @@
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>@{project.version}</tagNameFormat>
@@ -221,7 +200,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.7.1</version>
         <executions>
           <execution>
             <id>site-package</id>
@@ -235,11 +213,11 @@
           <dependency>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctor-maven-plugin</artifactId>
-            <version>1.5.7.1</version>
+            <version>3.0.0</version>
           </dependency>
         </dependencies>
         <configuration>
-          <source>8</source>
+          <source>17</source>
           <relativizeDecorationLinks>false</relativizeDecorationLinks>
         </configuration>
       </plugin>
@@ -260,7 +238,7 @@
         <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.28.0</version>
+          <version>0.42.0</version>
           <configuration>
             <images>
               <image>
@@ -289,6 +267,7 @@
                 <run>
                   <ports>
                     <port>8081:8080</port>
+                    <port>8000:8000</port>
                   </ports>
                   <wait>
                     <http>

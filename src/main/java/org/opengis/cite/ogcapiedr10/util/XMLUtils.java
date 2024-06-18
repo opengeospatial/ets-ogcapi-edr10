@@ -1,6 +1,9 @@
 package org.opengis.cite.ogcapiedr10.util;
 
-import org.w3c.dom.Node;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Properties;
+import java.util.logging.Level;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -8,10 +11,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Properties;
-import java.util.logging.Level;
+
+import org.w3c.dom.Node;
 
 /**
  * Provides various utility methods for accessing or manipulating XML representations.

@@ -1,14 +1,6 @@
 package org.opengis.cite.ogcapiedr10;
 
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.opengis.cite.ogcapiedr10.util.ClientUtils;
-import org.opengis.cite.ogcapiedr10.util.JsonUtils;
-import org.testng.ITestContext;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import static io.restassured.RestAssured.given;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,7 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import static io.restassured.RestAssured.given;
+import org.opengis.cite.ogcapiedr10.util.ClientUtils;
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+import org.testng.ITestContext;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 /**
  * A supporting base class that sets up a common test fixture. These configuration methods are invoked before those

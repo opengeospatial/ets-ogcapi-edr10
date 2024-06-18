@@ -1,12 +1,17 @@
 package org.opengis.cite.ogcapiedr10.collections;
 
-import com.reprezen.kaizen.oasparser.model3.*;
-import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
-
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertFalse;
 import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+
+import org.opengis.cite.ogcapiedr10.openapi3.TestPoint;
+
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.Operation;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
+import com.reprezen.kaizen.oasparser.model3.Path;
+import com.reprezen.kaizen.oasparser.model3.Schema;
 
 /**
  * /collections/{collectionId}/

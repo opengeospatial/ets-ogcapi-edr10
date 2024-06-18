@@ -1,12 +1,17 @@
 package org.opengis.cite.ogcapiedr10.queries;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.opengis.cite.ogcapiedr10.util.JsonUtils;
-
-import java.net.URLEncoder;
-import java.util.*;
 
 public class PositionQueryProcessor extends AbstractProcessor{
 
