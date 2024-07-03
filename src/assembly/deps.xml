@@ -11,10 +11,6 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <dependencySets>
     <dependencySet>
-      <includes>
-        <include>com.sun.jersey:jersey-client</include>
-        <include>org.opengis.cite:schema-utils</include>
-      </includes>
       <outputDirectory>/</outputDirectory>
       <unpack>false</unpack>
       <scope>runtime</scope>
@@ -25,9 +21,7 @@
         <exclude>org.opengis.cite.teamengine:teamengine-spi</exclude>
         <exclude>org.glassfish.jersey.*:*</exclude>
         <exclude>jakarta.ws.rs:jakarta.ws.rs-api</exclude>
-        <exclude>org.opengis.cite:schema-utils</exclude>
         <exclude>com.beust:jcommander</exclude>
-        <exclude>com.sun.jersey:jersey-core</exclude>
         <exclude>javax.ws.rs:jsr311-api</exclude>
         <exclude>org.testng:testng</exclude>
       </excludes>
