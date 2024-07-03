@@ -28,7 +28,7 @@ import jakarta.ws.rs.core.MediaType;
  * components.
  */
 public class ClientUtils {
-
+     
     /**
      * Builds a client component for interacting with HTTP endpoints. The client
      * will automatically redirect to the URI declared in 3xx responses. The
@@ -42,7 +42,6 @@ public class ClientUtils {
         config.property(ClientProperties.FOLLOW_REDIRECTS, true);
         config.property(ClientProperties.CONNECT_TIMEOUT, 10000);
         Client client = ClientBuilder.newClient(config);
-        client.register(new LoggingFilter());
         return client;
     }
 
@@ -65,7 +64,6 @@ public class ClientUtils {
         config.property(ClientProperties.PROXY_URI, proxy);
         config.property(ClientProperties.FOLLOW_REDIRECTS, true);
         Client client = ClientBuilder.newClient(config);
-        client.register(new LoggingFilter());
         return client;
     }
 
