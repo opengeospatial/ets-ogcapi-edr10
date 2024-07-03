@@ -46,15 +46,14 @@
   <properties>
     <ets-code>ogcapi-edr10</ets-code>
     <spec-version>1.0</spec-version>
-    <geotk.version>3.21</geotk.version>
-    <docker.teamengine.version>6.0-SNAPSHOT</docker.teamengine.version>
+    <docker.teamengine.version>6.0.0-SNAPSHOT</docker.teamengine.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.opengis.cite.teamengine</groupId>
       <artifactId>teamengine-spi</artifactId>
-      <version>6.0-SNAPSHOT</version>
+      <version>6.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opengis.cite</groupId>
@@ -67,9 +66,10 @@
       <version>4.0.4</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
+	  <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.4.0</version>
+	</dependency>
     <dependency>
       <groupId>org.opengis</groupId>
       <artifactId>geoapi-pending</artifactId>
@@ -111,11 +111,11 @@
 	  <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
       <version>3.1.6</version>
-	</dependency>
+    </dependency>    
     <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>json-path</artifactId>
-      <version>4.5.1</version>
+      <groupId>org.glassfish.jersey.connectors</groupId>
+      <artifactId>jersey-apache-connector</artifactId>
+      <version>2.30.1</version>
     </dependency>
     <dependency>
       <groupId>com.beust</groupId>
@@ -128,30 +128,15 @@
       <version>1.1.1</version>
     </dependency>
     <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>2.12.2</version>
-      <exclusions>
-      	<exclusion>
-      		<groupId>xml-apis</groupId>
-      		<artifactId>xml-apis</artifactId>
-      	</exclusion>
-      </exclusions>
-    </dependency>
+      <groupId>org.apache.sis.non-free</groupId>
+      <artifactId>sis-embedded-data</artifactId>
+      <version>1.4</version>
+    </dependency>    
     <dependency>
-	  <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>5.4.0</version>
-	</dependency>
-	<dependency>
-      <groupId>org.glassfish.jersey.connectors</groupId>
-      <artifactId>jersey-apache-connector</artifactId>
-      <version>2.30.1</version>
-	</dependency>
-	<dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>5.11.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -191,6 +176,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
+        <version>3.0.1</version>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>@{project.version}</tagNameFormat>
@@ -200,6 +186,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
+        <version>3.12.1</version>
         <executions>
           <execution>
             <id>site-package</id>
@@ -227,7 +214,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-scm-publish-plugin</artifactId>
-        <version>1.1</version>
+        <version>3.2.1</version>
         <configuration>
           <scmBranch>gh-pages</scmBranch>
         </configuration>
@@ -238,7 +225,7 @@
         <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.42.0</version>
+          <version>0.43.4</version>
           <configuration>
             <images>
               <image>
@@ -282,7 +269,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.6.1</version>
           <configuration>
             <artifactItems>
               <artifactItem>
@@ -319,7 +306,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.22.0</version>
+            <version>3.2.5</version>
             <executions>
               <execution>
                 <goals>
@@ -373,7 +360,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
+            <version>3.1.0</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -394,15 +381,6 @@
       </build>
     </profile>
   </profiles>
-  
-<repositories>
-  <repository>
-    <id>geotoolkit</id>
-    <name>Geotk Modules</name>
-    <url>http://maven.geotoolkit.org</url>
-    <layout>default</layout>
-  </repository>
-</repositories>
 
   <distributionManagement>
     <repository>

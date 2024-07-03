@@ -13,9 +13,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.sis.referencing.CRS;
-import org.apache.sis.referencing.crs.DefaultGeographicCRS;
 import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.opengis.referencing.crs.GeographicCRS;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -210,13 +210,14 @@ public class CollectionsResponse extends CommonFixture {
 			CoordinateReferenceSystem source = null;
 
 			try {
+
 				source = CRS.fromWKT(crsMap.get("wkt").toString());
 			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
 
-			DefaultGeographicCRS crs = (DefaultGeographicCRS) source;
+			GeographicCRS crs = (GeographicCRS) source;
 
 			if (crs.getDatum().getEllipsoid().getName().toString().equals("WGS 84")
 					|| crs.getDatum().getEllipsoid().getName().toString().equals("WGS_1984")
