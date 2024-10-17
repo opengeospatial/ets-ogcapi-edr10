@@ -79,15 +79,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
                 HashMap link = (HashMap) positionQuery.get("link");
                 HashMap variables = (HashMap) link.get("variables");
                 ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
-                String supportedFormat = null;
-                for (int f = 0; f < outputFormatList.size(); f++) {
-                    if (outputFormatList.get(f).equals("CoverageJSON") || outputFormatList.get(f).contains("CoverageJSON")) {  //preference for CoverageJSON if supported
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                    else if (outputFormatList.get(f).equals("GeoJSON")) {
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                }
+                String supportedFormat = getSupportedFormat(outputFormatList);
 
                 double medianx = 0d;
                 double mediany = 0d;
