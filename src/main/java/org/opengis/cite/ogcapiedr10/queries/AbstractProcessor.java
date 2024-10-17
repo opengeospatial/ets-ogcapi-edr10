@@ -29,5 +29,14 @@ public abstract class AbstractProcessor {
 
 	        return response.toString();
 	    }
+	   
+	   
+	   int getMaximum(int noOfCollections, int collectionsListSize) {	        
+	        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+	        //use all collections. Otherwise use the specified noOfCollections
+	        int maximum = noOfCollections == -1 ? collectionsListSize : noOfCollections;
+	        maximum = noOfCollections > collectionsListSize ? collectionsListSize : noOfCollections;
+	        return maximum;
+	   }
 
 }

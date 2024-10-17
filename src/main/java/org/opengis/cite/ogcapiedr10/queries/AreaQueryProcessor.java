@@ -16,11 +16,10 @@ public class AreaQueryProcessor extends AbstractProcessor{
         StringBuffer sb = new StringBuffer();
 
         ArrayList<String> collectionsList = new ArrayList<String>();
-        collectionsList.addAll(collectionIds);
-        
-        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-        //use all collections. Otherwise use the specified noOfCollections
-        int maximum = noOfCollections == -1 ? collectionsList.size() : noOfCollections;
+        collectionsList.addAll(collectionIds);        
+
+        //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
+        int maximum = getMaximum(noOfCollections, collectionsList.size());
         
         for (int c = 0; c < maximum; c++) {
 
