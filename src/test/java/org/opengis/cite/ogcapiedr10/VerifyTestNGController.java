@@ -15,19 +15,20 @@ import javax.xml.transform.Source;
  */
 public class VerifyTestNGController {
 
-    private static DocumentBuilder docBuilder;
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+	private static DocumentBuilder docBuilder;
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
-    @Test
-    public void testValidateTestRunArgs() throws Exception {  
-    	// Integration Test
-    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-    	DocumentBuilder db = dbf.newDocumentBuilder();
-        Document testRunProps = db.parse(this.getClass().getResourceAsStream("/test-run-props.xml"));
-        TestNGController controller = new TestNGController(System.getProperty("java.io.tmpdir"));
-        Source testResults = controller.doTestRun(testRunProps);
-        System.out.println("Test results: " + testResults.getSystemId());
-    }
+	@Test
+	public void testValidateTestRunArgs() throws Exception {
+		// Integration Test
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document testRunProps = db.parse(this.getClass().getResourceAsStream("/test-run-props.xml"));
+		TestNGController controller = new TestNGController(System.getProperty("java.io.tmpdir"));
+		Source testResults = controller.doTestRun(testRunProps);
+		System.out.println("Test results: " + testResults.getSystemId());
+	}
+
 }
