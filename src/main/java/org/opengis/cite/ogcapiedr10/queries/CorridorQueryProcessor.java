@@ -227,7 +227,10 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                     pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
                     
                     }
-                catch(Exception ex) { ex.printStackTrace();}
+                catch(Exception ex) { 
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
 
                 if(pageContent!=null) {
 

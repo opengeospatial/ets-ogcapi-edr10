@@ -164,8 +164,10 @@ public class AreaQueryProcessor extends AbstractProcessor{
                 try {
                     sampleParamaterNameSafe = URLEncoder.encode(sampleParamaterName,"UTF8");
                 }
-                catch(Exception ex) {ex.printStackTrace();}
-
+                catch(Exception ex) { 
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
 
                 String sampleDateTime = null;
                 if (extent.containsKey("temporal")) {
@@ -227,7 +229,10 @@ public class AreaQueryProcessor extends AbstractProcessor{
                     pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
 
                 }
-                catch(Exception ex) { ex.printStackTrace();}
+                catch(Exception ex) { 
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
 
                 if(pageContent!=null) {
 
