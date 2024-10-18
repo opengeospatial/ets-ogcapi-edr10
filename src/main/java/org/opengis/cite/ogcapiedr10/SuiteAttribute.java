@@ -1,92 +1,95 @@
 package org.opengis.cite.ogcapiedr10;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.sun.jersey.api.client.Client;
-
 import java.io.File;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+
 import io.restassured.path.json.JsonPath;
+import jakarta.ws.rs.client.Client;
 
 /**
- * An enumerated type defining ISuite attributes that may be set to constitute a shared test fixture.
+ * An enumerated type defining ISuite attributes that may be set to constitute a shared
+ * test fixture.
  */
 @SuppressWarnings("rawtypes")
 public enum SuiteAttribute {
 
-    /**
-     * A client component for interacting with HTTP endpoints.
-     */
-    CLIENT( "httpClient", Client.class ),
+	/**
+	 * A client component for interacting with HTTP endpoints.
+	 */
+	CLIENT("httpClient", Client.class),
 
-    /**
-     * The root URL.
-     */
-    IUT( "instanceUnderTest", URI.class ),
+	/**
+	 * The root URL.
+	 */
+	IUT("instanceUnderTest", URI.class),
 
-    /**
-     * A File containing the test subject or a description of it.
-     */
-    TEST_SUBJ_FILE( "testSubjectFile", File.class ),
+	/**
+	 * A File containing the test subject or a description of it.
+	 */
+	TEST_SUBJ_FILE("testSubjectFile", File.class),
 
-    /**
-     * The number of collections to test.
-     */
-    NO_OF_COLLECTIONS( "noOfCollections", Integer.class ),
-    
-    /**
-     * Location of API Definition
-     */
-    API_DEFINITION( "apiDefinition", URI.class ),    
+	/**
+	 * The number of collections to test.
+	 */
+	NO_OF_COLLECTIONS("noOfCollections", Integer.class),
 
-    /**
-     * Parsed OpenApi3 document resource /api; Added during execution.
-     */
-    API_MODEL( "apiModel", OpenApi3.class ),
+	/**
+	 * Location of API Definition
+	 */
+	API_DEFINITION("apiDefinition", URI.class),
 
-    /**
-     * Requirement classes parsed from /conformance; Added during execution.
-     */
-    REQUIREMENTCLASSES( "requirementclasses", List.class ),
+	/**
+	 * Parsed OpenApi3 document resource /api; Added during execution.
+	 */
+	API_MODEL("apiModel", OpenApi3.class),
 
-    /**
-     * Parsed collections from resource /collections; Added during execution.
-     */
-    COLLECTIONS( "collections", List.class ),
+	/**
+	 * Requirement classes parsed from /conformance; Added during execution.
+	 */
+	REQUIREMENTCLASSES("requirementclasses", List.class),
 
-    /**
-     * LandingPage as JSONPath object
-     */
-    LANDINGPAGEJSONPATH( "landingpagejsonpath", JsonPath.class ),
+	/**
+	 * Parsed collections from resource /collections; Added during execution.
+	 */
+	COLLECTIONS("collections", List.class),
 
-    /**
-     * Collection names assigned to a feature id parsed from resource /collections/{name}/items; Added during execution.
-     */
-    FEATUREIDS( "featureIds", Map.class );
+	/**
+	 * LandingPage as JSONPath object
+	 */
+	LANDINGPAGEJSONPATH("landingpagejsonpath", JsonPath.class),
 
-    private final Class attrType;
+	/**
+	 * Collection names assigned to a feature id parsed from resource
+	 * /collections/{name}/items; Added during execution.
+	 */
+	FEATUREIDS("featureIds", Map.class);
 
-    private final String attrName;
+	private final Class attrType;
 
-    SuiteAttribute( String attrName, Class attrType ) {
-        this.attrName = attrName;
-        this.attrType = attrType;
-    }
+	private final String attrName;
 
-    public Class getType() {
-        return attrType;
-    }
+	SuiteAttribute(String attrName, Class attrType) {
+		this.attrName = attrName;
+		this.attrType = attrType;
+	}
 
-    public String getName() {
-        return attrName;
-    }
+	public Class getType() {
+		return attrType;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder( attrName );
-        sb.append( '(' ).append( attrType.getName() ).append( ')' );
-        return sb.toString();
-    }
+	public String getName() {
+		return attrName;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(attrName);
+		sb.append('(').append(attrType.getName()).append(')');
+		return sb.toString();
+	}
+
 }

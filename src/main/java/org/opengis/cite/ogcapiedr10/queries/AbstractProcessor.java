@@ -5,29 +5,25 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public abstract class AbstractProcessor {
-    
-	   public String readStringFromURL(String urlString,int limit) throws Exception
-	    {
-	        URL requestURL = new URL(urlString);
 
-	        BufferedReader in = new BufferedReader(new InputStreamReader(requestURL.openConnection().getInputStream()));
+	public String readStringFromURL(String urlString, int limit) throws Exception {
+		URL requestURL = new URL(urlString);
 
-	        StringBuilder response = new StringBuilder();
-	        String inputLine;
+		BufferedReader in = new BufferedReader(new InputStreamReader(requestURL.openConnection().getInputStream()));
 
-	        int i = 0;
+		StringBuilder response = new StringBuilder();
+		String inputLine;
 
+		int i = 0;
 
-	        while (((inputLine = in.readLine()) != null) && (i < limit))
-	        {
-	            response.append(inputLine+"\n");
-	            i++;
-	        }
+		while (((inputLine = in.readLine()) != null) && (i < limit)) {
+			response.append(inputLine + "\n");
+			i++;
+		}
 
+		in.close();
 
-	        in.close();
-
-	        return response.toString();
-	    }
+		return response.toString();
+	}
 
 }

@@ -12,39 +12,38 @@ import static org.mockito.Mockito.when;
 
 public class VerifySuiteFixtureListener {
 
-    private static XmlSuite xmlSuite;
-    private static ISuite suite;
+	private static XmlSuite xmlSuite;
 
-    public VerifySuiteFixtureListener() {
-    }
+	private static ISuite suite;
 
-    @BeforeClass
-    public static void setUpClass() {
-        xmlSuite = mock(XmlSuite.class);
-        suite = mock(ISuite.class);
-        when(suite.getXmlSuite()).thenReturn(xmlSuite);
-    }
+	public VerifySuiteFixtureListener() {
+	}
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
+	@BeforeClass
+	public static void setUpClass() {
+		xmlSuite = mock(XmlSuite.class);
+		suite = mock(ISuite.class);
+		when(suite.getXmlSuite()).thenReturn(xmlSuite);
+	}
 
-    @Before
-    public void setUp() {
-    }
+	@AfterClass
+	public static void tearDownClass() {
+	}
 
-    @After
-    public void tearDown() {
-    }
+	@Before
+	public void setUp() {
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void noSuiteParameters() {
-        Map<String, String> params = new HashMap<String, String>();
-        when(xmlSuite.getParameters()).thenReturn(params);
-        SuiteFixtureListener iut = new SuiteFixtureListener();
-        iut.onStart(suite);
-    }
+	@After
+	public void tearDown() {
+	}
 
-
+	@Test(expected = IllegalArgumentException.class)
+	public void noSuiteParameters() {
+		Map<String, String> params = new HashMap<String, String>();
+		when(xmlSuite.getParameters()).thenReturn(params);
+		SuiteFixtureListener iut = new SuiteFixtureListener();
+		iut.onStart(suite);
+	}
 
 }
