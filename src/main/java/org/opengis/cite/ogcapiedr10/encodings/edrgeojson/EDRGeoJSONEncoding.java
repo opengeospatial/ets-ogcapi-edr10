@@ -79,7 +79,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
                 String supportedFormat = null;
 
                 for (int f = 0; f < outputFormatList.size(); f++) {
-                    if (outputFormatList.get(f).equals("GeoJSON")) {
+                    if (outputFormatList.get(f).equalsIgnoreCase("GeoJSON")) {
                         supportedFormat = outputFormatList.get(f);
                     }
                 }
@@ -228,7 +228,7 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 				
                 try {
                     if(supportedFormat!=null && supportedCRS!=null) {
-	                    if(supportedFormat.equals("GeoJSON") && 
+	                    if(supportedFormat.equalsIgnoreCase("GeoJSON") && 
 	                    		
 	                    		(supportedCRS.equals("CRS84") || 
 	                    				supportedCRS.equals("CRS:84") || 

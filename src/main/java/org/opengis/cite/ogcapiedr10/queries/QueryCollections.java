@@ -92,6 +92,7 @@ public class QueryCollections extends CommonFixture {
 		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
 		//use all collections. Otherwise, use the specified noOfCollections
 		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+                maximum = this.noOfCollections > collectionsList.size() ? collectionsList.size() : this.noOfCollections;
 
 		for (int c = 0; c < maximum; c++) {
 			
@@ -181,6 +182,7 @@ public class QueryCollections extends CommonFixture {
 		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
 		//use all collections. Otherwise, use the specified noOfCollections
 		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+                maximum = this.noOfCollections > collectionsList.size() ? collectionsList.size() : this.noOfCollections;
 
 		for (int c = 0; c < maximum; c++) {
 
