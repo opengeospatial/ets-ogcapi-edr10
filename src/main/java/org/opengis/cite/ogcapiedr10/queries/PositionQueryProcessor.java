@@ -83,7 +83,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
                 String supportedFormat = null;
 
                 if(variables==null) { //Avoids Nullpointer Exception
-                        sb.append(" The variables element is missing from the collection "+collectionId+" .");
+                        sb.append(" The variables element is missing from the collection " + collectionId + ". ");
                 } else {
                     ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
                     supportedFormat = getSupportedFormat(outputFormatList);
