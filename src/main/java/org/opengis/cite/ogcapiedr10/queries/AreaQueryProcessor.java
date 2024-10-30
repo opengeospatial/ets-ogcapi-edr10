@@ -32,7 +32,7 @@ public class AreaQueryProcessor extends AbstractProcessor{
             String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
             Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
-            JsonPath jsonResponse =  JsonPath.from(new java.io.File("D:\\tmp2\\jsonresponse444.txt"));
+            JsonPath jsonResponse = response.jsonPath();
             
             HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
             
