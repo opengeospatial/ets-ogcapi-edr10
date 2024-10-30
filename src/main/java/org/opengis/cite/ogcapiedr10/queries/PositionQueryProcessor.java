@@ -39,6 +39,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
             
             if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
             	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
+            	continue;
             }
 
 
