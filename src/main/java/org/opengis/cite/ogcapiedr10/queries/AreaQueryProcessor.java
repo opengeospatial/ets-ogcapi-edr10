@@ -32,7 +32,7 @@ public class AreaQueryProcessor extends AbstractProcessor{
             String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
             Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
-            JsonPath jsonResponse = response.jsonPath();
+            JsonPath jsonResponse =  JsonPath.from(new java.io.File("D:\\tmp2\\jsonresponse444.txt"));
             
             HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
             
@@ -56,8 +56,12 @@ public class AreaQueryProcessor extends AbstractProcessor{
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
                 Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
-
-                parameterNamesIterator.hasNext();
+                
+                if(!parameterNamesIterator.hasNext()) { 
+                        sb.append(" The parameter_names element of the collection "+collectionId+" is empty.");
+                        continue;
+                }
+                
                 String sampleParamaterName = parameterNamesIterator.next();
                 
                 if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
