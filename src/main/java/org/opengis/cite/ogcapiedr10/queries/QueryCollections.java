@@ -78,7 +78,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 66 : Validate that an error is returned by a Cube query if no query parameters are specified. 
 	 * Abstract Test 82 : Validate that an error is returned by a Trajectory query if no query parameters are specified. 
 	 * Abstract Test 100 : Validate that an error is returned by a Corridor query if no query parameters are specified. 
-	 * Abstract Test 136 : Validate that an error is returned by a Locations query if no query parameters are specified.
+	 * Abstract Test 136 : Validate that a GeoJSON document was returned with a status code 200 containing at least a list of features one for each location supported by the collection.
 	 *
 	 * @param collectionIdentifiers collection identifiers
 	 */
@@ -141,10 +141,12 @@ public class QueryCollections extends CommonFixture {
 									+ collectionId);
 				}
 				if (supportsLocationsQuery) {
-					
+                                        //https://github.com/opengeospatial/ets-ogcapi-edr10/issues/138
+                                        //test expects HTTP 200 for location query with no parameters
+                                        //see https://docs.ogc.org/is/19-086r4/19-086r4.html, Abstract Test 136
 					response = getCollectionResponse(collectionId + "/locations");
-					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 136. Expected status code 400 when a Locations query with no query parameters are specified for collection "
+					assertTrue(response.getStatusCode() == 200,
+							"Fails Abstract Test 136. Expected status code 200 when a Locations query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 			
