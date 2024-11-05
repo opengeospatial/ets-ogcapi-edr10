@@ -4,6 +4,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+import org.testng.SkipException;
 
 import java.net.URLEncoder;
 import java.util.*;
@@ -17,6 +18,8 @@ public class PositionQueryProcessor extends AbstractProcessor{
 
         //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
         int maximum = getMaximum(noOfCollections, collectionsList.size());
+        
+        boolean executedQuery = false;
         
         for (int c = 0; c < maximum; c++) {
 
@@ -38,7 +41,6 @@ public class PositionQueryProcessor extends AbstractProcessor{
             supportsPositionQuery = dataQueries != null && dataQueries.containsKey("position");
             
             if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
-            	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
             	continue;
             }
 
@@ -46,7 +48,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
             if (supportsPositionQuery) {
             	
                 if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
-                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                    continue;
                 }            	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
@@ -230,14 +232,16 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     sb.append("Response of Position Query on collection " + collectionId
                             + " was null. \n");
                 }
-
-
-
+                
+                executedQuery = true;
 
             }
 
 
 
+        }
+        if (!executedQuery) {
+            throw new SkipException("None of the collections support this query type. Increase the number of collections to parse.");
         }
 
       return sb.toString();
