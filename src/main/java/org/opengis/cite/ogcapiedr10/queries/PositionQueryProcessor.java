@@ -10,11 +10,14 @@ import java.net.URLEncoder;
 import java.util.*;
 
 public class PositionQueryProcessor extends AbstractProcessor{
+    public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
     public String validatePositionQueryUsingParameters(Set<String> collectionIds, String rootUri, int noOfCollections, RequestSpecification ini){
         StringBuffer sb = new StringBuffer();
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);
+        
+        int numberOfCollectionsWithPositionSupport = 0;
 
         //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
         int maximum = getMaximum(noOfCollections, collectionsList.size());
@@ -30,7 +33,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
             String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
             Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
-            JsonPath jsonResponse = response.jsonPath();
+            JsonPath jsonResponse = JsonPath.from(new java.io.File("D:\\52n\\Projekte\\CITE Consulting\\edr-issue-133-collection-response.json"));
             
             HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
             
@@ -46,6 +49,8 @@ public class PositionQueryProcessor extends AbstractProcessor{
 
 
             if (supportsPositionQuery) {
+                
+                numberOfCollectionsWithPositionSupport++;
             	
                 if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
                     continue;
@@ -240,8 +245,9 @@ public class PositionQueryProcessor extends AbstractProcessor{
 
 
         }
-        if (!executedQuery) {
-            throw new SkipException("None of the collections support this query type. Increase the number of collections to parse.");
+
+        if(numberOfCollectionsWithPositionSupport==0) {
+                sb.append(queryTypeNotSupported+"\n");
         }
 
       return sb.toString();
