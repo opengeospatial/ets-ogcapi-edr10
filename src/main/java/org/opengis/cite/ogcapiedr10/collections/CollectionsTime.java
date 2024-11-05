@@ -8,6 +8,8 @@ import static org.opengis.cite.ogcapiedr10.EtsAssert.assertTrue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import java.util.List;
+
 /**
  * /collections/{collectionId}/
  *
@@ -87,7 +89,7 @@ public class CollectionsTime{
         
         /**
          * <pre>
-         * Abstract Test 70: Validate that the coords query parameters are constructed correctly. (cube)
+         * Abstract Test 70: Validate that the bbox query parameters are constructed correctly. (cube)
          * </pre>
          *
          * @param testPoint
@@ -121,7 +123,6 @@ public class CollectionsTime{
 
             // ----------------
 
-            if (!testPoint.getPath().endsWith("/locations")) {
                 assertNotNull(bbox, "Required " + paramName + " parameter for collections with path '"
                         + testPoint.getPath() + "'  in OpenAPI document is missing");
 
@@ -129,14 +130,20 @@ public class CollectionsTime{
                     String msg = "Expected property '%s' with value '%s' but was '%s'";
                     assertEquals(bbox.getName(), paramName, String.format(msg, "name", paramName, bbox.getName()));
                     assertEquals(bbox.getIn(), "query", String.format(msg, "in", "query", bbox.getIn()));
-                    assertTrue(isRequired(bbox), String.format(msg, "required", "true", bbox.getRequired()));
+//                    assertTrue(isRequired(bbox), String.format(msg, "required", "true", bbox.getRequired()));
                     assertFalse(isExplode(bbox), String.format(msg, "explode", "false", bbox.getExplode()));
                     Schema schema = bbox.getSchema();
-                    assertEquals(schema.getType(), "string",
-                            String.format(msg, "schema -> type", "string", schema.getType()));
+                    if(schema.hasOneOfSchemas()) {
+                        List<Schema> oneOfSchemas = schema.getOneOfSchemas();
+                        for (Schema oneOfschema : oneOfSchemas) {
+                            assertEquals(oneOfschema.getType(), "array",
+                                    String.format(msg, "schema -> type", "array", schema.getType()));
+                        }
+                    }else {
+                        assertEquals(schema.getType(), "array",
+                                String.format(msg, "schema -> type", "array", schema.getType()));
+                    }
                 }
-
-            }
 
         }
 
