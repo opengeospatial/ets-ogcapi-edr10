@@ -17,6 +17,8 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);        
+        
+        int numberOfCollectionsWithAreaSupport = 0;
 
         //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
         int maximum = getMaximum(noOfCollections, collectionsList.size());
@@ -42,22 +44,22 @@ public class AreaQueryProcessor extends AbstractProcessor{
             
             supportsAreaQuery = dataQueries != null && dataQueries.containsKey("area");
 
-            if(supportsAreaQuery==false) { //Avoids Nullpointer Exception
-            	sb.append(" The area element is missing from the data_queries element of the collection "+collectionId+" .");
-            }
-
-
             if (supportsAreaQuery) {
             	
+                numberOfCollectionsWithAreaSupport++;
+                
                 if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
-                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                    continue;
                 }             	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
                 Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
-
-                parameterNamesIterator.hasNext();
+                
+                if(!parameterNamesIterator.hasNext()) { 
+                        continue;
+                }
+                
                 String sampleParamaterName = parameterNamesIterator.next();
                 
                 if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
@@ -258,7 +260,9 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
         }
 
-
+        if(numberOfCollectionsWithAreaSupport==0) {
+                sb.append(queryTypeNotSupported+"\n");
+        }
 
         return sb.toString();
     }
