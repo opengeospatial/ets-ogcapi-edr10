@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.List;
 
 public abstract class AbstractProcessor {
+
+    public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
     
 	   public String readStringFromURL(String urlString,int limit) throws Exception
 	    {

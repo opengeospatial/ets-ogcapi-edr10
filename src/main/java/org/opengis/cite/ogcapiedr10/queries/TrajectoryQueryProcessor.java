@@ -11,7 +11,6 @@ import java.util.*;
 public class TrajectoryQueryProcessor extends AbstractProcessor{
 
     double sizeOfLensSide = 1d; //in degrees
-    public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
     public String validateTrajectoryQueryUsingParameters(Set<String> collectionIds, String rootUri, int noOfCollections, RequestSpecification ini){
         StringBuffer sb = new StringBuffer();

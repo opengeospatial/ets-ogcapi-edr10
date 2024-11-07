@@ -350,6 +350,9 @@ public class QueryCollections extends CommonFixture {
 
 		AreaQueryProcessor processor = new AreaQueryProcessor();
 		String resultMessage = processor.validateAreaQueryUsingParameters(collectionIds,rootUri.toString(),this.noOfCollections,init());
+                if(resultMessage.contains(processor.queryTypeNotSupported)) {
+                    throw new SkipException(processor.queryTypeNotSupported);
+                }
 		assertTrue(resultMessage.length()==0,
 				"Fails Abstract Test 53. Therefore could not verify the implementation passes Abstract Tests 55, 57, 59, 61, 63, 65. Expected information that matches the selection criteria is returned for Area query. "
 						+ resultMessage);
