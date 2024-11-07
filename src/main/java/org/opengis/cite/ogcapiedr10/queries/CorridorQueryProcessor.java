@@ -65,8 +65,7 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                 Set parameterNamesSet = parameterNames.keySet();
                 Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
 
-                if(!parameterNamesIterator.hasNext()) { 
-                    sb.append(" The parameter_names element of the collection "+collectionId+" is empty.");
+                if(!parameterNamesIterator.hasNext()) {
                     continue;
                 }
                 String sampleParamaterName = parameterNamesIterator.next();
