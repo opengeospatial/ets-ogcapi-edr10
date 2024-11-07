@@ -130,7 +130,7 @@ public class CollectionsTime{
                     String msg = "Expected property '%s' with value '%s' but was '%s'";
                     assertEquals(bbox.getName(), paramName, String.format(msg, "name", paramName, bbox.getName()));
                     assertEquals(bbox.getIn(), "query", String.format(msg, "in", "query", bbox.getIn()));
-//                    assertTrue(isRequired(bbox), String.format(msg, "required", "true", bbox.getRequired()));
+                    assertTrue(isRequired(bbox), String.format(msg, "required", "true", bbox.getRequired()));
                     assertFalse(isExplode(bbox), String.format(msg, "explode", "false", bbox.getExplode()));
                     Schema schema = bbox.getSchema();
                     if(schema.hasOneOfSchemas()) {
