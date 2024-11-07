@@ -1,16 +1,19 @@
 package org.opengis.cite.ogcapiedr10.queries;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.opengis.cite.ogcapiedr10.util.JsonUtils;
-import org.testng.SkipException;
-
-import java.net.URLEncoder;
-import java.util.*;
 
 public class PositionQueryProcessor extends AbstractProcessor{
-    public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
     public String validatePositionQueryUsingParameters(Set<String> collectionIds, String rootUri, int noOfCollections, RequestSpecification ini){
         StringBuffer sb = new StringBuffer();
@@ -21,9 +24,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
 
         //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
         int maximum = getMaximum(noOfCollections, collectionsList.size());
-        
-        boolean executedQuery = false;
-        
+                
         for (int c = 0; c < maximum; c++) {
 
             String collectionId = collectionsList.get(c);
@@ -237,12 +238,8 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     sb.append("Response of Position Query on collection " + collectionId
                             + " was null. \n");
                 }
-                
-                executedQuery = true;
 
             }
-
-
 
         }
 
