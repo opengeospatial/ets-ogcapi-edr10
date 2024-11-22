@@ -8,11 +8,10 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.logging.Level;
 
-import javax.ws.rs.core.HttpHeaders;
-
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.Invocation.Builder;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 
 /**
