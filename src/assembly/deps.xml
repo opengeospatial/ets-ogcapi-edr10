@@ -18,7 +18,6 @@
         <exclude>*:jersey-hk2</exclude>
         <exclude>jakarta.ws.rs:jakarta.ws.rs-api</exclude>
         <exclude>com.beust:jcommander</exclude>
-        <exclude>javax.ws.rs:jsr311-api</exclude>
         <exclude>org.testng:testng</exclude>
       </excludes>
       <outputDirectory>/</outputDirectory>
