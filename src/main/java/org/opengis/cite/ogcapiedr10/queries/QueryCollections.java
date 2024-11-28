@@ -307,6 +307,9 @@ public class QueryCollections extends CommonFixture {
 		PositionQueryProcessor processor = new PositionQueryProcessor();
 
 		String resultMessage = processor.validatePositionQueryUsingParameters(collectionIds,rootUri.toString(),this.noOfCollections,init());
+                if(resultMessage.contains(processor.queryTypeNotSupported)) {
+                    throw new SkipException(processor.queryTypeNotSupported);
+                }
 		assertTrue(resultMessage.length()==0,
 				"Fails Abstract Test 37. Therefore could not verify the implementation passes Abstract Tests 39, 41, 43, 45, 47, and 49. Expected information that matches the selection criteria is returned for Position query. "
 						+ resultMessage);

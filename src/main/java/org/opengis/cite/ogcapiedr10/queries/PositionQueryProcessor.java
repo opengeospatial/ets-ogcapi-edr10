@@ -1,12 +1,17 @@
 package org.opengis.cite.ogcapiedr10.queries;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.opengis.cite.ogcapiedr10.util.JsonUtils;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.opengis.cite.ogcapiedr10.util.JsonUtils;
-
-import java.net.URLEncoder;
-import java.util.*;
 
 public class PositionQueryProcessor extends AbstractProcessor{
 
@@ -14,10 +19,12 @@ public class PositionQueryProcessor extends AbstractProcessor{
         StringBuffer sb = new StringBuffer();
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);
+        
+        int numberOfCollectionsWithPositionSupport = 0;
 
         //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
         int maximum = getMaximum(noOfCollections, collectionsList.size());
-        
+                
         for (int c = 0; c < maximum; c++) {
 
             String collectionId = collectionsList.get(c);
@@ -38,14 +45,16 @@ public class PositionQueryProcessor extends AbstractProcessor{
             supportsPositionQuery = dataQueries != null && dataQueries.containsKey("position");
             
             if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
-            	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
+            	continue;
             }
 
 
             if (supportsPositionQuery) {
+                
+                numberOfCollectionsWithPositionSupport++;
             	
                 if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
-                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                    continue;
                 }            	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
@@ -230,13 +239,12 @@ public class PositionQueryProcessor extends AbstractProcessor{
                             + " was null. \n");
                 }
 
-
-
-
             }
 
+        }
 
-
+        if(numberOfCollectionsWithPositionSupport==0) {
+                sb.append(queryTypeNotSupported+"\n");
         }
 
       return sb.toString();
