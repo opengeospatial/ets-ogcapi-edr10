@@ -65,7 +65,9 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                 Set parameterNamesSet = parameterNames.keySet();
                 Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
 
-                parameterNamesIterator.hasNext();
+                if(!parameterNamesIterator.hasNext()) {
+                    continue;
+                }
                 String sampleParamaterName = parameterNamesIterator.next();
 
                 if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
