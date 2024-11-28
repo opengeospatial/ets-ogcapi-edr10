@@ -34,7 +34,7 @@ public class PositionQueryProcessor extends AbstractProcessor{
             String url = JsonUtils.getCollectionURL(rootUri, collectionId);
 
             Response response = JsonUtils.getCollectionResponse(rootUri, collectionId, ini);
-            JsonPath jsonResponse = JsonPath.from(new java.io.File("D:\\52n\\Projekte\\CITE Consulting\\edr-issue-133-collection-response.json"));
+            JsonPath jsonResponse = response.jsonPath();
             
             HashMap<?,?> dataQueries = jsonResponse.getJsonObject("data_queries");
             
