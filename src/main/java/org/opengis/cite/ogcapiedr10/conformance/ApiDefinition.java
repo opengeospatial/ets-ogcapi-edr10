@@ -31,78 +31,76 @@ import io.restassured.response.Response;
  */
 public class ApiDefinition extends CommonFixture {
 
-	private String response;
+    private String response;
 
-	private Link apiUrl = null;
+    private Link apiUrl = null;
 
-	@BeforeClass(dependsOnMethods = "initCommonFixture")
-	public void retrieveApiUrl() {
-		Response request = init().baseUri(rootUri.toString()).accept(JSON).when().request(GET);
-		JsonPath jsonPath = request.jsonPath();
+    @BeforeClass(dependsOnMethods = "initCommonFixture")
+    public void retrieveApiUrl() {
+        Response request = init().baseUri( rootUri.toString() ).accept( JSON ).when().request( GET );
+        JsonPath jsonPath = request.jsonPath();
 
-		this.apiUrl = OpenApiUtils.parseApiUrl(jsonPath);
-	}
+        this.apiUrl = OpenApiUtils.parseApiUrl( jsonPath );
+    }
 
-	/**
-	 * <pre>
-	 * Abstract Test 4: Test Purpose: Validate that the API Definition document can be retrieved from the expected location.
-	 * </pre>
-	 */
-	@Test(description = "Implements Abstract Test 4 (/conf/core/api-definition)", groups = "apidefinition",
-			dependsOnGroups = "landingpage")
-	public void openapiDocumentRetrieval() {
+    
+      
+    
+    /**
+     * <pre>
+     * Abstract Test 4: Test Purpose: Validate that the API Definition document can be retrieved from the expected location.
+     * </pre>
+     */
+    @Test(description = "Implements Abstract Test 4 (/conf/core/api-definition)", groups = "apidefinition", dependsOnGroups = "landingpage")
+    public void openapiDocumentRetrieval() {
+    	
+        if ( apiUrl == null || apiUrl.getHref().isEmpty() )
+            throw new AssertionError( "Path to the API Definition could not be constructed from the landing page" );
+        Response request = init().baseUri( apiUrl.getHref() ).accept( apiUrl.getType() ).when().request( GET );
+        request.then().statusCode( 200 );
+        response = request.asString();
+    }
 
-		if (apiUrl == null || apiUrl.getHref().isEmpty())
-			throw new AssertionError("Path to the API Definition could not be constructed from the landing page");
-		Response request = init().baseUri(apiUrl.getHref()).accept(apiUrl.getType()).when().request(GET);
-		request.then().statusCode(200);
-		response = request.asString();
-	}
+    /**
+     * <pre>
+     * Abstract Test 5: Validate that the API Definition complies with the required structure and contents.
+     * </pre>
+     *
+     * @param testContext
+     *            never <code>null</code>
+     * @throws MalformedURLException
+     *             if the apiUrl is malformed
+     */
+    @Test(description = "Implements Abstract Test 5 (/conf/core/api-definition-success)", groups = "apidefinition", dependsOnMethods = "openapiDocumentRetrieval")
+    public void apiDefinitionValidation( ITestContext testContext )
+                            throws MalformedURLException {
+        
+        OpenApi3 apiModel = (OpenApi3) testContext.getSuite().getAttribute( API_MODEL.getName());
+        
+        if(apiModel == null) {
+            URI apiDefinitionLocation = (URI) testContext.getSuite().getAttribute( SuiteAttribute.API_DEFINITION.getName());
+            throw new AssertionError("Could not create API model from URI: " + apiDefinitionLocation);
+        }        
+        
+        if(apiModel.isValid() 	&&	(!apiUrl.getType().equals(OPEN_API_MIME_TYPE)))
+        {
+        	throw new SkipException("The API Definition was found to be valid. However, the Media Type identified by the Link to the API Definition document was not "+OPEN_API_MIME_TYPE);
+        }
+   
+        assertTrue( apiModel.isValid(), createValidationMsg( apiModel ) );
+ 
+    }
 
-	/**
-	 * <pre>
-	 * Abstract Test 5: Validate that the API Definition complies with the required structure and contents.
-	 * </pre>
-	 * @param testContext never <code>null</code>
-	 * @throws MalformedURLException if the apiUrl is malformed
-	 */
-	@Test(description = "Implements Abstract Test 5 (/conf/core/api-definition-success)", groups = "apidefinition",
-			dependsOnMethods = "openapiDocumentRetrieval")
-	public void apiDefinitionValidation(ITestContext testContext) throws MalformedURLException {
+    private String createValidationMsg( OpenApi3 model ) {
+        StringBuilder sb = new StringBuilder();
+        sb.append( "API definition is not valid. Found following validation items:" );
+        if ( !model.isValid() ) {
+            for ( ValidationResults.ValidationItem item : model.getValidationItems() ) {            	
+            	sb.append( "  @ " ).append( item.getPositionInfo() ).append( "  - " ).append( item.getSeverity() ).append( ": " ).append( item.getMsg() );
 
-		OpenApi3 apiModel = (OpenApi3) testContext.getSuite().getAttribute(API_MODEL.getName());
-
-		if (apiModel == null) {
-			URI apiDefinitionLocation = (URI) testContext.getSuite()
-				.getAttribute(SuiteAttribute.API_DEFINITION.getName());
-			throw new AssertionError("Could not create API model from URI: " + apiDefinitionLocation);
-		}
-
-		if (apiModel.isValid() && (!apiUrl.getType().equals(OPEN_API_MIME_TYPE))) {
-			throw new SkipException(
-					"The API Definition was found to be valid. However, the Media Type identified by the Link to the API Definition document was not "
-							+ OPEN_API_MIME_TYPE);
-		}
-
-		assertTrue(apiModel.isValid(), createValidationMsg(apiModel));
-
-	}
-
-	private String createValidationMsg(OpenApi3 model) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("API definition is not valid. Found following validation items:");
-		if (!model.isValid()) {
-			for (ValidationResults.ValidationItem item : model.getValidationItems()) {
-				sb.append("  @ ")
-					.append(item.getPositionInfo())
-					.append("  - ")
-					.append(item.getSeverity())
-					.append(": ")
-					.append(item.getMsg());
-
-			}
-		}
-		return sb.toString();
-	}
+            }
+        }
+        return sb.toString();
+    }
 
 }

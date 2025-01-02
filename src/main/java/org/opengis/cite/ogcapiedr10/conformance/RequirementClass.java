@@ -9,71 +9,72 @@ package org.opengis.cite.ogcapiedr10.conformance;
  */
 public enum RequirementClass {
 
-	CORE("http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/core"),
-	GEOJSON("http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/geojson"),
-	EDRGEOJSON("http://www.opengis.net/spec/ogcapi-edr-1/1.0/req/edr-geojson");
+    CORE( "http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/core" ),
+    GEOJSON("http://www.opengis.net/spec/ogcapi-edr-1/1.0/conf/geojson"),
+    EDRGEOJSON("http://www.opengis.net/spec/ogcapi-edr-1/1.0/req/edr-geojson");
 
-	private final String conformanceClass;
 
-	private final String mediaTypeFeaturesAndCollections;
+    private final String conformanceClass;
 
-	private final String mediaTypeOtherResources;
+    private final String mediaTypeFeaturesAndCollections;
 
-	RequirementClass(String conformanceClass) {
-		this(conformanceClass, null, null);
-	}
+    private final String mediaTypeOtherResources;
 
-	RequirementClass(String conformanceClass, String mediaTypeFeaturesAndCollections, String mediaTypeOtherResources) {
-		this.conformanceClass = conformanceClass;
-		this.mediaTypeFeaturesAndCollections = mediaTypeFeaturesAndCollections;
-		this.mediaTypeOtherResources = mediaTypeOtherResources;
-	}
+    RequirementClass( String conformanceClass ) {
+        this( conformanceClass, null, null );
+    }
 
-	/**
-	 * @return <code>true</code> if the RequirementClass has a media type for features and
-	 * collections, <code>true</code> otherwise
-	 */
-	public boolean hasMediaTypeForFeaturesAndCollections() {
-		return mediaTypeFeaturesAndCollections != null;
-	}
+    RequirementClass( String conformanceClass, String mediaTypeFeaturesAndCollections, String mediaTypeOtherResources ) {
+        this.conformanceClass = conformanceClass;
+        this.mediaTypeFeaturesAndCollections = mediaTypeFeaturesAndCollections;
+        this.mediaTypeOtherResources = mediaTypeOtherResources;
+    }
 
-	/**
-	 * @return media type for features and collections, <code>null</code> if not available
-	 */
-	public String getMediaTypeFeaturesAndCollections() {
-		return mediaTypeFeaturesAndCollections;
-	}
+    /**
+     * @return <code>true</code> if the RequirementClass has a media type for features and collections,
+     *         <code>true</code> otherwise
+     */
+    public boolean hasMediaTypeForFeaturesAndCollections() {
+        return mediaTypeFeaturesAndCollections != null;
+    }
 
-	/**
-	 * @return <code>true</code> if the RequirementClass has a media type for other
-	 * resources, <code>true</code> otherwise
-	 */
-	public boolean hasMediaTypeForOtherResources() {
-		return mediaTypeOtherResources != null;
-	}
+    /**
+     * @return media type for features and collections, <code>null</code> if not available
+     */
+    public String getMediaTypeFeaturesAndCollections() {
+        return mediaTypeFeaturesAndCollections;
+    }
 
-	/**
-	 * @return media type of other resources, <code>null</code> if not available
-	 */
-	public String getMediaTypeOtherResources() {
-		return mediaTypeOtherResources;
-	}
+    /**
+     * @return <code>true</code> if the RequirementClass has a media type for other resources,
+     *         <code>true</code> otherwise
+     */
+    public boolean hasMediaTypeForOtherResources() {
+        return mediaTypeOtherResources != null;
+    }
 
-	public String getConformanceClass() {
-		return conformanceClass;
-	}
+    /**
+     * @return media type of other resources, <code>null</code> if not available
+     */
+    public String getMediaTypeOtherResources() {
+        return mediaTypeOtherResources;
+    }
 
-	/**
-	 * @param conformanceClass the conformance class of the RequirementClass to return.
-	 * @return the RequirementClass with the passed conformance class, <code>null</code>
-	 * if RequirementClass exists
-	 */
-	public static RequirementClass byConformanceClass(String conformanceClass) {
-		for (RequirementClass requirementClass : values()) {
-			if (requirementClass.conformanceClass.equals(conformanceClass))
-				return requirementClass;
-		}
-		return null;
-	}
+    public String getConformanceClass() {
+        return conformanceClass;
+    }
+
+    /**
+     * @param conformanceClass
+     *            the conformance class of the RequirementClass to return.
+     * @return the RequirementClass with the passed conformance class, <code>null</code> if RequirementClass exists
+     */
+    public static RequirementClass byConformanceClass( String conformanceClass ) {
+        for ( RequirementClass requirementClass : values() ) {
+            if ( requirementClass.conformanceClass.equals( conformanceClass ) )
+                return requirementClass;
+        }
+        return null;
+    }
 
 }

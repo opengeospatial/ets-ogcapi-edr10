@@ -178,11 +178,11 @@ public class AbstractFeatures extends CommonDataFixture {
 		return collectionsData.iterator();
 	}
 
-	@BeforeClass
-	public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
-		OpenApi3 openApiDef = (OpenApi3) testContext.getSuite().getAttribute(SuiteAttribute.API_MODEL.getName());
-		apiDef = openApiDef.toString();
-	}
+        @BeforeClass
+        public void retrieveRequiredInformationFromTestContext(ITestContext testContext) {
+            OpenApi3 openApiDef = (OpenApi3) testContext.getSuite().getAttribute(SuiteAttribute.API_MODEL.getName());
+            apiDef = openApiDef.toString();
+        }
 
 	/**
 	 * Abstract Test 22, Test Method 1
@@ -195,6 +195,7 @@ public class AbstractFeatures extends CommonDataFixture {
 	 * Test Method
 	 *   1. Validate that the type property is present and has a value of FeatureCollection
 	 * </pre>
+	 *
 	 * @param collection the collection under test, never <code>null</code>
 	 */
 	public void validateTypeProperty(CollectionResponseKey collection) {
@@ -219,6 +220,7 @@ public class AbstractFeatures extends CommonDataFixture {
 	 * Test Method
 	 *   2. Validate the features property is present and that it is populated with an array of feature items.
 	 * </pre>
+	 *
 	 * @param collection the collection under test, never <code>null</code>
 	 */
 	void validateFeaturesProperty(CollectionResponseKey collection) {
@@ -255,6 +257,7 @@ public class AbstractFeatures extends CommonDataFixture {
 	 *
 	 * Verify that all links include the rel and type link parameters.
 	 * </pre>
+	 *
 	 * @param collection the collection under test, never <code>null</code>
 	 */
 	void validateLinks(CollectionResponseKey collection) {
@@ -310,6 +313,7 @@ public class AbstractFeatures extends CommonDataFixture {
 	 *
 	 * Test Method: Validate that the timeStamp value is set to the time when the response was generated.
 	 * </pre>
+	 *
 	 * @param collection the collection under test, never <code>null</code>
 	 */
 	public void validateTimeStamp(CollectionResponseKey collection) {
@@ -342,6 +346,7 @@ public class AbstractFeatures extends CommonDataFixture {
 	 *
 	 * Test Method: Validate that the numberReturned value is identical to the number of features in the response.
 	 * </pre>
+	 *
 	 * @param collection the collection under test, never <code>null</code>
 	 */
 	void validateNumberReturned(CollectionResponseKey collection) {
@@ -392,7 +397,6 @@ public class AbstractFeatures extends CommonDataFixture {
 		public JsonPath jsonPath() {
 			return response.jsonPath();
 		}
-
 	}
 
 	protected class CollectionResponseKey {
@@ -417,7 +421,6 @@ public class AbstractFeatures extends CommonDataFixture {
 		public int hashCode() {
 			return Objects.hash(id);
 		}
-
 	}
 
 }
