@@ -65,7 +65,7 @@ public class GeoJSONEncoding extends CommonFixture {
                 ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
                 String supportedFormat = null;
                 for (int f = 0; f < outputFormatList.size(); f++) {
-                    if (outputFormatList.get(f).equals("GeoJSON")) {
+                    if (outputFormatList.get(f).equalsIgnoreCase("GeoJSON")) {
                         supportedFormat = outputFormatList.get(f);
                     }
                 }

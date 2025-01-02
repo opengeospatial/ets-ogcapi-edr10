@@ -85,7 +85,7 @@ public class QueryCollections extends CommonFixture {
 	 * Abstract Test 66 : Validate that an error is returned by a Cube query if no query parameters are specified. 
 	 * Abstract Test 82 : Validate that an error is returned by a Trajectory query if no query parameters are specified. 
 	 * Abstract Test 100 : Validate that an error is returned by a Corridor query if no query parameters are specified. 
-	 * Abstract Test 136 : Validate that an error is returned by a Locations query if no query parameters are specified.
+	 * Abstract Test 136 : Validate that a GeoJSON document was returned with a status code 200 containing at least a list of features one for each location supported by the collection.
 	 *
 	 * @param collectionIdentifiers collection identifiers
 	 */
@@ -99,6 +99,7 @@ public class QueryCollections extends CommonFixture {
 		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
 		//use all collections. Otherwise, use the specified noOfCollections
 		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+                maximum = this.noOfCollections > collectionsList.size() ? collectionsList.size() : this.noOfCollections;
 
 		for (int c = 0; c < maximum; c++) {
 			
@@ -147,10 +148,12 @@ public class QueryCollections extends CommonFixture {
 									+ collectionId);
 				}
 				if (supportsLocationsQuery) {
-					
+                                        //https://github.com/opengeospatial/ets-ogcapi-edr10/issues/138
+                                        //test expects HTTP 200 for location query with no parameters
+                                        //see https://docs.ogc.org/is/19-086r4/19-086r4.html, Abstract Test 136
 					response = getCollectionResponse(collectionId + "/locations");
-					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 136. Expected status code 400 when a Locations query with no query parameters are specified for collection "
+					assertTrue(response.getStatusCode() == 200,
+							"Fails Abstract Test 136. Expected status code 200 when a Locations query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 			
@@ -188,6 +191,7 @@ public class QueryCollections extends CommonFixture {
 		//if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
 		//use all collections. Otherwise, use the specified noOfCollections
 		int maximum = this.noOfCollections == -1 ? collectionsList.size() : this.noOfCollections;
+                maximum = this.noOfCollections > collectionsList.size() ? collectionsList.size() : this.noOfCollections;
 
 		for (int c = 0; c < maximum; c++) {
 
@@ -312,6 +316,9 @@ public class QueryCollections extends CommonFixture {
 		PositionQueryProcessor processor = new PositionQueryProcessor();
 
 		String resultMessage = processor.validatePositionQueryUsingParameters(collectionIds,rootUri.toString(),this.noOfCollections,init());
+                if(resultMessage.contains(processor.queryTypeNotSupported)) {
+                    throw new SkipException(processor.queryTypeNotSupported);
+                }
 		assertTrue(resultMessage.length()==0,
 				"Fails Abstract Test 37. Therefore could not verify the implementation passes Abstract Tests 39, 41, 43, 45, 47, and 49. Expected information that matches the selection criteria is returned for Position query. "
 						+ resultMessage);
@@ -355,6 +362,9 @@ public class QueryCollections extends CommonFixture {
 
 		AreaQueryProcessor processor = new AreaQueryProcessor();
 		String resultMessage = processor.validateAreaQueryUsingParameters(collectionIds,rootUri.toString(),this.noOfCollections,init());
+                if(resultMessage.contains(processor.queryTypeNotSupported)) {
+                    throw new SkipException(processor.queryTypeNotSupported);
+                }
 		assertTrue(resultMessage.length()==0,
 				"Fails Abstract Test 53. Therefore could not verify the implementation passes Abstract Tests 55, 57, 59, 61, 63, 65. Expected information that matches the selection criteria is returned for Area query. "
 						+ resultMessage);

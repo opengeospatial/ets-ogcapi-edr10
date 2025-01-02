@@ -29,9 +29,8 @@ public class CorridorQueryProcessor extends AbstractProcessor{
         
         int numberOfCollectionsWithCorridorSupport = 0;
         
-        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-        //use all collections. Otherwise use the specified noOfCollections
-        int maximum = noOfCollections == -1 ? collectionsList.size() : noOfCollections;
+        //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
+        int maximum = getMaximum(noOfCollections, collectionsList.size());
         
         for (int c = 0; c < maximum; c++) {
 
@@ -71,7 +70,9 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                 Set parameterNamesSet = parameterNames.keySet();
                 Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
 
-                parameterNamesIterator.hasNext();
+                if(!parameterNamesIterator.hasNext()) {
+                    continue;
+                }
                 String sampleParamaterName = parameterNamesIterator.next();
 
                 if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
@@ -98,15 +99,7 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                 HashMap link = (HashMap) corridorQuery.get("link");
                 HashMap variables = (HashMap) link.get("variables");
                 ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
-                String supportedFormat = null;
-                for (int f = 0; f < outputFormatList.size(); f++) {
-                    if (outputFormatList.get(f).equals("CoverageJSON") || outputFormatList.get(f).contains("CoverageJSON")) {  //preference for CoverageJSON if supported
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                    else if (outputFormatList.get(f).equals("GeoJSON")) {
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                }
+                String supportedFormat = getSupportedFormat(outputFormatList);
 
                 double medianx = 0d;
                 double mediany = 0d;
@@ -241,7 +234,10 @@ public class CorridorQueryProcessor extends AbstractProcessor{
                     pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
                     
                     }
-                catch(Exception ex) { ex.printStackTrace();}
+                catch(Exception ex) { 
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
 
                 if(pageContent!=null) {
 

@@ -21,11 +21,12 @@ public class AreaQueryProcessor extends AbstractProcessor{
         StringBuffer sb = new StringBuffer();
 
         ArrayList<String> collectionsList = new ArrayList<String>();
-        collectionsList.addAll(collectionIds);
+        collectionsList.addAll(collectionIds);        
         
-        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-        //use all collections. Otherwise use the specified noOfCollections
-        int maximum = noOfCollections == -1 ? collectionsList.size() : noOfCollections;
+        int numberOfCollectionsWithAreaSupport = 0;
+
+        //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
+        int maximum = getMaximum(noOfCollections, collectionsList.size());
         
         for (int c = 0; c < maximum; c++) {
 
@@ -48,22 +49,22 @@ public class AreaQueryProcessor extends AbstractProcessor{
             
             supportsAreaQuery = dataQueries != null && dataQueries.containsKey("area");
 
-            if(supportsAreaQuery==false) { //Avoids Nullpointer Exception
-            	sb.append(" The area element is missing from the data_queries element of the collection "+collectionId+" .");
-            }
-
-
             if (supportsAreaQuery) {
             	
+                numberOfCollectionsWithAreaSupport++;
+                
                 if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
-                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                    continue;
                 }             	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
                 Set parameterNamesSet = parameterNames.keySet();
                 Iterator<String> parameterNamesIterator = parameterNamesSet.iterator();
-
-                parameterNamesIterator.hasNext();
+                
+                if(!parameterNamesIterator.hasNext()) { 
+                        continue;
+                }
+                
                 String sampleParamaterName = parameterNamesIterator.next();
                 
                 if(jsonResponse.getList("crs")==null) { //Avoids Nullpointer Exception
@@ -90,16 +91,8 @@ public class AreaQueryProcessor extends AbstractProcessor{
                 HashMap link = (HashMap) areaQuery.get("link");
                 HashMap variables = (HashMap) link.get("variables");
                 ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
-                String supportedFormat = null;
-                for (int f = 0; f < outputFormatList.size(); f++) {
-                    if (outputFormatList.get(f).equals("CoverageJSON") || outputFormatList.get(f).contains("CoverageJSON")) {  //preference for CoverageJSON if supported
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                    else if (outputFormatList.get(f).equals("GeoJSON")) {
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                }
-
+                String supportedFormat = getSupportedFormat(outputFormatList);
+                
                 double medianx = 0d;
                 double mediany = 0d;
                 double lminx = 0d; //lens
@@ -178,8 +171,10 @@ public class AreaQueryProcessor extends AbstractProcessor{
                 try {
                     sampleParamaterNameSafe = URLEncoder.encode(sampleParamaterName,"UTF8");
                 }
-                catch(Exception ex) {ex.printStackTrace();}
-
+                catch(Exception ex) { 
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
 
                 String sampleDateTime = null;
                 if (extent.containsKey("temporal")) {
@@ -241,7 +236,10 @@ public class AreaQueryProcessor extends AbstractProcessor{
                     pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
 
                 }
-                catch(Exception ex) { ex.printStackTrace();}
+                catch(Exception ex) { 
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
 
                 if(pageContent!=null) {
 
@@ -267,7 +265,9 @@ public class AreaQueryProcessor extends AbstractProcessor{
 
         }
 
-
+        if(numberOfCollectionsWithAreaSupport==0) {
+                sb.append(queryTypeNotSupported+"\n");
+        }
 
         return sb.toString();
     }

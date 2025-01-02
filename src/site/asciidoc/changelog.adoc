@@ -1,5 +1,15 @@
 = Release Notes
 
+== 1.2 (2024-11-28)
+
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/131[#131]: index/size failure on validating coords parameters
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133[#133]: Tests fail because of index size problem and schema check
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133[#138]: Abstract Test 136 seemingly incorrect
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133[#139]: Abstract Test 37 seemingly incorrect
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/141[#141]: validateAreaQueryUsingParameters throw exception
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/142[#142]: validateCorridorQueryUsingParameters throws exception
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/143[#143]: cubeBboxParameterDefinition test seemingly incorrect
+
 == 1.1 (2024-05-28)
 
 * https://github.com/opengeospatial/ets-ogcapi-edr10/issues/110[#110]: Landing page retrieval does not work when using path

@@ -20,10 +20,11 @@ public class PositionQueryProcessor extends AbstractProcessor{
         ArrayList<String> collectionsList = new ArrayList<String>();
         collectionsList.addAll(collectionIds);
         
-        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-        //use all collections. Otherwise use the specified noOfCollections
-        int maximum = noOfCollections == -1 ? collectionsList.size() : noOfCollections;
-        
+        int numberOfCollectionsWithPositionSupport = 0;
+
+        //fix setting of maximum, see https://github.com/opengeospatial/ets-ogcapi-edr10/issues/133
+        int maximum = getMaximum(noOfCollections, collectionsList.size());
+                
         for (int c = 0; c < maximum; c++) {
 
             String collectionId = collectionsList.get(c);
@@ -44,14 +45,16 @@ public class PositionQueryProcessor extends AbstractProcessor{
             supportsPositionQuery = dataQueries != null && dataQueries.containsKey("position");
             
             if(supportsPositionQuery==false) { //Avoids Nullpointer Exception
-            	sb.append(" The position element is missing from the data_queries element of the collection "+collectionId+" .");
+            	continue;
             }
 
 
             if (supportsPositionQuery) {
+                
+                numberOfCollectionsWithPositionSupport++;
             	
                 if(jsonResponse.getJsonObject("parameter_names")==null) { //Avoids Nullpointer Exception
-                	sb.append(" The parameter_names element is missing from the collection "+collectionId+" .");
+                    continue;
                 }            	
 
                 HashMap parameterNames = jsonResponse.getJsonObject("parameter_names");
@@ -68,12 +71,14 @@ public class PositionQueryProcessor extends AbstractProcessor{
                 List<String> crsList = jsonResponse.getList("crs");
 
                 String supportedCRS = null;
-                for (int q = 0; q < crsList.size(); q++) {
-                    if (crsList.get(q).equals("CRS:84") || 
-                    		crsList.get(q).equals("CRS84") || 
-                    		crsList.get(q).equals("EPSG:4326") || 
-                    		crsList.get(q).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
-                        supportedCRS = crsList.get(q);
+                if(crsList != null) {
+                    for (int q = 0; q < crsList.size(); q++) {
+                        if (crsList.get(q).equals("CRS:84") || 
+                                    crsList.get(q).equals("CRS84") || 
+                                    crsList.get(q).equals("EPSG:4326") || 
+                                    crsList.get(q).contains("www.opengis.net/def/crs/OGC/1.3/CRS84")) {
+                            supportedCRS = crsList.get(q);
+                        }
                     }
                 }
                 if (supportedCRS == null) {
@@ -84,15 +89,13 @@ public class PositionQueryProcessor extends AbstractProcessor{
                 HashMap positionQuery = (HashMap) dataQueries.get("position");
                 HashMap link = (HashMap) positionQuery.get("link");
                 HashMap variables = (HashMap) link.get("variables");
-                ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
                 String supportedFormat = null;
-                for (int f = 0; f < outputFormatList.size(); f++) {
-                    if (outputFormatList.get(f).equals("CoverageJSON") || outputFormatList.get(f).contains("CoverageJSON")) {  //preference for CoverageJSON if supported
-                        supportedFormat = outputFormatList.get(f);
-                    }
-                    else if (outputFormatList.get(f).equals("GeoJSON")) {
-                        supportedFormat = outputFormatList.get(f);
-                    }
+
+                if(variables==null) { //Avoids Nullpointer Exception
+                        sb.append(" The variables element is missing from the collection " + collectionId + ". ");
+                } else {
+                    ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
+                    supportedFormat = getSupportedFormat(outputFormatList);
                 }
 
                 double medianx = 0d;
@@ -214,7 +217,11 @@ public class PositionQueryProcessor extends AbstractProcessor{
                     pageContent = readStringFromURL(constructedURL,10);  //you can use Integer.MAX_VALUE for no limit
 
                 }
-                catch(Exception ex) {ex.printStackTrace();}
+                catch(Exception ex) {
+                    ex.printStackTrace();
+                    sb.append(ex.getMessage() + " \n");
+                }
+
 
                 if(pageContent!=null) {
 
@@ -232,13 +239,12 @@ public class PositionQueryProcessor extends AbstractProcessor{
                             + " was null. \n");
                 }
 
-
-
-
             }
 
+        }
 
-
+        if(numberOfCollectionsWithPositionSupport==0) {
+                sb.append(queryTypeNotSupported+"\n");
         }
 
       return sb.toString();
