@@ -7,52 +7,52 @@ import java.util.List;
 
 public abstract class AbstractProcessor {
 
-    public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
-    
-	   public String readStringFromURL(String urlString,int limit) throws Exception
-	    {
-	        URL requestURL = new URL(urlString);
+	public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
-	        BufferedReader in = new BufferedReader(new InputStreamReader(requestURL.openConnection().getInputStream()));
+	public String readStringFromURL(String urlString, int limit) throws Exception {
+		URL requestURL = new URL(urlString);
 
-	        StringBuilder response = new StringBuilder();
-	        String inputLine;
+		BufferedReader in = new BufferedReader(new InputStreamReader(requestURL.openConnection().getInputStream()));
 
-	        int i = 0;
+		StringBuilder response = new StringBuilder();
+		String inputLine;
 
+		int i = 0;
 
-	        while (((inputLine = in.readLine()) != null) && (i < limit))
-	        {
-	            response.append(inputLine+"\n");
-	            i++;
-	        }
+		while (((inputLine = in.readLine()) != null) && (i < limit)) {
+			response.append(inputLine + "\n");
+			i++;
+		}
 
+		in.close();
 
-	        in.close();
+		return response.toString();
+	}
 
-	        return response.toString();
-	    }
-	   
-	   
-	   int getMaximum(int noOfCollections, int collectionsListSize) {	        
-	        //if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
-	        //use all collections. Otherwise use the specified noOfCollections
-	        int maximum = noOfCollections == -1 ? collectionsListSize : noOfCollections;
-	        maximum = noOfCollections > collectionsListSize ? collectionsListSize : noOfCollections;
-	        return maximum;
-	   }
-	   
-	   String getSupportedFormat(List<String> outputFormatList) {
-	       String supportedFormat = "";
-               for (int f = 0; f < outputFormatList.size(); f++) {
-                   if (outputFormatList.get(f).equalsIgnoreCase("CoverageJSON") || outputFormatList.get(f).toLowerCase().contains("CoverageJSON".toLowerCase())) {  //preference for CoverageJSON if supported
-                       supportedFormat = outputFormatList.get(f);
-                   }
-                   else if (outputFormatList.get(f).equalsIgnoreCase("GeoJSON")) {
-                       supportedFormat = outputFormatList.get(f);
-                   }
-               }
-               return supportedFormat;
-	   }
+	int getMaximum(int noOfCollections, int collectionsListSize) {
+		// if noOfCollections is -1 (meaning check box 'Test all collections' was checked)
+		// use all collections. Otherwise use the specified noOfCollections
+		int maximum = noOfCollections == -1 ? collectionsListSize : noOfCollections;
+		maximum = noOfCollections > collectionsListSize ? collectionsListSize : noOfCollections;
+		return maximum;
+	}
+
+	String getSupportedFormat(List<String> outputFormatList) {
+		String supportedFormat = "";
+		for (int f = 0; f < outputFormatList.size(); f++) {
+			if (outputFormatList.get(f).equalsIgnoreCase("CoverageJSON")
+					|| outputFormatList.get(f).toLowerCase().contains("CoverageJSON".toLowerCase())) { // preference
+																										// for
+																										// CoverageJSON
+																										// if
+																										// supported
+				supportedFormat = outputFormatList.get(f);
+			}
+			else if (outputFormatList.get(f).equalsIgnoreCase("GeoJSON")) {
+				supportedFormat = outputFormatList.get(f);
+			}
+		}
+		return supportedFormat;
+	}
 
 }

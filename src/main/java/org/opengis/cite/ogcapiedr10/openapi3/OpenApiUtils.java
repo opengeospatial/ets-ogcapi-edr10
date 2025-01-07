@@ -1,19 +1,32 @@
 package org.opengis.cite.ogcapiedr10.openapi3;
 
-import com.reprezen.kaizen.oasparser.model3.*;
-import com.sun.jersey.api.uri.UriTemplate;
-import com.sun.jersey.api.uri.UriTemplateParser;
+import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.COLLECTIONS;
+import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.CONFORMANCE;
 
 import java.net.URI;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.COLLECTIONS;
-import static org.opengis.cite.ogcapiedr10.openapi3.OpenApiUtils.PATH.CONFORMANCE;
+import org.glassfish.jersey.uri.UriTemplate;
+import org.glassfish.jersey.uri.internal.UriTemplateParser;
 import org.opengis.cite.ogcapiedr10.util.Link;
+
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.Operation;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
+import com.reprezen.kaizen.oasparser.model3.Path;
+import com.reprezen.kaizen.oasparser.model3.Response;
+import com.reprezen.kaizen.oasparser.model3.Schema;
+import com.reprezen.kaizen.oasparser.model3.Server;
 
 import io.restassured.path.json.JsonPath;
 
@@ -28,7 +41,9 @@ public class OpenApiUtils {
 
 	@FunctionalInterface
 	private interface PathMatcherFunction<A, B, C> {
+
 		A apply(B b, C c);
+
 	}
 
 	enum PATH {
@@ -45,15 +60,18 @@ public class OpenApiUtils {
 		private String getPathItem() {
 			return pathItem;
 		}
+
 	}
 
 	private static class PathMatcher implements PathMatcherFunction<Boolean, String, String> {
+
 		@Override
 		public Boolean apply(String pathUnderTest, String pathToMatch) {
 			UriTemplateParser parser = new UriTemplateParser(pathUnderTest);
 			Matcher matcher = parser.getPattern().matcher(pathToMatch);
 			return matcher.matches();
 		}
+
 	}
 
 	private static class ExactMatchFilter implements Predicate<TestPoint> {
@@ -77,34 +95,33 @@ public class OpenApiUtils {
 			Pattern pattern = Pattern.compile(uri);
 			return pattern.matcher(requestedPath).matches();
 		}
+
 	}
 
 	private OpenApiUtils() {
 	}
 
 	/**
-	 * Parse all test points from the passed OpenApi3 document as described in
-	 * A.4.3. Identify the Test Points.
-	 *
+	 * Parse all test points from the passed OpenApi3 document as described in A.4.3.
+	 * Identify the Test Points.
 	 * @param apiModel never <code>null</code>
-	 * @param iut      the url of the instance under test, never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	static List<TestPoint> retrieveTestPoints(OpenApi3 apiModel, URI iut) {
-      
+
 		List<Path> pathItemObjects = identifyTestPoints(apiModel);
 
 		List<PathItemAndServer> pathItemAndServers = identifyServerUrls(apiModel, iut, pathItemObjects);
-	
+
 		return processServerObjects(pathItemAndServers, true);
 	}
 
 	/**
-	 * Parse the CONFORMANCE test points from the passed OpenApi3 document as
-	 * described in A.4.3. Identify the Test Points.
-	 *
+	 * Parse the CONFORMANCE test points from the passed OpenApi3 document as described in
+	 * A.4.3. Identify the Test Points.
 	 * @param apiModel never <code>null</code>
-	 * @param iut      the url of the instance under test, never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	public static List<TestPoint> retrieveTestPointsForConformance(OpenApi3 apiModel, URI iut) {
@@ -112,11 +129,10 @@ public class OpenApiUtils {
 	}
 
 	/**
-	 * Parse the COLLECTIONS METADATA test points from the passed OpenApi3 document
-	 * as described in A.4.3. Identify the Test Points.
-	 *
+	 * Parse the COLLECTIONS METADATA test points from the passed OpenApi3 document as
+	 * described in A.4.3. Identify the Test Points.
 	 * @param apiModel never <code>null</code>
-	 * @param iut      the url of the instance under test, never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	public static List<TestPoint> retrieveTestPointsForCollectionsMetadata(OpenApi3 apiModel, URI iut) {
@@ -124,13 +140,11 @@ public class OpenApiUtils {
 	}
 
 	/**
-	 * Parse the COLLECTION METADATA test points for the passed collectionName
-	 * including the extended path from the passed OpenApi3 document as described in
-	 * A.4.3. Identify the Test Points.
-	 *
-	 * @param apiModel       never <code>null</code>
-	 * @param iut            the url of the instance under test, never
-	 *                       <code>null</code>
+	 * Parse the COLLECTION METADATA test points for the passed collectionName including
+	 * the extended path from the passed OpenApi3 document as described in A.4.3. Identify
+	 * the Test Points.
+	 * @param apiModel never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
 	 * @param collectionName the extended path, may be <code>null</code>
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
@@ -147,46 +161,36 @@ public class OpenApiUtils {
 	}
 
 	/**
-	 * Parse the COLLECTIONS test points from the passed OpenApi3 document as
-	 * described in A.4.3. Identify the Test Points.
-	 *
-	 * @param apiModel       never <code>null</code>
-	 * @param iut            the url of the instance under test, never
-	 *                       <code>null</code>
-	 * @param noOfCollection the number of collections to return test points for (-1
-	 *                       means the test points of all collections should be
-	 *                       returned)
+	 * Parse the COLLECTIONS test points from the passed OpenApi3 document as described in
+	 * A.4.3. Identify the Test Points.
+	 * @param apiModel never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
+	 * @param noOfCollection the number of collections to return test points for (-1 means
+	 * the test points of all collections should be returned)
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	public static List<TestPoint> retrieveTestPointsForCollections(OpenApi3 apiModel, URI iut, int noOfCollection) {
 
-		String[] resources = { "locations", "position", "radius", "area", "trajectory" }; 
-		 
-		
-	
+		String[] resources = { "locations", "position", "radius", "area", "trajectory" };
+
 		List<TestPoint> allTestPoints = new ArrayList<TestPoint>();
 
 		try {
-		for (String res : resources) {
-			StringBuilder requestedPath = new StringBuilder();
-			requestedPath.append("/");
-			requestedPath.append(COLLECTIONS.getPathItem());
-			requestedPath.append("/.*/"+res);
+			for (String res : resources) {
+				StringBuilder requestedPath = new StringBuilder();
+				requestedPath.append("/");
+				requestedPath.append(COLLECTIONS.getPathItem());
+				requestedPath.append("/.*/" + res);
 
-
-
-			boolean r = allTestPoints
+				boolean r = allTestPoints
 					.addAll(retrieveTestPoints(apiModel, iut, requestedPath.toString(), (a, b) -> a.matches(b), true));
-			
-	
+
+			}
 		}
-		}
-		catch(Exception er)
-		{
-	
+		catch (Exception er) {
+
 			er.printStackTrace();
 		}
-		
 
 		if (noOfCollection < 0 || allTestPoints.size() <= noOfCollection) {
 			return allTestPoints;
@@ -196,12 +200,10 @@ public class OpenApiUtils {
 	}
 
 	/**
-	 * Parse the test points with the passed path including the extended path from
-	 * the passed OpenApi3 document as described in A.4.3. Identify the Test Points.
-	 *
-	 * @param apiModel       never <code>null</code>
-	 * @param iut            the url of the instance under test, never
-	 *                       <code>null</code>
+	 * Parse the test points with the passed path including the extended path from the
+	 * passed OpenApi3 document as described in A.4.3. Identify the Test Points.
+	 * @param apiModel never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
 	 * @param collectionName the extended path, may be <code>null</code>
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
@@ -213,14 +215,12 @@ public class OpenApiUtils {
 	}
 
 	/**
-	 * Parse the test points with the passed path including the extended path from
-	 * the passed OpenApi3 document as described in A.4.3. Identify the Test Points.
-	 *
-	 * @param apiModel       never <code>null</code>
-	 * @param iut            the url of the instance under test, never
-	 *                       <code>null</code>
+	 * Parse the test points with the passed path including the extended path from the
+	 * passed OpenApi3 document as described in A.4.3. Identify the Test Points.
+	 * @param apiModel never <code>null</code>
+	 * @param iut the url of the instance under test, never <code>null</code>
 	 * @param collectionName the extended path, may be <code>null</code>
-	 * @param featureId      the id of the feature, never <code>null</code>
+	 * @param featureId the id of the feature, never <code>null</code>
 	 * @return the parsed test points, may be empty but never <code>null</code>
 	 */
 	public static List<TestPoint> retrieveTestPointsForFeature(OpenApi3 apiModel, URI iut, String collectionName,
@@ -282,33 +282,25 @@ public class OpenApiUtils {
 		return false;
 	}
 
-	public static Link parseApiUrl( JsonPath jsonPath ) {
-	        
-	        
-	        
-	        for ( Object link : jsonPath.getList( "links" ) ) {
-	            Map<String, Object> linkMap = (Map<String, Object>) link;
-	            Object rel = linkMap.get( "rel" );
-	            Object type = linkMap.get( "type" );
-	            if ("service-desc".equals( rel ))  //Check service-desc first
-	            {
-	                return new Link((String) linkMap.get( "href" ),
-	                                (String)rel,
-	                                (String)type);
-	                
-	                  
-	            }
-	            else if ("service-doc".equals( rel )) 
-	            {
+	public static Link parseApiUrl(JsonPath jsonPath) {
 
-	                return new Link((String) linkMap.get( "href" ),
-	                                (String)rel,
-	                                (String)type);
-	                  
-	            }
-	        }
-	        return null;
-	    }
+		for (Object link : jsonPath.getList("links")) {
+			Map<String, Object> linkMap = (Map<String, Object>) link;
+			Object rel = linkMap.get("rel");
+			Object type = linkMap.get("type");
+			if ("service-desc".equals(rel)) // Check service-desc first
+			{
+				return new Link((String) linkMap.get("href"), (String) rel, (String) type);
+
+			}
+			else if ("service-doc".equals(rel)) {
+
+				return new Link((String) linkMap.get("href"), (String) rel, (String) type);
+
+			}
+		}
+		return null;
+	}
 
 	private static String createCollectionPath(String collectionName) {
 		StringBuilder requestedPath = new StringBuilder();
@@ -341,8 +333,8 @@ public class OpenApiUtils {
 	/**
 	 * A.4.3.1. Identify Test Points:
 	 *
-	 * a) Purpose: To identify the test points associated with each Path in the
-	 * OpenAPI document
+	 * a) Purpose: To identify the test points associated with each Path in the OpenAPI
+	 * document
 	 *
 	 * b) Pre-conditions:
 	 *
@@ -355,13 +347,12 @@ public class OpenApiUtils {
 	 *
 	 * c) Method:
 	 *
-	 * FOR EACH paths property in the OpenAPI document If the path name is one of
-	 * those specified in the WFS 3.0 specification Retrieve the Server URIs using
-	 * A.4.3.2. FOR EACH Server URI Concatenate the Server URI with the path name to
-	 * form a test point. Add that test point to the list.
+	 * FOR EACH paths property in the OpenAPI document If the path name is one of those
+	 * specified in the WFS 3.0 specification Retrieve the Server URIs using A.4.3.2. FOR
+	 * EACH Server URI Concatenate the Server URI with the path name to form a test point.
+	 * Add that test point to the list.
 	 *
 	 * d) References: None
-	 *
 	 * @param apiModel never <code>null</code>
 	 */
 	private static List<Path> identifyTestPoints(OpenApi3 apiModel) {
@@ -387,8 +378,7 @@ public class OpenApiUtils {
 	/**
 	 * A.4.3.2. Identify Server URIs:
 	 *
-	 * a) Purpose: To identify all server URIs applicable to an OpenAPI Operation
-	 * Object
+	 * a) Purpose: To identify all server URIs applicable to an OpenAPI Operation Object
 	 *
 	 * b) Pre-conditions:
 	 *
@@ -407,30 +397,29 @@ public class OpenApiUtils {
 	 *
 	 * 1) Identify the Server Objects which are in-scope for this operationObject
 	 *
-	 * IF Server Objects are defined at the Operation level, then those and only
-	 * those Server Objects apply to that Operation.
+	 * IF Server Objects are defined at the Operation level, then those and only those
+	 * Server Objects apply to that Operation.
 	 *
-	 * IF Server Objects are defined at the Path Item level, then those and only
-	 * those Server Objects apply to that Path Item.
+	 * IF Server Objects are defined at the Path Item level, then those and only those
+	 * Server Objects apply to that Path Item.
 	 *
-	 * IF Server Objects are not defined at the Operation level, then the Server
-	 * Objects defined for the parent Path Item apply to that Operation.
+	 * IF Server Objects are not defined at the Operation level, then the Server Objects
+	 * defined for the parent Path Item apply to that Operation.
 	 *
-	 * IF Server Objects are not defined at the Path Item level, then the Server
-	 * Objects defined for the root level apply to that Path.
+	 * IF Server Objects are not defined at the Path Item level, then the Server Objects
+	 * defined for the root level apply to that Path.
 	 *
-	 * IF no Server Objects are defined at the root level, then the default server
-	 * object is assumed as described in the OpenAPI specification.
+	 * IF no Server Objects are defined at the root level, then the default server object
+	 * is assumed as described in the OpenAPI specification.
 	 *
 	 * 2) Process each Server Object using A.4.3.3.
 	 *
-	 * 3) Delete any Server URI which does not reference a server on the list of
-	 * servers to test.
+	 * 3) Delete any Server URI which does not reference a server on the list of servers
+	 * to test.
 	 *
 	 * d) References: None
-	 *
-	 * @param apiModel        never <code>null</code>
-	 * @param iut             never <code>null</code>
+	 * @param apiModel never <code>null</code>
+	 * @param iut never <code>null</code>
 	 * @param pathItemObjects never <code>null</code>
 	 */
 	private static List<PathItemAndServer> identifyServerUrls(OpenApi3 apiModel, URI iut, List<Path> pathItemObjects) {
@@ -443,7 +432,8 @@ public class OpenApiUtils {
 				for (String serverUrl : serverUrls) {
 					if (DEFAULT_SERVER_URL.equalsIgnoreCase(serverUrl)) {
 						serverUrl = iut.toString();
-					} else if (serverUrl.startsWith("/")) {
+					}
+					else if (serverUrl.startsWith("/")) {
 						URI resolvedUri = iut.resolve(serverUrl);
 						serverUrl = resolvedUri.toString();
 					}
@@ -459,22 +449,20 @@ public class OpenApiUtils {
 	/**
 	 * A.4.3.3. Process Server Object:
 	 *
-	 * a) Purpose: To expand the contents of a Server Object into a set of absolute
-	 * URIs.
+	 * a) Purpose: To expand the contents of a Server Object into a set of absolute URIs.
 	 *
 	 * b) Pre-conditions: A Server Object has been retrieved
 	 *
 	 * c) Method:
 	 *
-	 * Processing the Server Object results in a set of absolute URIs. This set
-	 * contains all of the URIs that can be created given the URI template and
-	 * variables defined in that Server Object.
+	 * Processing the Server Object results in a set of absolute URIs. This set contains
+	 * all of the URIs that can be created given the URI template and variables defined in
+	 * that Server Object.
 	 *
-	 * If there are no variables in the URI template, then add the URI to the return
-	 * set.
+	 * If there are no variables in the URI template, then add the URI to the return set.
 	 *
-	 * For each variable in the URI template which does not have an enumerated set
-	 * of valid values:
+	 * For each variable in the URI template which does not have an enumerated set of
+	 * valid values:
 	 *
 	 * generate a URI using the default value,
 	 *
@@ -482,21 +470,19 @@ public class OpenApiUtils {
 	 *
 	 * flag this URI as non-exhaustive
 	 *
-	 * For each variable in the URI template which has an enumerated set of valid
-	 * values:
+	 * For each variable in the URI template which has an enumerated set of valid values:
 	 *
 	 * generate a URI for each value in the enumerated set,
 	 *
 	 * add each generated URI to the return set.
 	 *
-	 * Perform this processing in an iterative manner so that there is a unique URI
-	 * for all possible combinations of enumerated and default values.
+	 * Perform this processing in an iterative manner so that there is a unique URI for
+	 * all possible combinations of enumerated and default values.
 	 *
-	 * Convert all relative URIs to absolute URIs by rooting them on the URI to the
-	 * server hosting the OpenAPI document.
+	 * Convert all relative URIs to absolute URIs by rooting them on the URI to the server
+	 * hosting the OpenAPI document.
 	 *
 	 * d) References: None
-	 *
 	 * @param pathItemAndServers never <code>null</code>
 	 */
 	private static List<TestPoint> processServerObjects(List<PathItemAndServer> pathItemAndServers,
@@ -520,14 +506,16 @@ public class OpenApiUtils {
 		if (uriTemplate.getNumberOfTemplateVariables() == 0) {
 			TestPoint testPoint = new TestPoint(pathItemAndServer.serverUrl, pathString, contentMediaTypes);
 			uris.add(testPoint);
-		} else {
+		}
+		else {
 			List<Map<String, String>> templateReplacements = collectTemplateReplacements(pathItemAndServer,
 					uriTemplate);
 
 			if (templateReplacements.isEmpty() && allowEmptyTemplateReplacements) {
 				TestPoint testPoint = new TestPoint(pathItemAndServer.serverUrl, pathString, contentMediaTypes);
 				uris.add(testPoint);
-			} else {
+			}
+			else {
 				for (Map<String, String> templateReplacement : templateReplacements) {
 					TestPoint testPoint = new TestPoint(pathItemAndServer.serverUrl, pathString, templateReplacement,
 							contentMediaTypes);
@@ -555,10 +543,13 @@ public class OpenApiUtils {
 					Schema schema = parameter.getSchema();
 					if (schema.hasEnums()) {
 						addEnumTemplateValues(templateReplacements, templateVariable, schema);
-					} else if (schema.getDefault() != null) {
+					}
+					else if (schema.getDefault() != null) {
 						addDefaultTemplateValue(templateReplacements, templateVariable, schema);
-					} else {
-						// TODO: What should be done if the parameter does not have a default value and
+					}
+					else {
+						// TODO: What should be done if the parameter does not have a
+						// default value and
 						// no
 						// enumerated set of valid values?
 					}
@@ -577,7 +568,8 @@ public class OpenApiUtils {
 				replacement.put(templateVariable, enumValue.toString());
 				templateReplacements.add(replacement);
 			}
-		} else {
+		}
+		else {
 			if (templateReplacements.isEmpty()) {
 				Map<String, String> replacement = new HashMap<>();
 				templateReplacements.add(replacement);
