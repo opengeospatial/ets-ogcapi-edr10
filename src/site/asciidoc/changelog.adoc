@@ -1,5 +1,9 @@
 = Release Notes
 
+== 1.3 (2025-01-07)
+
+* https://github.com/opengeospatial/ets-ogcapi-edr10/issues/122[#122]: Migrate test suite to TEAM Engine 6 (Java 17)
+
 == 1.2 (2024-11-28)
 
 * https://github.com/opengeospatial/ets-ogcapi-edr10/issues/131[#131]: index/size failure on validating coords parameters
