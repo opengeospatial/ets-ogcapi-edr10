@@ -3,6 +3,7 @@
 == 1.3 (2025-01-07)
 
 * https://github.com/opengeospatial/ets-ogcapi-edr10/issues/122[#122]: Migrate test suite to TEAM Engine 6 (Java 17)
+* https://github.com/opengeospatial/ets-ogcapi-edr10/pull/118[#118]: Migrate Geotk dependency to Apache SIS
 
 == 1.2 (2024-11-28)
 
