@@ -88,6 +88,8 @@ public class Collections extends CommonDataFixture {
 		JsonPath jsonPath = response.jsonPath();
 		List<Map<String, Object>> collections = jsonPath.getList("collections");
 
+		boolean foundDataOrCollectionRelation = false;
+
 		for (Map<String, Object> collection : collections) {
 			Map<String, Object> map = (Map<String, Object>) collection;
 			Object links = map.get("links");
@@ -98,20 +100,24 @@ public class Collections extends CommonDataFixture {
 
 			for (Map<String, Object> link : collectionLinks) {
 				Object rel = link.get("rel");
+				if (linkIncludesRelAndType(link)) {
+					isValidCollection = true;
+				}
 				if (rel.equals("data") || rel.equals("collection")) {
 					relationIsDataOrCollection = true;
-					if (linkIncludesRelAndType(link)) {
-						isValidCollection = true;
-						break;
-					}
+					break;
 				}
 			}
-			assertTrue(relationIsDataOrCollection,
-					"Collection must include links for data or collection encodings. Missing links for collection "
-							+ map.get("id"));
+			foundDataOrCollectionRelation = foundDataOrCollectionRelation || relationIsDataOrCollection;
 			assertTrue(isValidCollection,
 					"Links for data or collection encodings must include a rel and type parameter. Missing for collection "
 							+ map.get("id"));
+		}
+		// https://github.com/opengeospatial/ets-ogcapi-edr10/issues/150
+		// Do not fail, if a collection has EDR specific data or collection relation.
+		// Skip, if no has EDR specific data or collection relation.
+		if (!foundDataOrCollectionRelation) {
+			throw new SkipException("No collection contained data or collection relation.");
 		}
 	}
 
