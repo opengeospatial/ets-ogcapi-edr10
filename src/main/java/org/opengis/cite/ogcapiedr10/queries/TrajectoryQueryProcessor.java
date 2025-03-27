@@ -176,7 +176,9 @@ public class TrajectoryQueryProcessor extends AbstractProcessor {
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
+					sb = new StringBuffer();
 					sb.append(ex.getMessage() + " \n");
+					return sb.toString();
 				}
 
 				String sampleDateTime = null;
