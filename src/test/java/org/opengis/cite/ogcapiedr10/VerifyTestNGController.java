@@ -21,7 +21,6 @@ public class VerifyTestNGController {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
-	@Ignore
 	@Test
 	public void testValidateTestRunArgs() throws Exception {
 		// Integration Test
