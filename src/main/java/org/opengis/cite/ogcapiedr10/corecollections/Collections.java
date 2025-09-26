@@ -115,7 +115,7 @@ public class Collections extends CommonDataFixture {
 		}
 		// https://github.com/opengeospatial/ets-ogcapi-edr10/issues/150
 		// Do not fail, if a collection has EDR specific data or collection relation.
-		// Skip, if no has EDR specific data or collection relation.
+		// Skip, if no collection has EDR specific data or collection relation.
 		if (!foundDataOrCollectionRelation) {
 			throw new SkipException("No collection contained data or collection relation.");
 		}
