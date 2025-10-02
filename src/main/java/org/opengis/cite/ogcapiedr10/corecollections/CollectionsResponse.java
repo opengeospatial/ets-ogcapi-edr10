@@ -125,10 +125,10 @@ public class CollectionsResponse extends CommonFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 8: Validate that all spatial geometries provided through the API are in the CRS84 spatial reference system unless otherwise requested by the client.
+	 * Abstract Test 8: Validate that all spatial geometries provided through the API are in the http://www.opengis.net/def/crs/OGC/1.3/CRS84 coordinate reference system unless otherwise requested by the client.
 	 *
 	 * Requirement A.46 G, which is in the Collections Requirements Class, states that "Every Collection within a collections array MUST have a 'crs' parameter which must comply with the requirement '/req/edr/rc-crs'."
-	 * Therefore we can expect that there be a declaration of support for CRS84
+	 * Therefore we can expect that there be a declaration of support for http://www.opengis.net/def/crs/OGC/1.3/CRS84
 	 * </pre>
 	 *
 	 */
@@ -231,11 +231,13 @@ public class CollectionsResponse extends CommonFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 17: Validate that each parameter in a collection is correctly defined.
+	 * Abstract Test 17 (v 1.0.0),
+	 * Abstract Test 24 (v 1.0.1):
+	 * Validate that each parameter in a collection is correctly defined.
 	 * </pre>
 	 *
 	 */
-	@Test(description = "Implements Abstract Test 17 (/conf/edr/rc-parameters)")
+	@Test(description = "Implements Abstract Test 17/24 (/conf/edr/rc-parameters)")
 	public void collectionsParameters() {
 		boolean compliesWithCollectionParametersRequirement = true;
 		StringBuffer resultMessage = new StringBuffer();
@@ -281,7 +283,7 @@ public class CollectionsResponse extends CommonFixture {
 			// have the required properties.
 			// Implements Test Method 3: Verify that each parameter property has a type
 			// property.
-			// Implements Test Method 4: Verify that each parameter property has a
+			// Implements Test Method 4: Verify that each parameter property has an
 			// observedProperty property.
 			for (int i = 0; i < parameterNameList.size(); i++) {
 				String parameterName = parameterNameList.get(i);
@@ -298,7 +300,7 @@ public class CollectionsResponse extends CommonFixture {
 			}
 
 			org.testng.Assert.assertTrue(compliesWithCollectionParametersRequirement,
-					"Fails Abstract Test 17 because " + resultMessage.toString());
+					"Fails Abstract Test 17/24 because " + resultMessage.toString());
 		}
 	}
 
@@ -306,12 +308,14 @@ public class CollectionsResponse extends CommonFixture {
 	 * <pre>
 	 * Abstract Test 13: Validate the extent property if it is present
 	 * Abstract Test 14: Validate that each collection provided by the server is described in the Collections Metadata.
-	 * Abstract Test 15: Validate that each Collection metadata entry in the Collections Metadata document includes all required links (data or collection).
-	 * Abstract Test 16: Validate that the required links are included in the Collections Metadata document (self and alternate).
+	 * Abstract Test 15 (v 1.0.0),
+	 * Abstract Test 22 (v 1.0.1): Validate that each Collection metadata entry in the Collections Metadata document includes all required links (data or collection).
+	 * Abstract Test 16 (v 1.0.0),
+	 * Abstract Test 23 (v 1.0.1): Validate that the required links are included in the Collections Metadata document (self and alternate).
 	 * </pre>
 	 *
 	 */
-	@Test(description = "Implements Abstract Test 13 (/conf/core/rc-extent), Abstract Test 14 (/conf/edr/rc-collection-info), Abstract Test 15 (/conf/edr/rc-md-query-links), Abstract Test 16 (/conf/core/rc-collection-info-links)")
+	@Test(description = "Implements Abstract Test 13 (/conf/core/rc-extent), Abstract Test 14 (/conf/edr/rc-collection-info), Abstract Test 15/22 (/conf/edr/rc-md-query-links), Abstract Test 16/23 (/conf/core/rc-collection-info-links)")
 	public void verifyCollectionsMetadata() {
 
 		StringBuffer resultMessageForSelfAndAlternateLinks = new StringBuffer();
@@ -349,7 +353,7 @@ public class CollectionsResponse extends CommonFixture {
 			if (checkExtentInCollection(jsonPathCol) == false)
 				resultMessageForCollectionExtent.append(collectionMap.get("id").toString() + " , ");
 
-			// Abstract Test 15
+			// Abstract Test 15/22
 			List<Object> linksList1 = jsonPathCol.getList("links");
 			linksList1.addAll((ArrayList) collectionMap.get("links")); // in some cases,
 																		// the links shown
@@ -362,7 +366,7 @@ public class CollectionsResponse extends CommonFixture {
 
 			collectionHasDataOrCollectionLinks = checkDataOrCollectionLinksArePresentInCollectionMetadata(linksList1);
 
-			// Abstract Test 16
+			// Abstract Test 16/23
 			collectionHasSelfAndAlternateLinks = checkSelfAndAlternateLinksArePresentInCollectionMetadata(linksList1);
 
 			if (collectionHasSelfAndAlternateLinks == false)
@@ -385,13 +389,13 @@ public class CollectionsResponse extends CommonFixture {
 
 		if (!resultMessageForDataOrCollectionLinks.toString().isEmpty())
 			resultMessage.append(
-					"Fails Abstract Test 15 because these collections are missing 'data' or 'collection' rel links: "
+					"Fails Abstract Test 15/22 because these collections are missing 'data' or 'collection' rel links: "
 							+ resultMessageForDataOrCollectionLinks.toString() + ". ");
 
 		if (!resultMessageForSelfAndAlternateLinks.toString().isEmpty())
-			resultMessage
-				.append("Fails Abstract Test 16 because these collections are missing 'self' or 'alternate' rel links: "
-						+ resultMessageForSelfAndAlternateLinks.toString() + ". ");
+			resultMessage.append(
+					"Fails Abstract Test 16/23 because these collections are missing 'self' or 'alternate' rel links: "
+							+ resultMessageForSelfAndAlternateLinks.toString() + ". ");
 
 		org.testng.Assert.assertTrue(resultMessage.toString().isEmpty(), resultMessage.toString());
 	}

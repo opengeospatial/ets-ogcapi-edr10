@@ -65,7 +65,7 @@ public class Conformance extends CommonFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 1: Validate that the resource paths advertised through the API conform with HTTP 1.1 and, where approprate, TLS.
+	 * Abstract Test 1: Validate that the resource paths advertised through the API conform with HTTP 1.1 and, where appropriate, TLS.
 	 * </pre>
 	 */
 	@Test(description = "Implements Abstract Test 1 and Requirement /req/core/http")
