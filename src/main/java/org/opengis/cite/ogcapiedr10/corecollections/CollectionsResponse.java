@@ -17,6 +17,7 @@ import org.opengis.cite.ogcapiedr10.CommonFixture;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.crs.GeographicCRS;
 import org.testng.ITestContext;
+import org.testng.SkipException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -324,6 +325,8 @@ public class CollectionsResponse extends CommonFixture {
 
 		List<Object> collectionsList = jsonPath.getList("collections");
 
+		boolean foundDataOrCollectionRelation = false;
+
 		for (int t = 0; t < collectionsList.size(); t++) {
 			boolean collectionHasSelfAndAlternateLinks = false;
 			boolean collectionHasDataOrCollectionLinks = false;
@@ -367,8 +370,8 @@ public class CollectionsResponse extends CommonFixture {
 
 			if (collectionHasSelfAndAlternateLinks == false)
 				resultMessageForSelfAndAlternateLinks.append(collectionMap.get("id").toString() + " , ");
-			if (collectionHasDataOrCollectionLinks == false)
-				resultMessageForDataOrCollectionLinks.append(collectionMap.get("id").toString() + " , ");
+
+			foundDataOrCollectionRelation = foundDataOrCollectionRelation || collectionHasDataOrCollectionLinks;
 
 		}
 
@@ -383,10 +386,12 @@ public class CollectionsResponse extends CommonFixture {
 			resultMessage.append("Fails Abstract Test 14 because these collections are missing 'id' properties: "
 					+ resultMessageForCollectionId.toString() + ". ");
 
-		if (!resultMessageForDataOrCollectionLinks.toString().isEmpty())
-			resultMessage.append(
-					"Fails Abstract Test 15 because these collections are missing 'data' or 'collection' rel links: "
-							+ resultMessageForDataOrCollectionLinks.toString() + ". ");
+		// https://github.com/opengeospatial/ets-ogcapi-edr10/issues/150
+		// Do not fail, if a collection has EDR specific data or collection relation.
+		// Skip, if no collection has EDR specific data or collection relation.
+		if (!foundDataOrCollectionRelation) {
+			throw new AssertionError("No collection contained data or collection relation.");
+		}
 
 		if (!resultMessageForSelfAndAlternateLinks.toString().isEmpty())
 			resultMessage

@@ -98,7 +98,12 @@ public class PositionQueryProcessor extends AbstractProcessor {
 				}
 				else {
 					ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
-					supportedFormat = getSupportedFormat(outputFormatList);
+					try {
+						supportedFormat = getSupportedFormat(outputFormatList);
+					}
+					catch (Exception e) {
+						sb.append(" No output formats found for collection " + collectionId + ". ");
+					}
 				}
 
 				double medianx = 0d;
@@ -223,7 +228,9 @@ public class PositionQueryProcessor extends AbstractProcessor {
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
+					sb = new StringBuffer();
 					sb.append(ex.getMessage() + " \n");
+					return sb.toString();
 				}
 
 				if (pageContent != null) {
@@ -246,7 +253,7 @@ public class PositionQueryProcessor extends AbstractProcessor {
 		}
 
 		if (numberOfCollectionsWithPositionSupport == 0) {
-			sb.append(queryTypeNotSupported + "\n");
+			sb.append(queryTypeNotSupported + "<br/>");
 		}
 
 		return sb.toString();
