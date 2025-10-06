@@ -83,13 +83,19 @@ dt {
 		<td>A URI that refers to the implementation under test or metadata about it.
     Ampersand ('&amp;') characters must be percent-encoded as '%26'.</td>
       </tr>
-	  <tr>
-      <td>ics</td>
-      <td>A comma-separated list of string values.</td>
-      <td>O</td>
-      <td>An implementation conformance statement that indicates which conformance
-      classes or options are supported.</td>
-    </tr>
+      <tr>
+        <td>apiDefinition</td>
+        <td>URI</td>
+		<td>M</td>
+		<td>A URI that refers to the api definition of the implementation under test.
+    Ampersand ('&amp;') characters must be percent-encoded as '%26'.</td>
+      </tr>
+      <tr>
+        <td>noofcollections</td>
+        <td>Integer</td>
+        <td>O</td>
+        <td>Number of collections under test. -1 means that all collections should be tested. Default: 3</td>
+      </tr>
 	  </tbody>
   </table>
 

@@ -13,11 +13,12 @@ public class AreaCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 54: Validate that the coords query parameters are constructed correctly. (area)
+	 * Abstract Test 54 (v1.0.0),
+     * Abstract Test 61 (v1.0.1): Validate that the coords query parameters are constructed correctly. (area)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 54 (/conf/edr/rc-coords-definition)",
+	@Test(description = "Implements Abstract Test 54/61 (/conf/edr/rc-coords-definition)",
 			dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaCoordsParameterDefinition(TestPoint testPoint) {
 
@@ -28,11 +29,12 @@ public class AreaCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 58: Validate that the dateTime query parameters are constructed correctly. (area)
+	 * Abstract Test 58 (v1.0.0),
+     * Abstract Test 65 (v1.0.1): Validate that the dateTime query parameters are constructed correctly. (area)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 58 (/conf/core/datetime-definition)",
+	@Test(description = "Implements Abstract Test 58/65 (/conf/core/datetime-definition)",
 			dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaDateTimeParameterDefinition(TestPoint testPoint) {
 
@@ -42,11 +44,12 @@ public class AreaCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 60: Validate that the parameter-name query parameters are processed
+	 * Abstract Test 60 (v1.0.0),
+     * Abstract Test 67 (v1.0.1): Validate that the parameter-name query parameters are processed
 	 * correctly. (area)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 60 (/conf/collections/REQ_rc-parameter-name-definition)",
+	@Test(description = "Implements Abstract Test 60/67 (/conf/collections/REQ_rc-parameter-name-definition)",
 			dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaParameternameParameterDefinition(TestPoint testPoint) {
 
@@ -55,11 +58,12 @@ public class AreaCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 62: Validate that the crs query parameters are constructed correctly.
+	 * Abstract Test 62 (v1.0.0),
+     * Abstract Test 69 (v1.0.1): Validate that the crs query parameters are constructed correctly.
 	 * (area)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 62 (/conf/edr/REQ_rc-crs-definition)",
+	@Test(description = "Implements Abstract Test 62/69 (/conf/edr/REQ_rc-crs-definition)",
 			dataProvider = "areaCollectionPaths", alwaysRun = true)
 	public void areaCrsParameterDefinition(TestPoint testPoint) {
 
@@ -69,11 +73,12 @@ public class AreaCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 64: Validate that the f query parameter is constructed correctly.
+	 * Abstract Test 64 (v1.0.0),
+     * Abstract Test 71 (v1.0.1): Validate that the f query parameter is constructed correctly.
 	 * (area)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 64 (/conf/edr/rc-f-definition)", dataProvider = "areaCollectionPaths",
+	@Test(description = "Implements Abstract Test 64/71 (/conf/edr/rc-f-definition)", dataProvider = "areaCollectionPaths",
 			alwaysRun = true)
 	public void areaFParameterDefinition(TestPoint testPoint) {
 
@@ -82,11 +87,12 @@ public class AreaCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 56: Validate that the vertical level query parameters are constructed
+	 * Abstract Test 56 (v1.0.0),
+     * Abstract Test 63 (v1.0.1): Validate that the vertical level query parameters are constructed
 	 * correctly. (area)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 56 (/conf/edr/rc-z-definition)", dataProvider = "areaCollectionPaths",
+	@Test(description = "Implements Abstract Test 56/63 (/conf/edr/rc-z-definition)", dataProvider = "areaCollectionPaths",
 			alwaysRun = true)
 	public void areaZParameterDefinition(TestPoint testPoint) {
 

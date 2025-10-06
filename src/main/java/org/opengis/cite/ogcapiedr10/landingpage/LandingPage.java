@@ -28,7 +28,7 @@ public class LandingPage extends CommonFixture {
 	/**
 	 * <pre>
 	 * Abstract Test 2: Validate that a landing page can be retrieved from the expected location.
-	 * Abstract Test 3: Validate that the landing page complies with the require structure and contents.
+	 * Abstract Test 3: Validate that the landing page complies with the required structure and contents.
 	 * </pre>
 	 */
 	@Test(description = "Implements Abstract Test 2 (/conf/core/root-op) and Abstract Test 3 (/conf/core/root-success) - Landing Page validation",

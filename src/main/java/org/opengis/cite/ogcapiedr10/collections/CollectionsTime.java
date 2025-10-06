@@ -31,10 +31,17 @@ public class CollectionsTime {
 
 	/**
 	 * <pre>
-	 * Abstract Test 38: Validate that the coords query parameters are constructed correctly. (position)
-	 * Abstract Test 54: Validate that the coords query parameters are constructed correctly. (area)
-	 * Abstract Test 92: Validate that the coords query parameters are constructed correctly. (trajectory)
-	 * Abstract Test 116: Validate that the coords query parameters are constructed correctly. (corridor)
+	 * Abstract Test 38 (v1.0.0),
+     * Abstract Test 45 (v1.0.1): Validate that the coords query parameters are constructed correctly. (position)
+	 * 
+	 * Abstract Test 54 (v1.0.0),
+     * Abstract Test 61 (v1.0.1): Validate that the coords query parameters are constructed correctly. (area)
+	 * 
+	 * Abstract Test 92 (v1.0.0),
+     * Abstract Test 99 (v1.0.1): Validate that the coords query parameters are constructed correctly. (trajectory)
+	 * 
+	 * Abstract Test 116 (v1.0.0),
+     * Abstract Test 123 (v1.0.1): Validate that the coords query parameters are constructed correctly. (corridor)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
@@ -90,7 +97,9 @@ public class CollectionsTime {
 
 	/**
 	 * <pre>
-	 * Abstract Test 70: Validate that the bbox query parameters are constructed correctly. (cube)
+	 * 
+	 * Abstract Test 70 (v1.0.0),
+     * Abstract Test 77 (v1.0.1): Validate that the bbox query parameters are constructed correctly. (cube)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
@@ -147,10 +156,18 @@ public class CollectionsTime {
 
 	/**
 	 * <pre>
-	 * Abstract Test 42: Validate that the dateTime query parameters are constructed correctly. (position)
-	 * Abstract Test 58: Validate that the dateTime query parameters are constructed correctly. (area)
-	 * Abstract Test 74: Validate that the dateTime query parameters are constructed correctly. (cube)
-	 * Abstract Test 139: Validate that the dateTime query parameters are constructed correctly. (instances)
+	 * 
+	 * Abstract Test 42 (v1.0.0),
+     * Abstract Test 49 (v1.0.1): Validate that the dateTime query parameters are constructed correctly. (position)
+	 * 
+	 * Abstract Test 58 (v1.0.0),
+     * Abstract Test 65 (v1.0.1): Validate that the dateTime query parameters are constructed correctly. (area)
+	 * 
+	 * Abstract Test 74 (v1.0.0),
+     * Abstract Test 81 (v1.0.1): Validate that the dateTime query parameters are constructed correctly. (cube)
+	 * 
+	 * Abstract Test 139 (v1.0.0),
+     * Abstract Test 146 (v1.0.1): Validate that the dateTime query parameters are constructed correctly. (instances)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
@@ -208,14 +225,30 @@ public class CollectionsTime {
 	}
 
 	/**
-	 * Abstract Test 44: Validate that the parameter-name query parameters are processed
-	 * correctly. (position) Abstract Test 60: Validate that the parameter-name query
-	 * parameters are processed correctly. (area) Abstract Test 76: Validate that the
-	 * parameter-name query parameters are processed correctly. (cube) Abstract Test 94:
-	 * Validate that the parameter-name query parameters are processed correctly.
-	 * (trajectory) Abstract Test 126: Validate that the parameter-name query parameters
-	 * are processed correctly. (corridor) Abstract Test 141: Validate that the
-	 * parameter-name query parameters are processed correctly. (locations)
+	 * <pre>
+	 * Abstract Test 44 (v1.0.0),
+     * Abstract Test 51 (v1.0.1): Validate that the parameter-name query parameters are processed
+	 * correctly. (position) 
+	 * 
+	 * Abstract Test 60 (v1.0.0),
+     * Abstract Test 67 (v1.0.1): Validate that the parameter-name query
+	 * parameters are processed correctly. (area) 
+	 * 
+	 * Abstract Test 76 (v1.0.0),
+     * Abstract Test 83 (v1.0.1): Validate that the
+	 * parameter-name query parameters are processed correctly. (cube) 
+	 * 
+	 * Abstract Test 94 (v1.0.0),
+     * Abstract Test 101 (v1.0.1): Validate that the parameter-name query parameters are processed correctly.
+	 * (trajectory) 
+	 * 
+	 * Abstract Test 126 (v1.0.0),
+     * Abstract Test 133 (v1.0.1): Validate that the parameter-name query parameters
+	 * are processed correctly. (corridor) 
+	 * 
+	 * Abstract Test 141 (v1.0.0),
+     * Abstract Test 148 (v1.0.1): Validate that the parameter-name query parameters are processed correctly. (locations)
+	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
 	 */
@@ -260,13 +293,30 @@ public class CollectionsTime {
 	}
 
 	/**
-	 * Abstract Test 46: Validate that the crs query parameters are constructed correctly.
-	 * (position) Abstract Test 62: Validate that the crs query parameters are constructed
-	 * correctly. (area) Abstract Test 78: Validate that the crs query parameters are
-	 * constructed correctly. (cube) Abstract Test 96: Validate that the crs query
-	 * parameters are constructed correctly. (trajectory) Abstract Test 128: Validate that
-	 * the crs query parameters are constructed correctly. (corridor) Abstract Test 143:
-	 * Validate that the crs query parameters are constructed correctly. (locations)
+	 * <pre>
+	 * Abstract Test 46 (v1.0.0),
+     * Abstract Test 53 (v1.0.1): Validate that the crs query parameters are constructed correctly.
+	 * (position) 
+	 * 
+	 * Abstract Test 62 (v1.0.0),
+     * Abstract Test 69 (v1.0.1): Validate that the crs query parameters are constructed
+	 * correctly. (area) 
+	 * 
+	 * Abstract Test 78 (v1.0.0),
+     * Abstract Test 85 (v1.0.1): Validate that the crs query parameters are
+	 * constructed correctly. (cube) 
+	 * 
+	 * Abstract Test 96 (v1.0.0),
+     * Abstract Test 103 (v1.0.1): Validate that the crs query
+	 * parameters are constructed correctly. (trajectory) 
+	 * 
+	 * Abstract Test 128 (v1.0.0),
+     * Abstract Test 135 (v1.0.1): Validate that
+	 * the crs query parameters are constructed correctly. (corridor) 
+	 * 
+	 * Abstract Test 143 (v1.0.0),
+     * Abstract Test 150 (v1.0.1): Validate that the crs query parameters are constructed correctly. (locations)
+	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
 	 */
@@ -308,13 +358,31 @@ public class CollectionsTime {
 	}
 
 	/**
-	 * Abstract Test 48: Validate that the f query parameter is constructed correctly.
-	 * (position) Abstract Test 64: Validate that the f query parameter is constructed
-	 * correctly. (area) Abstract Test 80: Validate that the f query parameter is
-	 * constructed correctly. (cube) Abstract Test 98: Validate that the f query parameter
-	 * is constructed correctly. (trajectory) Abstract Test 130: Validate that the f query
-	 * parameter is constructed correctly. (corridor) Abstract Test 145: Validate that the
+	 * <pre>
+	 * Abstract Test 48 (v1.0.0),
+     * Abstract Test 55 (v1.0.1): Validate that the f query parameter is constructed correctly.
+	 * (position) 
+	 * 
+	 * Abstract Test 64 (v1.0.0),
+     * Abstract Test 71 (v1.0.1): Validate that the f query parameter is constructed
+	 * correctly. (area) 
+	 * 
+	 * Abstract Test 80 (v1.0.0),
+     * Abstract Test 87 (v1.0.1): Validate that the f query parameter is
+	 * constructed correctly. (cube) 
+	 * 
+	 * Abstract Test 98 (v1.0.0),
+     * Abstract Test 105 (v1.0.1): Validate that the f query parameter
+	 * is constructed correctly. (trajectory) 
+	 * 
+	 * Abstract Test 130 (v1.0.0),
+     * Abstract Test 137 (v1.0.1): Validate that the f query
+	 * parameter is constructed correctly. (corridor) 
+	 * 
+	 * Abstract Test 145 (v1.0.0),
+     * Abstract Test 152 (v1.0.1): Validate that the
 	 * f query parameter is constructed correctly. (locations)
+	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
 	 */
@@ -355,10 +423,15 @@ public class CollectionsTime {
 	}
 
 	/**
-	 * Abstract Test 40 (/conf/edr/rc-z-definition): Validate that the vertical level
-	 * query parameters are constructed correctly. (position) Abstract Test 56
-	 * (/conf/edr/rc-z-definition): Validate that the vertical level query parameters are
+	 * <pre>
+	 * Abstract Test 40 (v1.0.0),
+     * Abstract Test 47 (v1.0.1): (/conf/edr/rc-z-definition): Validate that the vertical level
+	 * query parameters are constructed correctly. (position) 
+	 * 
+	 * Abstract Test 56 (v1.0.0),
+     * Abstract Test 63 (v1.0.1) (/conf/edr/rc-z-definition): Validate that the vertical level query parameters are
 	 * constructed correctly. (area)
+	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>
 	 */
@@ -624,7 +697,8 @@ public class CollectionsTime {
 
 	/**
 	 * <pre>
-	 * Abstract Test 120: Validate that the corridor-height query parameter is constructed correctly.
+	 * Abstract Test 120 (v1.0.0),
+     * Abstract Test 127 (v1.0.1): Validate that the corridor-height query parameter is constructed correctly.
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 * @param model api definition, never <code>null</code>

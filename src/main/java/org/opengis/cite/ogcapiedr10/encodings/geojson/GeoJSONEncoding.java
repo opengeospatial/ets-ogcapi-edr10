@@ -23,12 +23,14 @@ public class GeoJSONEncoding extends CommonFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 20: Verify support for JSON and GeoJSON
-	 * Abstract Test 21: Verify the content of a JSON document given an input document and schema.
+	 * Abstract Test 20 (v1.0.0),
+	 * Abstract Test 27 (v1.0.1): Verify support for JSON and GeoJSON
+	 * Abstract Test 21 (v1.0.0),
+	 * Abstract Test 28 (v1.0.1): Verify the content of a JSON document given an input document and schema.
 	 * Note that the first locations resource that supports GeoJSON is tested.
 	 * </pre>
 	 */
-	@Test(description = "Implements Abstract Test 20 (/conf/geojson/definition), Abstract Test 21 (/conf/geojson/content)")
+	@Test(description = "Implements Abstract Test 20/27 (/conf/geojson/definition), Abstract Test 21/28 (/conf/geojson/content)")
 	public void validateResponseForGeoJSON(ITestContext testContext) {
 
 		List<?> requirementClasses = (List<?>) testContext.getSuite().getAttribute(REQUIREMENTCLASSES.getName());

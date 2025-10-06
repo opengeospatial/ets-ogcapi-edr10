@@ -74,7 +74,8 @@ public class Collections extends CommonDataFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 15: Validate that each Collection metadata entry in the Collections Metadata document includes all required links.
+	 * Abstract Test 15 (v1.0.0),
+	 * Abstract Test 22 (v1.0.1): Validate that each Collection metadata entry in the Collections Metadata document includes all required links.
 	 * </pre>
 	 * @param testPoint the test point to test, never <code>null</code>
 	 */
@@ -117,7 +118,8 @@ public class Collections extends CommonDataFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 16: Validate that the required links are included in the Collections Metadata document.
+	 * Abstract Test 16 (v1.0.0),
+	 * Abstract Test 23 (v1.0.1): Validate that the required links are included in the Collections Metadata document.
 	 * </pre>
 	 * @param testPoint the test point to test, never <code>null</code>
 	 */

@@ -29,12 +29,14 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 22: Verify support for the EDR GeoJSON Schema
-	 * Abstract Test 23: Verify the content of an EDR GeoJSON document given an input document and schema.
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1): Verify support for the EDR GeoJSON Schema
+	 * Abstract Test 23 (v1.0.0),
+     * Abstract Test 30 (v1.0.1): Verify the content of an EDR GeoJSON document given an input document and schema.
 	 * Note that the first positions resource that supports GeoJSON is tested.
 	 * </pre>
 	 */
-	@Test(description = "Implements Abstract Test 22 (/conf/edr-geojson/definition), Abstract Test 23 (/conf/edr-geojson/content)")
+	@Test(description = "Implements Abstract Test 22/29 (/conf/edr-geojson/definition), Abstract Test 23/30 (/conf/edr-geojson/content)")
 	public void validateResponseForEDRGeoJSON(ITestContext testContext) {
 
 		List<?> requirementClasses = (List<?>) testContext.getSuite().getAttribute(REQUIREMENTCLASSES.getName());
@@ -267,11 +269,11 @@ public class EDRGeoJSONEncoding extends CommonFixture {
 		}
 
 		// String resultMessage = sb.toString(); //verbose error message
-		// EtsAssert.assertTrue(atLeastOneCollectionTested, "Fails Abstract Test 23. " +
+		// EtsAssert.assertTrue(atLeastOneCollectionTested, "Fails Abstract Test 23/30. " +
 		// resultMessage);
 
 		EtsAssert.assertTrue(atLeastOneCollectionTested,
-				"Fails Abstract Test 23. None of the collections were found to offer Position resources that return GeoJSON conforming to EDR GeoJSON.\n");
+				"Fails Abstract Test 23/30. None of the collections were found to offer Position resources that return GeoJSON conforming to EDR GeoJSON.\n");
 
 	}
 

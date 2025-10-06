@@ -23,22 +23,24 @@ public class JSONEncoding extends CommonFixture {
 
 	/**
 	 * <pre>
-	 * Abstract Test 18: Verify support for JSON
-	 * Abstract Test 19: Verify the content of a JSON document given an input document and schema.
+	 * Abstract Test 18 (v 1.0.0),
+	 * Abstract Test 25 (v 1.0.1): Verify support for JSON
+	 * Abstract Test 19 (v 1.0.0),
+	 * Abstract Test 26 (v 1.0.1): Verify the content of a JSON document given an input document and schema.
 	 * </pre>
 	 */
-	@Test(description = "Implements Abstract Test 18 (/conf/json/definition), Abstract Test 19 (/conf/json/content)")
+	@Test(description = "Implements Abstract Test 18/25 (/conf/json/definition), Abstract Test 19/26 (/conf/json/content)")
 	public void validateResponseForJSON() {
 
 		Response response = init().baseUri(rootUri.toString()).accept(ContentType.JSON).when().request(Method.GET);
 		assertTrue(response.getStatusCode() == 200,
-				"Fails Abstract Test 18, JSON response not supported for landing page");
+				"Fails Abstract Test 18/25, JSON response not supported for landing page");
 		assertTrue(isJSONValidPerSchema(response.asString(), "/"),
-				"Fails Abstract Test 19, landing page response not valid JSON");
+				"Fails Abstract Test 19/26, landing page response not valid JSON");
 
 		response = init().baseUri(apiDefUri.toString()).accept(OPEN_API_MIME_TYPE).when().request(GET);
 		assertTrue(response.getStatusCode() == 200,
-				"Fails Abstract Test 18, JSON response not supported for api description \nCODE"
+				"Fails Abstract Test 18/25, JSON response not supported for api description \nCODE"
 						+ response.getStatusCode() + "\n" + apiDefUri.toString());
 
 		response = init().baseUri(rootUri.toString())
@@ -46,13 +48,13 @@ public class JSONEncoding extends CommonFixture {
 			.when()
 			.request(Method.GET, "/conformance");
 		assertTrue(response.getStatusCode() == 200,
-				"Fails Abstract Test 18, JSON response not supported for conformance declaration");
+				"Fails Abstract Test 18/25, JSON response not supported for conformance declaration");
 		assertTrue(isJSONValidPerSchema(response.asString(), "/conformance"),
-				"Fails Abstract Test 19, conformance declaration response not valid JSON");
+				"Fails Abstract Test 19/26, conformance declaration response not valid JSON");
 
 		response = getCollectionResponse(null);
 		assertTrue(response.getStatusCode() == 200,
-				"Fails Abstract Test 18, JSON response not supported for collections metadata");
+				"Fails Abstract Test 18/25, JSON response not supported for collections metadata");
 		// TODO add JSON Schema Validation for /collections
 
 	}
