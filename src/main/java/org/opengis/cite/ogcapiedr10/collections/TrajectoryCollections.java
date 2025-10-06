@@ -13,11 +13,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 92: Validate that the coords query parameters are constructed correctly. (trajectory)
+	 * Abstract Test 92 (v1.0.0),
+     * Abstract Test 99 (v1.0.1): Validate that the coords query parameters are constructed correctly. (trajectory)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 92 (/conf/edr/rc-coords-definition)",
+	@Test(description = "Implements Abstract Test 92/99 (/conf/edr/rc-coords-definition)",
 			dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryCoordsParameterDefinition(TestPoint testPoint) {
 
@@ -28,11 +29,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 
 	/**
 	 * <pre>
-	 * Abstract Test 91: Validate that resources can be identified and extracted from a Collection with a Trajectory query using query parameters. (trajectory)
+	 * Abstract Test 91 (v1.0.0),
+     * Abstract Test 98 (v1.0.1): Validate that resources can be identified and extracted from a Collection with a Trajectory query using query parameters. (trajectory)
 	 * </pre>
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements datetime parameter part of Abstract Test 91 (/conf/trajectory)",
+	@Test(description = "Implements datetime parameter part of Abstract Test 91/98 (/conf/trajectory)",
 			dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryDateTimeParameterDefinition(TestPoint testPoint) {
 
@@ -42,11 +44,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 94: Validate that the parameter-name query parameters are processed
+	 * Abstract Test 94 (v1.0.0),
+     * Abstract Test 101 (v1.0.1): Validate that the parameter-name query parameters are processed
 	 * correctly. (trajectory)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 94 (/conf/collections/REQ_rc-parameter-name-definition)",
+	@Test(description = "Implements Abstract Test 94/101 (/conf/collections/REQ_rc-parameter-name-definition)",
 			dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryParameternameParameterDefinition(TestPoint testPoint) {
 
@@ -55,11 +58,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 96: Validate that the crs query parameters are constructed correctly.
+	 * Abstract Test 96 (v1.0.0),
+     * Abstract Test 103 (v1.0.1): Validate that the crs query parameters are constructed correctly.
 	 * (trajectory)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 96 (/conf/edr/REQ_rc-crs-definition)",
+	@Test(description = "Implements Abstract Test 96/103 (/conf/edr/REQ_rc-crs-definition)",
 			dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryCrsParameterDefinition(TestPoint testPoint) {
 
@@ -69,11 +73,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 98: Validate that the f query parameter is constructed correctly.
+	 * Abstract Test 98 (v1.0.0),
+     * Abstract Test 105 (v1.0.1): Validate that the f query parameter is constructed correctly.
 	 * (trajectory)
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements Abstract Test 98 (/conf/edr/rc-f-definition)",
+	@Test(description = "Implements Abstract Test 98/105 (/conf/edr/rc-f-definition)",
 			dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryFParameterDefinition(TestPoint testPoint) {
 
@@ -82,11 +87,12 @@ public class TrajectoryCollections extends AbstractFeatures {
 	}
 
 	/**
-	 * Abstract Test 91: Validate that resources can be identified and extracted from a
+	 * Abstract Test 91 (v1.0.0),
+     * Abstract Test 98 (v1.0.1): Validate that resources can be identified and extracted from a
 	 * Collection with a Trajectory query using query parameters.
 	 * @param testPoint the testPoint under test, never <code>null</code>
 	 */
-	@Test(description = "Implements VerticalLevel part of Abstract Test 91 (/conf/trajectory)",
+	@Test(description = "Implements VerticalLevel part of Abstract Test 91/98 (/conf/trajectory)",
 			dataProvider = "trajectoryCollectionPaths", alwaysRun = true)
 	public void trajectoryZParameterDefinition(TestPoint testPoint) {
 

@@ -79,20 +79,35 @@ public class QueryCollections extends CommonFixture {
 	}
 
 	/**
-	 * Abstract Test 34 : Validate that an error is returned by a Position query if no
-	 * query parameters are specified. Abstract Test 50 : Validate that an error is
-	 * returned by a Area query if no query parameters are specified. Abstract Test 66 :
+	 * Abstract Test 34 (v1.0.0),
+     * Abstract Test 41 (v1.0.1) : Validate that an error is returned by a Position query if no
+	 * query parameters are specified. 
+	 * <br/>
+	 * Abstract Test 50 (v1.0.0),
+     * Abstract Test 57 (v1.0.1) : Validate that an error is
+	 * returned by a Area query if no query parameters are specified. 
+	 * <br/>
+	 * Abstract Test 66 (v1.0.0),
+     * Abstract Test 73 (v1.0.1):
 	 * Validate that an error is returned by a Cube query if no query parameters are
-	 * specified. Abstract Test 82 : Validate that an error is returned by a Trajectory
-	 * query if no query parameters are specified. Abstract Test 100 : Validate that an
+	 * specified. 
+	 * <br/>
+	 * Abstract Test 82 (v1.0.0),
+     * Abstract Test 89 (v1.0.1) : Validate that an error is returned by a Trajectory
+	 * query if no query parameters are specified. 
+	 * <br/>
+	 * Abstract Test 100 (v1.0.0),
+     * Abstract Test 107 (v1.0.1) : Validate that an
 	 * error is returned by a Corridor query if no query parameters are specified.
-	 * Abstract Test 136 : Validate that a GeoJSON document was returned with a status
+	 * <br/>
+	 * Abstract Test 136 (v1.0.0),
+     * Abstract Test 143 (v1.0.1) : Validate that a GeoJSON document was returned with a status
 	 * code 200 containing at least a list of features one for each location supported by
 	 * the collection.
 	 * @param collectionIdentifiers collection identifiers
 	 */
 	@Test(dataProvider = "collectionIDs",
-			description = "Implements Abstract Test 34 (/conf/position), Abstract Test 50 (/conf/area), Abstract Test 66 (/conf/cube), Abstract Test 82 (/conf/trajectory), Abstract Test 100 (/conf/corridor), Abstract Test 136 (/conf/locations) ")
+			description = "Implements Abstract Test 34/41 (/conf/position), Abstract Test 50/57 (/conf/area), Abstract Test 66/73 (/conf/cube), Abstract Test 82/89 (/conf/trajectory), Abstract Test 100/107 (/conf/corridor), Abstract Test 136/143 (/conf/locations) ")
 	public void validateNoQueryParameters(Object collectionIdentifiers) {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
@@ -131,7 +146,7 @@ public class QueryCollections extends CommonFixture {
 
 					response = getCollectionResponse(collectionId + "/position");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 34. Expected status code 400 when a Position query with no query parameters are specified for collection "
+							"Fails Abstract Test 34/41. Expected status code 400 when a Position query with no query parameters are specified for collection "
 									+ collectionId);
 
 				}
@@ -139,14 +154,14 @@ public class QueryCollections extends CommonFixture {
 
 					response = getCollectionResponse(collectionId + "/area");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 50. Expected status code 400 when a Area query with no query parameters are specified for collection "
+							"Fails Abstract Test 50/57. Expected status code 400 when a Area query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 				if (supportsTrajectoryQuery) {
 
 					response = getCollectionResponse(collectionId + "/trajectory");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 82. Expected status code 400 when a Trajectory query with no query parameters are specified for collection "
+							"Fails Abstract Test 82/89. Expected status code 400 when a Trajectory query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 				if (supportsLocationsQuery) {
@@ -156,7 +171,7 @@ public class QueryCollections extends CommonFixture {
 					// 136
 					response = getCollectionResponse(collectionId + "/locations");
 					assertTrue(response.getStatusCode() == 200,
-							"Fails Abstract Test 136. Expected status code 200 when a Locations query with no query parameters are specified for collection "
+							"Fails Abstract Test 136/143. Expected status code 200 when a Locations query with no query parameters are specified for collection "
 									+ collectionId);
 				}
 
@@ -170,32 +185,64 @@ public class QueryCollections extends CommonFixture {
 	}
 
 	/**
-	 * Abstract Test 35 : Validate that an error is returned by a Position query when the
-	 * coords query parameter is not specified. Abstract Test 36 : Validate that an error
+	 * <pre>
+	 * 
+	 * Abstract Test 35 (v1.0.0),
+     * Abstract Test 42 (v1.0.1) : Validate that an error is returned by a Position query when the
+	 * coords query parameter is not specified. 
+	 * 
+	 * Abstract Test 36 (v1.0.0),
+     * Abstract Test 43 (v1.0.1) : Validate that an error
 	 * is returned by a Position query when the coords query parameter does not contain a
-	 * valid POINT Well Known Text value. Abstract Test 51 : Validate that an error is
+	 * valid POINT Well Known Text value. 
+	 * 
+	 * Abstract Test 51 (v1.0.0),
+     * Abstract Test 58 (v1.0.1) : Validate that an error is
 	 * returned by an Area query when the coords query parameter is not specified.
-	 * Abstract Test 52 : Validate that an error is returned by an Area query when the
+	 * 
+	 * Abstract Test 52 (v1.0.0),
+     * Abstract Test 59 (v1.0.1) : Validate that an error is returned by an Area query when the
 	 * coords query parameter does not contain a valid POLYGON Well Known Text value.
-	 * Abstract Test 83 : Validate that an error is returned by a Trajectory query when
-	 * the coords query parameter is not specified. Abstract Test 84 : Validate that an
+	 * 
+	 * Abstract Test 83 (v1.0.0),
+     * Abstract Test 90 (v1.0.1) : Validate that an error is returned by a Trajectory query when
+	 * the coords query parameter is not specified. 
+	 * 
+	 * Abstract Test 84 (v1.0.0),
+     * Abstract Test 91 (v1.0.1) : Validate that an
 	 * error is returned by a Trajectory query when the coords query parameter does not
-	 * contain a valid LINESTRING Well Known Text value. Abstract Test 85 : Validate that
+	 * contain a valid LINESTRING Well Known Text value. 
+	 * 
+	 * Abstract Test 85 (v1.0.0),
+     * Abstract Test 92 (v1.0.1) : Validate that
 	 * an error is returned by a Trajectory query when the coords query parameter does not
-	 * contain a valid LINESTRINGM Well Known Text value. Abstract Test 88 : Validate that
+	 * contain a valid LINESTRINGM Well Known Text value. 
+	 * 
+	 * Abstract Test 88 (v1.0.0),
+     * Abstract Test 95 (v1.0.1) : Validate that
 	 * an error is returned by a Trajectory query when the coords query parameter does not
-	 * contain a valid LINESTRINGZM Well Known Text value. Abstract Test 89 : Validate
+	 * contain a valid LINESTRINGZM Well Known Text value. 
+	 * 
+	 * Abstract Test 89 (v1.0.0),
+     * Abstract Test 96 (v1.0.1) : Validate
 	 * that an error is returned by a Trajectory query when the coords query parameter
-	 * does not contain a valid LINESTRINGZ Well Known Text value. Abstract Test 101 :
+	 * does not contain a valid LINESTRINGZ Well Known Text value. 
+	 * 
+	 * Abstract Test 101 (v1.0.0),
+     * Abstract Test 108 (v1.0.1) :
 	 * Validate that an error is returned by a Corridor query when the coords query
-	 * parameter is not specified. Abstract Test 106 : Validate that an error is returned
+	 * parameter is not specified. 
+	 * 
+	 * Abstract Test 106 (v1.0.0),
+     * Abstract Test 113 (v1.0.1) : Validate that an error is returned
 	 * by a corridor query when the coords query parameter does not contain a valid
 	 * LINESTRING Well Known Text value.
+	 * </pre>
 	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs",
-			description = "Implements Abstract Test 35 (/conf/position),Abstract Test 36 (/conf/position), Abstract Test 51 (/conf/area), Abstract Test 52 (/conf/area), Abstract Test 83 (/conf/trajectory), Abstract Test 101 (/conf/corridor)")
+			description = "Implements Abstract Test 35/42 (/conf/position),Abstract Test 36/43 (/conf/position), Abstract Test 51/58 (/conf/area), Abstract Test 52/59 (/conf/area), Abstract Test 83/90 (/conf/trajectory), Abstract Test 101/108 (/conf/corridor)")
 	public void validateCoordsQueryParameters(Object collectionIdentifiers) {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
@@ -234,12 +281,12 @@ public class QueryCollections extends CommonFixture {
 
 					response = getCollectionResponse(collectionId + "/position?coords=");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 35. Expected status code 400 when a Position query with coords query parameter is not specified for collection "
+							"Fails Abstract Test 35/42. Expected status code 400 when a Position query with coords query parameter is not specified for collection "
 									+ collectionId);
 
 					response = getCollectionResponse(collectionId + "/position?coords=POINT()");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 36. Expected status code 400 when a Position coords query parameter does not contain a valid POINT Well Known Text value for collection "
+							"Fails Abstract Test 36/43. Expected status code 400 when a Position coords query parameter does not contain a valid POINT Well Known Text value for collection "
 									+ collectionId);
 
 				}
@@ -247,39 +294,39 @@ public class QueryCollections extends CommonFixture {
 
 					response = getCollectionResponse(collectionId + "/area?coords=");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 51. Expected status code 400 when an Area query with coords query parameter is not specified for collection "
+							"Fails Abstract Test 51/58. Expected status code 400 when an Area query with coords query parameter is not specified for collection "
 									+ collectionId);
 
 					response = getCollectionResponse(collectionId + "/area?coords=POLYGON()");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 52. Expected status code 400 when an Area query with coords query parameter does not contain a valid POLYGON Well Known Text value for collection "
+							"Fails Abstract Test 52/59. Expected status code 400 when an Area query with coords query parameter does not contain a valid POLYGON Well Known Text value for collection "
 									+ collectionId);
 				}
 				if (supportsTrajectoryQuery) {
 
 					response = getCollectionResponse(collectionId + "/trajectory?coords=");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 83. Expected status code 400 when a Trajectory query with coords query parameter is not specified for collection "
+							"Fails Abstract Test 83/90. Expected status code 400 when a Trajectory query with coords query parameter is not specified for collection "
 									+ collectionId);
 
 					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRING()");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 84. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
+							"Fails Abstract Test 84/91. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
 					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRINGM()");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 85. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
+							"Fails Abstract Test 85/92. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
 					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRINGZM()");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 88. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
+							"Fails Abstract Test 88/95. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
 					response = getCollectionResponse(collectionId + "/trajectory?coords=LINESTRINGZ()");
 					assertTrue(response.getStatusCode() == 400,
-							"Fails Abstract Test 89. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
+							"Fails Abstract Test 89/96. Expected status code 400 when a Trajectory query with coords query parameter does not contain a valid LINESTRING Well Known Text value for collection "
 									+ collectionId);
 
 				}
@@ -307,20 +354,38 @@ public class QueryCollections extends CommonFixture {
 	}
 
 	/**
-	 * Abstract Test 37 : Validate that resources can be identified and extracted from a
-	 * Collection with a Position query using query parameters. Abstract Test 39 :
-	 * Validate that the coords query parameters are processed correctly. Abstract Test 41
-	 * : Validate that the vertical level query parameters are constructed correctly.
-	 * Abstract Test 43 : Validate that the datetime query parameters are processed
-	 * correctly. Abstract Test 45 : Validate that the parameter-name query parameters are
-	 * processed correctly. Abstract Test 47 : Validate that the crs query parameters are
-	 * processed correctly. Abstract Test 49 : Validate that the f query parameters are
+	 * <pre>
+	 * Abstract Test 37 (v1.0.0),
+     * Abstract Test 44 (v1.0.1) : Validate that resources can be identified and extracted from a
+	 * Collection with a Position query using query parameters. 
+	 * 
+	 * Abstract Test 39 (v1.0.0),
+     * Abstract Test 46 (v1.0.1) : Validate that the coords query parameters are processed correctly. 
+	 * 
+	 * Abstract Test 41 (v1.0.0),
+     * Abstract Test 48 (v1.0.1): Validate that the vertical level query parameters are constructed correctly.
+	 * 
+	 * Abstract Test 43 (v1.0.0),
+     * Abstract Test 50 (v1.0.1) : Validate that the datetime query parameters are processed
+	 * correctly. 
+	 * 
+	 * Abstract Test 45 (v1.0.0),
+     * Abstract Test 52 (v1.0.1) : Validate that the parameter-name query parameters are
+	 * processed correctly. 
+	 * 
+	 * Abstract Test 47 (v1.0.0),
+     * Abstract Test 54 (v1.0.1) : Validate that the crs query parameters are
+	 * processed correctly. 
+	 * 
+	 * Abstract Test 49 (v1.0.0),
+     * Abstract Test 56 (v1.0.1) : Validate that the f query parameters are
 	 * processed correctly.
+	 * </pre>
 	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs",
-			description = "Implements Abstract Test 37 (/conf/position), Abstract Test 39 (/conf/edr/rc-coords-response), Abstract Test 41 (/conf/edr/rc-z-response),  Abstract Test 43 (/conf/core/datetime-response),  Abstract Test 45 (/conf/edr/rc-parameter-name-response), Abstract Test 47 (/conf/edr/REQ_rc-crs-response), Abstract Test 49 (/conf/collections/rc-f-response)")
+			description = "Implements Abstract Test 37/44 (/conf/position), Abstract Test 39/46 (/conf/edr/rc-coords-response), Abstract Test 41/48 (/conf/edr/rc-z-response),  Abstract Test 43/50 (/conf/core/datetime-response),  Abstract Test 45/52 (/conf/edr/rc-parameter-name-response), Abstract Test 47/54 (/conf/edr/REQ_rc-crs-response), Abstract Test 49/56 (/conf/collections/rc-f-response)")
 	public void validatePositionQueryUsingParameters(Object collectionIdentifiers) {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
@@ -332,7 +397,7 @@ public class QueryCollections extends CommonFixture {
 			throw new SkipException(processor.queryTypeNotSupported);
 		}
 		assertTrue(resultMessage.length() == 0,
-				"Fails Abstract Test 37. Therefore could not verify the implementation passes Abstract Tests 39, 41, 43, 45, 47, and 49. Expected information that matches the selection criteria is returned for Position query. "
+				"Fails Abstract Test 37/44. Therefore could not verify the implementation passes Abstract Tests 39/46, 41/48, 43/50, 45/52, 47/54, and 49/56. Expected information that matches the selection criteria is returned for Position query. "
 						+ resultMessage);
 
 	}
@@ -349,20 +414,40 @@ public class QueryCollections extends CommonFixture {
 	}
 
 	/**
-	 * Abstract Test 53 : Validate that resources can be identified and extracted from a
-	 * Collection with an Area query using query parameters. Abstract Test 55 : Validate
-	 * that the coords query parameters are processed correctly. Abstract Test 57 :
+	 * <pre>
+	 * Abstract Test 53 (v1.0.0),
+     * Abstract Test 60 (v1.0.1) : Validate that resources can be identified and extracted from a
+	 * Collection with an Area query using query parameters. 
+	 * 
+	 * Abstract Test 55 (v1.0.0),
+     * Abstract Test 62 (v1.0.1) : Validate
+	 * that the coords query parameters are processed correctly. 
+	 * 
+	 * Abstract Test 57 (v1.0.0),
+     * Abstract Test 64 (v1.0.1) :
 	 * Validate that the vertical level query parameters are constructed correctly.
-	 * Abstract Test 59 : Validate that the datetime query parameters are processed
-	 * correctly. Abstract Test 61 : Validate that the parameter-name query parameters are
-	 * processed correctly. Abstract Test 63 : Validate that the crs query parameters are
-	 * processed correctly. Abstract Test 65 : Validate that the f query parameters are
+	 * 
+	 * Abstract Test 59 (v1.0.0),
+     * Abstract Test 66 (v1.0.1) : Validate that the datetime query parameters are processed
+	 * correctly.
+	 * 
+	 * Abstract Test 61 (v1.0.0),
+     * Abstract Test 68 (v1.0.1) : Validate that the parameter-name query parameters are
+	 * processed correctly. 
+	 * 
+	 * Abstract Test 63 (v1.0.0),
+     * Abstract Test 70 (v1.0.1) : Validate that the crs query parameters are
+	 * processed correctly. 
+	 * 
+	 * Abstract Test 65 (v1.0.0),
+     * Abstract Test 72 (v1.0.1) : Validate that the f query parameters are
 	 * processed correctly.
+	 * </pre>
 	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs",
-			description = "Implements Abstract Test 53 (/conf/area), Abstract Test 55 (/conf/edr/rc-coords-response), Abstract Test 57 (/conf/edr/rc-z-response),  Abstract Test 59 (/conf/core/datetime-response),  Abstract Test 61 (/conf/edr/rc-parameter-name-response), Abstract Test 63 (/conf/edr/REQ_rc-crs-response), Abstract Test 65 (/conf/collections/rc-f-response)")
+			description = "Implements Abstract Test 53/60 (/conf/area), Abstract Test 55/62 (/conf/edr/rc-coords-response), Abstract Test 57/64 (/conf/edr/rc-z-response),  Abstract Test 59/66 (/conf/core/datetime-response),  Abstract Test 61/68 (/conf/edr/rc-parameter-name-response), Abstract Test 63/70 (/conf/edr/REQ_rc-crs-response), Abstract Test 65/72 (/conf/collections/rc-f-response)")
 	public void validateAreaQueryUsingParameters(Object collectionIdentifiers) {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
@@ -374,7 +459,7 @@ public class QueryCollections extends CommonFixture {
 			throw new SkipException(processor.queryTypeNotSupported);
 		}
 		assertTrue(resultMessage.length() == 0,
-				"Fails Abstract Test 53. Therefore could not verify the implementation passes Abstract Tests 55, 57, 59, 61, 63, 65. Expected information that matches the selection criteria is returned for Area query. "
+				"Fails Abstract Test 53/60. Therefore could not verify the implementation passes Abstract Tests 55/62, 57/64, 59/66, 61/68, 63/70, 65/72. Expected information that matches the selection criteria is returned for Area query. "
 						+ resultMessage);
 
 	}
@@ -408,22 +493,43 @@ public class QueryCollections extends CommonFixture {
 	}
 
 	/**
-	 * Abstract Test 115 : Validate that resources can be identified and extracted from a
-	 * Collection with a Corridor query using query parameters. Abstract Test 117 :
-	 * Validate that the coords query parameters are processed correctly. Abstract Test
-	 * 119 : Validate that the corridor-width query parameters are processed correctly.
-	 * Abstract Test 121 : Validate that the corridor-height query parameters are
-	 * processed correctly. Abstract Test 123 :Validate that the width-units query
-	 * parameters are processed correctly. Abstract Test 125 : Validate that the
-	 * height-units query parameters are processed correctly. Abstract Test 127 : Validate
-	 * that the parameter-name query parameters are processed correctly. Abstract Test 129
-	 * : Validate that the crs query parameters are processed correctly. Abstract Test 131
-	 * : Validate that the f query parameters are processed correctly.
+	 * <pre>
+	 * Abstract Test 115 (v1.0.0),
+     * Abstract Test 122 (v1.0.1) : Validate that resources can be identified and extracted from a
+	 * Collection with a Corridor query using query parameters. 
+	 * 
+	 * Abstract Test 117 (v1.0.0),
+     * Abstract Test 124 (v1.0.1) : Validate that the coords query parameters are processed correctly. 
+	 *
+	 * Abstract Test 119 (v1.0.0),
+     * Abstract Test 126 (v1.0.1) : Validate that the corridor-width query parameters are processed correctly.
+	 * 
+	 * Abstract Test 121 (v1.0.0),
+     * Abstract Test 128 (v1.0.1) : Validate that the corridor-height query parameters are
+	 * processed correctly. 
+	 * 
+	 * Abstract Test 123 (v1.0.0),
+     * Abstract Test 130 (v1.0.1) : Validate that the width-units query
+	 * parameters are processed correctly. 
+	 * 
+	 * Abstract Test 125 (v1.0.0),
+     * Abstract Test 132 (v1.0.1) : Validate that the
+	 * height-units query parameters are processed correctly. 
+	 * 
+	 * Abstract Test 127 (v1.0.0),
+     * Abstract Test 134 (v1.0.1) : Validate that the parameter-name query parameters are processed correctly. 
+	 * 
+	 * Abstract Test 129 (v1.0.0),
+     * Abstract Test 136 (v1.0.1) : Validate that the crs query parameters are processed correctly. 
+	 * 
+	 * Abstract Test 131 (v1.0.0),
+     * Abstract Test 138 (v1.0.1) : Validate that the f query parameters are processed correctly.
+	 * </pre>
 	 * @param collectionIdentifiers collection identifiers
 	 */
 	@SuppressWarnings("unchecked")
 	@Test(dataProvider = "collectionIDs",
-			description = "Implements Abstract Test 115 (/conf/corridor), Abstract Test 117 (/conf/edr/rc-coords-response), Abstract Test 119 (/conf/collections/REQ_rc-corridor-width-response), Abstract Test 121 (/conf/collections/REQ_rc-corridor-height-response), Abstract Test 123 (/conf/collections/REQ_rc-width-units-response), Abstract Test 125 (/conf/collections/rc-height-units-response),  Abstract Test 127 (/conf/edr/rc-parameter-name-response), Abstract Test 129 (/conf/edr/REQ_rc-crs-response), Abstract Test 131 (/conf/collections/rc-f-response)")
+			description = "Implements Abstract Test 115/122 (/conf/corridor), Abstract Test 117/124 (/conf/edr/rc-coords-response), Abstract Test 119/126 (/conf/collections/REQ_rc-corridor-width-response), Abstract Test 121/128 (/conf/collections/REQ_rc-corridor-height-response), Abstract Test 123/130 (/conf/collections/REQ_rc-width-units-response), Abstract Test 125/132 (/conf/collections/rc-height-units-response),  Abstract Test 127/134 (/conf/edr/rc-parameter-name-response), Abstract Test 129/136 (/conf/edr/REQ_rc-crs-response), Abstract Test 131/138 (/conf/collections/rc-f-response)")
 	public void validateCorridorQueryUsingParameters(Object collectionIdentifiers) {
 
 		Set<String> collectionIds = (Set<String>) collectionIdentifiers;
@@ -435,7 +541,7 @@ public class QueryCollections extends CommonFixture {
 			throw new SkipException(processor.queryTypeNotSupported);
 		}
 		assertTrue(resultMessage.length() == 0,
-				"Fails Abstract Test 115. Therefore could not verify the implementation passes Abstract Tests 115, 117, 119, 121, 123, 125, 129, 131. Expected information that matches the selection criteria is returned for Corridor query. "
+				"Fails Abstract Test 115/122. Therefore could not verify the implementation passes Abstract Tests 115/122, 117/124, 119/126, 121/128, 123/130, 125/132, 129/136, 131/138. Expected information that matches the selection criteria is returned for Corridor query. "
 						+ resultMessage);
 
 	}

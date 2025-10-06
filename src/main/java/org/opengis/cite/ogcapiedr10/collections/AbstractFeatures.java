@@ -185,10 +185,12 @@ public class AbstractFeatures extends CommonDataFixture {
 	}
 
 	/**
-	 * Abstract Test 22, Test Method 1
+	 * Abstract Test 22 (v1.0.0),
+	 * Abstract Test 29 (v1.0.1), Test Method 1
 	 *
 	 * <pre>
-	 * Abstract Test 22: /ats/core/fc-response
+	 * Abstract Test 22 (v1.0.0),
+	 * Abstract Test 29 (v1.0.1): /ats/core/fc-response
 	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
 	 * Requirement: /req/core/fc-response
 	 *
@@ -209,10 +211,12 @@ public class AbstractFeatures extends CommonDataFixture {
 	}
 
 	/**
-	 * Abstract Test 22, Test Method 2
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1), Test Method 2
 	 *
 	 * <pre>
-	 * Abstract Test 22: /ats/core/fc-response
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1): /ats/core/fc-response
 	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
 	 * Requirement: /req/core/fc-response
 	 *
@@ -232,10 +236,12 @@ public class AbstractFeatures extends CommonDataFixture {
 	}
 
 	/**
-	 * Abstract Test 22, Test Method 4 (Abstract Test 23)
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1), Test Method 4 (Abstract Test 23/30)
 	 *
 	 * <pre>
-	 * Abstract Test 22: /ats/core/fc-response
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1): /ats/core/fc-response
 	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
 	 * Requirement: /req/core/fc-response
 	 *
@@ -244,7 +250,8 @@ public class AbstractFeatures extends CommonDataFixture {
 	 * </pre>
 	 *
 	 * <pre>
-	 * Abstract Test 23: /ats/core/fc-links
+	 * Abstract Test 23 (v1.0.0),
+     * Abstract Test 30 (v1.0.1): /ats/core/fc-links
 	 * Test Purpose: Validate that the required links are included in the Collections document.
 	 * Requirement: /req/core/fc-links, /req/core/fc-rel-type
 	 *
@@ -292,10 +299,12 @@ public class AbstractFeatures extends CommonDataFixture {
 	}
 
 	/**
-	 * Abstract Test 22, Test Method 5 (Abstract Test 24)
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1), Test Method 5 (Abstract Test 24)
 	 *
 	 * <pre>
-	 * Abstract Test 22: /ats/core/fc-response
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1): /ats/core/fc-response
 	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
 	 * Requirement: /req/core/fc-response
 	 *
@@ -304,7 +313,8 @@ public class AbstractFeatures extends CommonDataFixture {
 	 * </pre>
 	 *
 	 * <pre>
-	 * Abstract Test 24: /ats/core/fc-timeStamp
+	 * Abstract Test 24 (v1.0.0),
+     * Abstract Test 31 (v1.0.1): /ats/core/fc-timeStamp
 	 * Test Purpose: Validate the timeStamp parameter returned with a Features response
 	 * Requirement: /req/core/fc-timeStamp
 	 *
@@ -324,10 +334,12 @@ public class AbstractFeatures extends CommonDataFixture {
 	}
 
 	/**
-	 * Abstract Test 22, Test Method 7 (Abstract Test 26)
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1), Test Method 7 (Abstract Test 26/33)
 	 *
 	 * <pre>
-	 * Abstract Test 22: /ats/core/fc-response
+	 * Abstract Test 22 (v1.0.0),
+     * Abstract Test 29 (v1.0.1): /ats/core/fc-response
 	 * Test Purpose: Validate that the Feature Collections complies with the require structure and contents.
 	 * Requirement: /req/core/fc-response
 	 *
@@ -336,7 +348,8 @@ public class AbstractFeatures extends CommonDataFixture {
 	 * </pre>
 	 *
 	 * <pre>
-	 * Abstract Test 26: /ats/core/fc-numberReturned
+	 * Abstract Test 26 (v1.0.0),
+     * Abstract Test 33 (v1.0.1): /ats/core/fc-numberReturned
 	 * Test Purpose: Validate the numberReturned parameter returned with a Features response
 	 * Requirement: /req/core/fc-numberReturned
 	 *
