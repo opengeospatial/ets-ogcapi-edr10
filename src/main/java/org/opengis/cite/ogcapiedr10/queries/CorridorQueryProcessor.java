@@ -19,7 +19,13 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 
 	double corridorWidth = 2;
 
+	double corridorHeight = 2;
+
 	String corridorWidthUnit = "m";
+
+	String corridorHeightUnit = "m";
+
+	HashMap<?, ?> variablesMap;
 
 	public final String queryTypeNotSupported = "None of the collections support this query type. Increase the number of collections to parse.";
 
@@ -98,6 +104,18 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 				}
 
 				HashMap corridorQuery = (HashMap) dataQueries.get("corridor");
+				try {
+					corridorWidthUnit = getFirstUnit(corridorQuery, "width_units");
+				}
+				catch (Exception e) {
+					sb.append("Could not determine width_units for " + collectionId + " .");
+				}
+				try {
+					corridorHeightUnit = getFirstUnit(corridorQuery, "height_units");
+				}
+				catch (Exception e) {
+					sb.append("Could not determine height_units for " + collectionId + " .");
+				}
 				HashMap link = (HashMap) corridorQuery.get("link");
 				HashMap variables = (HashMap) link.get("variables");
 				ArrayList<String> outputFormatList = (ArrayList<String>) variables.get("output_formats");
@@ -222,7 +240,8 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 
 				String constructedURL = url + "/corridor?parameter-name=" + sampleParamaterNameSafe + "&coords="
 						+ "LINESTRING(" + lminx + "+" + lminy + "," + medianx + "+" + mediany + "," + lmaxx + "+"
-						+ lmaxy + ")" + "&corridor-width=" + corridorWidth + "&width-units=" + corridorWidthUnit + "&f="
+						+ lmaxy + ")" + "&corridor-width=" + corridorWidth + "&width-units=" + corridorWidthUnit
+						+ "&corridor-height=" + corridorHeight + "&height-units=" + corridorHeightUnit + "&f="
 						+ supportedFormat + "&datetime=" + sampleDateTime;
 				System.out.println("C " + constructedURL);
 
@@ -265,6 +284,16 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 		}
 
 		return sb.toString();
+	}
+
+	private String getFirstUnit(HashMap corridorQuery, String unitsDef) {
+		if (variablesMap == null) {
+			HashMap<?, ?> linkMap = (HashMap<?, ?>) corridorQuery.get("link");
+			variablesMap = (HashMap<?, ?>) linkMap.get("variables");
+		}
+		ArrayList<?> units = (ArrayList<?>) variablesMap.get(unitsDef);
+
+		return (String) units.get(0);
 	}
 
 }
