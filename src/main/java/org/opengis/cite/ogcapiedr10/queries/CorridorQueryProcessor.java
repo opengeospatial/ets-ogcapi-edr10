@@ -104,6 +104,8 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 				}
 
 				HashMap corridorQuery = (HashMap) dataQueries.get("corridor");
+				//https://github.com/opengeospatial/ets-ogcapi-edr10/issues/157
+				//get width and height units for collection
 				try {
 					corridorWidthUnit = getFirstUnit(corridorQuery, "width_units");
 				}
@@ -238,6 +240,8 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 					sb.append(" The temporal extent element is missing from the collection " + collectionId + " .");
 				}
 
+				//https://github.com/opengeospatial/ets-ogcapi-edr10/issues/157
+				//set corridor width and height with respective units
 				String constructedURL = url + "/corridor?parameter-name=" + sampleParamaterNameSafe + "&coords="
 						+ "LINESTRING(" + lminx + "+" + lminy + "," + medianx + "+" + mediany + "," + lmaxx + "+"
 						+ lmaxy + ")" + "&corridor-width=" + corridorWidth + "&width-units=" + corridorWidthUnit
@@ -285,7 +289,9 @@ public class CorridorQueryProcessor extends AbstractProcessor {
 
 		return sb.toString();
 	}
-
+	
+	//https://github.com/opengeospatial/ets-ogcapi-edr10/issues/157
+	//get corridor width and height with units
 	private String getFirstUnit(HashMap corridorQuery, String unitsDef) {
 		if (variablesMap == null) {
 			HashMap<?, ?> linkMap = (HashMap<?, ?>) corridorQuery.get("link");
